@@ -1,0 +1,21 @@
+*.xls
+*.pdf
+*.doc
+*.xlsx
+*.old
+*.zip
+*.lck
+*.txp
+*.tgz
+
+# ignore all files in the DOC/ directory
+DOC/
+
+# ignore all files in the IMPORT/ directory
+IMPORT/
+
+# ignore all files in the Runtime/ directory
+Runtime/
+
+# ignore all files in the PATH/ directory
+PATH/

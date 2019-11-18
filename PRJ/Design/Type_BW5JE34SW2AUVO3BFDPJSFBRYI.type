@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="ext_var" Kind="Struct" UUID="3492A7F048AE8ACA61C6B5B8ECF66566">
+    <Fields>
+        <Field Name="PV" Type="REAL" UUID="7C80A767487DA40608ED8C9F7ADFF238" />
+        <Field Name="real_PV" Type="REAL" UUID="9AA90B2D440A875074116596285A8261" />
+        <Field Name="Tf" Type="REAL" UUID="8F0507784751135BAAD1C5A6F3CDD318" />
+        <Field Name="selection_method" Type="INT" UUID="6E98F2EC468C22555740D39196A295B6" />
+        <Field Name="trans_enable" Type="BOOL" UUID="3F51F9614A45DED73F2F34A01C0B07B6" ArraySize="25" />
+        <Field Name="failure" Type="BOOL" UUID="F86D51614FB73ACFB6AE0297DB4EF50B" />
+        <Field Name="PV_gain" Type="REAL" UUID="8F9D8BD04042511D50BFC8BEC7BB54A4" />
+        <Field Name="PV_bias" Type="REAL" UUID="30027E594EE970D7034F9A890E98CF0F" />
+        <Field Name="RX_gain" Type="REAL" UUID="C55B40D343F836492CC480BABDA084DE" />
+        <Field Name="RX_bias" Type="REAL" UUID="1AB8707144FEB56E7089098720003562" />
+        <Field Name="AlarmHigh" Type="REAL" UUID="5EB6359841A32B6F06862C970B16E325" />
+        <Field Name="AlarmLow" Type="REAL" UUID="77D95CBF4D6B5F8D6EFB80995F180CCA" />
+        <Field Name="CharType" Type="INT" UUID="07C2226B41C49251C7FDB6AFE195C0F9" />
+        <Field Name="TransmitterHigh" Type="REAL" UUID="815D7AEC4B86717E30765280AE016DE9" />
+        <Field Name="TransmitterLow" Type="REAL" UUID="465333E84DE00BA7BB5DCA874F461467" />
+    </Fields>
+</Type>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Unitstate" Kind="Struct" UUID="1DF4539A4B2B6C683F0E61880D3B02D3">
+    <Fields>
+        <Field Name="EAO_KC2" Type="BOOL" UUID="448B36CA4967A4F41729B09E1E68C5D9" Comment="Экстренный останов КЦ-2" />
+        <Field Name="EAO_KS" Type="BOOL" UUID="CD48C77442481896887489A1FA117988" Comment="Экстренный останов КС" />
+        <Field Name="AOS" Type="BOOL" UUID="BBA6A99A4B9C062A4D54DD8C3126292F" Comment="Аварийный останов со стравливанием" />
+        <Field Name="AOB" Type="BOOL" UUID="F072A7274B9E1CC8F616CA90DFD6C4BA" Comment="Аварийный останов без стравливания" />
+        <Field Name="KOL_KC2" Type="BOOL" UUID="5056F4764D534F9FA3E861AAEB1792D8" Comment="КЦ Кольцо" />
+        <Field Name="KOL_GPA" Type="BOOL" UUID="DEAB4A0D44918A6FF96F7CA325BC4BA5" Comment="ГПА Кольцо" />
+        <Field Name="NO" Type="BOOL" UUID="36D551414AB249D387D524A5EE4D49FC" Comment="Нормальный останов" />
+        <Field Name="MAG" Type="BOOL" UUID="9926E98F46A9416E5673CB8B0299A450" Comment="КЦ Магистраль" />
+        <Field Name="PUSK" Type="BOOL" UUID="BECE7FE64F5EC3255193E9B7E664AAF3" Comment="Пуск КЦ" />
+        <Field Name="STOP_G" Type="BOOL" UUID="4677986E4BEF146408D415AEE85C4DEB" Comment="КЦ остановлен (контур заполнен газом)" />
+        <Field Name="STOP" Type="BOOL" UUID="D22809E44704664CCC37ACB76AF86389" Comment="КЦ остановлен (контур без газа)" />
+        <Field Name="UND" Type="BOOL" UUID="BD3FAEFF4856391C509CA7904F61A319" Comment="Неопределённый режим" />
+    </Fields>
+</Type>

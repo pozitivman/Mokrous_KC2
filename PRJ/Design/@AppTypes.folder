@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Типы приложений">
+    <Items>
+        <Item Name="AT_AZCMYOXD7IGUXM2WHXT2SHAVX4.int" />
+        <Item Name="AT_FO2WFUEBA6UUTOFLCCABTJBFK4.int" />
+        <Item Name="AT_GGP6UAUJAPIE7FQMTDEQ7KSV3E.int" />
+        <Item Name="AT_GLNHR3YDNTHETOLUKGXKFTPMQM.int" />
+        <Item Name="AT_LECNYL766BEUFDS4PKMQ5SJ66M.int" />
+        <Item Name="AT_NBXKC63N3K4UJBDK2XAMDM5ICU.int" />
+        <Item Name="AT_OGDBCU6F3IHUJF7BSZHJJGAT4E.int" />
+        <Item Name="AT_WRSXGLSKVTXETAXXEYFUIFULI4.int" />
+        <Item Name="AT_YDHZ22JOMOOE5JF5KRO4KIAAMM.int" />
+        <Item Name="FLDR_Drivers_MB.folder" />
+        <Item Name="FLDR_Drivers_Sonet.folder" />
+        <Item Name="FLDR_NLXJ3NIYJJVEDNWVUJ2M4T3XOA.folder" />
+        <Item Name="FLDR_RI6QLIFMZA7EVFRJ34HP4RFYGE.folder" />
+    </Items>
+</Folder>

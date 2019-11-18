@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="IM_HMI" Kind="Struct" Comment="Структура ИМ для SCADA" UUID="149C9CFC429DA2CF7340C7840A20076B">
+    <Fields>
+        <Field Name="DA" Type="BOOL" UUID="FE19DEBA47672959B9357CAA0872C4E9" Comment="0 - автомат, 1 - дистанция" />
+        <Field Name="rOn" Type="BOOL" UUID="6FE5D5BC424015684885CE8CC800D9A5" Comment="Кн. &quot;Открыть&quot;" />
+        <Field Name="rOff" Type="BOOL" UUID="8C410ADB4BE1FCDCBAC6C7A3F036F6FA" Comment="Кн. &quot;Закрыть&quot;" />
+        <Field Name="state" Type="WORD" UUID="9738752C4512DAC52F9E51AF2C18AFDD" Comment="Положение (0 - ничего, 1 - закрыт, 2 - открыт, 3 - оба)" />
+        <Field Name="block_DA" Type="BOOL" UUID="CBF499F84C67C5995D2E0ABBA9D8FFFF" Comment="Блокировка ДУ" />
+        <Field Name="block_ON_ru" Type="BOOL" UUID="A7E086BD4767C585547FEB9A6924390C" Comment="Блокировка Открытия в ДУ" />
+        <Field Name="block_OFF_ru" Type="BOOL" UUID="51CFD5C840533F60EEA0E19B284976F3" Comment="Блокировка Закрытия в ДУ" />
+        <Field Name="block_IMIT" Type="BOOL" UUID="3D8C8FDA45A2837B5CD0CAB45D4BFE7A" Comment="Блокировка имитации" />
+        <Field Name="general" Type="BOOL" UUID="277BB6A84512C7C16028A38D690688D0" Comment="Обобщённая ошибка ИМ" />
+    </Fields>
+</Type>

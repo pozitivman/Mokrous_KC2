@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="IM">
+    <Items>
+        <Item Name="FLDR_IMSHKU17.folder" />
+        <Item Name="Type_ACT_cfg.type" />
+        <Item Name="Type_ACT_ctrl.type" />
+        <Item Name="Type_ACT_dbg.type" />
+        <Item Name="Type_ACT_in.type" />
+        <Item Name="Type_ACT_oper.type" />
+        <Item Name="Type_ACT_out.type" />
+        <Item Name="Type_IM_APS.type" />
+        <Item Name="Type_IM_HMI.type" />
+        <Item Name="Type_IM_PLC.type" />
+        <Item Name="Type_support_ACT.type" />
+    </Items>
+</Folder>

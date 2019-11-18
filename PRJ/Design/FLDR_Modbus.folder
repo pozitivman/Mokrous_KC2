@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Modbus">
+    <Items>
+        <Item Name="Type_26VVSKVNQQGUHHGG7QU3FJASEM.type" />
+        <Item Name="Type_3DSTXSS4OOIELGBGZX3KMN4YEE.type" />
+        <Item Name="Type_AzU.type" />
+        <Item Name="Type_FAQB37T53JLETKOBV57PJTI25M.type" />
+        <Item Name="Type_GPA.type" />
+        <Item Name="Type_IHYOJVZLFYTUVMGZHFYQOXKRZY.type" />
+        <Item Name="Type_MV2YJ5EMKCGEPCLQ6IG77IEAWY.type" />
+        <Item Name="Type_PIR.type" />
+        <Item Name="Type_SODU.type" />
+        <Item Name="Type_WRIDWMYWQPEUZPCWPJZEZSCZNM.type" />
+    </Items>
+</Folder>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="gpa_str" Kind="Struct" UUID="BFA29D114211BEBF973A11BF32F99F51">
+    <Fields>
+        <Field Name="online" Type="BOOL" UUID="B46739DE4EBBA6E7FF987695DE202784" Comment="Статус: ГПА в онлайне" />
+        <Field Name="Q" Type="REAL" UUID="4355EE8F4C09E0E5504913A9DD1BA20F" Comment="Статус: Расход через ГПА" />
+        <Field Name="Ein" Type="REAL" UUID="72F6DA704309E108E14F60AC92BB954F" Comment="Статус: Давление на входе в нагнетатель" />
+        <Field Name="EoutEin" Type="REAL" UUID="0610B75542632210D2D45F85105E8999" Comment="Статус: Степень сжатия" />
+        <Field Name="Eout" Type="REAL" UUID="6B9F72084D54274190C3C9910CC57E46" Comment="Статус: Давление на выходе из нагнетателя" />
+        <Field Name="Nst" Type="REAL" UUID="653DEE444B44F6C56D38CEA23189A008" Comment="Статус: Обороты СТ" />
+        <Field Name="S" Type="REAL" UUID="7721F75948A14A6F5924E5AEB7C12176" Comment="Статус: Удаленность от линии помпажа" />
+        <Field Name="delta_S" Type="REAL" UUID="3D16D28948100F01D9489D9C01620F9C" Comment="Конфиг: запас по помажу" />
+        <Field Name="Nvd_r" Type="REAL" UUID="8032B53F4561304B845066B2B05B4F5C" Comment="Статус: Прив. обороты ВД" />
+        <Field Name="reserve" Type="BOOL" UUID="24F0E525474FEE61AD7B24A4E9B2532D" ArraySize="5" Comment="Статус: Резерв" />
+        <Field Name="remote" Type="BOOL" UUID="83BEE6824447740442898CB907DC6191" Comment="Статус: Удаленное регулирование" />
+        <Field Name="ls_error" Type="REAL" UUID="E057F0D0432FFA83A948DABD0456ECA4" Comment="Статус: Рассогласование по нагрузке" />
+        <Field Name="run" Type="BOOL" UUID="BDFB3ADF4B981BBC48816099A8C24FBC" Comment="Статус: ГПА в магистрали" />
+        <Field Name="test_online" Type="BOOL" UUID="262C5D5048BC0726981B6CAB4922EF07" Comment="Статус: флаг для определения связи" />
+        <Field Name="DEBLOCK" Type="BOOL" UUID="32DBD4A34D675AF5E715FAA1E89BD9ED" Comment="Статус: Деблокировка" />
+        <Field Name="time_offline" Type="INT" UUID="F9239E6341D9047543EFC4B8016901BB" Comment="Статус: время неответа" />
+        <Field Name="ls_DB" Type="REAL" UUID="B1692C634DCC20EDEA2641B0436FE49E" Comment="Конфиг: ЗН по выравниванию нагрузки" />
+        <Field Name="ls_KI" Type="REAL" UUID="35358F034250FE1BB0D6A98325A5C9D7" Comment="Статус: КИ по выравниванию нагрузки " />
+        <Field Name="ls_Kr" Type="REAL" UUID="703560B04D649476780BA8B1C6DDAEEB" Comment="Конфиг: КИ по выравниванию нагрузки" />
+        <Field Name="ls_KP" Type="REAL" UUID="18CC65FE4EA9580893050D97EC0883F3" Comment="Конфиг: Кп по выравниванию нагрузки" />
+        <Field Name="ls_P_part" Type="REAL" UUID="2D3A12474A7A3C39B282E6AF149D21BF" Comment="Статус: П- часть по выравниванию нагрузки" />
+        <Field Name="ls_dI_part" Type="REAL" UUID="1783B6244E7AEA5D937969890B2FEB8E" Comment="Статус: И-часть по выравниванию нагрузки" />
+        <Field Name="ls_KD" Type="REAL" UUID="06FDE9EB4EF708F87E60BF95E7A6F6A8" Comment="Конфиг: КД по выравниванию нагрузки" />
+        <Field Name="ls_D_part" Type="REAL" UUID="3FE5216F41D9AAB264AF63899339E404" Comment="Статус: Д-часть по выравниванию нагрузки" />
+        <Field Name="ls_P_D_part" Type="REAL" UUID="4FBB6C4B445B55868FED5B8098B8E3CD" Comment="Статус: ПД-часть по выравниванию нагрузки" />
+        <Field Name="ls_P_D_part_prev" Type="REAL" UUID="7911409148E76E0F3AA3C7B1A01C6472" Comment="Статус: пред. ПД-часть по выравниванию нагрузки" />
+        <Field Name="ls_cv" Type="REAL" UUID="C35D55424A80A60B7394648D4CE66B4A" Comment="Статус: воздействие по выравниванию нагрузки" />
+        <Field Name="cv_prev" Type="REAL" UUID="1D708109411F5B45EA9B24BF41651AAC" Comment="Статус: пред. задание для ГПА в процентах" />
+        <Field Name="SP_cv" Type="REAL" UUID="BE9620B64D973DAFCF32868B43189031" Comment="Статус: задание для ГПА" />
+        <Field Name="SP_LowLimit" Type="REAL" UUID="ACDB7F764060852C4D91A0932FA100DF" Comment="Конфиг: мин. значение задания для ГПА" />
+        <Field Name="SP_HighLimit" Type="REAL" UUID="C3DC6C6849DEA3655C985D98F6C3CB7D" Comment="Конфиг: макс. значение задания для ГПА" />
+        <Field Name="cv" Type="REAL" UUID="9701ABFF4419AA26B72F0B952AE8A3B1" Comment="Статус: задание для ГПА в процентах" />
+        <Field Name="TransmitterLow" Type="REAL" UUID="BB4781F5426D73A821B81E8DD786DCCC" />
+        <Field Name="TransmitterHigh" Type="REAL" UUID="0BE740B44DB1C6930F3595A72A28B11D" />
+        <Field Name="Line_Reg" Type="REAL" UUID="8091EC43440C77D0EAE3E3BDD12481EC" />
+        <Field Name="SP_Nst" Type="REAL" UUID="FB57EE7F4CEB2B23FB81C0926F7BC309" />
+        <Field Name="ls_S_gain" Type="REAL" UUID="255D0AA246405004474EC1BEEE117036" />
+        <Field Name="ls_Nvdr_gain" Type="REAL" UUID="E4C4B6794B00D6B6007A47AB36721669" />
+        <Field Name="ls_Nst_gain" Type="REAL" UUID="CF82125748BFF3AED80A62910BC22603" />
+        <Field Name="ls_Q_gain" Type="REAL" UUID="2E6F914E4FF2AB44DEC38697CA974711" />
+        <Field Name="ls_Eout_gain" Type="REAL" UUID="3C537C4644DB90E626376D8A0078AB56" />
+        <Field Name="cv_Ramp_rate" Type="REAL" UUID="25087ECE47BD022B0627CF8DD745FF58" />
+        <Field Name="Freeze" Type="BOOL" UUID="11A7F0D8458F6114DF635E894CEA1EB1" />
+        <Field Name="FreezeAll" Type="BOOL" UUID="BF52288A43C23C49976B7CA34F9C918D" />
+        <Field Name="Q_min" Type="REAL" UUID="A7E818E04CF6E0CB9D388297D800F9C4" />
+        <Field Name="Q_max" Type="REAL" UUID="BE738AFF45576B7D1DA1C6B351463EF3" />
+        <Field Name="Q_perc" Type="REAL" UUID="CAF9A6904F78B390CDF15AB7D4612DEB" />
+        <Field Name="Nst_min" Type="REAL" UUID="3DCB64BF4459D3292AF0A39A2D281689" />
+        <Field Name="Nst_max" Type="REAL" UUID="18FE9D3749F70B74640B2EA5ECB85EE0" />
+        <Field Name="Nst_perc" Type="REAL" UUID="9F74F66B4232450622710F9D9E4CDD95" />
+        <Field Name="Nvd_min" Type="REAL" UUID="57F0E1374FB0A2CC5FDF43AE607BD031" />
+        <Field Name="Nvd_max" Type="REAL" UUID="A1E5AB984A244EE1F2BE7693B35EEC6F" />
+        <Field Name="Nvd_perc" Type="REAL" UUID="98063DFD47183677F303BEB303D0BCDC" />
+        <Field Name="Q_maximal" Type="REAL" UUID="0121C336464DB1C53F13BBB3D4F61349" Comment="Максимально возможный прокачиваемый расход" />
+    </Fields>
+</Type>

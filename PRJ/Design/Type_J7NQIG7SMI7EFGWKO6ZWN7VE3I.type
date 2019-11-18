@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_DI_A1_hmi" Kind="Struct" UUID="0FFFD3AD4220876AA111EA8316E67378">
+    <Fields>
+        <Field Name="Ala_ispr_Ppr" Type="BOOL" UUID="44A5E7C4471093AAFFE988B211518C69" Comment="Сигнализация исправности питания преобразователей" />
+        <Field Name="rez_01" Type="BOOL" UUID="AFF1E4FA4D0E930ADF47BDA42CEB3361" Comment="Резерв" />
+        <Field Name="rez_02" Type="BOOL" UUID="9A5ACCE04AE7375DABCBF39AED31FC63" Comment="Резерв" />
+        <Field Name="rez_03" Type="BOOL" UUID="0CF82AA145E06415B6DA20A4DA543C89" Comment="Резерв" />
+        <Field Name="rez_04" Type="BOOL" UUID="8C7DFC4846D676119C8E519E41FF0158" Comment="Резерв" />
+        <Field Name="rez_05" Type="BOOL" UUID="B62A03F84F36832C6CD5888DF58B88B8" Comment="Резерв" />
+        <Field Name="Pg2_plum" Type="BOOL" UUID="20046B984D77D709CCDDA0AA06367F18" Comment="Давление газа на выходном шлейфе" />
+        <Field Name="No_U_AVVgr_3" Type="BOOL" UUID="A9DFC67E45F0CF25177A8789EB14FB41" Comment="Отсутствие напряжения в схеме аварийно-вытяжных вентиляторов группы 3" />
+        <Field Name="no_U_PV5" Type="BOOL" UUID="5AD3FEA24790E4EBA6A2DF8DF1DEBE2E" Comment="Отсутствие напряжения в схеме приточного вентилятора №5" />
+        <Field Name="no_U_PV6" Type="BOOL" UUID="1494271F4593EF4DA69FBD9EBCAE03EC" Comment="Отсутствие напряжения в схеме приточного вентилятора №6" />
+        <Field Name="Inc1_ON" Type="BOOL" UUID="C35D9761493CDDDE2CED109A0A1F7AEF" Comment="Ввод №1 включен" />
+        <Field Name="Inc1_OFF" Type="BOOL" UUID="CBCB1D344743CCC254CA1484A272DCAA" Comment="Ввод №1 отлючен" />
+        <Field Name="Inc2_ON" Type="BOOL" UUID="196E06904F6C2989F97998BD9534ADAE" Comment="Ввод №2 включен" />
+        <Field Name="Inc2_OFF" Type="BOOL" UUID="803F766B4D2C81AC6E24C2890E0F4CF1" Comment="Ввод №2 отлючен" />
+        <Field Name="SS_ON" Type="BOOL" UUID="015EFBDE472D1ED713000781273A9005" Comment="Секционный выключатель включен" />
+        <Field Name="SS_OFF" Type="BOOL" UUID="13D11EC94D9FB510169EA98F9D8E01FF" Comment="Секционный выключатель отлючен" />
+        <Field Name="APK_ON" Type="BOOL" UUID="47CC6F134353BCF200AA08AE531FD44E" Comment="АПК открыт" />
+        <Field Name="APK_OFF" Type="BOOL" UUID="14A536C041F7E861BE6D5B807A1F2948" Comment="АПК закрыт" />
+        <Field Name="APK_Heat_ON" Type="BOOL" UUID="7188CC5947CCF4DDD002CB9A263A0219" Comment="АПК обогрев включен" />
+        <Field Name="N11GD100_1_WORK" Type="BOOL" UUID="A7E24AED4BDA419F02325C9A1738DD93" Comment="11ГД-100 №1 в работе" />
+        <Field Name="N11GD100_1_FLT" Type="BOOL" UUID="BA5F3A214F1FE32D3ED0AF995A5AD3DD" Comment="Авария 11ГД-100 №1" />
+        <Field Name="N11GD100_2_WORK" Type="BOOL" UUID="A37E0DAA477DBE477189FAADE6F4D77D" Comment="11ГД-100 №2 в работе" />
+        <Field Name="N11GD100_2_FLT" Type="BOOL" UUID="F0AAC6754A9A08089511139967477101" Comment="Авария 11ГД-100 №2" />
+        <Field Name="AC804_FLT" Type="BOOL" UUID="8A945BFA463525098D5733BC12DD3E90" Comment="АС-804 неисправна" />
+        <Field Name="AC804_WORK" Type="BOOL" UUID="188D56A440145AA3036E5383270548A9" Comment="АС-804 в работе" />
+        <Field Name="AC804_REZ" Type="BOOL" UUID="C7A50FC840EB729F920007BC3CEF9388" Comment="АС-804 в резерве" />
+        <Field Name="TG2_FLT" Type="BOOL" UUID="7420B74A4C28F43B727AC0BC8503F3FD" Comment="Авария теплогенератора №2" />
+        <Field Name="P3_30_ON" Type="BOOL" UUID="F22216AA417CD19EBDADD2880094F046" Comment="Насос РЗ-30 ГСМ включен" />
+        <Field Name="P3_30_KVR_AUTO" Type="BOOL" UUID="9B2CB23B47424842014877929B6F96D3" Comment="КВР насоса РЗ-30 ГСМ в положении автомат" />
+        <Field Name="rez_06" Type="BOOL" UUID="B98F228C4C23E3458109F1A3009B6169" Comment="Резерв" />
+        <Field Name="rez_07" Type="BOOL" UUID="A6126429429BD972F81A54BE7B3FBEA0" Comment="Резерв" />
+        <Field Name="Ctrl24_TC_1" Type="BOOL" UUID="27820B6145E64DA06F575E89206CC608" Comment="Контроль 24 В ТС" />
+        <Field Name="dummy" Type="BOOL" UUID="607CCED44C2AB4F2D84DC0B91D7B111D" Comment="Заглушка" />
+    </Fields>
+</Type>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_BTN_elementary" Kind="Struct" UUID="1BC234A345F1B4878927B7A4724C11D0">
+    <Fields>
+        <Field Name="Press" Type="BOOL" UUID="1B4B43FB44AB8D9F5085D0A2D45CA003" Comment="Признак нажатия кнопки" />
+        <Field Name="Enable" Type="BOOL" UUID="370CC3424480657C61F90D98F1387E10" Comment="Признак активности кнопки" />
+        <Field Name="CfgType" Type="INT" UUID="73644E5E4498F6B8A67CD79B12B1F12F" Comment="Тип кнопки" />
+        <Field Name="Text" Type="STRING" UUID="5D0EBB0745FFCE21449961BBE97A6FCC" Comment="Текст кнопки" />
+        <Field Name="CfgTime" Type="TIME" UUID="372B0DFF4EF7A0A97F1FE88D9B16A07F" Comment="Время импульса (если необходимо)" />
+    </Fields>
+</Type>

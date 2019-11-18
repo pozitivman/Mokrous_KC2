@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_DO_A5_raw" Kind="Struct" UUID="29963D534E6165DF73ADC9B8D27CA92D">
+    <Fields>
+        <Field Name="DO_5_1" Type="BOOL" UUID="B7F1C917434B8D971A815EAC099FACD1" Comment="Индикация АО КЦ бс" />
+        <Field Name="DO_5_2" Type="BOOL" UUID="65DAED00482AA7AEE9D75A83407CFD12" Comment="Индикация АО КЦ сс" />
+        <Field Name="DO_5_3" Type="BOOL" UUID="6879CF8448BBEDD694F0429A742F8DA7" Comment="Предупредительный звуковой сигнал" />
+        <Field Name="DO_5_4" Type="BOOL" UUID="3600D0354690575B547B30864E8BB7F7" Comment="Аварийный звуковой сигнал" />
+        <Field Name="DO_5_5" Type="BOOL" UUID="5571DE214737D3416D625F9D53E74C5E" Comment="Неисправность контроллера" />
+        <Field Name="DO_5_6" Type="BOOL" UUID="9F4FA43343DF77EA0DB3B38C6D9EA053" Comment="Не подключен" />
+        <Field Name="DO_5_7" Type="BOOL" UUID="A9488E6A4D1C6079C7F8F6ABA37300ED" Comment="Не подключен" />
+        <Field Name="DO_5_8" Type="BOOL" UUID="10C019084DAD5741F28D75B2447320C7" Comment="Не подключен" />
+        <Field Name="DO_5_9" Type="BOOL" UUID="056AB6FA4CBC20C9FD17078660EC2FED" Comment="Не подключен" />
+        <Field Name="DO_5_10" Type="BOOL" UUID="E3B023514EFBACAF1B5E7F99A43BF844" Comment="Не подключен" />
+        <Field Name="DO_5_11" Type="BOOL" UUID="583F6416443D93CF050340A25C731A62" Comment="Не подключен" />
+        <Field Name="DO_5_12" Type="BOOL" UUID="759299894586EAE219BC339440972DB1" Comment="Не подключен" />
+        <Field Name="DO_5_13" Type="BOOL" UUID="578C88A54952AF957205C0B4F0D9F7AC" Comment="Не подключен" />
+        <Field Name="DO_5_14" Type="BOOL" UUID="2A943DA64CC8BE43753C93AE3E55756E" Comment="Не подключен" />
+        <Field Name="DO_5_15" Type="BOOL" UUID="886ADB7047297925302F8C87373F2FB2" Comment="Не подключен" />
+        <Field Name="DO_5_16" Type="BOOL" UUID="8083C8894AE6EA7DE65D84A7647043D2" Comment="Не подключен" />
+    </Fields>
+</Type>

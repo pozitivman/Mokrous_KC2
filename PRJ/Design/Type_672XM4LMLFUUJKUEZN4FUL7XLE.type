@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SERVER_APS" Kind="Struct" UUID="B1D1EDC448E09AB86E5A52AEDDA047BF">
+    <Fields>
+        <Field Name="SHKU17_A1_3" Type="BOOL" UUID="29654CD74C6F40F105045181CF95ACEB" Comment="ШКУ-17. Ошибка модуля Сонет: A1_3" />
+        <Field Name="SHKU17_A1_4" Type="BOOL" UUID="67475BE7436C3917CE02CFB853ECDB93" Comment="ШКУ-17. Ошибка модуля Сонет: A1_4" />
+        <Field Name="SHKU17_A1_5" Type="BOOL" UUID="9AA6710D4B6C2E1C2AFE7F8CBD9B000A" Comment="ШКУ-17. Ошибка модуля Сонет: A1_5" />
+        <Field Name="SHKU17_A1_6" Type="BOOL" UUID="34614EE240F839A60BC4DDA5FC41295B" Comment="ШКУ-17. Ошибка модуля Сонет: A1_6" />
+        <Field Name="SHKU17_A1_7" Type="BOOL" UUID="31BDF0334AA4C4A64DCDCF891D198BE3" Comment="ШКУ-17. Ошибка модуля Сонет: A1_7" />
+        <Field Name="SHKU17_A1_8" Type="BOOL" UUID="02D6344E4E45C59463A9ED938872315E" Comment="ШКУ-17. Ошибка модуля Сонет: A1_8" />
+        <Field Name="SHKU17_A1_9" Type="BOOL" UUID="15CE9693489C48AB6BA18B9B74482BE0" Comment="ШКУ-17. Ошибка модуля Сонет: A1_9" />
+        <Field Name="SHKU17_A1_10" Type="BOOL" UUID="A79569D3401A1AF5B120D384F07A9BE2" Comment="ШКУ-17. Ошибка модуля Сонет: A1_10" />
+        <Field Name="SHKU17_A2_3" Type="BOOL" UUID="1AC0E71A49C02B723BBF76BEFF841EA7" Comment="ШКУ-17. Ошибка модуля Сонет: A2_3" />
+        <Field Name="SHKU17_A2_4" Type="BOOL" UUID="EFAD31AA4ED6369F1AF666809A825AE5" Comment="ШКУ-17. Ошибка модуля Сонет: A2_4" />
+        <Field Name="SHKU17_A2_5" Type="BOOL" UUID="195968F14F1EDF14D31D059FF8B6F0B7" Comment="ШКУ-17. Ошибка модуля Сонет: A2_5" />
+        <Field Name="SHKU17_A2_6" Type="BOOL" UUID="B2A35ADA4297B9369555049B0828E4AC" Comment="ШКУ-17. Ошибка модуля Сонет: A2_6" />
+        <Field Name="SHKU17_A2_7" Type="BOOL" UUID="92F8D9DB47838DF48ACBBD8ABF0A9B24" Comment="ШКУ-17. Ошибка модуля Сонет: A2_7" />
+        <Field Name="SHKU17_A2_8" Type="BOOL" UUID="D1CA6A8D4FDA9EE8F1F989BEF0822051" Comment="ШКУ-17. Ошибка модуля Сонет: A2_8" />
+        <Field Name="SHKU17_A2_9" Type="BOOL" UUID="FF9E91D8496B9123E95631BE941043CF" Comment="ШКУ-17. Ошибка модуля Сонет: A2_9" />
+        <Field Name="SHKU17_A2_10" Type="BOOL" UUID="BAF669A748DE072CC7384DAD71E3FD34" Comment="ШКУ-17. Ошибка модуля Сонет: A2_10" />
+        <Field Name="SHKU17_A3_3" Type="BOOL" UUID="9493B23D4F88CF6A9B4DD3A231DA60CF" Comment="ШКУ-17. Ошибка модуля Сонет: A3_3" />
+        <Field Name="SHKU17_A3_4" Type="BOOL" UUID="63439C7848260A3DC79560B9846E5E22" Comment="ШКУ-17. Ошибка модуля Сонет: A3_4" />
+        <Field Name="SHKU17_A3_5" Type="BOOL" UUID="E6D91D6949D94A6AA816199B156E3B62" Comment="ШКУ-17. Ошибка модуля Сонет: A3_5" />
+        <Field Name="SHKU17_A3_6" Type="BOOL" UUID="ACAEF4424D102600823276A31E74C0CE" Comment="ШКУ-17. Ошибка модуля Сонет: A3_6" />
+        <Field Name="SHKU17_A3_7" Type="BOOL" UUID="F2E64FFD48FBFC2A49EB2C8915C8A342" Comment="ШКУ-17. Ошибка модуля Сонет: A3_7" />
+        <Field Name="SHKU17_A3_8" Type="BOOL" UUID="48E89D2B41A40F0296198D808581D2E0" Comment="ШКУ-17. Ошибка модуля Сонет: A3_8" />
+        <Field Name="SHKU17_A3_9" Type="BOOL" UUID="544A30EC46242C80AB27BD8949BF758C" Comment="ШКУ-17. Ошибка модуля Сонет: A3_9" />
+        <Field Name="SHKU17_A3_10" Type="BOOL" UUID="5089D5F24A3B6D51CE9AA7ACA2D34D25" Comment="ШКУ-17. Ошибка модуля Сонет: A3_10" />
+        <Field Name="SHKU17_A4_3" Type="BOOL" UUID="AE37D2EA439B572398629F99AE7168CA" Comment="ШКУ-17. Ошибка модуля Сонет: A4_3" />
+        <Field Name="SHKU17_A4_4" Type="BOOL" UUID="736F3ABF49225CF4B46064B7E2165E16" Comment="ШКУ-17. Ошибка модуля Сонет: A4_4" />
+        <Field Name="SHKU17_A4_5" Type="BOOL" UUID="3C7456D94AA6E5FADEEF0E994C5CA065" Comment="ШКУ-17. Ошибка модуля Сонет: A4_5" />
+        <Field Name="SHKU17_A4_6" Type="BOOL" UUID="4DBAED89463CD0419C2EC7BC6A71EFB7" Comment="ШКУ-17. Ошибка модуля Сонет: A4_6" />
+        <Field Name="SHKU17_A4_7" Type="BOOL" UUID="09F614B54AD5797CAF2C358539B774CD" Comment="ШКУ-17. Ошибка модуля Сонет: A4_7" />
+        <Field Name="SHKU17_A4_8" Type="BOOL" UUID="08066F7D444716722D0CF6BB2E88B028" Comment="ШКУ-17. Ошибка модуля Сонет: A4_8" />
+        <Field Name="SHKU17_A4_9" Type="BOOL" UUID="463B27034E657E74B819E6BB817BB59D" Comment="ШКУ-17. Ошибка модуля Сонет: A4_9" />
+        <Field Name="SHKU17_A4_10" Type="BOOL" UUID="064535C94342A273AB5F3B873A51FCE2" Comment="ШКУ-17. Ошибка модуля Сонет: A4_10" />
+        <Field Name="SHKU17_A5_3" Type="BOOL" UUID="F65FFCA242FA0C74B4BB7FBF3A380EDE" Comment="ШКУ-17. Ошибка модуля Сонет: A5_3" />
+        <Field Name="SHKU17_A5_4" Type="BOOL" UUID="B90D99164622748685AF0F9E68FF0DF8" Comment="ШКУ-17. Ошибка модуля Сонет: A5_4" />
+        <Field Name="SHKU17_A5_5" Type="BOOL" UUID="F929B0A649DDA9C1AB702AB740D1873B" Comment="ШКУ-17. Ошибка модуля Сонет: A5_5" />
+        <Field Name="SHKU17_A5_6" Type="BOOL" UUID="981B51E144F9C34D721268B6B1DA8715" Comment="ШКУ-17. Ошибка модуля Сонет: A5_6" />
+        <Field Name="SHKU17_A5_7" Type="BOOL" UUID="6349758C4437F333ACE5888BEB93F207" Comment="ШКУ-17. Ошибка модуля Сонет: A5_7" />
+        <Field Name="SHKU17_A5_8" Type="BOOL" UUID="C6080F9A4492E3776939BFA456B8DF38" Comment="ШКУ-17. Ошибка модуля Сонет: A5_8" />
+        <Field Name="SHKU17_A5_9" Type="BOOL" UUID="DD56BAF846BDE6F57CFCE98EED8A6BB8" Comment="ШКУ-17. Ошибка модуля Сонет: A5_9" />
+        <Field Name="SHKU17_A5_10" Type="BOOL" UUID="3A34556E4B6554BA3D8C1AB835280AB9" Comment="ШКУ-17. Ошибка модуля Сонет: A5_10" />
+    </Fields>
+</Type>

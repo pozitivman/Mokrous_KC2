@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Scada">
+    <Items>
+        <Item Name="Type_B6L63YZIHLWEHHIQAVUFTQ47ZM.type" />
+        <Item Name="Type_CCCMMQCYCIIENCUOQK3RLHITEQ.type" />
+        <Item Name="Type_FDTESIBHQDVETO6Q46MBXJ2UXM.type" />
+        <Item Name="Type_H5EHDC2QQVRUXJPN7SQ34EYB64.type" />
+        <Item Name="Type_LTPV7GAXB63ETOOUNPVTYA5QZY.type" />
+        <Item Name="Type_NWDSCBHLXV2ELOAKRHIGEQDH6Y.type" />
+        <Item Name="Type_TV.type" />
+        <Item Name="Type_VG64NUZWZHJEZFT5GMTBH4JRBU.type" />
+        <Item Name="Type_W7I7OCEMDJUU7MFGEMA4B4PUPE.type" />
+        <Item Name="Type_XUARM4RRPLWEZPXM365EHVP5DI.type" />
+    </Items>
+</Folder>

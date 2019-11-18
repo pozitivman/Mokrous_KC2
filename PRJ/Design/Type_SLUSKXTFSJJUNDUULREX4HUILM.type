@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_DI_A3_hmi" Kind="Struct" UUID="8DFF14AC42F2B5E36C4A82896B2314FD">
+    <Fields>
+        <Field Name="Fire1GN_KC2" Type="BOOL" UUID="120807E54F92E77B7D9DBD841BAC6C8C" Comment="Пожар в ГН КЦ 2" />
+        <Field Name="Fire1mb_KC2" Type="BOOL" UUID="5758FD4E453655CC98FF8C91F73C5CD9" Comment="Пожар в маслобаке КЦ 2" />
+        <Field Name="Fire1_AC804" Type="BOOL" UUID="B6AA9B574DCFC763A3A44C831AA3CC8C" Comment="Пожар в АС-804" />
+        <Field Name="Fire1_ESSN" Type="BOOL" UUID="54C769424636A188413986B1F330F9B0" Comment="Пожар в ЭССН" />
+        <Field Name="Fire1_RU04" Type="BOOL" UUID="E2ACD9924EC601DDF0204DB00F743375" Comment="Пожар РУ-0,4 кВ" />
+        <Field Name="Fire1_Kot" Type="BOOL" UUID="2DD234C44F960C1F1B7D49B7A653AE39" Comment="Пожар в котельной" />
+        <Field Name="Zag1_GN_KC2_10p" Type="BOOL" UUID="439774624F495DDCF32F37AAE2EE3479" Comment="Загазованность в ГН КЦ 2 10%" />
+        <Field Name="Zag1_GN_KC2_20p" Type="BOOL" UUID="0EFE86884F009D542971D3BC936EF6B0" Comment="Загазованность в ГН КЦ 2 20%" />
+        <Field Name="Zag1_PU_KC2_10p" Type="BOOL" UUID="E615C6A3483FE681C5C492B81CC2763E" Comment="Загазованность в ПУ КЦ 2 10%" />
+        <Field Name="Zag1_PU_KC2_20p" Type="BOOL" UUID="3FC2BF224E83F9EC7C360EA5B534D3CF" Comment="Загазованность в ПУ КЦ 2  20%" />
+        <Field Name="Zag1_MZ_ESSN_10p" Type="BOOL" UUID="F4CB41CF4D712A9EF4846ABFBDFF54D0" Comment="Загазованность в машзале ЭССН 10%" />
+        <Field Name="Zag1_MZ_ESSN_20p" Type="BOOL" UUID="3F5EB4D14B661197B2E3E898ED305D91" Comment="Загазованность в машзале ЭССН  20%" />
+        <Field Name="Zag_CH4_KOT_10p" Type="BOOL" UUID="0CD2CBC44F1D2F5C26D265BA984E6803" Comment="Загазованность СН4  в котельной  10%" />
+        <Field Name="Zag_CH4_KOT_20p" Type="BOOL" UUID="55BFD84B428BF473A712A297E62A5F19" Comment="Загазованность СН4  в котельной 20%" />
+        <Field Name="Zag_CO_KOT_20mg" Type="BOOL" UUID="F04EF6A1486B3201BE31D0B6D3017412" Comment="Загазованность СО в котельной 20мг/м3" />
+        <Field Name="Zag_CO_KOT_100mg" Type="BOOL" UUID="A7DBEAFC426C94EB4DFB84B8F1FE9F08" Comment="Загазованность СО в котельной 100мг/м3" />
+        <Field Name="Neispr_SPO_KZ" Type="BOOL" UUID="79B6B3A542868D4F08E5E1AAD0A8B974" Comment="Неисправность системы ПО и КЗ" />
+        <Field Name="ComSh_AC804_inc1_Q1_ON" Type="BOOL" UUID="9C6FA5644FEE0FC8DAD199AAAED00207" Comment="Щит связи АС-804. Ввод №1: контактор №1 включен" />
+        <Field Name="ComSh_AC804_inc1_Q1_OFF" Type="BOOL" UUID="1E2D70F641446834B1D637B7DE48C754" Comment="Щит связи АС-804. Ввод №1: контактор №1 отключен" />
+        <Field Name="ComSh_AC804_inc2_Q2_ON" Type="BOOL" UUID="66D2FADD4E4302EFEA212B899315E38F" Comment="Щит связи АС-804. Ввод №2: контактор №2 включен" />
+        <Field Name="ComSh_AC804_inc2_Q2_OFF" Type="BOOL" UUID="9DAA49FB4FF0A4312DB606B50C5AAD76" Comment="Щит связи АС-804. Ввод №2: контактор №2 отключен" />
+        <Field Name="Call_KC2" Type="BOOL" UUID="D9FC9DDC400AD27397313CBC6D3CB7E5" Comment="Вызов в цех №2" />
+        <Field Name="rez_08" Type="BOOL" UUID="4E287EAF44457F9C6DB7CEB827ED20AF" Comment="Резерв" />
+        <Field Name="Ala_KOT" Type="BOOL" UUID="91E8CD5944F1EBF0C24775AA28FA0622" Comment="Авария в котельной" />
+        <Field Name="PL_KC2_ON" Type="BOOL" UUID="D1B69D524C53AF47A03670B2ACDEEBCC" Comment="Периметральное освещение КЦ 2 включено" />
+        <Field Name="rez_09" Type="BOOL" UUID="CFD8BCA54AA7206E2DB1AEADD2E8AA27" Comment="Резерв" />
+        <Field Name="rez_10" Type="BOOL" UUID="BF4BEC7C47230C40637760AA92E66457" Comment="Резерв" />
+        <Field Name="rez_11" Type="BOOL" UUID="D84EC5954120E51B936C87903AC06BCA" Comment="Резерв" />
+        <Field Name="rez_12" Type="BOOL" UUID="04C8C6784AB299FB3AE052B5EF1E0A29" Comment="Резерв" />
+        <Field Name="rez_13" Type="BOOL" UUID="E7731979418E2212682B0F97AA823B5C" Comment="Резерв" />
+        <Field Name="rez_14" Type="BOOL" UUID="1212380B4FA1C023F3FAF3B57A712F13" Comment="Резерв" />
+        <Field Name="Ctrl24_TC_2" Type="BOOL" UUID="55209C37472BC60CE1E44982FEC8AEF2" Comment="Контроль 24 В ТС" />
+        <Field Name="GPA7_AS_ON" Type="BOOL" UUID="68BD95024389A60DA01FF38D7348C01D" Comment="ГПА №7 Включить звуковую сигнализацию" />
+        <Field Name="GPA8_AS_ON" Type="BOOL" UUID="BF346A13474A4A9BCCF06E82BB9A973F" Comment="ГПА №8 Включить звуковую сигнализацию" />
+        <Field Name="GPA9_AS_ON" Type="BOOL" UUID="426E152942B07CBE8D1B108F09D1B676" Comment="ГПА №9 Включить звуковую сигнализацию" />
+        <Field Name="rez_15" Type="BOOL" UUID="F1123E894464E95CA15FEDA72CA56379" Comment="Резерв" />
+        <Field Name="rez_16" Type="BOOL" UUID="F3F313384586AA45F17F0DAE63BB79F3" Comment="Резерв" />
+        <Field Name="rez_17" Type="BOOL" UUID="E2062C87406A340D1F85448745C45F9C" Comment="Резерв" />
+        <Field Name="GPA7_S1Gr" Type="BOOL" UUID="48C8EEFC4B813FEBBF440BB03612E8FE" Comment="ГПА №7 Останов в группе" />
+        <Field Name="GPA8_S1Gr" Type="BOOL" UUID="071A2FEB465D45ECD646758C22CB4EE7" Comment="ГПА №8 Останов в группе" />
+        <Field Name="GPA9_S1Gr" Type="BOOL" UUID="F004E8AF4649D6B2ED57AAB12EDE4FDA" Comment="ГПА №9 Останов в группе" />
+        <Field Name="rez_18" Type="BOOL" UUID="2452885F4D140BC8847447B824A48AAA" Comment="Резерв" />
+        <Field Name="rez_19" Type="BOOL" UUID="C4C284D44C05C949C97CBDAB364016B0" Comment="Резерв" />
+        <Field Name="rez_20" Type="BOOL" UUID="0DBB2A344DCF8CC9FEFE179E187EE3DF" Comment="Резерв" />
+        <Field Name="rez_21" Type="BOOL" UUID="A9B9A3EF49A5141FB85510AE2EA155DD" Comment="Резерв" />
+        <Field Name="rez_22" Type="BOOL" UUID="094272D44304233D3123339B8C3885B7" Comment="Резерв" />
+        <Field Name="rez_23" Type="BOOL" UUID="ED19A9BC480D3DBC99EB359CE601C0DB" Comment="Резерв" />
+        <Field Name="rez_24" Type="BOOL" UUID="A25CDD3944F89B11043D26B1402A14D3" Comment="Резерв" />
+        <Field Name="rez_25" Type="BOOL" UUID="7953069D457A4B27DB54C8B2F2C83416" Comment="Резерв" />
+        <Field Name="rez_26" Type="BOOL" UUID="DD37D13F4061AE09EAFE77AB3F88B6E3" Comment="Резерв" />
+        <Field Name="rez_27" Type="BOOL" UUID="17C3B9A74A1CA421D429058764610ABF" Comment="Резерв" />
+        <Field Name="rez_28" Type="BOOL" UUID="4B52CC974E0AD66547563B9AFBE8E4A8" Comment="Резерв" />
+        <Field Name="rez_29" Type="BOOL" UUID="D7B93F34493A82387923868C7EC91398" Comment="Резерв" />
+        <Field Name="rez_30" Type="BOOL" UUID="0E135A5B449638DF0BA16089526149C9" Comment="Резерв" />
+        <Field Name="rez_31" Type="BOOL" UUID="CD0A465347E06032EA18FDBBCE6B2EC6" Comment="Резерв" />
+        <Field Name="rez_32" Type="BOOL" UUID="5268BDF447B93B1E342E13935611485F" Comment="Резерв" />
+        <Field Name="rez_33" Type="BOOL" UUID="99AD6A654C8170CE4903F89EE84FC5DE" Comment="Резерв" />
+        <Field Name="rez_34" Type="BOOL" UUID="C383798E4C0CDA45F117099DF691BC7E" Comment="Резерв" />
+        <Field Name="rez_35" Type="BOOL" UUID="60C9DDC04ACD250BFC66C6A15266628D" Comment="Резерв" />
+        <Field Name="rez_36" Type="BOOL" UUID="703FD7484843F80C42D59FBEFF2E84C2" Comment="Резерв" />
+        <Field Name="rez_37" Type="BOOL" UUID="47E1AAA14B7BDAD8D721BD9DADA91797" Comment="Резерв" />
+        <Field Name="rez_38" Type="BOOL" UUID="2F3D9125474445B061F9A0BCD0BE5616" Comment="Резерв" />
+        <Field Name="rez_39" Type="BOOL" UUID="D8052BA44370FC2F5EEF0BB7222CECAC" Comment="Резерв" />
+        <Field Name="Ctrl24_TC_3" Type="BOOL" UUID="98F9D03C41117748D87617A81B440F12" Comment="Контроль 24 В ТС" />
+        <Field Name="RU04_ESSN_inc1_Upres" Type="BOOL" UUID="233057FF4E03F4619E6D008335761902" Comment="РУ-0,4кВ ЭССН. Ввод №1: наличие напряжения" />
+        <Field Name="RU04_ESSN_inc2_Upres" Type="BOOL" UUID="85167A0D4D0A980CDEFDC6864D323939" Comment="РУ-0,4кВ ЭССН. Ввод №2: наличие напряжения" />
+        <Field Name="RU04_ESSN_ASM_B_Upres" Type="BOOL" UUID="56D0B8C04AE53C1C6A4C8E8EB9104CC2" Comment="РУ-0,4кВ ЭССН. Сборные шины: наличие напряжения" />
+        <Field Name="AGRS_Tech_FLT" Type="BOOL" UUID="FDD82E8842962879EB2FEEBBC9B8400D" Comment="Технологическая авария АГРС" />
+        <Field Name="AGRS_Door_open" Type="BOOL" UUID="71270EBE4085834BD672A18E1291B4D6" Comment="Дверь АГРС открыта" />
+        <Field Name="Inc1_LEP3_Ulost" Type="BOOL" UUID="2964E70240C5638A92140C9BEB789A96" Comment="Ввод 1 (ЛЭП №3):  отсутствие напряжения" />
+        <Field Name="Inc1_LEP3_VMP10_ON" Type="BOOL" UUID="6872305B4E2ADBAF3EBFF8985FC9AF64" Comment="Ввод 1 (ЛЭП №3):  ВМП-10 включен" />
+        <Field Name="Inc1_LEP3_VMP10_OFF" Type="BOOL" UUID="7285E168484613F883639694849D762E" Comment="Ввод 1 (ЛЭП №3):  ВМП-10 отключен" />
+        <Field Name="TR2_TKU_VMP10_ON" Type="BOOL" UUID="690C21BE45678A9599D37EBAEB366272" Comment="Трансформатор №2 ТКУ: ВМП-10 включен" />
+        <Field Name="TR2_TKU_VMP10_OFF" Type="BOOL" UUID="74718F99400C821DEA8C84B1C10FE42C" Comment="Трансформатор №2 ТКУ: ВМП-10 отключен" />
+        <Field Name="LEP_EXZ_Sev_VMP10_ON" Type="BOOL" UUID="AD98907C4E719696B6088A9C5FEB390F" Comment="ЛЭП –ЭХЗ «Север»:  ВМП-10 включен" />
+        <Field Name="LEP_EXZ_Sev_VMP10_OFF" Type="BOOL" UUID="924C02E54C05EF500B69A3BE35DDC17A" Comment="ЛЭП –ЭХЗ «Север»:  ВМП-10 отключен" />
+        <Field Name="Inc2_LEP17_Ulost" Type="BOOL" UUID="CFB24374481716A476CDF695A83C5D0F" Comment="Ввод 2 (ЛЭП №17):  отсутствие напряжения" />
+        <Field Name="Inc2_LEP17_VMP10_ON" Type="BOOL" UUID="984CF2C54BBA278E2BF428B5A1B4DB6D" Comment="Ввод 2 (ЛЭП №17):  ВМП-10 включен" />
+        <Field Name="Inc2_LEP17_VMP10_OFF" Type="BOOL" UUID="3726CD0441A91422A5963E9DD8FBB372" Comment="Ввод 2 (ЛЭП №17):  ВМП-10 отключен" />
+        <Field Name="TR1_TKU_VMP10_ON" Type="BOOL" UUID="CB1F574248590F5A7B2B6899D7BF4CD3" Comment="Трансформатор №1 ТКУ: ВМП-10 включен" />
+        <Field Name="TR1_TKU_VMP10_OFF" Type="BOOL" UUID="7DE92C31472B1D26D4AD9A924D7CC719" Comment="Трансформатор №1 ТКУ: ВМП-10 отключен" />
+        <Field Name="LEP_EXZ_Ug_VMP10_ON" Type="BOOL" UUID="D12897D74AE51CA4E4F95794C565A562" Comment="ЛЭП –ЭХЗ «Юг»:  ВМП-10 включен" />
+        <Field Name="LEP_EXZ_Ug_VMP10_OFF" Type="BOOL" UUID="FF487667437D54493A29BC908AE40F3A" Comment="ЛЭП –ЭХЗ «Юг»:  ВМП-10 отключен" />
+        <Field Name="MG1_VMP10_ON" Type="BOOL" UUID="BDFA9EE841983E5B1F4DDC95D9811376" Comment="МГ-№1: ВМП-10 включен" />
+        <Field Name="MG1_VMP10_OFF" Type="BOOL" UUID="9D60707B4EAE7BB82ACE7489A3BC1056" Comment="МГ-№1: ВМП-10 отключен" />
+        <Field Name="MG2_VMP10_ON" Type="BOOL" UUID="011422E7453FC4A87364789A68314C0D" Comment="МГ-№2: ВМП-10 включен" />
+        <Field Name="MG2_VMP10_OFF" Type="BOOL" UUID="BB101DA64730BD17CC56D3A28A43C9C6" Comment="МГ-№2: ВМП-10 отключен" />
+        <Field Name="SS_10KV_VMP10_ON" Type="BOOL" UUID="7C1437594F9BD70C1A81109E4D55B38C" Comment="Секционный выключатель 10кВ: ВМП-10 включен" />
+        <Field Name="SS_10KV_VMP10_OFF" Type="BOOL" UUID="246DED754FEC483DE637A688619D4FA2" Comment="Секционный выключатель 10кВ: ВМП-10 отключен" />
+        <Field Name="rez_40" Type="BOOL" UUID="8CE0B3694B56F239484676AB4C636219" Comment="Резерв" />
+        <Field Name="rez_41" Type="BOOL" UUID="B30910C54AFF9AF64EB245BF81E36646" Comment="Резерв" />
+        <Field Name="rez_42" Type="BOOL" UUID="11730060426C4712459184ADB590D532" Comment="Резерв" />
+        <Field Name="rez_43" Type="BOOL" UUID="55DA706E44921A2A1563A58B7584F5BB" Comment="Резерв" />
+        <Field Name="rez_44" Type="BOOL" UUID="8B69F63A420D8FDF5F00CDADD2DAE3BD" Comment="Резерв" />
+        <Field Name="rez_45" Type="BOOL" UUID="838A2C1B4664AF1263ECDD95D8BA039A" Comment="Резерв" />
+        <Field Name="Ctrl24_TC_4" Type="BOOL" UUID="9AF333F24761CB6EDA9A81B2156A4299" Comment="Контроль 24 В ТС" />
+        <Field Name="Ctrl_OP_AC220" Type="BOOL" UUID="A9F09552431DE62704F5A0B298941BEB" Comment="Контроль основного питания ~220 В" />
+        <Field Name="Ctrl_RP_DC200" Type="BOOL" UUID="4BD2D5EE42A7F98B2E3CED8B8D36400E" Comment="Контроль резервного питания 220 В пост." />
+        <Field Name="AP_ON" Type="BOOL" UUID="ECDBF6A041E99E1F3E9978A70EC9286C" Comment="Автоматы питания включены" />
+        <Field Name="SHKU17_Doors_open" Type="BOOL" UUID="05B10B484184C4A88D14EBA0F50A3EE2" Comment="Двери ШКУ-17 открыты" />
+        <Field Name="Ctrl_Isp_Raz" Type="BOOL" UUID="3423AF9C4D23A5CDB00D868C095E9C5F" Comment="Контроль исправности разрядников" />
+        <Field Name="Ispr_OIP24DC_IC" Type="BOOL" UUID="8C0AB26F4E8E680FC21679B6ABB78ABB" Comment="Исправность осн. ИП =24 В внутр. цепей" />
+        <Field Name="Ispr_RIP24DC_IC" Type="BOOL" UUID="8888F066430710C63F7466AD194B1387" Comment="Исправность рез. ИП =24 В внутр. цепей" />
+        <Field Name="Ispr_OIP24DC_AI" Type="BOOL" UUID="3AE9C5C442887D2866A2549C7072C8B2" Comment="Исправность осн. ИП =24 В AI" />
+        <Field Name="Ispr_RIP24DC_AI" Type="BOOL" UUID="B7523D6A482D9BCCE518628408C594AC" Comment="Исправность рез. ИП =24 В AI" />
+        <Field Name="Ispr_OIP24DC_DI" Type="BOOL" UUID="38B49892494D22E556CCEE967346D149" Comment="Исправность осн. ИП =24 В DI" />
+        <Field Name="Ispr_RIP24DC_DI" Type="BOOL" UUID="DA43F11C425D872127BD69A65B3EBEC2" Comment="Исправность рез. ИП =24 В DI" />
+        <Field Name="Ispr_OIP24DC_DO" Type="BOOL" UUID="37811AAF45A0286EF9EEA283E008620E" Comment="Исправность осн. ИП =24 В DO" />
+        <Field Name="Ispr_RIP24DC_DO" Type="BOOL" UUID="FC05958D4D6D701060322DB250EA3FA2" Comment="Исправность рез. ИП =24 В DO" />
+        <Field Name="Ispr_OIP24DC_BEAO" Type="BOOL" UUID="DEAC1FB940A7A1347A992993A24F8C26" Comment="Исправность осн. ИП =24 В БЭАО" />
+        <Field Name="Ispr_RIP24DC_BEAO" Type="BOOL" UUID="933D938841A65479B33BC199F84FE336" Comment="Исправность рез. ИП =24 В БЭАО" />
+        <Field Name="rez_46" Type="BOOL" UUID="FB2AD00142FB7BF4F50C53A756231375" Comment="Резерв" />
+        <Field Name="EAO_KC_PU" Type="BOOL" UUID="C663492544353BB49CD225AEF3A36321" Comment="ЭАО КЦ с ПУ" />
+        <Field Name="EAO_KC_PU_KCD" Type="BOOL" UUID="7CDF3062403DA822A355839A40D955DF" Comment="ЭАО КЦ с ПУ.КЦД" />
+        <Field Name="AOB_KC_PU" Type="BOOL" UUID="1237F77C4491D70EB5CFB99410ECF62E" Comment="АО КЦ бс с ПУ" />
+        <Field Name="AOB_KC_PU_KCD" Type="BOOL" UUID="A07DE22547A0DE8FC3390CAB136DE769" Comment="АО КЦ бс с ПУ.КЦД" />
+        <Field Name="AOS_KC_PU" Type="BOOL" UUID="5746B47E4B017249BE1C45A579D3AE60" Comment="АО КЦ сс с ПУ" />
+        <Field Name="AOS_KC_PU_KCD" Type="BOOL" UUID="67C0950D4A4FBACA7B243EBE836544FA" Comment="АО КЦ сс с ПУ.КЦД" />
+        <Field Name="EAO_KC_PEAO" Type="BOOL" UUID="19DDB42448CB8A56D9A8818C7CEBCB7C" Comment="ЭАО КЦ с ПЭАО" />
+        <Field Name="EAO_KC_PEAO_KCD" Type="BOOL" UUID="FC3FF0E8430514EFD737E792607275F5" Comment="ЭАО КЦ с ПЭАО.КЦД" />
+        <Field Name="Ctr_P_KR" Type="BOOL" UUID="D753813148C3E1A2FB4DFEB206BD452E" Comment="Контроль питания кранов" />
+        <Field Name="BEAO_ready" Type="BOOL" UUID="DAB906B242BC537E7AF892B9BCC99D6B" Comment="Готовность БЭАО" />
+        <Field Name="PU_ready" Type="BOOL" UUID="5A9D774D40337E42C5395F89C6FD7F7F" Comment="Готовность ПУ" />
+        <Field Name="Ask_sound" Type="BOOL" UUID="92BB7D024BEA1EDF93A1F69AD370E170" Comment="Съем звука (ПУ)" />
+        <Field Name="RU_KR" Type="BOOL" UUID="03E36C3F498EA72C46BBC79223729AF6" Comment="РУ кранами" />
+        <Field Name="rez_47" Type="BOOL" UUID="DCAA8222491A91401FCF8DAD3D3B9C87" Comment="Резерв" />
+        <Field Name="rez_48" Type="BOOL" UUID="6F8BEC8A4D83A59B1C68609FB6957BA2" Comment="Резерв" />
+        <Field Name="rez_49" Type="BOOL" UUID="6A3F74494A939038C69BE89CADA02D8B" Comment="Резерв" />
+        <Field Name="Neispr_P_SHARM" Type="BOOL" UUID="BDD1F78B416941003C87268B31E84F84" Comment="Неиспр. питания шкафа АРМ" />
+        <Field Name="Pinv_SHARM_pres" Type="BOOL" UUID="5E0ED92E422C8CEC3F1B1BA8F9915F75" Comment="Наличие пит. ШАРМ от инв." />
+        <Field Name="AP_SHARM_ON" Type="BOOL" UUID="16B66C3D45E39C095DC7A7B1E6F3DE67" Comment="Автоматы пит. ШАРМ включены" />
+        <Field Name="Doors_SHARM_OPEN" Type="BOOL" UUID="0B630F45409F9D398B69588E0F698139" Comment="Двери ШАРМ открыты" />
+        <Field Name="Neispr_P_US" Type="BOOL" UUID="1C40A2BC491BA6D855BA6DAF1F056D32" Comment="Неиспр. пит. устр. серверного" />
+        <Field Name="Ppres_Inv_US" Type="BOOL" UUID="CB68C1974376507197EA438FE163C87E" Comment="Наличие пит. УС от инв." />
+        <Field Name="AP_US_ON" Type="BOOL" UUID="739103FC400239AB27893C9DCC21FBE6" Comment="Автоматы пит. УС включены" />
+        <Field Name="Doors_US_OPEN" Type="BOOL" UUID="3BDAD1B8437285B01D7275A4685C4C91" Comment="Двери УС открыты" />
+        <Field Name="Neispr_OP_SHSO" Type="BOOL" UUID="800B1F8644CAC2E294D266AAC839048A" Comment="Неиспр. осн. пит. ШСО" />
+        <Field Name="Neispr_RP_SHSO" Type="BOOL" UUID="4AB170AA442136B36D370F87FA1DBB0E" Comment="Неиспр. рез. пит. ШСО" />
+        <Field Name="AP_SHSO_ON" Type="BOOL" UUID="01ED0D374454EE465407D4A706BDBA13" Comment="Автоматы пит. ШСО включены" />
+        <Field Name="Doors_SHSO_OPEN" Type="BOOL" UUID="BD59B7EE478DE6BB8D34CBA182FC5BEA" Comment="Двери ШСО открыты" />
+        <Field Name="rez_50" Type="BOOL" UUID="19BC3F3542F9E667F3A5F48114C3897D" Comment="Резерв" />
+        <Field Name="rez_51" Type="BOOL" UUID="4AC9180C46D1DD59B060F8A0B68716A6" Comment="Резерв" />
+        <Field Name="rez_52" Type="BOOL" UUID="11FEECD948604FDABD202B9FAE588B7D" Comment="Резерв" />
+        <Field Name="rez_53" Type="BOOL" UUID="55D402C44E35E82CDB95D797A1CFE2F1" Comment="Резерв" />
+        <Field Name="kr30B_OFF" Type="BOOL" UUID="4B6333F044785FC54393E399834BCE7A" Comment="Кран 30Б Закрыт" />
+        <Field Name="kr30B_ON" Type="BOOL" UUID="4BDFA1184B4AE90F111355A270E2AFD6" Comment="Кран 30Б Открыт" />
+        <Field Name="kr30B_IM" Type="BOOL" UUID="7B1166C04B55625CAA89D5934947E64C" Comment="Кран 30Б Контроль цепи ИМ" />
+        <Field Name="kr30B_VK" Type="BOOL" UUID="344BCE1F4A3D9C25C4351EAF20EFD64A" Comment="Кран 30Б Контроль цепи ВК" />
+        <Field Name="kr30Bbis_OFF" Type="BOOL" UUID="AAE1C7E547BF6D009576CCBB082B7AB6" Comment="Кран 30Ббис Закрыт" />
+        <Field Name="kr30Bbis_ON" Type="BOOL" UUID="4825C4C24C61A5049C46EC909D0EC569" Comment="Кран 30Ббис Открыт" />
+        <Field Name="kr30Bbis_IM" Type="BOOL" UUID="FDC9EA224E527BDA52D00FB6286C907A" Comment="Кран 30Ббис Контроль цепи ИМ" />
+        <Field Name="kr30Bbis_VK" Type="BOOL" UUID="3B201EF74C66E8CF953C9E9CE27FD2FB" Comment="Кран 30Ббис Контроль цепи ВК" />
+        <Field Name="kr7B_OFF" Type="BOOL" UUID="E0B507C04D6C9D637DCD13AAD6A68347" Comment="Кран 7Б Закрыт" />
+        <Field Name="kr7B_ON" Type="BOOL" UUID="514F3D3D4BA631FA1531948CA923F7B1" Comment="Кран 7Б Открыт" />
+        <Field Name="kr7B_IM" Type="BOOL" UUID="E3B15AC741464E86CE088993297482F8" Comment="Кран 7Б Контроль цепи ИМ" />
+        <Field Name="kr7B_VK" Type="BOOL" UUID="E62EE6484D03AF532B5DE7B2D0402C1A" Comment="Кран 7Б Контроль цепи ВК" />
+        <Field Name="kr7Bzak_OFF" Type="BOOL" UUID="4BF479CA4A4389E66DD08EBDBDD20E9B" Comment="Кран 7Б зак Закрыт" />
+        <Field Name="kr7Bzak_ON" Type="BOOL" UUID="0EF3B3224ABB13CA5AF008A435712659" Comment="Кран 7Б зак Открыт" />
+        <Field Name="kr7Bzak_IM" Type="BOOL" UUID="025691534B8F55475B1CC897C4ADA760" Comment="Кран 7Б зак Контроль цепи ИМ" />
+        <Field Name="kr7Bzak_VK" Type="BOOL" UUID="38B878EE4330937DC7376188DED8D274" Comment="Кран 7Б зак Контроль цепи ВК" />
+        <Field Name="kr8B_OFF" Type="BOOL" UUID="9F47034A4B51A6A9DEE7FB8F4A347043" Comment="Кран 8Б Закрыт" />
+        <Field Name="kr8B_ON" Type="BOOL" UUID="99371B39488FCF6E42DE84895E14B23B" Comment="Кран 8Б Открыт" />
+        <Field Name="kr8B_IM" Type="BOOL" UUID="54113AFE45C10E1DE752AB8FE507BB20" Comment="Кран 8Б Контроль цепи ИМ" />
+        <Field Name="kr8B_VK" Type="BOOL" UUID="7852ED1F4628A3460523048686FA35BA" Comment="Кран 8Б Контроль цепи ВК" />
+        <Field Name="kr8Bbis_OFF" Type="BOOL" UUID="E8EFE5D84EF6E4AFDE405EB92EB12A12" Comment="Кран 8Ббис Закрыт" />
+        <Field Name="kr8Bbis_ON" Type="BOOL" UUID="1545A0C24E484F6A3AF9BF892706C928" Comment="Кран 8Ббис Открыт" />
+        <Field Name="kr8Bbis_IM" Type="BOOL" UUID="5D8F725C4FE3DEEDA7B15BADE6FA97CC" Comment="Кран 8Ббис Контроль цепи ИМ" />
+        <Field Name="kr8Bbis_VK" Type="BOOL" UUID="EA4975114B8E40068106E986F25FCDB2" Comment="Кран 8Ббис Контроль цепи ВК" />
+        <Field Name="rez_55" Type="BOOL" UUID="35B89E474BDB39311EB1C2A7E95B2BB7" Comment="Резерв" />
+        <Field Name="rez_56" Type="BOOL" UUID="2B102617488E49438A289A9E1628D68F" Comment="Резерв" />
+        <Field Name="rez_57" Type="BOOL" UUID="09BDA20D4A8DE7AE58424297659554D6" Comment="Резерв" />
+        <Field Name="rez_58" Type="BOOL" UUID="2190A6D24352F418F1457BA24DF6E92E" Comment="Резерв" />
+        <Field Name="rez_59" Type="BOOL" UUID="10F41D744ED4744A71968EBF1967514E" Comment="Резерв" />
+        <Field Name="rez_60" Type="BOOL" UUID="7C4F12424885D21370C7E0A207A3B170" Comment="Резерв" />
+        <Field Name="rez_61" Type="BOOL" UUID="776908A245C3C921415AFF90BF6C5028" Comment="Резерв" />
+        <Field Name="rez_62" Type="BOOL" UUID="CA8672B44A1B4DAE6738029F84A58A58" Comment="Резерв" />
+        <Field Name="kr17B_OFF" Type="BOOL" UUID="78077FAB4722158615E2E186009D670B" Comment="Кран 17Б Закрыт" />
+        <Field Name="kr17B_ON" Type="BOOL" UUID="4ECD92594538776DD66692B380833518" Comment="Кран 17Б Открыт" />
+        <Field Name="kr17B_IM" Type="BOOL" UUID="0FD3A9AC4CDAB4F27DEBD9AF75E6C8A4" Comment="Кран 17Б Контроль цепи ИМ" />
+        <Field Name="kr17B_VK" Type="BOOL" UUID="0CFC903941C840DD69B86399F1840D5D" Comment="Кран 17Б Контроль цепи ВК" />
+        <Field Name="kr18B_OFF" Type="BOOL" UUID="C84362D743AB58C68D05C696E482FD47" Comment="Кран 18Б Закрыт" />
+        <Field Name="kr18B_ON" Type="BOOL" UUID="4E87208E479CDDCFF08463ABEA85AE83" Comment="Кран 18Б Открыт" />
+        <Field Name="kr18B_IM" Type="BOOL" UUID="83B1FC0C4E34AB2B3DAEC0ADC2E71440" Comment="Кран 18Б Контроль цепи ИМ" />
+        <Field Name="kr18B_VK" Type="BOOL" UUID="CBD9843C40D7FA65436DC482B6DA2DFE" Comment="Кран 18Б Контроль цепи ВК" />
+        <Field Name="rez_63" Type="BOOL" UUID="C43E069C4F388EEA6B50039ACB3F8C24" Comment="Резерв" />
+        <Field Name="rez_64" Type="BOOL" UUID="B1946E8840BB23E0C58C618488768714" Comment="Резерв" />
+        <Field Name="rez_65" Type="BOOL" UUID="E6496AC24A32FCE20D39839BA1C2EF70" Comment="Резерв" />
+        <Field Name="rez_66" Type="BOOL" UUID="0ECABCB449E1A298B6C89A9E9A363655" Comment="Резерв" />
+        <Field Name="kr6B_OFF" Type="BOOL" UUID="83EF0E214F5AF44E7F608AB0B7F2C196" Comment="Кран 6Б Закрыт" />
+        <Field Name="kr6B_ON" Type="BOOL" UUID="22EEF6974B82AAFFCC35F88E89BD5BCC" Comment="Кран 6Б Открыт" />
+        <Field Name="kr6B_IM" Type="BOOL" UUID="6A6F5ECE4B6D79B3247D8BA5178AB0AC" Comment="Кран 6Б Контроль цепи ИМ" />
+        <Field Name="kr6B_VK" Type="BOOL" UUID="46F6FE894B0380E76465C4AD83E9166F" Comment="Кран 6Б Контроль цепи ВК" />
+        <Field Name="dummy" Type="BOOL" UUID="7958CB5F4D87D670F1959EADDF6C6E54" Comment="Заглушка" />
+    </Fields>
+</Type>

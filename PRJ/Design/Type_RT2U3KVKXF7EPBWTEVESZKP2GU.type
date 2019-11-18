@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_AI_A1_raw" Kind="Struct" UUID="72CAE6524DA13E8C80C60A9E490681BF">
+    <Fields>
+        <Field Name="AI_3_1" Type="DINT" UUID="389E0F814FA373E6B8B743BE422CEBC7" Comment="Температура наружного воздуха" />
+        <Field Name="AI_3_2" Type="DINT" UUID="84F42D8647F013D455FFF6A0693963B1" Comment="Температура грунта" />
+        <Field Name="AI_3_3" Type="DINT" UUID="1375484743BFA01CBD3896961D76C692" Comment="Температура газа до крана 7Б" />
+        <Field Name="AI_3_4" Type="DINT" UUID="FEA797DB498B2DAA0542F68C44FDD187" Comment="Температура газа после крана 8Б" />
+        <Field Name="AI_4_1" Type="DINT" UUID="4CF98EC74C969672BBFEA9B80569305F" Comment="Температура газа до крана 8Ббис" />
+        <Field Name="AI_4_2" Type="DINT" UUID="EB95E64A4409D78B9E453F948FD29266" Comment="Температура газа после крана 8Ббис" />
+        <Field Name="AI_4_3" Type="DINT" UUID="B3CE3A3E4D8B498C8C00D5A60BA698FB" Comment="Давление газа после крана 8Ббис" />
+        <Field Name="AI_4_4" Type="DINT" UUID="6515A27244A52BC89FF43AA3A074B7C3" Comment="Давление газа до крана 7Б" />
+        <Field Name="AI_5_1" Type="DINT" UUID="54BCF728479F685DAEB18DBBA98FB4FE" Comment="Резерв" />
+        <Field Name="AI_5_2" Type="DINT" UUID="B13092D64A3AD7DB6CC650995E85234F" Comment="Давление атмосферного воздуха" />
+        <Field Name="AI_5_3" Type="DINT" UUID="A64F8752481140D97A7AA0817AA0E249" Comment="Положение АПК №3" />
+        <Field Name="AI_5_4" Type="DINT" UUID="3ED02A8E4FD19BC5AF347CBC69405B1A" Comment="Резерв" />
+        <Field Name="AI_6_1" Type="DINT" UUID="73974A784AA62B4540C6F2B1E6468E20" Comment="Резерв" />
+        <Field Name="AI_6_2" Type="DINT" UUID="32F1A5624F9BA8283678E1B74B096B5D" Comment="Резерв" />
+        <Field Name="AI_6_3" Type="DINT" UUID="C1C43E594DEFA4141FC68C9845121629" Comment="Резерв" />
+        <Field Name="AI_6_4" Type="DINT" UUID="4B209B3149374D3D9A8E92BC06FAE94B" Comment="Контроль 24 В ТИ" />
+        <Field Name="AI_7_1" Type="DINT" UUID="4B7D8302489323001CB423863F5C8A71" Comment="Температура газа  до  ПУ" />
+        <Field Name="AI_7_2" Type="DINT" UUID="CDC75103497F3865961042B5E01C1BB9" Comment="Температура газа  после ПУ" />
+        <Field Name="AI_7_3" Type="DINT" UUID="215B17A54F2AE6DC27D78BA803EDAF02" Comment="Резерв" />
+        <Field Name="AI_7_4" Type="DINT" UUID="49A50AF244420F35F07436A36F68B514" Comment="Давление газа  до  ПУ" />
+        <Field Name="AI_8_1" Type="DINT" UUID="8E82D3B640A7397621AD8E87A70EC9DF" Comment="Давление газа  после ПУ" />
+        <Field Name="AI_8_2" Type="DINT" UUID="D711E8DB48B4EA9AD1D5FC811C1A4EA2" Comment="Резерв" />
+        <Field Name="AI_8_3" Type="DINT" UUID="3256AF624E832F91456016856ED57FD8" Comment="Температура газа на входе  группы 2" />
+        <Field Name="AI_8_4" Type="DINT" UUID="36DF6BEC4C56132B3B4673B307893019" Comment="Температура газа на выходе  группы 2" />
+        <Field Name="AI_9_1" Type="DINT" UUID="5D948A97481ADBAC11171EB74E802FA8" Comment="Давление газа на выходном шлейфе  " />
+        <Field Name="AI_9_2" Type="DINT" UUID="C6DD0FAD4428D0C19C5A77A61135A67B" Comment="Резерв" />
+        <Field Name="AI_9_3" Type="DINT" UUID="8302B57641B34517BD18BCA12C5CBABE" Comment="Давление сжатого воздуха" />
+        <Field Name="AI_9_4" Type="DINT" UUID="21CE41E64C39858BDDE1B88C12D25198" Comment="Температура топливного газа" />
+        <Field Name="AI_10_1" Type="DINT" UUID="3A758AD441034CED0B206FA438D9AF4D" Comment="Температура пускового газа" />
+        <Field Name="AI_10_2" Type="DINT" UUID="A715BBC44BE899300EA42783EE6AFDCB" Comment="Давление топливного  газа" />
+        <Field Name="AI_10_3" Type="DINT" UUID="E54977BE42465E5F29A0D9B9CBC249E5" Comment="Давление пускового газа" />
+        <Field Name="AI_10_4" Type="DINT" UUID="ADC834E4482067AD105CBCA89EAC1854" Comment="Контроль 24 В ТИ" />
+    </Fields>
+</Type>

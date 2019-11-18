@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="AI_HMI_el_reduc" Kind="Struct" UUID="EADF965A41DFF5F06AB668BE37160EFD">
+    <Fields>
+        <Field Name="PV" Type="REAL" UUID="6DA25EB64457F8BC1B432796A1A66249" Comment="Текущее значение" />
+        <Field Name="Flt" Type="BOOL" UUID="E2D09078462D4EE2900331AD762C3383" Comment="Отказ канала" />
+    </Fields>
+</Type>

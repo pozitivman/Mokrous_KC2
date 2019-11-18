@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_TV" Kind="Struct" UUID="26B66B4D4EE8F7BAC7367CAE287EFD5F">
+    <Fields>
+        <Field Name="LG_System_mode_str" Type="STRING" UUID="1E3861384740206C32C5939FCC65E122" Comment="1я строка" />
+        <Field Name="LG_System_status_str" Type="STRING" UUID="F33882E64CCAAA8B7089498E194B9E74" Comment="2я строка" />
+        <Field Name="Color" Type="BYTE" UUID="446FDCF246276327E4B7FD9D8EBC8EE4" Comment="Цвет телевизора (0бит - жёлтый, 1бит - красный, 2бит - зелётый, 3бит - тёмно-зелёный, 4бит - коричневый, 5бит - серый)" />
+    </Fields>
+</Type>

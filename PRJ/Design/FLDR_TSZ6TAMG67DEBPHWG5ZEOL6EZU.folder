@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="APS">
+    <Items>
+        <Item Name="Type_672XM4LMLFUUJKUEZN4FUL7XLE.type" />
+        <Item Name="Type_7V4TPDEDVWGETCK7LRPIJCGRQA.type" />
+        <Item Name="Type_GML4EU2SARREFKZAQ2OFHU4A7Y.type" />
+        <Item Name="Type_OY345GFURDXUPBRHZJ6OXA2KR4.type" />
+        <Item Name="Type_P3QWWH6OCDIEBFENVKSXWNPARY.type" />
+        <Item Name="Type_TXTCJHIQMIQEDJPYLSU2GKBHZM.type" />
+        <Item Name="Type_VO3TW4LQAT7UBHJWK6B3ZV2RKA.type" />
+        <Item Name="Type_YPPHUQFO4Y5EHB4WP23ILO7IHY.type" />
+    </Items>
+</Folder>

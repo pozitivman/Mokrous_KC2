@@ -1,0 +1,2111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="2E4145A245FE272ED129E28C3789A649" Name="main_SHKU17_A3" Period="100" PutDataAtEndOfCycle="false">
+    <Variables>
+        <Variable UUID="8AE8D56F4A5BD1C3C662A485821DD514" Name="clock_MAIN_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="225274604CDB9612C680E7BD85812BDD" Name="clock_MAIN_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="765971E04892586B6C2A9EBF1371B63D" Name="delay" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="19FC3D954D3C699771E0559EAE60114D" Name="DI_fb" Type="block_DI" TypeUUID="996FFC01410FAAA19E620CB4DD7B4D05" Usage="internal" />
+        <Variable UUID="1BFD23A943F7A242E42F7CB6615710E5" Name="APS_fb" Type="block_APS" TypeUUID="97011E5B4333944A336F59817F2BB612" Usage="internal" />
+        <Variable UUID="AAE37AB0401F0D767F1D599C4B4C52C1" Name="Arch_fb" Type="Archive" TypeUUID="FC3659584F7E9A1B032F2EB588B15E81" Usage="internal" />
+        <Variable UUID="A84911F14A55AF36F3B094943DBA8C2B" Name="ALG_fb" Type="block_ALG" TypeUUID="C8FD4D8B4E6B016D906A7BB168892D92" Usage="internal" />
+        <Variable UUID="7891091F4D51F49091BA4EB93C6232A7" Name="PRU_fb" Type="block_PRU" TypeUUID="1AD13A9D46DF643D1E27DF99C8A631B2" Usage="internal" />
+        <Variable UUID="DACD290045533143D5532B8FA00C18A8" Name="Link_fb" Type="block_Link" TypeUUID="0DEB5E1642B7CA983E2A3DB75DD05F50" Usage="internal" />
+        <Variable UUID="780371BE4A56425C09EE37931B99EDB4" Name="DO_fb" Type="block_DO" TypeUUID="AA8ADA744B25C48EFB08D59D8312319A" Usage="internal" />
+        <Variable UUID="62651D214E2351A944F67CA5489E5763" Name="IM_fb" Type="block_IM" TypeUUID="26E0AC1E46B7FF19C9E641911C17C168" Usage="internal" />
+        <Variable UUID="4A356C304C62A47D9A9CA585FF355EEE" Name="State_fb" Type="block_State" TypeUUID="036EB079487A64D1FD0967AC43C6C53B" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[clock_MAIN_cur := CLOCK();
+IF FirstScan_MAIN THEN clock_MAIN_prev := clock_MAIN_cur; END_IF;
+cycleTime_MAIN := clock_MAIN_cur - clock_MAIN_prev;
+clock_MAIN_prev := clock_MAIN_cur;
+
+// Исправность SHKU17 (1 Гц)
+delay := delay + cycleTime_MAIN;
+//IF delay > LREAL#1 THEN CTU1_DO_HMI.PLC_OK := NOT CTU1_DO_HMI.PLC_OK; delay := LREAL#0; END_IF;
+
+IMIT := Global_BTN.IMIT;
+Deblock := Global_BTN.Deblock;
+Kvitir  := Global_BTN.Kvitir OR Kvitir_ALL_DI;
+
+//AI_fb();
+DI_fb();
+
+State_fb();
+
+ALG_fb();
+
+IM_fb();
+
+APS_fb();
+
+DO_fb();
+//AO_fb();
+
+// Данные для архива
+//Arch_fb();
+
+// Данные для ПРУ
+PRU_fb();
+
+// Данные для соседних узлов
+//Link_fb();
+
+IF FirstScan_MAIN THEN FirstScan_MAIN := BOOL#0; END_IF;
+clock_MAIN_cur := CLOCK();
+cycleTime_MAIN_sys := clock_MAIN_cur - clock_MAIN_prev;]]></ST>
+    <DataTypes>
+        <Struct UUID="6D63867E4EAEA6E77997CCA9428AE797" Name="ACT_Cfg">
+            <Field UUID="5FC7B8EC4CF918BB986C3680B3274107" Name="tmrCmdSP" Comment="таймер подачи команды" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="802040604BCDBF85174F8D940702E9BA" Name="tmrPressSP" Comment="таймер дожима" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+        </Struct>
+        <Struct UUID="1E808FD44FD17288C2202DB8C35DB4DC" Name="ACT_Ctrl">
+            <Field UUID="B521CCB54178366AC90E38A8F01C4BDD" Name="RA" Comment="дистанционный или автоматический режим управления" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="FF6E228A4F4252AF7B044E93BF1C4CF9" Name="noR" Comment="блокировка дистанционного режима управления" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="D36AA2784D178751B98A68BA90AE140A" Name="rOnOff" Comment="команда &apos;включить/выключить&apos; (&apos;открыть/закрыть&apos;) в дистанционном режиме" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="AEFB037F488E7878DD36EC977CBD0949" Name="aOnOff" Comment="команда &apos;включить/выключить&apos; (&apos;открыть/закрыть&apos;) в автоматич режиме" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="234E1C79444037E76DA479B95D64F8D4" Name="rep" Comment="повторить последнюю команду" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="5F7B9A594BF0F6B0E30C3CB1709DCC4A" Name="cwOn" Comment="не учитывать контроль цепи управления команды &apos;открыть&apos;" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="013167D54FE220938D38F893DC2670CF" Name="cwOff" Comment="не учитывать контроль цепи управления команды &apos;закрыть&apos;" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="1A18D4AB4C52B0B9C231259E0399BE82" Name="dummy" Comment="резерв" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+        </Struct>
+        <Struct UUID="EFD6591C4A753B7C2DD7DD8FB0D790F3" Name="ACT_Dbg">
+            <Field UUID="523E6FD54252C6F48B9CD8A0A9B58654" Name="rev" Comment="дата разработки ревизии блока (число, месяц, год)" Type="DWORD" TypeUUID="53CAB7E947643F098D755BB9A02688FA" />
+            <Field UUID="95DD922A4665D89F245954BFD333F723" Name="tmrCmdon" Comment="Таймер команды &apos;включить&apos;: текущее значение" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="532D90284AC1370B647B91939E2DF5A1" Name="tmrCmdoff" Comment="Таймер команды &apos;выключить&apos;: текущее значение" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="F94992664E922629E17EDF9E9EBFA97B" Name="tmrPresson" Comment="Таймер дожима &apos;включить&apos;: текущее значение" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="4F340B7B4CEF0061BC1303AFB42B4AF8" Name="tmrPressoff" Comment="Таймер дожима &apos;выключить&apos;: текущее значение" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="22BE4D054887EA320E1A798B508E5B0D" Name="spDelayncon" Comment="Уставка таймера задержки сигнала &apos;не открыт&apos;" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="CEF957054BFEDBA5BB3880BC3E846A7C" Name="spDelayncoff" Comment="Уставка таймера задержки сигнала &apos;не закрыт&apos;" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="7CE3FB2D49F80561F49E519413549264" Name="tmrDelayncon" Comment="Таймер задержки сигнала &apos;не открыт&apos;" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="5DF45A6D42A69C38CEFB07946CC4361F" Name="tmrDelayncoff" Comment="Таймер задержки сигнала &apos;не закрыт&apos;" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="7B8C5C5E43B8EA9861027CB60D88AF2F" Name="cmdon" Comment="Внутренняя команда &apos;включить/открыть&apos;" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="5CAF6BE948E310D1242DE1BC90E6DD29" Name="cmdoff" Comment="Внутренняя команда &apos;выключить/закрыть&apos;" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="5DD1E7AE4166F967CF25D1981A0BEBCF" Name="ONScmdon" Comment="Команда оператора &apos;включить&apos;-на один цикл" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="8F79C4FC45129E9BD806DE80E256B1B2" Name="ONScmdoff" Comment="Команда оператора &apos;выключить&apos;-на один цикл" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="AAACA97F486F5D2054BC8C90CB2D1DE9" Name="ONSon" Comment="Включен (открыт)-на один цикл" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="A83EB9C749722FADFB35C9843F16EDDF" Name="ONSoff" Comment="Выключен (открыт)-на один цикл" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="686055E8464E72A577603F885DCE4847" Name="ONSrep" Comment="Повторить последнюю команду-на один цикл" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="98032FB240110A38E290D7ACDC997456" Name="tmp" Comment="Вспомогательная переменная для ONScmdon" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="D1017C5643F8024A41272A886C2C6039" Name="tmp2" Comment="Вспомогательная переменная для ONSon" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="AF8FB49343098BEF281A239A408A36E0" Name="tmp3" Comment="Вспомогательная переменная для ONScmdoff" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="4E58906D406AC8BC52322E894F62BC58" Name="tmp4" Comment="Вспомогательная переменная для ONSoff" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="187398BC4C7E06D5227A9FA46B2DD6B2" Name="tmp5" Comment="Вспомогательная переменная для ONSrep" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="04D883F4483A0B71E445BBAEB8732E13" Name="storeCmdon" Comment="Подавалась команда оператора &apos;включить&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="E046312940C857E2114086BE451D28CD" Name="storeCmdoff" Comment="Подавалась команда оператора &apos;выключить&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="0FF2F10545ABE32C7A4D278CAD23EC22" Name="storeOn" Comment="Срабатывал концевик положения &apos;включен&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="6B4FB4D144E9613B6E8731B8CD9FB41E" Name="storeOff" Comment="Срабатывал концевик положения &apos;выключен&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="B928D2544460054293C69B969F60B7C1" Name="storeNon" Comment="Условия формирования флага &apos;не открыт&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="03399E1E463C4AB28EE395B807BB24D6" Name="storeNoff" Comment="Условия формирования флага &apos;не закрыт&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="2326BC7A45CD0A021B427384457AFF96" Name="storeRep" Comment="Условия формирования флага &apos;повтор последней команды&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="03B94E7848CC387CE3EBA4BC7CEB3554" Name="prevOuton" Comment="Состояние команды &apos;включить/открыть&apos; на предыдущем цикле" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="968731204B11C9A24892F8A74F2006D3" Name="prevOutoff" Comment="Состояние команды &apos;выключить/закрыть&apos; на предыдущем цикле" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="84E01BFB45FAED8C4DFBAE91DCD69BE3" Name="chngOuton" Comment="Задний фронт команды &apos;включить/открыть&apos;" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="7086F09C41B4123CA8D2D9BAD4CCBE79" Name="chngOutoff" Comment="Задний фронт команды &apos;выключить/закрыть&apos;" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="A6CACC7C4544D1DD6468F1B219B08E15" Name="fstExe" Comment="При первом выполнении равен нулю" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="672B0B434F62B49954267CBF89A35477" Name="starter" Comment="Классический пускатель (справедливо для механизма типа 12)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+        </Struct>
+        <Struct UUID="5F7A8D2F4FF995FFA39AF192D8894387" Name="ACT_In">
+            <Field UUID="01C69AF94D51500C37AC7EA94CC76521" Name="on" Comment="включен (открыт)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="3646458945E05F268E776294D710283E" Name="off" Comment="выключен (закрыт)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="160A3CC94C2AFB9DB43B649B3B269A96" Name="con" Comment="контроль цепи включения (открытия)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="243D85F2475A066F95F984A4FA4E52A3" Name="coff" Comment="контроль цепи выключения (закрытия)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+        </Struct>
+        <Struct UUID="53217BE648723612F5836C83CCD229E0" Name="ACT_Oper">
+            <Field UUID="63CBB398402DC985D61AC996AD5FCB8E" Name="non" Comment="Не включен (не открыт)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="CFBEFF5C4039215506069BB7EE7259E5" Name="noff" Comment="Не выключен (не закрыт)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="28EAEC3E4E56AFA4F8FAE4BBB853ACBA" Name="nstart" Comment="Не стронулся" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="1A0EC4E6457C42C7BC41FA9E3402BA2B" Name="selfon" Comment="Самопроизвольное включение (открытие)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="3979071A40215F915671DA9DF1C54259" Name="selfoff" Comment="Самопроизвольное закрытие (выключение)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="A502DED244B99EC30C85AF850291F940" Name="flt" Comment="Неисправность концевых выключателей" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="E77A54F841B412D712D7749212ED7557" Name="ncon" Comment="Нет контроля цепи включения (открытия)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="DCECC5484F293734DD9717B24B0DC132" Name="ncoff" Comment="Нет контроля цепи выключения (закрытия)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+        </Struct>
+        <Struct UUID="EF06966C4B92B5BFAD5680A4E3E4A6A7" Name="ACT_Out">
+            <Field UUID="F667F7D94948573E99A575B79FB68CB1" Name="outon" Comment="Управляющая команда &apos;включить/открыть&apos; на механизм" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="D30A2C6D47150544B19A3FB86E6EF771" Name="outoff" Comment="Управляющая команда &apos;отключить/закрыть&apos; на механизм" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="4FDB28FA463D4C3F8FD03DB6206E7A97" Name="dummy" Comment="Резерв" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="DC1021DF4ADB119F31CDB5BB62704656" Name="dummy2" Comment="Резерв" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+        </Struct>
+        <Struct UUID="948723BC4D336C2DD9B225A33B949D39" Name="IM_APS">
+            <Field UUID="51FBCDA840A6C6EF41BCD9B62955BAE6" Name="non" Comment="ИМ &quot;Не открыт&quot;" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="A2ED7FC44BD72BADC474D894CBD03A8E" Name="noff" Comment="ИМ &quot;Не закрыт&quot;" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="E893A9AF46FE58DD36A615A882B0844B" Name="nstart" Comment="ИМ &quot;Не стронулся&quot;" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="1563692E45AA35491B67DDBA8E80B51E" Name="selfon" Comment="ИМ &quot;Самопроизвольное открытие&quot;" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="67BE6EC24165A1C57E23708ADC476672" Name="selfoff" Comment="ИМ &quot;Самопроизвольное закрытие&quot;" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="DF7EE7994432C98C5535BDBF5A0D3943" Name="flt" Comment="ИМ &quot;Ошибка концевиков&quot;" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="CD634B294F172C1F8991B6B874D49623" Name="ncon" Comment="ИМ &quot;Нет КЦУ открытия&quot;" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="F7FD59F847F41D41A416F7867BED6E18" Name="ncoff" Comment="ИМ &quot;Нет КЦУ закрытия&quot;" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+        </Struct>
+        <Struct UUID="149C9CFC429DA2CF7340C7840A20076B" Name="IM_HMI" Comment="Структура ИМ для SCADA">
+            <Field UUID="FE19DEBA47672959B9357CAA0872C4E9" Name="DA" Comment="0 - автомат, 1 - дистанция" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="6FE5D5BC424015684885CE8CC800D9A5" Name="rOn" Comment="Кн. &quot;Открыть&quot;" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="8C410ADB4BE1FCDCBAC6C7A3F036F6FA" Name="rOff" Comment="Кн. &quot;Закрыть&quot;" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="9738752C4512DAC52F9E51AF2C18AFDD" Name="state" Comment="Положение (0 - ничего, 1 - закрыт, 2 - открыт, 3 - оба)" Type="WORD" TypeUUID="05CD1AAB4891B30C004C2799CA460884" />
+            <Field UUID="CBF499F84C67C5995D2E0ABBA9D8FFFF" Name="block_DA" Comment="Блокировка ДУ" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="A7E086BD4767C585547FEB9A6924390C" Name="block_ON_ru" Comment="Блокировка Открытия в ДУ" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="51CFD5C840533F60EEA0E19B284976F3" Name="block_OFF_ru" Comment="Блокировка Закрытия в ДУ" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="3D8C8FDA45A2837B5CD0CAB45D4BFE7A" Name="block_IMIT" Comment="Блокировка имитации" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="277BB6A84512C7C16028A38D690688D0" Name="general" Comment="Обобщённая ошибка ИМ" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+        </Struct>
+        <Struct UUID="C1697AFE4AF951CFD2394E8E3622C1B2" Name="IM_PLC" Comment="Управление ИМ из PLC и их АПС">
+            <Field UUID="8A559E9B458AA54B0CA181A6569A1065" Name="aOn" Comment="Включение" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="6E974714492EAFA66AECD88FFA011996" Name="aOff" Comment="Отключение" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="EA186CB84E91B6EC19C192AE056DA4EF" Name="APS" Comment="Список АПС" Type="IM_APS" TypeUUID="948723BC4D336C2DD9B225A33B949D39" />
+        </Struct>
+        <Struct UUID="0209C2A3445A6A14C63266A0E52B929B" Name="support_ACT">
+            <Field UUID="C128AC9F4B6FC9CAE98F99929AB61438" Name="Config" Comment="конфигурационные параметры" Type="ACT_Cfg" TypeUUID="6D63867E4EAEA6E77997CCA9428AE797" />
+            <Field UUID="9A0D205548B279A70FCE5AAC91CD9AAD" Name="Control" Comment="управляющие команды" Type="ACT_Ctrl" TypeUUID="1E808FD44FD17288C2202DB8C35DB4DC" />
+            <Field UUID="D36203864CAC129BA092BABA6B5C5CCA" Name="Ins" Comment="входные сигналы" Type="ACT_In" TypeUUID="5F7A8D2F4FF995FFA39AF192D8894387" />
+            <Field UUID="42F147E24EE30E8BA4D0AA8D3994A7A2" Name="Outs" Comment="выходные команды" Type="ACT_Out" TypeUUID="EF06966C4B92B5BFAD5680A4E3E4A6A7" />
+            <Field UUID="B5837346411737AA71AEF5A2F846CB96" Name="Oper" Comment="параметры для интерфейса" Type="ACT_Oper" TypeUUID="53217BE648723612F5836C83CCD229E0" />
+            <Field UUID="72308134420C94E25CC2CFB61EBFE43D" Name="Debug" Comment="отладочные параметры" Type="ACT_Dbg" TypeUUID="EFD6591C4A753B7C2DD7DD8FB0D790F3" />
+        </Struct>
+    </DataTypes>
+    <FBLibrary>
+        <Folder Name="ALG" Comment="" Data="" UUID="403563EE48D0A33CCA7667BB6F98A1D7">
+            <Folder Name="Drums" Comment="" Data="" UUID="34E67B4147CC6A879ECF2DB15D11428F">
+                <FunctionBlock UUID="5C3F45D04F7362D06D4D46AAFA5B9054" Name="drum_AOB">
+                    <Variables />
+                    <ST><![CDATA[drumAOB.start := (APS_TASK = INT#5) AND MD.AOB;
+
+// Пуск drum
+IF drumAOB.start AND NOT drumAOB.run THEN
+	drumAOB.run := BOOL#1;
+	drumAOB.step := INT#0;
+END_IF;
+
+// Останов drum извне
+IF MD.EAO_KS OR MD.EAO_KC2 OR MD.AOS OR FirstScan_MAIN THEN
+	drumAOB.run := BOOL#0;
+	drumAOB.step_prev := INT#-1;
+	drumAOB.step := INT#-1;
+	AOB_to_DO := BOOL#0;
+//	AOB_KR36_ON := BOOL#0;
+//	AOB_KR36a_ON := BOOL#0;
+//	AOB_KR23_OFF := BOOL#0;
+//	AOB_KR25_OFF := BOOL#0;
+END_IF;
+
+// Тело drum
+CASE drumAOB.step OF
+0:	IF drumAOB.step_prev <> INT#0 THEN
+		drumAOB.TMR2 := LREAL#120;
+		drumAOB.step_prev := drumAOB.step;
+	END_IF;
+	AOB_to_DO := BOOL#1; (*АОбс в СтУ-1, ГПА11-14*)
+	(*КХР открыть*)
+//	AOB_KR36_ON := BOOL#1;
+//	AOB_KR36a_ON := BOOL#1;
+//	AOB_KR23_OFF := BOOL#1;
+//	AOB_KR25_OFF := BOOL#1;
+	drumAOB.TMR2 := drumAOB.TMR2 - cycleTime_MAIN;
+	(* IF (CTU1_SHKU17_A1.KR7_OFF AND NOT CTU1_SHKU17_A1.KR7_ON) AND (CTU1_SHKU17_A1.KR7a_OFF AND NOT CTU1_SHKU17_A1.KR7a_ON) AND (CTU1_SHKU17_A1.KR8_OFF AND NOT CTU1_SHKU17_A1.KR8_ON) AND
+	   (SHKU17_DI_HMI_A1.KR36_ON AND NOT SHKU17_DI_HMI_A1.KR36_OFF) AND (SHKU17_DI_HMI_A1.KR36a_ON AND NOT SHKU17_DI_HMI_A1.KR36a_OFF) AND
+	   (SHKU17_DI_HMI_A1.KR36p_ON AND NOT SHKU17_DI_HMI_A1.KR36p_OFF) AND
+	   (SHKU17_DI_HMI_A1.KR23_OFF AND NOT SHKU17_DI_HMI_A1.KR23_ON) AND (SHKU17_DI_HMI_A1.KR25_OFF AND NOT SHKU17_DI_HMI_A1.KR25_ON) THEN
+		drumAOB.step := INT#1;
+	END_IF; *)
+	IF drumAOB.TMR2 <= LREAL#0 THEN
+		drumAOB.step := INT#2;
+	END_IF;
+1:	drumAOB.done_ok := BOOL#1;
+	drumAOB.step_prev := drumAOB.step;
+	drumAOB.step := INT#3;
+2:	drumAOB.done_flt := BOOL#1;
+	drumAOB.step_prev := drumAOB.step;
+	drumAOB.step := INT#3;
+3:	IF drumAOB.step_prev <> INT#3 THEN
+//		Need_accept.AOB_MG_cut := BOOL#1;
+		AOB_to_DO := BOOL#0;
+//		AOB_KR36_ON := BOOL#0;
+//		AOB_KR36a_ON := BOOL#0;
+//		AOB_KR23_OFF := BOOL#0;
+//		AOB_KR25_OFF := BOOL#0;
+		drumAOB.step_prev := drumAOB.step;
+	END_IF;
+	IF Deblock AND NOT drumAOB.start THEN
+		drumAOB.step := INT#-1;
+		drumAOB.step_prev := INT#-1;
+		drumAOB.run := BOOL#0;
+		drumAOB.done_ok := BOOL#0;
+		drumAOB.done_flt := BOOL#0;
+	END_IF;		
+END_CASE;
+
+IF Global_BTN.AOB_MG_cut_accept OR Global_BTN.AOB_MG_cut_not_accept THEN
+//	Need_accept.AOB_MG_cut := BOOL#0;
+END_IF;
+
+// Выходы
+//SHKU17_DO_HMI_A1.AObs_main_GPA11	:= AOB_to_DO;
+//SHKU17_DO_HMI_A1.AObs_backup_GPA11	:= AOB_to_DO;
+//SHKU17_DO_HMI_A1.AObs_main_GPA12	:= AOB_to_DO;
+//SHKU17_DO_HMI_A1.AObs_backup_GPA12	:= AOB_to_DO;
+//SHKU17_DO_HMI_A1.AObs_main_GPA13	:= AOB_to_DO;
+//SHKU17_DO_HMI_A1.AObs_backup_GPA13	:= AOB_to_DO;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="4D53F5474B560A5B5A0762874A2A180C" Name="drum_AOS">
+                    <Variables>
+                        <Variable UUID="A65C5BE040510776B17054B512B5AE0E" Name="USL_1" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="3CDB11DE4DFB1AE5D6178EAE08D6A26F" Name="USL_2" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[drumAOS.start := (APS_TASK = INT#6) AND MD.AOS;
+
+// Пуск drum
+IF drumAOS.start AND NOT drumAOS.run THEN
+	drumAOS.run := BOOL#1;
+	drumAOS.step := INT#0;
+END_IF;
+
+// Останов drum извне
+IF MD.EAO_KS OR MD.EAO_KC2 OR FirstScan_MAIN THEN
+	drumAOS.run		:= BOOL#0;
+	drumAOS.step_prev := INT#-1;
+	drumAOS.step	:= INT#-1;
+	AOS_to_DO		:= BOOL#0;
+	AOS_KR6B_ON		:= BOOL#0;
+	AOS_KR6BR_ON	:= BOOL#0;
+	AOS_KR7B_OFF	:= BOOL#0;
+	AOS_KR8B_OFF	:= BOOL#0;
+	AOS_KR8Bbis_OFF	:= BOOL#0;
+	AOS_KR17B_ON	:= BOOL#0;
+	AOS_KR18B_ON	:= BOOL#0;
+END_IF;
+
+// Тело drum
+CASE drumAOS.step OF
+0:	IF drumAOS.step_prev <> INT#0 THEN
+		drumAOS.TMR2 := LREAL#120;
+		drumAOS.step_prev := drumAOS.step;
+	END_IF;
+	AOS_to_DO 		:= BOOL#1; (*АОсс в другие подсистемы*)
+	AOS_KR6B_ON		:= BOOL#1;
+	AOS_KR6BR_ON	:= BOOL#1;
+	drumAOS.TMR2	:= drumAOS.TMR2 - cycleTime_MAIN;
+	IF (SHKU17_A3_DI_HMI.kr6B_ON AND NOT SHKU17_A3_DI_HMI.kr6B_OFF) AND (SHKU17_A5_DI_HMI.kr6BR_ON AND NOT SHKU17_A5_DI_HMI.kr6BR_OFF) THEN
+		drumAOS.step := INT#1;
+	END_IF;
+	IF drumAOS.TMR2 <= LREAL#0 THEN
+		drumAOS.step := INT#3;
+	END_IF;
+
+
+1:
+	AOS_KR7B_OFF	:= BOOL#1;
+	AOS_KR8B_OFF	:= BOOL#1;
+	AOS_KR8Bbis_OFF	:= BOOL#1;
+	AOS_KR17B_ON	:= BOOL#1;
+	AOS_KR18B_ON	:= BOOL#1;
+	IF (SHKU17_A3_DI_HMI.kr7B_OFF AND NOT SHKU17_A3_DI_HMI.kr7B_ON) AND (SHKU17_A3_DI_HMI.kr8B_OFF AND NOT SHKU17_A3_DI_HMI.kr8B_ON) AND 
+		(SHKU17_A3_DI_HMI.kr8Bbis_OFF AND NOT SHKU17_A3_DI_HMI.kr8Bbis_ON) AND (SHKU17_A3_DI_HMI.kr17B_ON AND NOT SHKU17_A3_DI_HMI.kr17B_OFF) AND 
+		(SHKU17_A3_DI_HMI.kr18B_ON AND NOT SHKU17_A3_DI_HMI.kr18B_OFF) THEN
+		drumAOS.step := INT#2;
+	END_IF;
+	IF drumAOS.TMR2 <= LREAL#0 THEN
+		drumAOS.step := INT#3;
+	END_IF;
+
+2:	drumAOS.done_ok := BOOL#1;
+	drumAOS.step_prev := drumAOS.step;
+	drumAOS.step := INT#4;
+
+
+3:	drumAOS.done_flt := BOOL#1;
+	drumAOS.step_prev := drumAOS.step;
+	drumAOS.step := INT#4;
+
+
+4:	IF drumAOS.step_prev <> INT#3 THEN
+//		Need_accept.AOS_MG_cut := BOOL#1;
+		AOS_to_DO		:= BOOL#0;
+		AOS_KR6B_ON		:= BOOL#0;
+		AOS_KR6BR_ON	:= BOOL#0;
+		AOS_KR7B_OFF	:= BOOL#0;
+		AOS_KR8B_OFF	:= BOOL#0;
+		AOS_KR8Bbis_OFF	:= BOOL#0;
+		AOS_KR17B_ON	:= BOOL#0;
+		AOS_KR18B_ON	:= BOOL#0;
+		drumAOS.step_prev := drumAOS.step;
+	END_IF;
+	IF Deblock AND NOT drumAOS.start THEN
+		drumAOS.step := INT#-1;
+		drumAOS.step_prev := INT#-1;
+		drumAOS.run := BOOL#0;
+		drumAOS.done_ok := BOOL#0;
+		drumAOS.done_flt := BOOL#0;
+	END_IF;		
+END_CASE;
+
+IF Global_BTN.AOS_MG_cut_accept OR Global_BTN.AOS_MG_cut_not_accept THEN
+//	Need_accept.AOS_MG_cut := BOOL#0;
+END_IF;
+
+// Выходы
+SHKU17_A3_DO_HMI.GPA7_FLT	:= AOS_to_DO;
+SHKU17_A3_DO_HMI.GPA8_FLT	:= AOS_to_DO;
+SHKU17_A3_DO_HMI.GPA9_FLT	:= AOS_to_DO;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="A5ED774D44E035F9FD7A53AFF570B634" Name="drum_KOL">
+                    <Variables />
+                    <ST><![CDATA[drumKOL.start := (APS_TASK = INT#3) AND MD.KOL_KC2;
+
+// Пуск drum
+IF drumKOL.start AND NOT drumKOL.run THEN
+	drumKOL.run := BOOL#1;
+	drumKOL.step := INT#0;
+END_IF;
+
+// Останов drum извне
+IF MD.EAO_KS OR MD.EAO_KC2 OR MD.AOS OR MD.AOB OR MD.NO OR FirstScan_MAIN THEN
+	drumKOL.run := BOOL#0;
+	drumKOL.step_prev := INT#-1;
+	drumKOL.step := INT#-1;
+//	KOL_KXR_ON := BOOL#0;
+//	KOL_KR36_ON := BOOL#0;
+//	KOL_KR36a_ON := BOOL#0;
+//	KOL_KR23_OFF := BOOL#0;
+//	KOL_KR25_OFF := BOOL#0;
+END_IF;
+
+// Тело drum
+CASE drumKOL.step OF
+0:	IF drumKOL.step_prev <> INT#0 THEN
+		drumKOL.TMR2 := LREAL#120;
+		drumKOL.step_prev := drumKOL.step;
+	END_IF;
+	(*КХР открыть*)
+//	KOL_KXR_ON := BOOL#1;
+//	KOL_KR36_ON := BOOL#1;
+//	KOL_KR36a_ON := BOOL#1;
+//	KOL_KR23_OFF := BOOL#1;
+//	KOL_KR25_OFF := BOOL#1;
+	drumKOL.TMR2 := drumKOL.TMR2 - cycleTime_MAIN;
+	(*IF (SHKU17_DI_HMI_A1.KR36_ON AND NOT SHKU17_DI_HMI_A1.KR36_OFF) AND (SHKU17_DI_HMI_A1.KR36a_ON AND NOT SHKU17_DI_HMI_A1.KR36a_OFF) AND
+	   (SHKU17_DI_HMI_A1.KR36p_ON AND NOT SHKU17_DI_HMI_A1.KR36p_OFF) AND
+	   (SHKU17_DI_HMI_A1.KR23_OFF AND NOT SHKU17_DI_HMI_A1.KR23_ON) AND (SHKU17_DI_HMI_A1.KR25_OFF AND NOT SHKU17_DI_HMI_A1.KR25_ON) THEN
+		drumKOL.step := INT#1;
+	END_IF;*)
+	IF drumKOL.TMR2 <= LREAL#0 THEN
+		drumKOL.step := INT#2;
+	END_IF;
+1:	drumKOL.done_ok := BOOL#1;
+	drumKOL.step_prev := drumKOL.step;
+	drumKOL.step := INT#3;
+2:	drumKOL.done_flt := BOOL#1;
+	drumKOL.step_prev := drumKOL.step;
+	drumKOL.step := INT#3;
+3:	IF drumKOL.step_prev <> INT#3 THEN
+//		KOL_KXR_ON := BOOL#0;
+//		KOL_KR36_ON := BOOL#0;
+//		KOL_KR36a_ON := BOOL#0;
+//		KOL_KR23_OFF := BOOL#0;
+//		KOL_KR25_OFF := BOOL#0;
+		drumKOL.step_prev := drumKOL.step;
+	END_IF;
+	IF Deblock AND NOT drumKOL.start THEN
+		drumKOL.step := INT#-1;
+		drumKOL.step_prev := INT#-1;
+		drumKOL.run := BOOL#0;
+		drumKOL.done_ok := BOOL#0;
+		drumKOL.done_flt := BOOL#0;
+	END_IF;		
+END_CASE;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="0C6A093C421AF5B1D419C381F5CBCE8E" Name="drum_KOL_GPA">
+                    <Variables />
+                    <ST><![CDATA[drumKOL_GPA.start := (APS_TASK = INT#2) AND MD.KOL_GPA;
+
+// Пуск drum
+IF drumKOL_GPA.start AND NOT drumKOL_GPA.run THEN
+	drumKOL_GPA.run := BOOL#1;
+	drumKOL_GPA.step := INT#0;
+END_IF;
+
+// Останов drum извне
+IF MD.EAO_KS OR MD.EAO_KC2 OR MD.AOS OR MD.AOB OR MD.NO OR FirstScan_MAIN THEN
+	drumKOL_GPA.run := BOOL#0;
+	drumKOL_GPA.step_prev := INT#-1;
+	drumKOL_GPA.step := INT#-1;
+//	K_to_GPA := BOOL#0;
+END_IF;
+
+// Тело drum
+CASE drumKOL_GPA.step OF
+0:	IF drumKOL_GPA.step_prev <> INT#0 THEN
+		drumKOL_GPA.TMR2 := LREAL#120;
+		drumKOL_GPA.step_prev := drumKOL_GPA.step;
+	END_IF;
+//	K_to_GPA := BOOL#1; (*Кольцо в ГПА*)
+	drumKOL_GPA.TMR2 := drumKOL_GPA.TMR2 - cycleTime_MAIN;
+	(*IF MD_Teh.GPA_K THEN
+		drumKOL_GPA.step := INT#1;
+	END_IF;*)
+	IF drumKOL_GPA.TMR2 <= LREAL#0 THEN
+		drumKOL_GPA.step := INT#2;
+	END_IF;
+1:	drumKOL_GPA.done_ok := BOOL#1;
+	drumKOL_GPA.step_prev := drumKOL_GPA.step;
+	drumKOL_GPA.step := INT#3;
+2:	drumKOL_GPA.done_flt := BOOL#1;
+	drumKOL_GPA.step_prev := drumKOL_GPA.step;
+	drumKOL_GPA.step := INT#3;
+3:	IF drumKOL_GPA.step_prev <> INT#3 THEN
+//		K_to_GPA := BOOL#0;
+		drumKOL_GPA.step_prev := drumKOL_GPA.step;
+	END_IF;
+	IF Deblock AND NOT drumKOL_GPA.start THEN
+		drumKOL_GPA.step := INT#-1;
+		drumKOL_GPA.step_prev := INT#-1;
+		drumKOL_GPA.run := BOOL#0;
+		drumKOL_GPA.done_ok := BOOL#0;
+		drumKOL_GPA.done_flt := BOOL#0;
+	END_IF;		
+END_CASE;
+
+//Link_GPA11.Command_MK := K_to_GPA;
+//Link_GPA12.Command_MK := K_to_GPA;
+//Link_GPA13.Command_MK := K_to_GPA;
+//Link_GPA14.Command_MK := K_to_GPA;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="F6D81CF545166B8DEA829DAAA4FFC5AD" Name="drum_NO">
+                    <Variables />
+                    <ST><![CDATA[drumNO.start := (APS_TASK = INT#4) AND MD.NO;
+
+// Пуск drum
+IF drumNO.start AND NOT drumNO.run THEN
+	drumNO.run := BOOL#1;
+	drumNO.step := INT#0;
+END_IF;
+
+// Останов drum извне
+IF MD.EAO_KS OR MD.EAO_KC2 OR MD.AOS OR MD.AOB OR FirstScan_MAIN THEN
+	drumNO.run := BOOL#0;
+	drumNO.step_prev := INT#-1;
+	drumNO.step := INT#-1;
+	NO_to_DO := BOOL#0;
+//	NO_KR36_ON := BOOL#0;
+//	NO_KR36a_ON := BOOL#0;
+//	NO_KR23_OFF := BOOL#0;
+//	NO_KR25_OFF := BOOL#0;
+	//NO_start := BOOL#0;
+	//NO_stop := BOOL#0;
+END_IF;
+
+// Тело drum
+CASE drumNO.step OF
+0:	IF drumNO.step_prev <> INT#0 THEN
+		drumNO.TMR2 := LREAL#900;
+		drumNO.step_prev := drumNO.step;
+		//NO_start := BOOL#1;
+		CREATE_EVENT('Запуск алгоритма НО КЦ-2', DINT#102, INT#1, 'КЦ', '', CURRENT_DATE_TIME(), '');
+	END_IF;
+	NO_to_DO := BOOL#1; (*НО в ГПА*)
+	(*КХР открыть*)
+//	NO_KR36_ON := BOOL#1;
+//	NO_KR36a_ON := BOOL#1;
+//	NO_KR23_OFF := BOOL#1;
+//	NO_KR25_OFF := BOOL#1;
+	drumNO.TMR2 := drumNO.TMR2 - cycleTime_MAIN;
+
+	(*IF (CTU1_SHKU17_A1.KR7_OFF AND NOT CTU1_SHKU17_A1.KR7_ON) AND (CTU1_SHKU17_A1.KR7a_OFF AND NOT CTU1_SHKU17_A1.KR7a_ON) AND (CTU1_SHKU17_A1.KR8_OFF AND NOT CTU1_SHKU17_A1.KR8_ON) AND
+	   (SHKU17_DI_HMI_A1.KR36_ON AND NOT SHKU17_DI_HMI_A1.KR36_OFF) AND (SHKU17_DI_HMI_A1.KR36a_ON AND NOT SHKU17_DI_HMI_A1.KR36a_OFF) AND
+	   (SHKU17_DI_HMI_A1.KR36p_ON AND NOT SHKU17_DI_HMI_A1.KR36p_OFF) AND
+	   (SHKU17_DI_HMI_A1.KR23_OFF AND NOT SHKU17_DI_HMI_A1.KR23_ON) AND (SHKU17_DI_HMI_A1.KR25_OFF AND NOT SHKU17_DI_HMI_A1.KR25_ON) AND
+	   (MD_Teh.GPAs_stop) THEN
+		drumNO.step := INT#1;
+	END_IF; *)
+	IF drumNO.TMR2 <= LREAL#0 THEN
+		drumNO.step := INT#2;
+	END_IF;
+1:	drumNO.done_ok := BOOL#1;
+	CREATE_EVENT('Нормальное завершение алгоритма НО КЦ-2', DINT#102, INT#1, 'КЦ', '', CURRENT_DATE_TIME(), '');
+	//NO_stop := BOOL#1;
+	drumNO.step_prev := drumNO.step;
+	drumNO.step := INT#3;
+2:	drumNO.done_flt := BOOL#1;
+	drumNO.step_prev := drumNO.step;
+	drumNO.step := INT#3;
+3:	IF drumNO.step_prev <> INT#3 THEN
+		NO_to_DO := BOOL#0;
+		//NO_start := BOOL#0;
+//		NO_KR36_ON := BOOL#0;
+//		NO_KR36a_ON := BOOL#0;
+//		NO_KR23_OFF := BOOL#0;
+//		NO_KR25_OFF := BOOL#0;
+		drumNO.step_prev := drumNO.step;
+	END_IF;
+	IF Deblock AND NOT drumNO.start THEN
+		//NO_stop := BOOL#0;
+		drumNO.step := INT#-1;
+		drumNO.step_prev := INT#-1;
+		drumNO.run := BOOL#0;
+		drumNO.done_ok := BOOL#0;
+		drumNO.done_flt := BOOL#0;
+	END_IF;		
+END_CASE;
+
+// Выходы
+//Link_GPA11.Command_NOB := NO_to_DO;
+//Link_GPA12.Command_NOB := NO_to_DO;
+//Link_GPA13.Command_NOB := NO_to_DO;
+//Link_GPA14.Command_NOB := NO_to_DO;]]></ST>
+                </FunctionBlock>
+            </Folder>
+            <FunctionBlock UUID="C8FD4D8B4E6B016D906A7BB168892D92" Name="block_ALG">
+                <Variables>
+                    <Variable UUID="32BF7E374B703E584F190BA898045D53" Name="AOB" Type="drum_AOB" TypeUUID="5C3F45D04F7362D06D4D46AAFA5B9054" Usage="internal" />
+                    <Variable UUID="C157D4F24D7E82D061B407883E07E79E" Name="AOS" Type="drum_AOS" TypeUUID="4D53F5474B560A5B5A0762874A2A180C" Usage="internal" />
+                    <Variable UUID="EC536BC649C09F9DB247BAB85D058531" Name="KOL" Type="drum_KOL" TypeUUID="A5ED774D44E035F9FD7A53AFF570B634" Usage="internal" />
+                    <Variable UUID="8B01DF554B2F137956F08F8B8C4CB88A" Name="KOL_GPA" Type="drum_KOL_GPA" TypeUUID="0C6A093C421AF5B1D419C381F5CBCE8E" Usage="internal" />
+                    <Variable UUID="90ADF16E4E69AA7765ADB4BCA3186CBC" Name="NO" Type="drum_NO" TypeUUID="F6D81CF545166B8DEA829DAAA4FFC5AD" Usage="internal" />
+                    <Variable UUID="E56CC37D49141F2E40528584E37EC7F2" Name="tmp" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="20" Array="TRUE" Usage="internal" />
+                    <Variable UUID="BE17BD984F5458B426262CAE8040F985" Name="delay" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Size="10" Array="TRUE" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[AOS();
+AOB();
+NO();
+KOL();
+KOL_GPA();
+
+//Алгоритм открытия крана 6б по превышению давления на выходе цеха
+OVR_KR6B_ON := (APS_TASK = INT#7);
+
+IF IMIT THEN
+
+END_IF;]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <Folder Name="APS" Comment="" Data="" UUID="E4D5F2DE4B10CDBFC8A497B30313CE63">
+            <FunctionBlock UUID="97011E5B4333944A336F59817F2BB612" Name="block_APS">
+                <Variables>
+                    <Variable UUID="577764ED4B44CFA6C9862E8628DD3491" Name="clock_APS_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="1A1A536B41572521AF42D1B5D7C773A7" Name="clock_APS_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="B8FCD4E34135F762D7C6AEA403CFCA60" Name="APS_TASK_alg" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="747E079E4918BDF1E01417AF30FE4BC9" Name="APL" Type="proc_AE" TypeUUID="665F4B4646FC5E75565ABCB2FD5974AF" Usage="internal" />
+                    <Variable UUID="22F837DA47A3DB91DF1E7FBFD277CEBE" Name="Deblock_last" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[clock_APS_cur := CLOCK();
+IF FirstScan_MAIN THEN clock_APS_prev := clock_APS_cur; END_IF;
+cycleTime_APS := clock_APS_cur - clock_APS_prev;
+clock_APS_prev := clock_APS_cur;
+APS_TASK_alg :=INT#0;
+IF Deblock AND NOT Deblock_last THEN
+	APS_TASK := INT#0;
+END_IF;
+Deblock_last := Deblock;
+
+//АПС
+APL(INT#0, SHKU17_A3_DI_HMI.Fire1GN_KC2, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Fire1GN_KC2);   // Пожар в ГН КЦ 2
+APL(INT#1, SHKU17_A3_DI_HMI.Fire1mb_KC2, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Fire1mb_KC2);   // Пожар в маслобаке КЦ 2
+APL(INT#2, SHKU17_A3_DI_HMI.Fire1_AC804, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Fire1_AC804);   // Пожар в АС-804
+APL(INT#3, SHKU17_A3_DI_HMI.Fire1_ESSN, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Fire1_ESSN);   // Пожар в ЭССН
+APL(INT#4, SHKU17_A3_DI_HMI.Fire1_RU04, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Fire1_RU04);   // Пожар РУ-0,4 кВ
+APL(INT#5, SHKU17_A3_DI_HMI.Fire1_Kot, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Fire1_Kot);   // Пожар в котельной
+APL(INT#6, SHKU17_A3_DI_HMI.Zag1_GN_KC2_10p, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Zag1_GN_KC2_10p);   // Загазованность в ГН КЦ 2 10%
+APL(INT#7, SHKU17_A3_DI_HMI.Zag1_GN_KC2_20p, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Zag1_GN_KC2_20p);   // Загазованность в ГН КЦ 2 20%
+APL(INT#8, SHKU17_A3_DI_HMI.Zag1_PU_KC2_10p, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Zag1_PU_KC2_10p);   // Загазованность в ПУ КЦ 2 10%
+APL(INT#9, SHKU17_A3_DI_HMI.Zag1_PU_KC2_20p, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Zag1_PU_KC2_20p);   // Загазованность в ПУ КЦ 2  20%
+APL(INT#10, SHKU17_A3_DI_HMI.Zag1_MZ_ESSN_10p, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Zag1_MZ_ESSN_10p);   // Загазованность в машзале ЭССН 10%
+APL(INT#11, SHKU17_A3_DI_HMI.Zag1_MZ_ESSN_20p, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Zag1_MZ_ESSN_20p);   // Загазованность в машзале ЭССН  20%
+APL(INT#12, SHKU17_A3_DI_HMI.Zag_CH4_KOT_10p, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Zag_CH4_KOT_10p);   // Загазованность СН4  в котельной  10%
+APL(INT#13, SHKU17_A3_DI_HMI.Zag_CH4_KOT_20p, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Zag_CH4_KOT_20p);   // Загазованность СН4  в котельной 20%
+APL(INT#14, SHKU17_A3_DI_HMI.Zag_CO_KOT_20mg, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Zag_CO_KOT_20mg);   // Загазованность СО в котельной 20мг/м3
+APL(INT#15, SHKU17_A3_DI_HMI.Zag_CO_KOT_100mg, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Zag_CO_KOT_100mg);   // Загазованность СО в котельной 100мг/м3
+APL(INT#16, SHKU17_A3_DI_HMI.Neispr_SPO_KZ, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Neispr_SPO_KZ);   // Неисправность системы ПО и КЗ
+APL(INT#17, SHKU17_A3_DI_HMI.ComSh_AC804_inc1_Q1_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.ComSh_AC804_inc1_Q1_ON);   // Щит связи АС-804. Ввод №1: контактор №1 включен
+APL(INT#18, SHKU17_A3_DI_HMI.ComSh_AC804_inc1_Q1_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.ComSh_AC804_inc1_Q1_OFF);   // Щит связи АС-804. Ввод №1: контактор №1 отключен
+APL(INT#19, SHKU17_A3_DI_HMI.ComSh_AC804_inc2_Q2_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.ComSh_AC804_inc2_Q2_ON);   // Щит связи АС-804. Ввод №2: контактор №2 включен
+APL(INT#20, SHKU17_A3_DI_HMI.ComSh_AC804_inc2_Q2_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.ComSh_AC804_inc2_Q2_OFF);   // Щит связи АС-804. Ввод №2: контактор №2 отключен
+APL(INT#21, SHKU17_A3_DI_HMI.Call_KC2, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Call_KC2);   // Вызов в цех №2
+APL(INT#22, SHKU17_A3_DI_HMI.rez_08, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_08);   // Резерв
+APL(INT#23, SHKU17_A3_DI_HMI.Ala_KOT, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ala_KOT);   // Авария в котельной
+APL(INT#24, SHKU17_A3_DI_HMI.PL_KC2_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.PL_KC2_ON);   // Периметральное освещение КЦ 2 включено
+APL(INT#25, SHKU17_A3_DI_HMI.rez_09, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_09);   // Резерв
+APL(INT#26, SHKU17_A3_DI_HMI.rez_10, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_10);   // Резерв
+APL(INT#27, SHKU17_A3_DI_HMI.rez_11, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_11);   // Резерв
+APL(INT#28, SHKU17_A3_DI_HMI.rez_12, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_12);   // Резерв
+APL(INT#29, SHKU17_A3_DI_HMI.rez_13, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_13);   // Резерв
+APL(INT#30, SHKU17_A3_DI_HMI.rez_14, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_14);   // Резерв
+APL(INT#31, SHKU17_A3_DI_HMI.Ctrl24_TC_2, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ctrl24_TC_2);   // Контроль 24 В ТС №2
+APL(INT#32, SHKU17_A3_DI_HMI.GPA7_AS_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.GPA7_AS_ON);   // ГПА №7 Включить звуковую сигнализацию
+APL(INT#33, SHKU17_A3_DI_HMI.GPA8_AS_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.GPA8_AS_ON);   // ГПА №8 Включить звуковую сигнализацию
+APL(INT#34, SHKU17_A3_DI_HMI.GPA9_AS_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.GPA9_AS_ON);   // ГПА №9 Включить звуковую сигнализацию
+APL(INT#35, SHKU17_A3_DI_HMI.rez_15, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_15);   // Резерв
+APL(INT#36, SHKU17_A3_DI_HMI.rez_16, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_16);   // Резерв
+APL(INT#37, SHKU17_A3_DI_HMI.rez_17, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_17);   // Резерв
+APL(INT#38, SHKU17_A3_DI_HMI.GPA7_S1Gr, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.GPA7_S1Gr);   // ГПА №7 Останов в группе
+APL(INT#39, SHKU17_A3_DI_HMI.GPA8_S1Gr, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.GPA8_S1Gr);   // ГПА №8 Останов в группе
+APL(INT#40, SHKU17_A3_DI_HMI.GPA9_S1Gr, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.GPA9_S1Gr);   // ГПА №9 Останов в группе
+APL(INT#41, SHKU17_A3_DI_HMI.rez_18, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_18);   // Резерв
+APL(INT#42, SHKU17_A3_DI_HMI.rez_19, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_19);   // Резерв
+APL(INT#43, SHKU17_A3_DI_HMI.rez_20, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_20);   // Резерв
+APL(INT#44, SHKU17_A3_DI_HMI.rez_21, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_21);   // Резерв
+APL(INT#45, SHKU17_A3_DI_HMI.rez_22, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_22);   // Резерв
+APL(INT#46, SHKU17_A3_DI_HMI.rez_23, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_23);   // Резерв
+APL(INT#47, SHKU17_A3_DI_HMI.rez_24, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_24);   // Резерв
+APL(INT#48, SHKU17_A3_DI_HMI.rez_25, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_25);   // Резерв
+APL(INT#49, SHKU17_A3_DI_HMI.rez_26, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_26);   // Резерв
+APL(INT#50, SHKU17_A3_DI_HMI.rez_27, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_27);   // Резерв
+APL(INT#51, SHKU17_A3_DI_HMI.rez_28, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_28);   // Резерв
+APL(INT#52, SHKU17_A3_DI_HMI.rez_29, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_29);   // Резерв
+APL(INT#53, SHKU17_A3_DI_HMI.rez_30, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_30);   // Резерв
+APL(INT#54, SHKU17_A3_DI_HMI.rez_31, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_31);   // Резерв
+APL(INT#55, SHKU17_A3_DI_HMI.rez_32, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_32);   // Резерв
+APL(INT#56, SHKU17_A3_DI_HMI.rez_33, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_33);   // Резерв
+APL(INT#57, SHKU17_A3_DI_HMI.rez_34, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_34);   // Резерв
+APL(INT#58, SHKU17_A3_DI_HMI.rez_35, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_35);   // Резерв
+APL(INT#59, SHKU17_A3_DI_HMI.rez_36, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_36);   // Резерв
+APL(INT#60, SHKU17_A3_DI_HMI.rez_37, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_37);   // Резерв
+APL(INT#61, SHKU17_A3_DI_HMI.rez_38, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_38);   // Резерв
+APL(INT#62, SHKU17_A3_DI_HMI.rez_39, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_39);   // Резерв
+APL(INT#63, SHKU17_A3_DI_HMI.Ctrl24_TC_3, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ctrl24_TC_3);   // Контроль 24 В ТС №3
+APL(INT#64, SHKU17_A3_DI_HMI.RU04_ESSN_inc1_Upres, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.RU04_ESSN_inc1_Upres);   // РУ-0,4кВ ЭССН. Ввод №1: наличие напряжения
+APL(INT#65, SHKU17_A3_DI_HMI.RU04_ESSN_inc2_Upres, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.RU04_ESSN_inc2_Upres);   // РУ-0,4кВ ЭССН. Ввод №2: наличие напряжения
+APL(INT#66, SHKU17_A3_DI_HMI.RU04_ESSN_ASM_B_Upres, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.RU04_ESSN_ASM_B_Upres);   // РУ-0,4кВ ЭССН. Сборные шины: наличие напряжения
+APL(INT#67, SHKU17_A3_DI_HMI.AGRS_Tech_FLT, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.AGRS_Tech_FLT);   // Технологическая авария АГРС
+APL(INT#68, SHKU17_A3_DI_HMI.AGRS_Door_open, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.AGRS_Door_open);   // Дверь АГРС открыта
+APL(INT#69, SHKU17_A3_DI_HMI.Inc1_LEP3_Ulost, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Inc1_LEP3_Ulost);   // Ввод 1 (ЛЭП №3):  отсутствие напряжения
+APL(INT#70, SHKU17_A3_DI_HMI.Inc1_LEP3_VMP10_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Inc1_LEP3_VMP10_ON);   // Ввод 1 (ЛЭП №3):  ВМП-10 включен
+APL(INT#71, SHKU17_A3_DI_HMI.Inc1_LEP3_VMP10_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Inc1_LEP3_VMP10_OFF);   // Ввод 1 (ЛЭП №3):  ВМП-10 отключен
+APL(INT#72, SHKU17_A3_DI_HMI.TR2_TKU_VMP10_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.TR2_TKU_VMP10_ON);   // Трансформатор №2 ТКУ: ВМП-10 включен
+APL(INT#73, SHKU17_A3_DI_HMI.TR2_TKU_VMP10_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.TR2_TKU_VMP10_OFF);   // Трансформатор №2 ТКУ: ВМП-10 отключен
+APL(INT#74, SHKU17_A3_DI_HMI.LEP_EXZ_Sev_VMP10_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.LEP_EXZ_Sev_VMP10_ON);   // ЛЭП –ЭХЗ «Север»:  ВМП-10 включен
+APL(INT#75, SHKU17_A3_DI_HMI.LEP_EXZ_Sev_VMP10_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.LEP_EXZ_Sev_VMP10_OFF);   // ЛЭП –ЭХЗ «Север»:  ВМП-10 отключен
+APL(INT#76, SHKU17_A3_DI_HMI.Inc2_LEP17_Ulost, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Inc2_LEP17_Ulost);   // Ввод 2 (ЛЭП №17):  отсутствие напряжения
+APL(INT#77, SHKU17_A3_DI_HMI.Inc2_LEP17_VMP10_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Inc2_LEP17_VMP10_ON);   // Ввод 2 (ЛЭП №17):  ВМП-10 включен
+APL(INT#78, SHKU17_A3_DI_HMI.Inc2_LEP17_VMP10_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Inc2_LEP17_VMP10_OFF);   // Ввод 2 (ЛЭП №17):  ВМП-10 отключен
+APL(INT#79, SHKU17_A3_DI_HMI.TR1_TKU_VMP10_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.TR1_TKU_VMP10_ON);   // Трансформатор №1 ТКУ: ВМП-10 включен
+APL(INT#80, SHKU17_A3_DI_HMI.TR1_TKU_VMP10_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.TR1_TKU_VMP10_OFF);   // Трансформатор №1 ТКУ: ВМП-10 отключен
+APL(INT#81, SHKU17_A3_DI_HMI.LEP_EXZ_Ug_VMP10_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.LEP_EXZ_Ug_VMP10_ON);   // ЛЭП –ЭХЗ «Юг»:  ВМП-10 включен
+APL(INT#82, SHKU17_A3_DI_HMI.LEP_EXZ_Ug_VMP10_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.LEP_EXZ_Ug_VMP10_OFF);   // ЛЭП –ЭХЗ «Юг»:  ВМП-10 отключен
+APL(INT#83, SHKU17_A3_DI_HMI.MG1_VMP10_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.MG1_VMP10_ON);   // МГ-№1: ВМП-10 включен
+APL(INT#84, SHKU17_A3_DI_HMI.MG1_VMP10_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.MG1_VMP10_OFF);   // МГ-№1: ВМП-10 отключен
+APL(INT#85, SHKU17_A3_DI_HMI.MG2_VMP10_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.MG2_VMP10_ON);   // МГ-№2: ВМП-10 включен
+APL(INT#86, SHKU17_A3_DI_HMI.MG2_VMP10_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.MG2_VMP10_OFF);   // МГ-№2: ВМП-10 отключен
+APL(INT#87, SHKU17_A3_DI_HMI.SS_10KV_VMP10_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.SS_10KV_VMP10_ON);   // Секционный выключатель 10кВ: ВМП-10 включен
+APL(INT#88, SHKU17_A3_DI_HMI.SS_10KV_VMP10_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.SS_10KV_VMP10_OFF);   // Секционный выключатель 10кВ: ВМП-10 отключен
+APL(INT#89, SHKU17_A3_DI_HMI.rez_40, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_40);   // Резерв
+APL(INT#90, SHKU17_A3_DI_HMI.rez_41, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_41);   // Резерв
+APL(INT#91, SHKU17_A3_DI_HMI.rez_42, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_42);   // Резерв
+APL(INT#92, SHKU17_A3_DI_HMI.rez_43, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_43);   // Резерв
+APL(INT#93, SHKU17_A3_DI_HMI.rez_44, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_44);   // Резерв
+APL(INT#94, SHKU17_A3_DI_HMI.rez_45, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_45);   // Резерв
+APL(INT#95, SHKU17_A3_DI_HMI.Ctrl24_TC_4, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ctrl24_TC_4);   // Контроль 24 В ТС №4
+APL(INT#96, SHKU17_A3_DI_HMI.Ctrl_OP_AC220, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ctrl_OP_AC220);   // Контроль основного питания ~220 В
+APL(INT#97, SHKU17_A3_DI_HMI.Ctrl_RP_DC200, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ctrl_RP_DC200);   // Контроль резервного питания 220 В пост.
+APL(INT#98, SHKU17_A3_DI_HMI.AP_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.AP_ON);   // Автоматы питания включены
+APL(INT#99, SHKU17_A3_DI_HMI.SHKU17_Doors_open, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.SHKU17_Doors_open);   // Двери ШКУ-17 открыты
+APL(INT#100, SHKU17_A3_DI_HMI.Ctrl_Isp_Raz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ctrl_Isp_Raz);   // Контроль исправности разрядников
+APL(INT#101, SHKU17_A3_DI_HMI.Ispr_OIP24DC_IC, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ispr_OIP24DC_IC);   // Неисправность осн. ИП =24 В внутр. цепей
+APL(INT#102, SHKU17_A3_DI_HMI.Ispr_RIP24DC_IC, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ispr_RIP24DC_IC);   // Неисправность рез. ИП =24 В внутр. цепей
+APL(INT#103, SHKU17_A3_DI_HMI.Ispr_OIP24DC_AI, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ispr_OIP24DC_AI);   // Неисправность осн. ИП =24 В AI
+APL(INT#104, SHKU17_A3_DI_HMI.Ispr_RIP24DC_AI, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ispr_RIP24DC_AI);   // Неисправность рез. ИП =24 В AI
+APL(INT#105, SHKU17_A3_DI_HMI.Ispr_OIP24DC_DI, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ispr_OIP24DC_DI);   // Неисправность осн. ИП =24 В DI
+APL(INT#106, SHKU17_A3_DI_HMI.Ispr_RIP24DC_DI, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ispr_RIP24DC_DI);   // Неисправность рез. ИП =24 В DI
+APL(INT#107, SHKU17_A3_DI_HMI.Ispr_OIP24DC_DO, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ispr_OIP24DC_DO);   // Неисправность осн. ИП =24 В DO
+APL(INT#108, SHKU17_A3_DI_HMI.Ispr_RIP24DC_DO, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ispr_RIP24DC_DO);   // Неисправность рез. ИП =24 В DO
+APL(INT#109, SHKU17_A3_DI_HMI.Ispr_OIP24DC_BEAO, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ispr_OIP24DC_BEAO);   // Неисправность осн. ИП =24 В БЭАО
+APL(INT#110, SHKU17_A3_DI_HMI.Ispr_RIP24DC_BEAO, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ispr_RIP24DC_BEAO);   // Неисправность рез. ИП =24 В БЭАО
+APL(INT#111, SHKU17_A3_DI_HMI.rez_46, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_46);   // Резерв
+APL(INT#112, SHKU17_A3_DI_HMI.EAO_KC_PU, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.EAO_KC_PU);   // ЭАО КЦ с ПУ
+APL(INT#113, SHKU17_A3_DI_HMI.EAO_KC_PU_KCD, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.EAO_KC_PU_KCD);   // ЭАО КЦ с ПУ. Неисправность КЦД
+APL(INT#114, SHKU17_A3_DI_HMI.AOB_KC_PU, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.AOB_KC_PU);   // АО КЦ бс с ПУ
+APL(INT#115, SHKU17_A3_DI_HMI.AOB_KC_PU_KCD, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.AOB_KC_PU_KCD);   // АО КЦ бс с ПУ. Неисправность КЦД
+APL(INT#116, SHKU17_A3_DI_HMI.AOS_KC_PU, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.AOS_KC_PU);   // АО КЦ сс с ПУ
+APL(INT#117, SHKU17_A3_DI_HMI.AOS_KC_PU_KCD, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.AOS_KC_PU_KCD);   // АО КЦ сс с ПУ. Неисправность КЦД
+APL(INT#118, SHKU17_A3_DI_HMI.EAO_KC_PEAO, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.EAO_KC_PEAO);   // ЭАО КЦ с ПЭАО
+APL(INT#119, SHKU17_A3_DI_HMI.EAO_KC_PEAO_KCD, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.EAO_KC_PEAO_KCD);   // ЭАО КЦ с ПЭАО. Неисправность КЦД
+APL(INT#120, SHKU17_A3_DI_HMI.Ctr_P_KR, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ctr_P_KR);   // Контроль питания кранов
+APL(INT#121, SHKU17_A3_DI_HMI.BEAO_ready, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.BEAO_ready);   // Готовность БЭАО
+APL(INT#122, SHKU17_A3_DI_HMI.PU_ready, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.PU_ready);   // Готовность ПУ
+APL(INT#123, SHKU17_A3_DI_HMI.Ask_sound, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ask_sound);   // Съем звука (ПУ)
+APL(INT#124, SHKU17_A3_DI_HMI.RU_KR, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.RU_KR);   // РУ кранами
+APL(INT#125, SHKU17_A3_DI_HMI.rez_47, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_47);   // Резерв
+APL(INT#126, SHKU17_A3_DI_HMI.rez_48, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_48);   // Резерв
+APL(INT#127, SHKU17_A3_DI_HMI.rez_49, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_49);   // Резерв
+APL(INT#128, SHKU17_A3_DI_HMI.Neispr_P_SHARM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Neispr_P_SHARM);   // Неисправность питания шкафа АРМ
+APL(INT#129, SHKU17_A3_DI_HMI.Pinv_SHARM_pres, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Pinv_SHARM_pres);   // Наличие пит. ШАРМ от инв.
+APL(INT#130, SHKU17_A3_DI_HMI.AP_SHARM_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.AP_SHARM_ON);   // Автоматы пит. ШАРМ включены
+APL(INT#131, SHKU17_A3_DI_HMI.Doors_SHARM_OPEN, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Doors_SHARM_OPEN);   // Двери ШАРМ открыты
+APL(INT#132, SHKU17_A3_DI_HMI.Neispr_P_US, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Neispr_P_US);   // Неисправность. пит. устр. серверного
+APL(INT#133, SHKU17_A3_DI_HMI.Ppres_Inv_US, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Ppres_Inv_US);   // Наличие пит. УС от инв.
+APL(INT#134, SHKU17_A3_DI_HMI.AP_US_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.AP_US_ON);   // Автоматы пит. УС включены
+APL(INT#135, SHKU17_A3_DI_HMI.Doors_US_OPEN, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Doors_US_OPEN);   // Двери УС открыты
+APL(INT#136, SHKU17_A3_DI_HMI.Neispr_OP_SHSO, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Neispr_OP_SHSO);   // Неисправность осн. пит. ШСО
+APL(INT#137, SHKU17_A3_DI_HMI.Neispr_RP_SHSO, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Neispr_RP_SHSO);   // Неисправность рез. пит. ШСО
+APL(INT#138, SHKU17_A3_DI_HMI.AP_SHSO_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.AP_SHSO_ON);   // Автоматы пит. ШСО включены
+APL(INT#139, SHKU17_A3_DI_HMI.Doors_SHSO_OPEN, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Doors_SHSO_OPEN);   // Двери ШСО открыты
+APL(INT#140, SHKU17_A3_DI_HMI.rez_50, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_50);   // Резерв
+APL(INT#141, SHKU17_A3_DI_HMI.rez_51, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_51);   // Резерв
+APL(INT#142, SHKU17_A3_DI_HMI.rez_52, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_52);   // Резерв
+APL(INT#143, SHKU17_A3_DI_HMI.rez_53, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_53);   // Резерв
+APL(INT#144, SHKU17_A3_DI_HMI.kr30B_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr30B_OFF);   // Кран 30Б Закрыт
+APL(INT#145, SHKU17_A3_DI_HMI.kr30B_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr30B_ON);   // Кран 30Б Открыт
+APL(INT#146, SHKU17_A3_DI_HMI.kr30B_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr30B_IM);   // Кран 30Б Контроль цепи ИМ - неисправность
+APL(INT#147, SHKU17_A3_DI_HMI.kr30B_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr30B_VK);   // Кран 30Б Контроль цепи ВК - неисправность
+APL(INT#148, SHKU17_A3_DI_HMI.kr30Bbis_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr30Bbis_OFF);   // Кран 30Ббис Закрыт
+APL(INT#149, SHKU17_A3_DI_HMI.kr30Bbis_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr30Bbis_ON);   // Кран 30Ббис Открыт
+APL(INT#150, SHKU17_A3_DI_HMI.kr30Bbis_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr30Bbis_IM);   // Кран 30Ббис Контроль цепи ИМ - неисправность
+APL(INT#151, SHKU17_A3_DI_HMI.kr30Bbis_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr30Bbis_VK);   // Кран 30Ббис Контроль цепи ВК - неисправность
+APL(INT#152, SHKU17_A3_DI_HMI.kr7B_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr7B_OFF);   // Кран 7Б Закрыт
+APL(INT#153, SHKU17_A3_DI_HMI.kr7B_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr7B_ON);   // Кран 7Б Открыт
+APL(INT#154, SHKU17_A3_DI_HMI.kr7B_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr7B_IM);   // Кран 7Б Контроль цепи ИМ - неисправность
+APL(INT#155, SHKU17_A3_DI_HMI.kr7B_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr7B_VK);   // Кран 7Б Контроль цепи ВК - неисправность
+APL(INT#156, SHKU17_A3_DI_HMI.kr7Bzak_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr7Bzak_OFF);   // Кран 7Б зак Закрыт
+APL(INT#157, SHKU17_A3_DI_HMI.kr7Bzak_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr7Bzak_ON);   // Кран 7Б зак Открыт
+APL(INT#158, SHKU17_A3_DI_HMI.kr7Bzak_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr7Bzak_IM);   // Кран 7Б зак Контроль цепи ИМ - неисправность
+APL(INT#159, SHKU17_A3_DI_HMI.kr7Bzak_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr7Bzak_VK);   // Кран 7Б зак Контроль цепи ВК - неисправность
+APL(INT#160, SHKU17_A3_DI_HMI.kr8B_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr8B_OFF);   // Кран 8Б Закрыт
+APL(INT#161, SHKU17_A3_DI_HMI.kr8B_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr8B_ON);   // Кран 8Б Открыт
+APL(INT#162, SHKU17_A3_DI_HMI.kr8B_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr8B_IM);   // Кран 8Б Контроль цепи ИМ - неисправность
+APL(INT#163, SHKU17_A3_DI_HMI.kr8B_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr8B_VK);   // Кран 8Б Контроль цепи ВК - неисправность
+APL(INT#164, SHKU17_A3_DI_HMI.kr8Bbis_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr8Bbis_OFF);   // Кран 8Ббис Закрыт
+APL(INT#165, SHKU17_A3_DI_HMI.kr8Bbis_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr8Bbis_ON);   // Кран 8Ббис Открыт
+APL(INT#166, SHKU17_A3_DI_HMI.kr8Bbis_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr8Bbis_IM);   // Кран 8Ббис Контроль цепи ИМ - неисправность
+APL(INT#167, SHKU17_A3_DI_HMI.kr8Bbis_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr8Bbis_VK);   // Кран 8Ббис Контроль цепи ВК - неисправность
+APL(INT#168, SHKU17_A3_DI_HMI.rez_55, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_55);   // Резерв
+APL(INT#169, SHKU17_A3_DI_HMI.rez_56, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_56);   // Резерв
+APL(INT#170, SHKU17_A3_DI_HMI.rez_57, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_57);   // Резерв
+APL(INT#171, SHKU17_A3_DI_HMI.rez_58, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_58);   // Резерв
+APL(INT#172, SHKU17_A3_DI_HMI.rez_59, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_59);   // Резерв
+APL(INT#173, SHKU17_A3_DI_HMI.rez_60, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_60);   // Резерв
+APL(INT#174, SHKU17_A3_DI_HMI.rez_61, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_61);   // Резерв
+APL(INT#175, SHKU17_A3_DI_HMI.rez_62, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_62);   // Резерв
+APL(INT#176, SHKU17_A3_DI_HMI.kr17B_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr17B_OFF);   // Кран 17Б Закрыт
+APL(INT#177, SHKU17_A3_DI_HMI.kr17B_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr17B_ON);   // Кран 17Б Открыт
+APL(INT#178, SHKU17_A3_DI_HMI.kr17B_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr17B_IM);   // Кран 17Б Контроль цепи ИМ - неисправность
+APL(INT#179, SHKU17_A3_DI_HMI.kr17B_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr17B_VK);   // Кран 17Б Контроль цепи ВК - неисправность
+APL(INT#180, SHKU17_A3_DI_HMI.kr18B_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr18B_OFF);   // Кран 18Б Закрыт
+APL(INT#181, SHKU17_A3_DI_HMI.kr18B_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr18B_ON);   // Кран 18Б Открыт
+APL(INT#182, SHKU17_A3_DI_HMI.kr18B_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr18B_IM);   // Кран 18Б Контроль цепи ИМ - неисправность
+APL(INT#183, SHKU17_A3_DI_HMI.kr18B_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr18B_VK);   // Кран 18Б Контроль цепи ВК - неисправность
+APL(INT#184, SHKU17_A3_DI_HMI.rez_63, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_63);   // Резерв
+APL(INT#185, SHKU17_A3_DI_HMI.rez_64, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_64);   // Резерв
+APL(INT#186, SHKU17_A3_DI_HMI.rez_65, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_65);   // Резерв
+APL(INT#187, SHKU17_A3_DI_HMI.rez_66, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.rez_66);   // Резерв
+APL(INT#188, SHKU17_A3_DI_HMI.kr6B_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr6B_OFF);   // Кран 6Б Закрыт
+APL(INT#189, SHKU17_A3_DI_HMI.kr6B_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr6B_ON);   // Кран 6Б Открыт
+APL(INT#190, SHKU17_A3_DI_HMI.kr6B_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr6B_IM);   // Кран 6Б Контроль цепи ИМ - неисправность
+APL(INT#191, SHKU17_A3_DI_HMI.kr6B_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.kr6B_VK);   // Кран 6Б Контроль цепи ВК - неисправность
+
+APL(INT#192, Local_IM.Heat_APK.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Heat_APK_non);   // Обогрев АПК - не открыт/не включен
+APL(INT#193, Local_IM.Heat_APK.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Heat_APK_noff);   // Обогрев АПК - не закрыт/не отключен
+APL(INT#194, Local_IM.Heat_APK.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Heat_APK_nstart);   // Обогрев АПК - не стронулся
+APL(INT#195, Local_IM.Heat_APK.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Heat_APK_selfon);   // Обогрев АПК - самопроизвольное открытие/включение
+APL(INT#196, Local_IM.Heat_APK.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Heat_APK_selfoff);   // Обогрев АПК - самопроизвольное закрытие/отключение
+APL(INT#197, Local_IM.Heat_APK.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Heat_APK_flt);   // Обогрев АПК - ошибка концевиков
+APL(INT#198, Local_IM.Heat_APK.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Heat_APK_ncon);   // Обогрев АПК - КЦУ открытия/включения
+APL(INT#199, Local_IM.Heat_APK.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.Heat_APK_ncoff);   // Обогрев АПК - КЦУ закрытия/отключения
+APL(INT#200, Local_IM.P3_30.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.P3_30_non);   // Насос РЗ-30 ГСМ - не открыт/не включен
+APL(INT#201, Local_IM.P3_30.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.P3_30_noff);   // Насос РЗ-30 ГСМ - не закрыт/не отключен
+APL(INT#202, Local_IM.P3_30.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.P3_30_nstart);   // Насос РЗ-30 ГСМ - не стронулся
+APL(INT#203, Local_IM.P3_30.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.P3_30_selfon);   // Насос РЗ-30 ГСМ - самопроизвольное открытие/включение
+APL(INT#204, Local_IM.P3_30.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.P3_30_selfoff);   // Насос РЗ-30 ГСМ - самопроизвольное закрытие/отключение
+APL(INT#205, Local_IM.P3_30.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.P3_30_flt);   // Насос РЗ-30 ГСМ - ошибка концевиков
+APL(INT#206, Local_IM.P3_30.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.P3_30_ncon);   // Насос РЗ-30 ГСМ - КЦУ открытия/включения
+APL(INT#207, Local_IM.P3_30.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.P3_30_ncoff);   // Насос РЗ-30 ГСМ - КЦУ закрытия/отключения
+APL(INT#208, Local_IM.PL_KC2.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.PL_KC2_non);   // Периметральное освещение КЦ 2 - не открыт/не включен
+APL(INT#209, Local_IM.PL_KC2.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.PL_KC2_noff);   // Периметральное освещение КЦ 2 - не закрыт/не отключен
+APL(INT#210, Local_IM.PL_KC2.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.PL_KC2_nstart);   // Периметральное освещение КЦ 2 - не стронулся
+APL(INT#211, Local_IM.PL_KC2.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.PL_KC2_selfon);   // Периметральное освещение КЦ 2 - самопроизвольное открытие/включение
+APL(INT#212, Local_IM.PL_KC2.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.PL_KC2_selfoff);   // Периметральное освещение КЦ 2 - самопроизвольное закрытие/отключение
+APL(INT#213, Local_IM.PL_KC2.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.PL_KC2_flt);   // Периметральное освещение КЦ 2 - ошибка концевиков
+APL(INT#214, Local_IM.PL_KC2.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.PL_KC2_ncon);   // Периметральное освещение КЦ 2 - КЦУ открытия/включения
+APL(INT#215, Local_IM.PL_KC2.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.PL_KC2_ncoff);   // Периметральное освещение КЦ 2 - КЦУ закрытия/отключения
+APL(INT#216, Local_IM.KR30B.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30B_non);   // Кран 30Б - не открыт/не включен
+APL(INT#217, Local_IM.KR30B.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30B_noff);   // Кран 30Б - не закрыт/не отключен
+APL(INT#218, Local_IM.KR30B.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30B_nstart);   // Кран 30Б - не стронулся
+APL(INT#219, Local_IM.KR30B.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30B_selfon);   // Кран 30Б - самопроизвольное открытие/включение
+APL(INT#220, Local_IM.KR30B.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30B_selfoff);   // Кран 30Б - самопроизвольное закрытие/отключение
+APL(INT#221, Local_IM.KR30B.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30B_flt);   // Кран 30Б - ошибка концевиков
+APL(INT#222, Local_IM.KR30B.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30B_ncon);   // Кран 30Б - КЦУ открытия/включения
+APL(INT#223, Local_IM.KR30B.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30B_ncoff);   // Кран 30Б - КЦУ закрытия/отключения
+APL(INT#224, Local_IM.KR30Bbis.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30Bbis_non);   // Кран  30Б бис - не открыт/не включен
+APL(INT#225, Local_IM.KR30Bbis.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30Bbis_noff);   // Кран  30Б бис - не закрыт/не отключен
+APL(INT#226, Local_IM.KR30Bbis.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30Bbis_nstart);   // Кран  30Б бис - не стронулся
+APL(INT#227, Local_IM.KR30Bbis.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30Bbis_selfon);   // Кран  30Б бис - самопроизвольное открытие/включение
+APL(INT#228, Local_IM.KR30Bbis.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30Bbis_selfoff);   // Кран  30Б бис - самопроизвольное закрытие/отключение
+APL(INT#229, Local_IM.KR30Bbis.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30Bbis_flt);   // Кран  30Б бис - ошибка концевиков
+APL(INT#230, Local_IM.KR30Bbis.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30Bbis_ncon);   // Кран  30Б бис - КЦУ открытия/включения
+APL(INT#231, Local_IM.KR30Bbis.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR30Bbis_ncoff);   // Кран  30Б бис - КЦУ закрытия/отключения
+APL(INT#232, Local_IM.KR7B.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7B_non);   // Кран 7Б - не открыт/не включен
+APL(INT#233, Local_IM.KR7B.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7B_noff);   // Кран 7Б - не закрыт/не отключен
+APL(INT#234, Local_IM.KR7B.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7B_nstart);   // Кран 7Б - не стронулся
+APL(INT#235, Local_IM.KR7B.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7B_selfon);   // Кран 7Б - самопроизвольное открытие/включение
+APL(INT#236, Local_IM.KR7B.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7B_selfoff);   // Кран 7Б - самопроизвольное закрытие/отключение
+APL(INT#237, Local_IM.KR7B.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7B_flt);   // Кран 7Б - ошибка концевиков
+APL(INT#238, Local_IM.KR7B.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7B_ncon);   // Кран 7Б - КЦУ открытия/включения
+APL(INT#239, Local_IM.KR7B.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7B_ncoff);   // Кран 7Б - КЦУ закрытия/отключения
+APL(INT#240, Local_IM.KR7zak.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7zak_non);   // Кран 7Б зак - не открыт/не включен
+APL(INT#241, Local_IM.KR7zak.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7zak_noff);   // Кран 7Б зак - не закрыт/не отключен
+APL(INT#242, Local_IM.KR7zak.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7zak_nstart);   // Кран 7Б зак - не стронулся
+APL(INT#243, Local_IM.KR7zak.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7zak_selfon);   // Кран 7Б зак - самопроизвольное открытие/включение
+APL(INT#244, Local_IM.KR7zak.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7zak_selfoff);   // Кран 7Б зак - самопроизвольное закрытие/отключение
+APL(INT#245, Local_IM.KR7zak.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7zak_flt);   // Кран 7Б зак - ошибка концевиков
+APL(INT#246, Local_IM.KR7zak.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7zak_ncon);   // Кран 7Б зак - КЦУ открытия/включения
+APL(INT#247, Local_IM.KR7zak.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR7zak_ncoff);   // Кран 7Б зак - КЦУ закрытия/отключения
+APL(INT#248, Local_IM.KR8B.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8B_non);   // Кран 8Б - не открыт/не включен
+APL(INT#249, Local_IM.KR8B.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8B_noff);   // Кран 8Б - не закрыт/не отключен
+APL(INT#250, Local_IM.KR8B.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8B_nstart);   // Кран 8Б - не стронулся
+APL(INT#251, Local_IM.KR8B.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8B_selfon);   // Кран 8Б - самопроизвольное открытие/включение
+APL(INT#252, Local_IM.KR8B.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8B_selfoff);   // Кран 8Б - самопроизвольное закрытие/отключение
+APL(INT#253, Local_IM.KR8B.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8B_flt);   // Кран 8Б - ошибка концевиков
+APL(INT#254, Local_IM.KR8B.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8B_ncon);   // Кран 8Б - КЦУ открытия/включения
+APL(INT#255, Local_IM.KR8B.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8B_ncoff);   // Кран 8Б - КЦУ закрытия/отключения
+APL(INT#256, Local_IM.KR8Bbis.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8Bbis_non);   // Кран 8Б бис - не открыт/не включен
+APL(INT#257, Local_IM.KR8Bbis.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8Bbis_noff);   // Кран 8Б бис - не закрыт/не отключен
+APL(INT#258, Local_IM.KR8Bbis.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8Bbis_nstart);   // Кран 8Б бис - не стронулся
+APL(INT#259, Local_IM.KR8Bbis.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8Bbis_selfon);   // Кран 8Б бис - самопроизвольное открытие/включение
+APL(INT#260, Local_IM.KR8Bbis.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8Bbis_selfoff);   // Кран 8Б бис - самопроизвольное закрытие/отключение
+APL(INT#261, Local_IM.KR8Bbis.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8Bbis_flt);   // Кран 8Б бис - ошибка концевиков
+APL(INT#262, Local_IM.KR8Bbis.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8Bbis_ncon);   // Кран 8Б бис - КЦУ открытия/включения
+APL(INT#263, Local_IM.KR8Bbis.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR8Bbis_ncoff);   // Кран 8Б бис - КЦУ закрытия/отключения
+APL(INT#264, Local_IM.KR17B.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR17B_non);   // Кран  17Б - не открыт/не включен
+APL(INT#265, Local_IM.KR17B.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR17B_noff);   // Кран  17Б - не закрыт/не отключен
+APL(INT#266, Local_IM.KR17B.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR17B_nstart);   // Кран  17Б - не стронулся
+APL(INT#267, Local_IM.KR17B.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR17B_selfon);   // Кран  17Б - самопроизвольное открытие/включение
+APL(INT#268, Local_IM.KR17B.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR17B_selfoff);   // Кран  17Б - самопроизвольное закрытие/отключение
+APL(INT#269, Local_IM.KR17B.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR17B_flt);   // Кран  17Б - ошибка концевиков
+APL(INT#270, Local_IM.KR17B.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR17B_ncon);   // Кран  17Б - КЦУ открытия/включения
+APL(INT#271, Local_IM.KR17B.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR17B_ncoff);   // Кран  17Б - КЦУ закрытия/отключения
+APL(INT#272, Local_IM.KR18B.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR18B_non);   // Кран 18Б - не открыт/не включен
+APL(INT#273, Local_IM.KR18B.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR18B_noff);   // Кран 18Б - не закрыт/не отключен
+APL(INT#274, Local_IM.KR18B.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR18B_nstart);   // Кран 18Б - не стронулся
+APL(INT#275, Local_IM.KR18B.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR18B_selfon);   // Кран 18Б - самопроизвольное открытие/включение
+APL(INT#276, Local_IM.KR18B.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR18B_selfoff);   // Кран 18Б - самопроизвольное закрытие/отключение
+APL(INT#277, Local_IM.KR18B.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR18B_flt);   // Кран 18Б - ошибка концевиков
+APL(INT#278, Local_IM.KR18B.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR18B_ncon);   // Кран 18Б - КЦУ открытия/включения
+APL(INT#279, Local_IM.KR18B.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR18B_ncoff);   // Кран 18Б - КЦУ закрытия/отключения
+APL(INT#280, Local_IM.KR6B.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6B_non);   // Кран 6Б - не открыт/не включен
+APL(INT#281, Local_IM.KR6B.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6B_noff);   // Кран 6Б - не закрыт/не отключен
+APL(INT#282, Local_IM.KR6B.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6B_nstart);   // Кран 6Б - не стронулся
+APL(INT#283, Local_IM.KR6B.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6B_selfon);   // Кран 6Б - самопроизвольное открытие/включение
+APL(INT#284, Local_IM.KR6B.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6B_selfoff);   // Кран 6Б - самопроизвольное закрытие/отключение
+APL(INT#285, Local_IM.KR6B.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6B_flt);   // Кран 6Б - ошибка концевиков
+APL(INT#286, Local_IM.KR6B.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6B_ncon);   // Кран 6Б - КЦУ открытия/включения
+APL(INT#287, Local_IM.KR6B.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6B_ncoff);   // Кран 6Б - КЦУ закрытия/отключения
+APL(INT#288, Local_IM.KR6BR.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6BR_non);   // Кран 6БР - не открыт/не включен
+APL(INT#289, Local_IM.KR6BR.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6BR_noff);   // Кран 6БР - не закрыт/не отключен
+APL(INT#290, Local_IM.KR6BR.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6BR_nstart);   // Кран 6БР - не стронулся
+APL(INT#291, Local_IM.KR6BR.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6BR_selfon);   // Кран 6БР - самопроизвольное открытие/включение
+APL(INT#292, Local_IM.KR6BR.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6BR_selfoff);   // Кран 6БР - самопроизвольное закрытие/отключение
+APL(INT#293, Local_IM.KR6BR.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6BR_flt);   // Кран 6БР - ошибка концевиков
+APL(INT#294, Local_IM.KR6BR.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6BR_ncon);   // Кран 6БР - КЦУ открытия/включения
+APL(INT#295, Local_IM.KR6BR.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6BR_ncoff);   // Кран 6БР - КЦУ закрытия/отключения
+APL(INT#296, Local_IM.KRA.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRA_non);   // Кран А - не открыт/не включен
+APL(INT#297, Local_IM.KRA.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRA_noff);   // Кран А - не закрыт/не отключен
+APL(INT#298, Local_IM.KRA.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRA_nstart);   // Кран А - не стронулся
+APL(INT#299, Local_IM.KRA.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRA_selfon);   // Кран А - самопроизвольное открытие/включение
+APL(INT#300, Local_IM.KRA.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRA_selfoff);   // Кран А - самопроизвольное закрытие/отключение
+APL(INT#301, Local_IM.KRA.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRA_flt);   // Кран А - ошибка концевиков
+APL(INT#302, Local_IM.KRA.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRA_ncon);   // Кран А - КЦУ открытия/включения
+APL(INT#303, Local_IM.KRA.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRA_ncoff);   // Кран А - КЦУ закрытия/отключения
+APL(INT#304, Local_IM.KRC.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRC_non);   // Кран С - не открыт/не включен
+APL(INT#305, Local_IM.KRC.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRC_noff);   // Кран С - не закрыт/не отключен
+APL(INT#306, Local_IM.KRC.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRC_nstart);   // Кран С - не стронулся
+APL(INT#307, Local_IM.KRC.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRC_selfon);   // Кран С - самопроизвольное открытие/включение
+APL(INT#308, Local_IM.KRC.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRC_selfoff);   // Кран С - самопроизвольное закрытие/отключение
+APL(INT#309, Local_IM.KRC.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRC_flt);   // Кран С - ошибка концевиков
+APL(INT#310, Local_IM.KRC.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRC_ncon);   // Кран С - КЦУ открытия/включения
+APL(INT#311, Local_IM.KRC.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KRC_ncoff);   // Кран С - КЦУ закрытия/отключения
+APL(INT#312, Local_IM.KR6_9.APS.non, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6_9_non);   // Кран 6-9 - не открыт/не включен
+APL(INT#313, Local_IM.KR6_9.APS.noff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6_9_noff);   // Кран 6-9 - не закрыт/не отключен
+APL(INT#314, Local_IM.KR6_9.APS.nstart, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6_9_nstart);   // Кран 6-9 - не стронулся
+APL(INT#315, Local_IM.KR6_9.APS.selfon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6_9_selfon);   // Кран 6-9 - самопроизвольное открытие/включение
+APL(INT#316, Local_IM.KR6_9.APS.selfoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6_9_selfoff);   // Кран 6-9 - самопроизвольное закрытие/отключение
+APL(INT#317, Local_IM.KR6_9.APS.flt, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6_9_flt);   // Кран 6-9 - ошибка концевиков
+APL(INT#318, Local_IM.KR6_9.APS.ncon, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6_9_ncon);   // Кран 6-9 - КЦУ открытия/включения
+APL(INT#319, Local_IM.KR6_9.APS.ncoff, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A3_APS.KR6_9_ncoff);   // Кран 6-9 - КЦУ закрытия/отключения
+
+APL(INT#320, Global_BTN.AOS, BOOL#1, BOOL#0, LREAL#0, INT#6, APS_TASK_alg, SHKU17_A3_APS.ARM_btn_AOS);	//Кнопка АОС с АРМ оператора
+APL(INT#321, Global_BTN.AOB, BOOL#1, BOOL#0, LREAL#0, INT#5, APS_TASK_alg, SHKU17_A3_APS.ARM_btn_AOB);	//Кнопка АОБ с АРМ оператора
+APL(INT#322, Global_BTN.NO, BOOL#1, BOOL#0, LREAL#0, INT#4, APS_TASK_alg, SHKU17_A3_APS.ARM_btn_NO);	//Кнопка НО с АРМ оператора
+APL(INT#323, Global_BTN.KOL, BOOL#1, BOOL#0, LREAL#0, INT#3, APS_TASK_alg, SHKU17_A3_APS.ARM_btn_KOL);	//Кнопка Кольцо с АРМ оператора
+
+
+//Выходы АПС
+IF APS_TASK_alg > APS_TASK THEN
+	APS_TASK := APS_TASK_alg;
+END_IF;
+
+clock_APS_cur := CLOCK();
+cycleTime_APS_sys := clock_APS_cur - clock_APS_prev;]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="665F4B4646FC5E75565ABCB2FD5974AF" Name="proc_AE">
+                <Variables>
+                    <Variable UUID="F12965654FA5488211461A8777F6ECEA" Name="Numb" Comment="Порядковый номер. (от 0 и до размер TMR-1 или Active_prev1-1)" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                    <Variable UUID="EE794E1141A0E648C9EFEB886B56CB3B" Name="Condition" Comment="Условие срабатывания" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="66B8745E4168E5093F29FB91F4AAA6CC" Name="Permition" Comment="Взвод" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="E05DB7D5430D0C4BAF1C8B9741111CBB" Name="Invers" Comment="Инверсия" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="430BAA714BC4DC96ACD2748E6D2CFAB7" Name="Delay" Comment="Задержка, сек" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                    <Variable UUID="F42A99374ACF8554471F1688B944836C" Name="Action" Comment="Тип воздействия на логику (6 - АОС, 5 - АОБ, 4 - НО, 3 - Кольцо, 2 - КОЛ ГПА, 1 - ПС, 0 - ничего)" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                    <Variable UUID="857628FC46456576C472EAA1809370F2" Name="OUT_task" Comment="Воздействие на логику" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="inout" />
+                    <Variable UUID="7E7FB469496625FC2AEE98B3723AEE6B" Name="Active" Comment="Признак сработки АПС" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                    <Variable UUID="99360B6645CB57E08DA6EA8AEBA6BAC3" Name="TMR" Comment="Задержка, сек" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Size="323" Array="TRUE" Usage="internal" />
+                    <Variable UUID="80FD67B945B9C562E3EFD9B58CB34FC4" Name="Active_prev1" Comment="Признак сработки АПС на предыдущем цикле" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="323" Array="TRUE" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[IF (Condition XOR Invers) AND Permition THEN
+	IF NOT Active THEN TMR[Numb] := TMR[Numb] + cycleTime_APS; END_IF;
+ELSE
+	TMR[Numb] := LREAL#0;
+END_IF;
+
+//Если TMR[Numb] > Delay, то защита сработала
+IF TMR[Numb] > Delay THEN
+	Active := BOOL#1;
+END_IF;
+//OUT_nofiks := TMR[Numb] > Delay;
+
+//Снятие признака защиты по деблокировке
+IF Deblock AND TMR[Numb] = LREAL#0 THEN
+	Active := BOOL#0;
+	TMR[Numb] := LREAL#0;
+END_IF;
+
+//Определение воздействия на логику (6 - АОС, 5 - АОБ, 4 - НО, 3 - Кольцо, 2 - КОЛ ГПА, 1 - ПС, 0 - ничего)
+IF Active THEN
+	IF Action > OUT_task THEN
+		OUT_task := Action;
+	END_IF;
+END_IF;
+
+//Включение звука
+IF Active AND NOT Active_prev1[Numb] THEN
+	IF Action = INT#1  THEN Sound_PS := BOOL#1; END_IF;
+	IF Action >= INT#5 THEN Sound_AS := BOOL#1; Sound_PS := BOOL#0; END_IF;
+END_IF;
+IF Kvitir THEN Sound_PS := BOOL#0; Sound_AS := BOOL#0; END_IF;
+
+Active_prev1[Numb] := Active;]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <Folder Name="IM" Comment="" Data="" UUID="AED6C3604162A53E30F762AD0EA6D51B">
+            <Folder Name="Crane" Comment="" Data="" UUID="52D5876243874D3B48AB99884651DCAC">
+                <FunctionBlock UUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Name="VLV_cfg_share">
+                    <Variables>
+                        <Variable UUID="C2162D414CBA596CA878259983DB13D9" Name="Type_vlv" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" Usage="input" />
+                        <Variable UUID="6D1F8E75415DD1EE7669CBB3C19FBDC5" Name="KR" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="inout" />
+                        <Variable UUID="F12B23C44567245BB6CCEFAFE9EA2A32" Name="HMI_KR" Type="IM_HMI" TypeUUID="149C9CFC429DA2CF7340C7840A20076B" Usage="inout" />
+                        <Variable UUID="A933132845430AA404EA78BC8DE6DC18" Name="PLC_KR" Type="IM_PLC" TypeUUID="C1697AFE4AF951CFD2394E8E3622C1B2" Usage="inout" />
+                        <Variable UUID="AD0A0AF44332F84B9ADF1E8CDB124448" Name="DI_KR_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="6ED1B369475469F08CD3FE8EB84C508A" Name="DI_KR_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="A2C7569E4EF6C428B033A8A8B063754F" Name="DI_KRkcu_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="D99E567A4C992044F25154A40277244C" Name="DI_KRkcu_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="E38C75264772C8F222DD0D98AF79BE99" Name="Err_external" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="C5B9BE0941F729AFA357F389F3A620A8" Name="dT" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                        <Variable UUID="F75A7257454618327CC3C4B12D6ECDD9" Name="imitation" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="7F8DDEB34599F43503A5EF90FF9B3629" Name="DO_KR_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="996645E646098C0AC96D099618A2C595" Name="DO_KR_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="A8FD8DEF4C33DA13E2428DA456C3020B" Name="CMD_KR_aOnOff" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="444702A74BFB0CDF3DB506AB4C4728CB" Name="CMD_KR_rOnOff" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="5CF977694B62F1B5DF42018CBC9AC36E" Name="cmd_ON" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                        <Variable UUID="6AC5E04148881ADABE2D57B3B084BDB2" Name="cmd_OFF" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                        <Variable UUID="77792DB54DC6FADF08E1649008705310" Name="alg_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="D35135DB47BC9750D69A5D91C818EE20" Name="alg_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="33A8CFF5423788263329DF9A2CC3BB6D" Name="man_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="E992153742F9E3B363B56BBDAD2FEA60" Name="man_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="4E70B22541D3138E6EDA2BA8A4D6CB4D" Name="vlv" Type="proc_VLV" TypeUUID="74AD1DA245D32F473481BD9BE5146EF8" Usage="internal" />
+                        <Variable UUID="00BDB5FC40BDD0690E101D874FDEC070" Name="block_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="F468BA824D581E39573636B55197C1B9" Name="block_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="CA8FF7BA4DD938219C011F83305254C0" Name="rep" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[//Подготовка входов для С-блока
+//Обработка команд из логики (block_ON и block_OFF - для однократного выполнения команды)
+(*IF HMI_KR.DA_ON THEN
+	HMI_KR.DA := BOOL#1;
+	HMI_KR.DA_ON := BOOL#0;
+END_IF;
+IF HMI_KR.DA_OFF THEN
+	HMI_KR.DA := BOOL#0;
+	HMI_KR.DA_OFF := BOOL#0;
+END_IF;
+
+IF HMI_KR.repair_ON THEN
+	HMI_KR.repair := BOOL#1;
+	HMI_KR.repair_ON := BOOL#0;
+END_IF;
+IF HMI_KR.repair_OFF THEN
+	HMI_KR.repair := BOOL#0;
+	HMI_KR.repair_OFF := BOOL#0;
+END_IF;*)
+
+IF PLC_KR.aOn  AND NOT HMI_KR.DA AND NOT DI_KR_ON  (*AND NOT HMI_KR.repair*) THEN alg_ON := BOOL#1;  block_ON := BOOL#1; block_OFF := BOOL#0; END_IF; PLC_KR.aOn := BOOL#0;// AND NOT block_ON	
+IF PLC_KR.aOff AND NOT HMI_KR.DA AND NOT DI_KR_OFF (*AND NOT HMI_KR.repair*) THEN alg_OFF := BOOL#1; block_OFF := BOOL#1; block_ON := BOOL#0; END_IF; PLC_KR.aOff := BOOL#0;//AND NOT block_OFF 
+IF alg_ON AND CMD_KR_aOnOff OR alg_OFF AND NOT CMD_KR_aOnOff THEN
+	rep := BOOL#1;
+ELSE
+	IF alg_ON  THEN CMD_KR_aOnOff := BOOL#1; END_IF;
+	IF alg_OFF THEN CMD_KR_aOnOff := BOOL#0; END_IF;
+END_IF;
+alg_ON := BOOL#0;
+alg_OFF := BOOL#0;
+
+//Обработка команд от оператора
+IF HMI_KR.rOn  AND HMI_KR.DA AND NOT HMI_KR.block_ON_ru	 (*AND NOT HMI_KR.repair*) THEN man_ON  := BOOL#1; block_OFF := BOOL#0; END_IF; HMI_KR.rOn  := BOOL#0;
+IF HMI_KR.rOff AND HMI_KR.DA AND NOT HMI_KR.block_OFF_ru (*AND NOT HMI_KR.repair*) THEN man_OFF := BOOL#1; block_ON := BOOL#0;  END_IF; HMI_KR.rOff := BOOL#0;
+IF man_ON AND CMD_KR_rOnOff OR man_OFF AND NOT CMD_KR_rOnOff THEN
+	rep := BOOL#1;
+ELSE
+	IF man_ON THEN CMD_KR_rOnOff := BOOL#1; END_IF;
+	IF man_OFF THEN CMD_KR_rOnOff := BOOL#0; END_IF;
+END_IF;
+man_ON := BOOL#0;
+man_OFF := BOOL#0;
+
+KR.Control.RA.0 := HMI_KR.DA;
+KR.Control.noR.0 := HMI_KR.block_DA;
+KR.Control.rOnOff.0 := CMD_KR_rOnOff;
+KR.Control.aOnOff.0 := CMD_KR_aOnOff;
+KR.Control.rep.0 := (rep AND KR.Debug.tmp5.0);
+
+KR.Ins.on.0 := DI_KR_ON;
+KR.Ins.off.0 := DI_KR_OFF;
+KR.Ins.con.0 := DI_KRkcu_ON;
+KR.Ins.coff.0 := DI_KRkcu_OFF;
+
+//Вызов С-блока
+vlv(Type_vlv, KR, dT, BOOL_TO_BYTE(imitation));
+
+//Обработка выходов из С-блока
+DO_KR_ON := KR.Outs.outon.0;
+DO_KR_OFF := KR.Outs.outoff.0;
+
+PLC_KR.APS.non := KR.Oper.non.0;
+PLC_KR.APS.noff := KR.Oper.noff.0;
+PLC_KR.APS.nstart := KR.Oper.nstart.0;
+PLC_KR.APS.selfon := KR.Oper.selfon.0;
+PLC_KR.APS.selfoff := KR.Oper.selfoff.0;
+PLC_KR.APS.flt := KR.Oper.flt.0;
+PLC_KR.APS.ncon := KR.Oper.ncon.0;
+PLC_KR.APS.ncoff := KR.Oper.ncoff.0;
+
+HMI_KR.general := PLC_KR.APS.non OR PLC_KR.APS.noff OR PLC_KR.APS.nstart OR PLC_KR.APS.selfon OR PLC_KR.APS.selfoff OR PLC_KR.APS.flt OR PLC_KR.APS.ncon OR PLC_KR.APS.ncoff OR Err_external;
+
+rep := KR.Control.rep.0;
+HMI_KR.state.0 := (KR.Ins.off.0 AND ((Type_VLV = BYTE#21) OR (Type_VLV = BYTE#22))) OR (NOT KR.Ins.on.0 AND ((Type_VLV = BYTE#110) OR (Type_VLV = BYTE#111) OR (Type_VLV = BYTE#12)));
+HMI_KR.state.1 := KR.Ins.on.0;
+CMD_KR_rOnOff := KR.Control.rOnOff.0;
+CMD_KR_aOnOff := KR.Control.aOnOff.0;
+
+//Для имитации (она реализована в C-блоке)
+DI_KR_ON := KR.Ins.on.0;
+DI_KR_OFF := KR.Ins.off.0;]]></ST>
+                </FunctionBlock>
+                <Function UUID="D6106FB640D38BAEC865E793B3569DA0" Name="VLV_init" ResultTypeUUID="0209C2A3445A6A14C63266A0E52B929B">
+                    <Variables>
+                        <Variable UUID="C5BBAE744D6B0FB1419FE78FB69E419C" Name="tmrCmdSP" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                        <Variable UUID="6F6320B846FF14987C859A89FC65D0E7" Name="tmrPressSP" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                        <Variable UUID="0AFCC1C24A0B0329EFD17DBE8F2AC19F" Name="cwOn" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" Usage="input" />
+                        <Variable UUID="A466FF0A44070EBFD5DBEDBEA3303507" Name="cwOff" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" Usage="input" />
+                        <Variable UUID="9C69398844F31B2EF99A7CA03127004F" Name="RA" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    </Variables>
+                    <ST><![CDATA[VLV_init.Config.tmrCmdSP := tmrCmdSP;
+VLV_init.Config.tmrPressSP := tmrPressSP;
+VLV_init.Control.cwOn := cwOn;
+VLV_init.Control.cwOff := cwOff;
+VLV_init.Control.RA.0 := RA;]]></ST>
+                </Function>
+            </Folder>
+            <FunctionBlock UUID="146885F54E1C584B41F5598A697BE112" Name="CMD_VLV_blc">
+                <Variables>
+                    <Variable UUID="C7C16D5C486629AFC1EF1FB349404AFB" Name="KR6B_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="006B5DD746E60AEF7E40628B66880506" Name="KR6BR_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="54DD6D3A4F2C2DFB769411BD39B7C0AE" Name="KR7B_OFF_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="4AA48FFD43D37B28CE3ACF921DCED0CA" Name="KR8B_OFF_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="ED2210C844643DD077A497B904D5643A" Name="KR8Bbis_OFF_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="71E412B8434E0CDBB5AB0F9010FFA854" Name="KR17B_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="F10E6CCE40B0C60B0083F5A008B42D4F" Name="KR18B_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[//Кран 6б
+if (AOS_KR6B_ON or OVR_KR6B_ON) and not KR6B_ON_prev then
+	SHKU17_IM.KR6B.DA := false;
+	Local_IM.KR6B.aOn := true;
+end_if;
+KR6B_ON_prev := AOS_KR6B_ON or OVR_KR6B_ON;
+
+
+//Кран 6бр
+if (AOS_KR6BR_ON) and not KR6BR_ON_prev then
+	SHKU17_IM.KR6BR.DA := false;
+	Local_IM.KR6BR.aOn := true;
+end_if;
+KR6BR_ON_prev := AOS_KR6BR_ON;
+
+
+//Кран 7б
+if (AOS_KR7B_OFF) and not KR7B_OFF_prev then
+	SHKU17_IM.KR7B.DA := false;
+	Local_IM.KR7B.aOff := true;
+end_if;
+KR7B_OFF_prev := AOS_KR7B_OFF;
+
+
+//Кран 8б
+if (AOS_KR8B_OFF) and not KR8B_OFF_prev then
+	SHKU17_IM.KR8B.DA := false;
+	Local_IM.KR8B.aOff := true;
+end_if;
+KR8B_OFF_prev := AOS_KR8B_OFF;
+
+
+//Кран 8б' 
+if (AOS_KR8Bbis_OFF) and not KR8Bbis_OFF_prev then
+	SHKU17_IM.KR8Bbis.DA := false;
+	Local_IM.KR8Bbis.aOff := true;
+end_if;
+KR8Bbis_OFF_prev := AOS_KR8Bbis_OFF;
+
+
+//Кран 17б
+if (AOS_KR17B_ON) and not KR17B_ON_prev then
+	SHKU17_IM.KR17B.DA := false;
+	Local_IM.KR17B.aOn := true;
+end_if;
+KR17B_ON_prev := AOS_KR17B_ON;
+
+
+//Кран 18б
+if (AOS_KR18B_ON) and not KR18B_ON_prev then
+	SHKU17_IM.KR18B.DA := false;
+	Local_IM.KR18B.aOn := true;
+end_if;
+KR18B_ON_prev := AOS_KR18B_ON;
+
+(*
+// Кран БФС1
+IF CTU1_DI_HMI.L_max_BFS1 AND NOT KRBFS1_ON_prev THEN
+	CTU1_IM.KRBFS1.DA := BOOL#0;
+	Local_IM.KRBFS1.aOn := BOOL#1;
+END_IF;
+KRBFS1_ON_prev := CTU1_DI_HMI.L_max_BFS1;
+
+IF CTU1_DI_HMI.L_min_BFS1 AND NOT KRBFS1_OFF_prev THEN
+	CTU1_IM.KRBFS1.DA := BOOL#0;
+	Local_IM.KRBFS1.aOff := BOOL#1;
+END_IF;
+KRBFS1_OFF_prev := CTU1_DI_HMI.L_min_BFS1;
+
+// Кран БФС2
+IF CTU1_DI_HMI.L_max_BFS1 AND NOT KRBFS2_ON_prev THEN
+	CTU1_IM.KRBFS2.DA := BOOL#0;
+	Local_IM.KRBFS2.aOn := BOOL#1;
+END_IF;
+KRBFS2_ON_prev := CTU1_DI_HMI.L_max_BFS1;
+
+IF CTU1_DI_HMI.L_min_BFS1 AND NOT KRBFS2_OFF_prev THEN
+	CTU1_IM.KRBFS2.DA := BOOL#0;
+	Local_IM.KRBFS2.aOff := BOOL#1;
+END_IF;
+KRBFS2_OFF_prev := CTU1_DI_HMI.L_min_BFS1;
+
+// Кран БФС3
+IF CTU1_DI_HMI.L_max_BFS1 AND NOT KRBFS3_ON_prev THEN
+	CTU1_IM.KRBFS3.DA := BOOL#0;
+	Local_IM.KRBFS3.aOn := BOOL#1;
+END_IF;
+KRBFS3_ON_prev := CTU1_DI_HMI.L_max_BFS1;
+
+IF CTU1_DI_HMI.L_min_BFS1 AND NOT KRBFS3_OFF_prev THEN
+	CTU1_IM.KRBFS3.DA := BOOL#0;
+	Local_IM.KRBFS3.aOff := BOOL#1;
+END_IF;
+KRBFS3_OFF_prev := CTU1_DI_HMI.L_min_BFS1;
+
+// Кран БФС4
+IF CTU1_DI_HMI.L_max_BFS1 AND NOT KRBFS4_ON_prev THEN
+	CTU1_IM.KRBFS4.DA := BOOL#0;
+	Local_IM.KRBFS4.aOn := BOOL#1;
+END_IF;
+KRBFS4_ON_prev := CTU1_DI_HMI.L_max_BFS1;
+
+IF CTU1_DI_HMI.L_min_BFS1 AND NOT KRBFS4_OFF_prev THEN
+	CTU1_IM.KRBFS4.DA := BOOL#0;
+	Local_IM.KRBFS4.aOff := BOOL#1;
+END_IF;
+KRBFS4_OFF_prev := CTU1_DI_HMI.L_min_BFS1;
+
+// Кран БФС5
+IF CTU1_DI_HMI.L_max_BFS1 AND NOT KRBFS5_ON_prev THEN
+	CTU1_IM.KRBFS5.DA := BOOL#0;
+	Local_IM.KRBFS5.aOn := BOOL#1;
+END_IF;
+KRBFS5_ON_prev := CTU1_DI_HMI.L_max_BFS1;
+
+IF CTU1_DI_HMI.L_min_BFS1 AND NOT KRBFS5_OFF_prev THEN
+	CTU1_IM.KRBFS5.DA := BOOL#0;
+	Local_IM.KRBFS5.aOff := BOOL#1;
+END_IF;
+KRBFS5_OFF_prev := CTU1_DI_HMI.L_min_BFS1;
+
+// Кран БФС6
+IF CTU1_DI_HMI.L_max_BFS1 AND NOT KRBFS6_ON_prev THEN
+	CTU1_IM.KRBFS6.DA := BOOL#0;
+	Local_IM.KRBFS6.aOn := BOOL#1;
+END_IF;
+KRBFS6_ON_prev := CTU1_DI_HMI.L_max_BFS1;
+
+IF CTU1_DI_HMI.L_min_BFS1 AND NOT KRBFS6_OFF_prev THEN
+	CTU1_IM.KRBFS6.DA := BOOL#0;
+	Local_IM.KRBFS6.aOff := BOOL#1;
+END_IF;
+KRBFS6_OFF_prev := CTU1_DI_HMI.L_min_BFS1;
+
+// Кран Е-3
+IF AI_as_DI.L_max_E3 AND NOT KRE3_ON_prev THEN
+	CTU1_IM.KRE3.DA := BOOL#0;
+	Local_IM.KRE3.aOn := BOOL#1;
+END_IF;
+KRE3_ON_prev := AI_as_DI.L_max_E3;
+
+IF AI_as_DI.L_min_E3 AND NOT KRE3_OFF_prev THEN
+	CTU1_IM.KRE3.DA := BOOL#0;
+	Local_IM.KRE3.aOff := BOOL#1;
+END_IF;
+KRE3_OFF_prev := AI_as_DI.L_min_E3;
+
+// Кран Е-2
+IF AI_as_DI.L_min_E2 AND NOT KRE2_ON_prev THEN
+	CTU1_IM.KRE2.DA := BOOL#0;
+	Local_IM.KRE2.aOn := BOOL#1;
+END_IF;
+KRE2_ON_prev := AI_as_DI.L_min_E2;
+
+IF AI_as_DI.L_max_E2 AND NOT KRE2_OFF_prev THEN
+	CTU1_IM.KRE2.DA := BOOL#0;
+	Local_IM.KRE2.aOff := BOOL#1;
+END_IF;
+KRE2_OFF_prev := AI_as_DI.L_max_E2;
+
+// Кран 7
+CTU1_IM.KR7.block_ON_ru := MD.KOL_KC1 OR MD.AOS OR MD.AOB OR MD.EAO_KS OR MD.EAO_KC1 OR (CTU1_AI_PLC.dP_KR7.PV > REAL#0.2) OR CTU1_AI_PLC.dP_KR7.flt;
+CTU1_IM.KR7.block_OFF_ru := MD.MAG;
+IF (ALG_AOB OR ALG_AOS OR ALG_NO) AND NOT KR7_OFF_prev THEN
+	CTU1_IM.KR7.DA := BOOL#0;
+	Local_IM.KR7.aOff := BOOL#1;
+END_IF;
+KR7_OFF_prev := ALG_AOB OR ALG_AOS OR ALG_NO;
+
+// Кран 7б
+CTU1_IM.KR7b.block_ON_ru := MD.KOL_KC1 OR MD.AOS OR MD.AOB OR MD.EAO_KS OR MD.EAO_KC1;
+CTU1_IM.KR7b.block_OFF_ru := MD.MAG;
+// Кран 7а
+CTU1_IM.KR7a.block_ON_ru := MD.KOL_KC1 OR MD.AOS OR MD.AOB OR MD.EAO_KS OR MD.EAO_KC1 OR (CTU1_AI_PLC.dP_KR7a.PV > REAL#0.2) OR CTU1_AI_PLC.dP_KR7a.flt;
+CTU1_IM.KR7a.block_OFF_ru := MD.MAG;
+IF (ALG_AOB OR ALG_AOS OR ALG_NO) AND NOT KR7a_OFF_prev THEN
+	CTU1_IM.KR7a.DA := BOOL#0;
+	Local_IM.KR7a.aOff := BOOL#1;
+END_IF;
+KR7a_OFF_prev := ALG_AOB OR ALG_AOS OR ALG_NO;
+
+// Кран 7аб
+CTU1_IM.KR7ab.block_ON_ru := MD.KOL_KC1 OR MD.AOS OR MD.AOB OR MD.EAO_KS OR MD.EAO_KC1;
+CTU1_IM.KR7ab.block_OFF_ru := MD.MAG;
+// Кран 17
+CTU1_IM.KR17.block_ON_ru := MD.MAG OR MD.KOL_KC1 OR MD.AOB;
+IF (AOS_KR17_ON) AND NOT KR17_ON_prev THEN
+	CTU1_IM.KR17.DA := BOOL#0;
+	Local_IM.KR17.aOn := BOOL#1;
+END_IF;
+KR17_ON_prev := AOS_KR17_ON;
+
+// Кран 8
+CTU1_IM.KR8.block_ON_ru := MD.KOL_KC1 OR MD.AOS OR MD.AOB OR MD.EAO_KS OR MD.EAO_KC1 OR (CTU1_AI_PLC.dP_KR8.PV > REAL#0.2) OR CTU1_AI_PLC.dP_KR8.flt;
+CTU1_IM.KR8.block_OFF_ru := MD.MAG;
+IF (ALG_AOB OR ALG_AOS OR ALG_NO) AND NOT KR8_OFF_prev THEN
+	CTU1_IM.KR8.DA := BOOL#0;
+	Local_IM.KR8.aOff := BOOL#1;
+END_IF;
+KR8_OFF_prev := ALG_AOB OR ALG_AOS OR ALG_NO;
+
+// Кран 8аб
+CTU1_IM.KR8ab.block_ON_ru := MD.KOL_KC1 OR MD.AOS OR MD.AOB OR MD.EAO_KS OR MD.EAO_KC1;
+CTU1_IM.KR8ab.block_OFF_ru := MD.MAG;
+// Кран 18
+CTU1_IM.KR18.block_ON_ru := MD.MAG OR MD.KOL_KC1 OR MD.AOB;
+IF (AOS_KR18_ON) AND NOT KR18_ON_prev THEN
+	CTU1_IM.KR18.DA := BOOL#0;
+	Local_IM.KR18.aOn := BOOL#1;
+END_IF;
+KR18_ON_prev := AOS_KR18_ON;
+
+// Кран 20
+CTU1_IM.KRG20_5.block_ON_ru := NOT (MD.KOL_KC1 OR MD.AOS OR MD.AOB OR MD.EAO_KS OR MD.EAO_KC1) OR (CTU1_AI_PLC.dP_KR8.PV > REAL#0.2) OR CTU1_AI_PLC.dP_KR8.flt;
+CTU1_IM.KRG20_5.block_OFF_ru := MD.KOL_KC1 OR MD.AOS OR MD.AOB OR MD.EAO_KS OR MD.EAO_KC1;
+IF (ALG_AOB OR ALG_AOS OR (ALG_NO AND (CTU1_DI_HMI.KR7_OFF AND NOT CTU1_DI_HMI.KR7_ON OR CTU1_DI_HMI.KR7a_OFF AND NOT CTU1_DI_HMI.KR7a_ON) AND CTU1_DI_HMI.KR8_OFF AND NOT CTU1_DI_HMI.KR8_ON)) AND NOT KRG20_5_ON_prev THEN
+	CTU1_IM.KRG20_5.DA := BOOL#0;
+END_IF;
+IF ((ALG_AOB OR ALG_AOS OR ALG_NO) AND NOT CTU1_IM.KRG20_5.DA) OR (CTU1_IM.KRG20_5.rOn AND CTU1_IM.KRG20_5.DA) THEN
+	KR20_need_ON := BOOL#1;
+	CTU1_IM.KRG20_5.rOn := BOOL#0;
+	//Local_IM.KRG20_5.aOn := BOOL#1;
+END_IF;
+IF CTU1_IM.KRG20_5.rOff AND CTU1_IM.KRG20_5.DA THEN
+	KR20_need_ON := BOOL#0;
+END_IF;
+//IF KR20_need_ON AND CTU1_DI_HMI.dP_KRG_20_5 THEN
+IF KR20_need_ON AND (CTU1_AI_PLC.dP_KRG_20_5.PV < REAL#0.2) AND NOT CTU1_AI_PLC.dP_KRG_20_5.flt THEN
+	IF CTU1_IM.KRG20_5.DA THEN
+		CTU1_IM.KRG20_5.rOn := BOOL#1;
+	ELSE
+		Local_IM.KRG20_5.aOn := BOOL#1;
+	END_IF;
+	KR20_need_ON := BOOL#0;
+END_IF;
+KRG20_5_ON_prev := ALG_AOB OR ALG_AOS;
+
+// Кран 3д2-1
+// Кран 19
+IF MG_cut_run AND NOT KR1026_OFF_prev THEN
+	CTU1_IM.KR1026.DA := BOOL#0;
+	Local_IM.KR1026.aOff := BOOL#1;
+END_IF;
+KR1026_OFF_prev := MG_cut_run;
+
+// Кран 21
+IF MG_cut_run AND NOT KR1029_OFF_prev THEN
+	CTU1_IM.KR1029.DA := BOOL#0;
+	Local_IM.KR1029.aOff := BOOL#1;
+END_IF;
+KR1029_OFF_prev := MG_cut_run;
+*)]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="26E0AC1E46B7FF19C9E641911C17C168" Name="block_IM">
+                <Variables>
+                    <Variable UUID="EEC938834361935FB5A0B7A172D7BA26" Name="clock_VLV_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="619EA5CC4F76ABD69EBC4B98739EAA35" Name="clock_VLV_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="50DB75124EEDC4BB9D02DFA153380C1E" Name="CMD_VLV" Type="CMD_VLV_blc" TypeUUID="146885F54E1C584B41F5598A697BE112" Usage="internal" />
+                    <Variable UUID="73EEFCA54C3141308DF94A8904790ED4" Name="SEN_Heat_APK" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="CE7A90416E1B4669B649315BBA68EA19" Name="SEN_P3_30" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="BD41370845E54581AC06957C4DD15CF8" Name="SEN_PL_KC2" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="9A3480761F1D4BEFBDFF981D07FC0313" Name="SEN_KR30B" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="9748E2483D20455C98F9974A4172D9B2" Name="SEN_KR30Bbis" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="E1557D77F5584962AEA475DC80B71603" Name="SEN_KR7B" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="A702160CC5B146A5BD1BB3CDED303FC0" Name="SEN_KR7zak" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="E9C8B1B254EE4CF18E527C2A34EF38B8" Name="SEN_KR8B" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="90D06114FA614254B9BD4A9343D627D5" Name="SEN_KR8Bbis" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="8ED005B06C0F439F93AAB34839465813" Name="SEN_KR17B" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="22D6F1F3629944CC83DD4600E60CEF80" Name="SEN_KR18B" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="666659363D2844D792BB3278D74E207B" Name="SEN_KR6B" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="273ACC4A2E7E4F279B27AAD86EB9F9C2" Name="SEN_KR6BR" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="6BE01CB1436C42E9A32A1C184CC0D71D" Name="SEN_KRA" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="D74B4ACA6F414B79B1C4A60EDBD27E74" Name="SEN_KRC" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="4AB8EBF9830941EFA90A6F676682602F" Name="SEN_KR6_9" Type="support_ACT" TypeUUID="0209C2A3445A6A14C63266A0E52B929B" Usage="internal" />
+                    <Variable UUID="C13B61AA0B044FE1BC00663792503FE9" Name="main_Heat_APK" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="E8C9D58B6A8040A6A1D32C8E5CA48628" Name="main_P3_30" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="FC94515DF70F4B119011CD8575B85B87" Name="main_PL_KC2" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="FE118777BBB44BFAA263107983A6DF1A" Name="main_KR30B" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="2C998AE7ACE54AE48342ACA1428C2740" Name="main_KR30Bbis" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="3F1AEF3DC46C447B8D0535061C43DB15" Name="main_KR7B" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="2F7B1B0173C046F7A0AB45C262C04D6F" Name="main_KR7zak" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="DC50DF4594E44A2B90800C5C19FB5EA0" Name="main_KR8B" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="4C15F4B028E14F32B3BD5ED0ABF66C3F" Name="main_KR8Bbis" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="B12C58AFB6A64624A3934F4385CBEA27" Name="main_KR17B" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="697238A285854780A090F0E129AF4633" Name="main_KR18B" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="274207E26A7841CCB87FA9479D5489EE" Name="main_KR6B" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="ADE2795F1F3F4A789CAA8A1D9C9808B4" Name="main_KR6BR" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="1622A4288C564A43B6D62D47D2ECBA57" Name="main_KRA" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="39D4CAC4CFE04692B3DBDEA66C1F3A69" Name="main_KRC" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="A283AC7887A0440CB1AD5EB5205BAB9F" Name="main_KR6_9" Type="VLV_cfg_share" TypeUUID="9D0CF1E14CAFF71E9390B6A2C83DEEF4" Usage="internal" />
+                    <Variable UUID="197CE5A34281FB1D357633B0A1D5B4B1" Name="tmp" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="5" Array="TRUE" Usage="internal" />
+                    <Variable UUID="A17B04FC4DFFA949135FBA94ED8F9613" Name="dummy" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[
+clock_VLV_cur := CLOCK();
+IF FirstScan_MAIN THEN clock_VLV_prev := clock_VLV_cur; END_IF;
+cycleTime_VLV := clock_VLV_cur - clock_VLV_prev;
+clock_VLV_prev := clock_VLV_cur;
+
+
+IF FirstScan_MAIN THEN
+	SEN_Heat_APK	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_P3_30	 	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_PL_KC2	 	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KR30B	 	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KR30Bbis	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KR7B	 	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KR7zak	 	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KR8B	 	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KR8Bbis	 	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KR17B	 	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KR18B	 	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KR6B	 	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KR6BR	 	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KRA	 		:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KRC	 		:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_KR6_9	 	:= VLV_init(LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+END_IF;
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////ОБРАБОТКА КОМАНД ИЗ ЛОГИКИ/////////////////////////////////////////
+CMD_VLV();
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+main_Heat_APK(BYTE#111,SEN_Heat_APK,SHKU17_IM.Heat_APK,Local_IM.Heat_APK,SHKU17_A1_DI_HMI.APK_Heat_ON,SHKU17_A1_DI_HMI.dummy,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.APK_heat_ON,SHKU17_A3_DO_HMI.dummy);
+main_P3_30(BYTE#111,SEN_P3_30,SHKU17_IM.P3_30,Local_IM.P3_30,SHKU17_A1_DI_HMI.P3_30_ON,SHKU17_A1_DI_HMI.dummy,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.P3_30_ON,SHKU17_A3_DO_HMI.dummy);
+main_PL_KC2(BYTE#111,SEN_PL_KC2,SHKU17_IM.PL_KC2,Local_IM.PL_KC2,SHKU17_A3_DI_HMI.PL_KC2_ON,SHKU17_A3_DI_HMI.dummy,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.PL_KC2_ON,SHKU17_A3_DO_HMI.dummy);
+main_KR30B(BYTE#22,SEN_KR30B,SHKU17_IM.KR30B,Local_IM.KR30B,SHKU17_A3_DI_HMI.kr30B_ON,SHKU17_A3_DI_HMI.kr30B_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.kr30B_ON,SHKU17_A3_DO_HMI.kr30B_OFF);
+main_KR30Bbis(BYTE#22,SEN_KR30Bbis,SHKU17_IM.KR30Bbis,Local_IM.KR30Bbis,SHKU17_A3_DI_HMI.kr30Bbis_ON,SHKU17_A3_DI_HMI.kr30Bbis_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.kr30Bbis_ON,SHKU17_A3_DO_HMI.kr30Bbis_OFF);
+main_KR7B(BYTE#22,SEN_KR7B,SHKU17_IM.KR7B,Local_IM.KR7B,SHKU17_A3_DI_HMI.kr7B_ON,SHKU17_A3_DI_HMI.kr7B_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.kr7B_ON,SHKU17_A3_DO_HMI.kr7B_OFF);
+main_KR7zak(BYTE#22,SEN_KR7zak,SHKU17_IM.KR7zak,Local_IM.KR7zak,SHKU17_A3_DI_HMI.kr7Bzak_ON,SHKU17_A3_DI_HMI.kr7Bzak_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.kr7Bzak_ON,SHKU17_A3_DO_HMI.kr7Bzak_OFF);
+main_KR8B(BYTE#22,SEN_KR8B,SHKU17_IM.KR8B,Local_IM.KR8B,SHKU17_A3_DI_HMI.kr8B_ON,SHKU17_A3_DI_HMI.kr8B_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.kr8B_ON,SHKU17_A3_DO_HMI.kr8B_OFF);
+main_KR8Bbis(BYTE#22,SEN_KR8Bbis,SHKU17_IM.KR8Bbis,Local_IM.KR8Bbis,SHKU17_A3_DI_HMI.kr8Bbis_ON,SHKU17_A3_DI_HMI.kr8Bbis_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.kr8Bbis_ON,SHKU17_A3_DO_HMI.kr8Bbis_OFF);
+main_KR17B(BYTE#22,SEN_KR17B,SHKU17_IM.KR17B,Local_IM.KR17B,SHKU17_A3_DI_HMI.kr17B_ON,SHKU17_A3_DI_HMI.kr17B_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.kr17B_ON,SHKU17_A3_DO_HMI.kr17B_OFF);
+main_KR18B(BYTE#22,SEN_KR18B,SHKU17_IM.KR18B,Local_IM.KR18B,SHKU17_A3_DI_HMI.kr18B_ON,SHKU17_A3_DI_HMI.kr18B_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.kr18B_ON,SHKU17_A3_DO_HMI.kr18B_OFF);
+main_KR6B(BYTE#22,SEN_KR6B,SHKU17_IM.KR6B,Local_IM.KR6B,SHKU17_A3_DI_HMI.kr6B_ON,SHKU17_A3_DI_HMI.kr6B_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.kr6B_ON,SHKU17_A3_DO_HMI.kr6B_OFF);
+main_KR6BR(BYTE#22,SEN_KR6BR,SHKU17_IM.KR6BR,Local_IM.KR6BR,SHKU17_A5_DI_HMI.kr6BR_ON,SHKU17_A5_DI_HMI.kr6BR_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.kr6BR_ON,SHKU17_A3_DO_HMI.kr6BR_OFF);
+main_KRA(BYTE#22,SEN_KRA,SHKU17_IM.KRA,Local_IM.KRA,SHKU17_A5_DI_HMI.krA_ON,SHKU17_A5_DI_HMI.krA_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.krA_ON,SHKU17_A3_DO_HMI.krA_OFF);
+main_KRC(BYTE#22,SEN_KRC,SHKU17_IM.KRC,Local_IM.KRC,SHKU17_A5_DI_HMI.krC_ON,SHKU17_A5_DI_HMI.krC_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.krC_ON,SHKU17_A3_DO_HMI.krC_OFF);
+main_KR6_9(BYTE#22,SEN_KR6_9,SHKU17_IM.KR6_9,Local_IM.KR6_9,SHKU17_A5_DI_HMI.kr6_9_ON,SHKU17_A5_DI_HMI.kr6_9_OFF,BOOL#1,BOOL#1,BOOL#0,cycleTime_VLV, IMIT,SHKU17_A3_DO_HMI.kr6_9_ON,SHKU17_A3_DO_HMI.kr6_9_OFF);
+
+
+clock_VLV_cur := CLOCK();
+cycleTime_VLV_sys := clock_VLV_cur - clock_VLV_prev;]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <Folder Name="IO" Comment="" Data="" UUID="835A59BB40DD7924C99D28BBC92BD403">
+            <Folder Name="AIO" Comment="" Data="" UUID="6CFEBB59410FDECDBD7688AF79E853DA" />
+            <Folder Name="DIO" Comment="" Data="" UUID="4DF449EF4A78C5941B793E878D76C5D2">
+                <FunctionBlock UUID="68199DEB4787394BB7C709A7AC58774F" Name="DI_Proc">
+                    <Variables>
+                        <Variable UUID="C710DEEE4025E1A7FBEC3AB69D10EB95" Name="Numb" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                        <Variable UUID="A55187544BF14F871DFAAFBEFA4D73E7" Name="DI_raw" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="57D10F9A4EBA338294FAD79532728AE7" Name="cycle_set" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                        <Variable UUID="C0030F2546D0531C72976CAA199383CB" Name="Inv" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="52174AB240497E60923815B0C58ACA7C" Name="DI_out" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="output" />
+                        <Variable UUID="EF897D2E4471E85C56052AB99C3143C5" Name="cycle_val" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Size="192" Array="TRUE" Usage="internal" />
+                        <Variable UUID="0C0A43644A71081B09CFCB86B5F34B8D" Name="DI_in_last" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="192" Array="TRUE" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[IF DI_Raw = DI_in_last[Numb] THEN
+	cycle_val[Numb] := cycle_val[Numb] + INT#1;
+ELSE
+	cycle_val[Numb] := INT#0;
+END_IF;
+
+IF cycle_val[Numb] >= cycle_set THEN
+	DI_out := DI_Raw XOR Inv;
+	cycle_val[Numb] := cycle_val[Numb] - INT#1;
+END_IF;
+
+DI_in_last[Numb] := DI_Raw;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="996FFC01410FAAA19E620CB4DD7B4D05" Name="block_DI">
+                    <Variables>
+                        <Variable UUID="E0711C66460CCD34145CB4ABB4AE60E2" Name="clock_DI_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                        <Variable UUID="C1AACD3B4B75FDD66863319DC9AE3CAF" Name="clock_DI_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                        <Variable UUID="123516FD4C830D51212C2AA9B2952C8C" Name="IMIT_ON" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                        <Variable UUID="3BD784024DF6264F8475698A2D31A958" Name="IMIT_ON_bool" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="12A5215540E65C4A89F777BD1EE14D8E" Name="PDI" Type="DI_Proc" TypeUUID="68199DEB4787394BB7C709A7AC58774F" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[clock_DI_cur := CLOCK();
+IF FirstScan_MAIN THEN
+	clock_DI_prev := clock_DI_cur;
+END_IF;
+cycleTime_DI := clock_DI_cur - clock_DI_prev;
+clock_DI_prev := clock_DI_cur;
+
+IF NOT IMIT THEN
+	PDI(INT#0,	SHKU17_A3_DI_raw.DI_3_1,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Fire1GN_KC2);
+	PDI(INT#1,	SHKU17_A3_DI_raw.DI_3_2,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Fire1mb_KC2);
+	PDI(INT#2,	SHKU17_A3_DI_raw.DI_3_3,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Fire1_AC804);
+	PDI(INT#3,	SHKU17_A3_DI_raw.DI_3_4,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Fire1_ESSN);
+	PDI(INT#4,	SHKU17_A3_DI_raw.DI_3_5,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Fire1_RU04);
+	PDI(INT#5,	SHKU17_A3_DI_raw.DI_3_6,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Fire1_Kot);
+	PDI(INT#6,	SHKU17_A3_DI_raw.DI_3_7,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Zag1_GN_KC2_10p);
+	PDI(INT#7,	SHKU17_A3_DI_raw.DI_3_8,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Zag1_GN_KC2_20p);
+	PDI(INT#8,	SHKU17_A3_DI_raw.DI_3_9,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Zag1_PU_KC2_10p);
+	PDI(INT#9,	SHKU17_A3_DI_raw.DI_3_10,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Zag1_PU_KC2_20p);
+	PDI(INT#10,	SHKU17_A3_DI_raw.DI_3_11,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Zag1_MZ_ESSN_10p);
+	PDI(INT#11,	SHKU17_A3_DI_raw.DI_3_12,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Zag1_MZ_ESSN_20p);
+	PDI(INT#12,	SHKU17_A3_DI_raw.DI_3_13,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Zag_CH4_KOT_10p);
+	PDI(INT#13,	SHKU17_A3_DI_raw.DI_3_14,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Zag_CH4_KOT_20p);
+	PDI(INT#14,	SHKU17_A3_DI_raw.DI_3_15,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Zag_CO_KOT_20mg);
+	PDI(INT#15,	SHKU17_A3_DI_raw.DI_3_16,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Zag_CO_KOT_100mg);
+	PDI(INT#16,	SHKU17_A3_DI_raw.DI_4_1,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Neispr_SPO_KZ);
+	PDI(INT#17,	SHKU17_A3_DI_raw.DI_4_2,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.ComSh_AC804_inc1_Q1_ON);
+	PDI(INT#18,	SHKU17_A3_DI_raw.DI_4_3,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.ComSh_AC804_inc1_Q1_OFF);
+	PDI(INT#19,	SHKU17_A3_DI_raw.DI_4_4,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.ComSh_AC804_inc2_Q2_ON);
+	PDI(INT#20,	SHKU17_A3_DI_raw.DI_4_5,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.ComSh_AC804_inc2_Q2_OFF);
+	PDI(INT#21,	SHKU17_A3_DI_raw.DI_4_6,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Call_KC2);
+	PDI(INT#22,	SHKU17_A3_DI_raw.DI_4_7,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_08);
+	PDI(INT#23,	SHKU17_A3_DI_raw.DI_4_8,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ala_KOT);
+	PDI(INT#24,	SHKU17_A3_DI_raw.DI_4_9,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.PL_KC2_ON);
+	PDI(INT#25,	SHKU17_A3_DI_raw.DI_4_10,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_09);
+	PDI(INT#26,	SHKU17_A3_DI_raw.DI_4_11,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_10);
+	PDI(INT#27,	SHKU17_A3_DI_raw.DI_4_12,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_11);
+	PDI(INT#28,	SHKU17_A3_DI_raw.DI_4_13,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_12);
+	PDI(INT#29,	SHKU17_A3_DI_raw.DI_4_14,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_13);
+	PDI(INT#30,	SHKU17_A3_DI_raw.DI_4_15,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_14);
+	PDI(INT#31,	SHKU17_A3_DI_raw.DI_4_16,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ctrl24_TC_2);
+	PDI(INT#32,	SHKU17_A3_DI_raw.DI_5_1,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.GPA7_AS_ON);
+	PDI(INT#33,	SHKU17_A3_DI_raw.DI_5_2,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.GPA8_AS_ON);
+	PDI(INT#34,	SHKU17_A3_DI_raw.DI_5_3,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.GPA9_AS_ON);
+	PDI(INT#35,	SHKU17_A3_DI_raw.DI_5_4,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_15);
+	PDI(INT#36,	SHKU17_A3_DI_raw.DI_5_5,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_16);
+	PDI(INT#37,	SHKU17_A3_DI_raw.DI_5_6,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_17);
+	PDI(INT#38,	SHKU17_A3_DI_raw.DI_5_7,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.GPA7_S1Gr);
+	PDI(INT#39,	SHKU17_A3_DI_raw.DI_5_8,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.GPA8_S1Gr);
+	PDI(INT#40,	SHKU17_A3_DI_raw.DI_5_9,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.GPA9_S1Gr);
+	PDI(INT#41,	SHKU17_A3_DI_raw.DI_5_10,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_18);
+	PDI(INT#42,	SHKU17_A3_DI_raw.DI_5_11,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_19);
+	PDI(INT#43,	SHKU17_A3_DI_raw.DI_5_12,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_20);
+	PDI(INT#44,	SHKU17_A3_DI_raw.DI_5_13,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_21);
+	PDI(INT#45,	SHKU17_A3_DI_raw.DI_5_14,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_22);
+	PDI(INT#46,	SHKU17_A3_DI_raw.DI_5_15,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_23);
+	PDI(INT#47,	SHKU17_A3_DI_raw.DI_5_16,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_24);
+	PDI(INT#48,	SHKU17_A3_DI_raw.DI_6_1,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_25);
+	PDI(INT#49,	SHKU17_A3_DI_raw.DI_6_2,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_26);
+	PDI(INT#50,	SHKU17_A3_DI_raw.DI_6_3,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_27);
+	PDI(INT#51,	SHKU17_A3_DI_raw.DI_6_4,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_28);
+	PDI(INT#52,	SHKU17_A3_DI_raw.DI_6_5,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_29);
+	PDI(INT#53,	SHKU17_A3_DI_raw.DI_6_6,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_30);
+	PDI(INT#54,	SHKU17_A3_DI_raw.DI_6_7,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_31);
+	PDI(INT#55,	SHKU17_A3_DI_raw.DI_6_8,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_32);
+	PDI(INT#56,	SHKU17_A3_DI_raw.DI_6_9,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_33);
+	PDI(INT#57,	SHKU17_A3_DI_raw.DI_6_10,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_34);
+	PDI(INT#58,	SHKU17_A3_DI_raw.DI_6_11,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_35);
+	PDI(INT#59,	SHKU17_A3_DI_raw.DI_6_12,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_36);
+	PDI(INT#60,	SHKU17_A3_DI_raw.DI_6_13,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_37);
+	PDI(INT#61,	SHKU17_A3_DI_raw.DI_6_14,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_38);
+	PDI(INT#62,	SHKU17_A3_DI_raw.DI_6_15,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_39);
+	PDI(INT#63,	SHKU17_A3_DI_raw.DI_6_16,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ctrl24_TC_3);
+	PDI(INT#64,	SHKU17_A3_DI_raw.DI_7_1,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.RU04_ESSN_inc1_Upres);
+	PDI(INT#65,	SHKU17_A3_DI_raw.DI_7_2,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.RU04_ESSN_inc2_Upres);
+	PDI(INT#66,	SHKU17_A3_DI_raw.DI_7_3,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.RU04_ESSN_ASM_B_Upres);
+	PDI(INT#67,	SHKU17_A3_DI_raw.DI_7_4,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.AGRS_Tech_FLT);
+	PDI(INT#68,	SHKU17_A3_DI_raw.DI_7_5,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.AGRS_Door_open);
+	PDI(INT#69,	SHKU17_A3_DI_raw.DI_7_6,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Inc1_LEP3_Ulost);
+	PDI(INT#70,	SHKU17_A3_DI_raw.DI_7_7,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Inc1_LEP3_VMP10_ON);
+	PDI(INT#71,	SHKU17_A3_DI_raw.DI_7_8,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Inc1_LEP3_VMP10_OFF);
+	PDI(INT#72,	SHKU17_A3_DI_raw.DI_7_9,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.TR2_TKU_VMP10_ON);
+	PDI(INT#73,	SHKU17_A3_DI_raw.DI_7_10,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.TR2_TKU_VMP10_OFF);
+	PDI(INT#74,	SHKU17_A3_DI_raw.DI_7_11,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.LEP_EXZ_Sev_VMP10_ON);
+	PDI(INT#75,	SHKU17_A3_DI_raw.DI_7_12,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.LEP_EXZ_Sev_VMP10_OFF);
+	PDI(INT#76,	SHKU17_A3_DI_raw.DI_7_13,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Inc2_LEP17_Ulost);
+	PDI(INT#77,	SHKU17_A3_DI_raw.DI_7_14,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Inc2_LEP17_VMP10_ON);
+	PDI(INT#78,	SHKU17_A3_DI_raw.DI_7_15,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Inc2_LEP17_VMP10_OFF);
+	PDI(INT#79,	SHKU17_A3_DI_raw.DI_7_16,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.TR1_TKU_VMP10_ON);
+	PDI(INT#80,	SHKU17_A3_DI_raw.DI_8_1,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.TR1_TKU_VMP10_OFF);
+	PDI(INT#81,	SHKU17_A3_DI_raw.DI_8_2,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.LEP_EXZ_Ug_VMP10_ON);
+	PDI(INT#82,	SHKU17_A3_DI_raw.DI_8_3,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.LEP_EXZ_Ug_VMP10_OFF);
+	PDI(INT#83,	SHKU17_A3_DI_raw.DI_8_4,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.MG1_VMP10_ON);
+	PDI(INT#84,	SHKU17_A3_DI_raw.DI_8_5,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.MG1_VMP10_OFF);
+	PDI(INT#85,	SHKU17_A3_DI_raw.DI_8_6,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.MG2_VMP10_ON);
+	PDI(INT#86,	SHKU17_A3_DI_raw.DI_8_7,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.MG2_VMP10_OFF);
+	PDI(INT#87,	SHKU17_A3_DI_raw.DI_8_8,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.SS_10KV_VMP10_ON);
+	PDI(INT#88,	SHKU17_A3_DI_raw.DI_8_9,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.SS_10KV_VMP10_OFF);
+	PDI(INT#89,	SHKU17_A3_DI_raw.DI_8_10,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_40);
+	PDI(INT#90,	SHKU17_A3_DI_raw.DI_8_11,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_41);
+	PDI(INT#91,	SHKU17_A3_DI_raw.DI_8_12,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_42);
+	PDI(INT#92,	SHKU17_A3_DI_raw.DI_8_13,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_43);
+	PDI(INT#93,	SHKU17_A3_DI_raw.DI_8_14,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_44);
+	PDI(INT#94,	SHKU17_A3_DI_raw.DI_8_15,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_45);
+	PDI(INT#95,	SHKU17_A3_DI_raw.DI_8_16,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ctrl24_TC_4);
+	PDI(INT#96,	SHKU17_A3_DI_raw.DI_9_1,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ctrl_OP_AC220);
+	PDI(INT#97,	SHKU17_A3_DI_raw.DI_9_2,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ctrl_RP_DC200);
+	PDI(INT#98,	SHKU17_A3_DI_raw.DI_9_3,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.AP_ON);
+	PDI(INT#99,	SHKU17_A3_DI_raw.DI_9_4,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.SHKU17_Doors_open);
+	PDI(INT#100,	SHKU17_A3_DI_raw.DI_9_5,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ctrl_Isp_Raz);
+	PDI(INT#101,	SHKU17_A3_DI_raw.DI_9_6,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ispr_OIP24DC_IC);
+	PDI(INT#102,	SHKU17_A3_DI_raw.DI_9_7,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ispr_RIP24DC_IC);
+	PDI(INT#103,	SHKU17_A3_DI_raw.DI_9_8,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ispr_OIP24DC_AI);
+	PDI(INT#104,	SHKU17_A3_DI_raw.DI_9_9,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ispr_RIP24DC_AI);
+	PDI(INT#105,	SHKU17_A3_DI_raw.DI_9_10,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ispr_OIP24DC_DI);
+	PDI(INT#106,	SHKU17_A3_DI_raw.DI_9_11,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ispr_RIP24DC_DI);
+	PDI(INT#107,	SHKU17_A3_DI_raw.DI_9_12,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ispr_OIP24DC_DO);
+	PDI(INT#108,	SHKU17_A3_DI_raw.DI_9_13,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ispr_RIP24DC_DO);
+	PDI(INT#109,	SHKU17_A3_DI_raw.DI_9_14,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ispr_OIP24DC_BEAO);
+	PDI(INT#110,	SHKU17_A3_DI_raw.DI_9_15,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ispr_RIP24DC_BEAO);
+	PDI(INT#111,	SHKU17_A3_DI_raw.DI_9_16,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_46);
+	PDI(INT#112,	SHKU17_A3_DI_raw.DI_10_1,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.EAO_KC_PU);
+	PDI(INT#113,	SHKU17_A3_DI_raw.DI_10_2,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.EAO_KC_PU_KCD);
+	PDI(INT#114,	SHKU17_A3_DI_raw.DI_10_3,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.AOB_KC_PU);
+	PDI(INT#115,	SHKU17_A3_DI_raw.DI_10_4,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.AOB_KC_PU_KCD);
+	PDI(INT#116,	SHKU17_A3_DI_raw.DI_10_5,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.AOS_KC_PU);
+	PDI(INT#117,	SHKU17_A3_DI_raw.DI_10_6,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.AOS_KC_PU_KCD);
+	PDI(INT#118,	SHKU17_A3_DI_raw.DI_10_7,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.EAO_KC_PEAO);
+	PDI(INT#119,	SHKU17_A3_DI_raw.DI_10_8,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.EAO_KC_PEAO_KCD);
+	PDI(INT#120,	SHKU17_A3_DI_raw.DI_10_9,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ctr_P_KR);
+	PDI(INT#121,	SHKU17_A3_DI_raw.DI_10_10,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.BEAO_ready);
+	PDI(INT#122,	SHKU17_A3_DI_raw.DI_10_11,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.PU_ready);
+	PDI(INT#123,	SHKU17_A3_DI_raw.DI_10_12,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ask_sound);
+	PDI(INT#124,	SHKU17_A3_DI_raw.DI_10_13,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.RU_KR);
+	PDI(INT#125,	SHKU17_A3_DI_raw.DI_10_14,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_47);
+	PDI(INT#126,	SHKU17_A3_DI_raw.DI_10_15,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_48);
+	PDI(INT#127,	SHKU17_A3_DI_raw.DI_10_16,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_49);
+	PDI(INT#128,	SHKU17_A4_DI_raw.DI_3_1,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Neispr_P_SHARM);
+	PDI(INT#129,	SHKU17_A4_DI_raw.DI_3_2,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Pinv_SHARM_pres);
+	PDI(INT#130,	SHKU17_A4_DI_raw.DI_3_3,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.AP_SHARM_ON);
+	PDI(INT#131,	SHKU17_A4_DI_raw.DI_3_4,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Doors_SHARM_OPEN);
+	PDI(INT#132,	SHKU17_A4_DI_raw.DI_3_5,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Neispr_P_US);
+	PDI(INT#133,	SHKU17_A4_DI_raw.DI_3_6,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Ppres_Inv_US);
+	PDI(INT#134,	SHKU17_A4_DI_raw.DI_3_7,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.AP_US_ON);
+	PDI(INT#135,	SHKU17_A4_DI_raw.DI_3_8,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Doors_US_OPEN);
+	PDI(INT#136,	SHKU17_A4_DI_raw.DI_3_9,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Neispr_OP_SHSO);
+	PDI(INT#137,	SHKU17_A4_DI_raw.DI_3_10,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Neispr_RP_SHSO);
+	PDI(INT#138,	SHKU17_A4_DI_raw.DI_3_11,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.AP_SHSO_ON);
+	PDI(INT#139,	SHKU17_A4_DI_raw.DI_3_12,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.Doors_SHSO_OPEN);
+	PDI(INT#140,	SHKU17_A4_DI_raw.DI_3_13,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_50);
+	PDI(INT#141,	SHKU17_A4_DI_raw.DI_3_14,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_51);
+	PDI(INT#142,	SHKU17_A4_DI_raw.DI_3_15,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_52);
+	PDI(INT#143,	SHKU17_A4_DI_raw.DI_3_16,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_53);
+	PDI(INT#144,	SHKU17_A4_DI_raw.DI_4_1,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr30B_OFF);
+	PDI(INT#145,	SHKU17_A4_DI_raw.DI_4_2,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr30B_ON);
+	PDI(INT#146,	SHKU17_A4_DI_raw.DI_4_3,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr30B_IM);
+	PDI(INT#147,	SHKU17_A4_DI_raw.DI_4_4,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr30B_VK);
+	PDI(INT#148,	SHKU17_A4_DI_raw.DI_4_5,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr30Bbis_OFF);
+	PDI(INT#149,	SHKU17_A4_DI_raw.DI_4_6,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr30Bbis_ON);
+	PDI(INT#150,	SHKU17_A4_DI_raw.DI_4_7,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr30Bbis_IM);
+	PDI(INT#151,	SHKU17_A4_DI_raw.DI_4_8,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr30Bbis_VK);
+	PDI(INT#152,	SHKU17_A4_DI_raw.DI_4_9,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr7B_OFF);
+	PDI(INT#153,	SHKU17_A4_DI_raw.DI_4_10,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr7B_ON);
+	PDI(INT#154,	SHKU17_A4_DI_raw.DI_4_11,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr7B_IM);
+	PDI(INT#155,	SHKU17_A4_DI_raw.DI_4_12,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr7B_VK);
+	PDI(INT#156,	SHKU17_A4_DI_raw.DI_4_13,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr7Bzak_OFF);
+	PDI(INT#157,	SHKU17_A4_DI_raw.DI_4_14,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr7Bzak_ON);
+	PDI(INT#158,	SHKU17_A4_DI_raw.DI_4_15,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr7Bzak_IM);
+	PDI(INT#159,	SHKU17_A4_DI_raw.DI_4_16,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr7Bzak_VK);
+	PDI(INT#160,	SHKU17_A4_DI_raw.DI_5_1,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr8B_OFF);
+	PDI(INT#161,	SHKU17_A4_DI_raw.DI_5_2,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr8B_ON);
+	PDI(INT#162,	SHKU17_A4_DI_raw.DI_5_3,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr8B_IM);
+	PDI(INT#163,	SHKU17_A4_DI_raw.DI_5_4,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr8B_VK);
+	PDI(INT#164,	SHKU17_A4_DI_raw.DI_5_5,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr8Bbis_OFF);
+	PDI(INT#165,	SHKU17_A4_DI_raw.DI_5_6,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr8Bbis_ON);
+	PDI(INT#166,	SHKU17_A4_DI_raw.DI_5_7,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr8Bbis_IM);
+	PDI(INT#167,	SHKU17_A4_DI_raw.DI_5_8,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr8Bbis_VK);
+	PDI(INT#168,	SHKU17_A4_DI_raw.DI_5_9,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_55);
+	PDI(INT#169,	SHKU17_A4_DI_raw.DI_5_10,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_56);
+	PDI(INT#170,	SHKU17_A4_DI_raw.DI_5_11,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_57);
+	PDI(INT#171,	SHKU17_A4_DI_raw.DI_5_12,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_58);
+	PDI(INT#172,	SHKU17_A4_DI_raw.DI_5_13,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_59);
+	PDI(INT#173,	SHKU17_A4_DI_raw.DI_5_14,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_60);
+	PDI(INT#174,	SHKU17_A4_DI_raw.DI_5_15,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_61);
+	PDI(INT#175,	SHKU17_A4_DI_raw.DI_5_16,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_62);
+	PDI(INT#176,	SHKU17_A4_DI_raw.DI_6_1,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr17B_OFF);
+	PDI(INT#177,	SHKU17_A4_DI_raw.DI_6_2,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr17B_ON);
+	PDI(INT#178,	SHKU17_A4_DI_raw.DI_6_3,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr17B_IM);
+	PDI(INT#179,	SHKU17_A4_DI_raw.DI_6_4,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr17B_VK);
+	PDI(INT#180,	SHKU17_A4_DI_raw.DI_6_5,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr18B_OFF);
+	PDI(INT#181,	SHKU17_A4_DI_raw.DI_6_6,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr18B_ON);
+	PDI(INT#182,	SHKU17_A4_DI_raw.DI_6_7,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr18B_IM);
+	PDI(INT#183,	SHKU17_A4_DI_raw.DI_6_8,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr18B_VK);
+	PDI(INT#184,	SHKU17_A4_DI_raw.DI_6_9,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_63);
+	PDI(INT#185,	SHKU17_A4_DI_raw.DI_6_10,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_64);
+	PDI(INT#186,	SHKU17_A4_DI_raw.DI_6_11,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_65);
+	PDI(INT#187,	SHKU17_A4_DI_raw.DI_6_12,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.rez_66);
+	PDI(INT#188,	SHKU17_A4_DI_raw.DI_6_13,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr6B_OFF);
+	PDI(INT#189,	SHKU17_A4_DI_raw.DI_6_14,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr6B_ON);
+	PDI(INT#190,	SHKU17_A4_DI_raw.DI_6_15,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr6B_IM);
+	PDI(INT#191,	SHKU17_A4_DI_raw.DI_6_16,	INT#3,	BOOL#0,	SHKU17_A3_DI_HMI.kr6B_VK);
+END_IF;
+
+//При имитации однократно инициализируем конечники кранов
+IMIT_ON(IMIT, IMIT_ON_bool);
+IF IMIT_ON_bool THEN
+
+END_IF;
+
+clock_DI_cur := CLOCK();
+cycleTime_DI_sys := clock_DI_cur - clock_DI_prev;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="AA8ADA744B25C48EFB08D59D8312319A" Name="block_DO">
+                    <Variables />
+                    <ST><![CDATA[SHKU17_A4_DO_raw.DO_8_1		:=	SHKU17_A3_DO_HMI.APK_heat_ON;
+SHKU17_A4_DO_raw.DO_8_2		:=	SHKU17_A3_DO_HMI.rez_01;
+SHKU17_A4_DO_raw.DO_8_3		:=	SHKU17_A3_DO_HMI.rez_02;
+SHKU17_A4_DO_raw.DO_8_4		:=	SHKU17_A3_DO_HMI.rez_03;
+SHKU17_A4_DO_raw.DO_8_5		:=	SHKU17_A3_DO_HMI.rez_04;
+SHKU17_A4_DO_raw.DO_8_6		:=	SHKU17_A3_DO_HMI.P3_30_ON;
+SHKU17_A4_DO_raw.DO_8_7		:=	SHKU17_A3_DO_HMI.PL_KC2_ON;
+SHKU17_A4_DO_raw.DO_8_8		:=	SHKU17_A3_DO_HMI.rez_05;
+SHKU17_A4_DO_raw.DO_8_9		:=	SHKU17_A3_DO_HMI.rez_06;
+SHKU17_A4_DO_raw.DO_8_10	:=	SHKU17_A3_DO_HMI.rez_07;
+SHKU17_A4_DO_raw.DO_8_11	:=	SHKU17_A3_DO_HMI.rez_08;
+SHKU17_A4_DO_raw.DO_8_12	:=	SHKU17_A3_DO_HMI.rez_09;
+SHKU17_A4_DO_raw.DO_8_13	:=	SHKU17_A3_DO_HMI.rez_10;
+SHKU17_A4_DO_raw.DO_8_14	:=	SHKU17_A3_DO_HMI.rez_11;
+SHKU17_A4_DO_raw.DO_8_15	:=	SHKU17_A3_DO_HMI.rez_12;
+SHKU17_A4_DO_raw.DO_8_16	:=	SHKU17_A3_DO_HMI.rez_13;
+SHKU17_A4_DO_raw.DO_9_1		:=	SHKU17_A3_DO_HMI.GPA7_FLT;
+SHKU17_A4_DO_raw.DO_9_2		:=	SHKU17_A3_DO_HMI.GPA8_FLT;
+SHKU17_A4_DO_raw.DO_9_3		:=	SHKU17_A3_DO_HMI.GPA9_FLT;
+SHKU17_A4_DO_raw.DO_9_4		:=	SHKU17_A3_DO_HMI.GPA7_KC2_READY;
+SHKU17_A4_DO_raw.DO_9_5		:=	SHKU17_A3_DO_HMI.GPA7_AO_IN_GR;
+SHKU17_A4_DO_raw.DO_9_6		:=	SHKU17_A3_DO_HMI.GPA7_KR6_ON;
+SHKU17_A4_DO_raw.DO_9_7		:=	SHKU17_A3_DO_HMI.GPA8_KC2_READY;
+SHKU17_A4_DO_raw.DO_9_8		:=	SHKU17_A3_DO_HMI.GPA8_AO_IN_GR;
+SHKU17_A4_DO_raw.DO_9_9		:=	SHKU17_A3_DO_HMI.GPA8_KR6_ON;
+SHKU17_A4_DO_raw.DO_9_10	:=	SHKU17_A3_DO_HMI.GPA9_KC2_READY;
+SHKU17_A4_DO_raw.DO_9_11	:=	SHKU17_A3_DO_HMI.GPA9_AO_IN_GR;
+SHKU17_A4_DO_raw.DO_9_12	:=	SHKU17_A3_DO_HMI.GPA9_KR6_ON;
+SHKU17_A4_DO_raw.DO_9_13	:=	SHKU17_A3_DO_HMI.rez_14;
+SHKU17_A4_DO_raw.DO_9_14	:=	SHKU17_A3_DO_HMI.rez_15;
+SHKU17_A4_DO_raw.DO_9_15	:=	SHKU17_A3_DO_HMI.rez_16;
+SHKU17_A4_DO_raw.DO_9_16	:=	SHKU17_A3_DO_HMI.rez_17;
+SHKU17_A4_DO_raw.DO_10_1	:=	SHKU17_A3_DO_HMI.kr30B_OFF;
+SHKU17_A4_DO_raw.DO_10_2	:=	SHKU17_A3_DO_HMI.kr30B_ON;
+SHKU17_A4_DO_raw.DO_10_3	:=	SHKU17_A3_DO_HMI.kr30Bbis_OFF;
+SHKU17_A4_DO_raw.DO_10_4	:=	SHKU17_A3_DO_HMI.kr30Bbis_ON;
+SHKU17_A4_DO_raw.DO_10_5	:=	SHKU17_A3_DO_HMI.kr7B_OFF;
+SHKU17_A4_DO_raw.DO_10_6	:=	SHKU17_A3_DO_HMI.kr7B_ON;
+SHKU17_A4_DO_raw.DO_10_7	:=	SHKU17_A3_DO_HMI.kr7Bzak_OFF;
+SHKU17_A4_DO_raw.DO_10_8	:=	SHKU17_A3_DO_HMI.kr7Bzak_ON;
+SHKU17_A4_DO_raw.DO_10_9	:=	SHKU17_A3_DO_HMI.kr8B_OFF;
+SHKU17_A4_DO_raw.DO_10_10	:=	SHKU17_A3_DO_HMI.kr8B_ON;
+SHKU17_A4_DO_raw.DO_10_11	:=	SHKU17_A3_DO_HMI.kr8Bbis_OFF;
+SHKU17_A4_DO_raw.DO_10_12	:=	SHKU17_A3_DO_HMI.kr8Bbis_ON;
+SHKU17_A4_DO_raw.DO_10_13	:=	SHKU17_A3_DO_HMI.rez_18;
+SHKU17_A4_DO_raw.DO_10_14	:=	SHKU17_A3_DO_HMI.rez_19;
+SHKU17_A4_DO_raw.DO_10_15	:=	SHKU17_A3_DO_HMI.rez_20;
+SHKU17_A4_DO_raw.DO_10_16	:=	SHKU17_A3_DO_HMI.rez_21;
+SHKU17_A4_DO_raw.DO_7_1		:=	SHKU17_A3_DO_HMI.kr17B_OFF;
+SHKU17_A4_DO_raw.DO_7_2		:=	SHKU17_A3_DO_HMI.kr17B_ON;
+SHKU17_A4_DO_raw.DO_7_3		:=	SHKU17_A3_DO_HMI.kr18B_OFF;
+SHKU17_A4_DO_raw.DO_7_4		:=	SHKU17_A3_DO_HMI.kr18B_ON;
+SHKU17_A4_DO_raw.DO_7_5		:=	SHKU17_A3_DO_HMI.rez_22;
+SHKU17_A4_DO_raw.DO_7_6		:=	SHKU17_A3_DO_HMI.rez_23;
+SHKU17_A4_DO_raw.DO_7_7		:=	SHKU17_A3_DO_HMI.kr6B_OFF;
+SHKU17_A4_DO_raw.DO_7_8		:=	SHKU17_A3_DO_HMI.kr6B_ON;
+SHKU17_A4_DO_raw.DO_7_9		:=	SHKU17_A3_DO_HMI.kr6BR_OFF;
+SHKU17_A4_DO_raw.DO_7_10	:=	SHKU17_A3_DO_HMI.kr6BR_ON;
+SHKU17_A4_DO_raw.DO_7_11	:=	SHKU17_A3_DO_HMI.krA_OFF;
+SHKU17_A4_DO_raw.DO_7_12	:=	SHKU17_A3_DO_HMI.krA_ON;
+SHKU17_A4_DO_raw.DO_7_13	:=	SHKU17_A3_DO_HMI.krC_OFF;
+SHKU17_A4_DO_raw.DO_7_14	:=	SHKU17_A3_DO_HMI.krC_ON;
+SHKU17_A4_DO_raw.DO_7_15	:=	SHKU17_A3_DO_HMI.kr6_9_OFF;
+SHKU17_A4_DO_raw.DO_7_16	:=	SHKU17_A3_DO_HMI.kr6_9_ON;
+]]></ST>
+                </FunctionBlock>
+            </Folder>
+        </Folder>
+        <Folder Name="State" Comment="" Data="" UUID="E5B737A24528AD7BD0584390296411E8">
+            <FunctionBlock UUID="036EB079487A64D1FD0967AC43C6C53B" Name="block_State">
+                <Variables>
+                    <Variable UUID="1DE383964D98026158B4F0AE765CB39F" Name="i" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="58DEB88147109C92263E539A9A7F4537" Name="j" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="10815C9549D154866D455FA8B00EB745" Name="dw_mask_udint" Type="UDINT" TypeUUID="48E8E24D4C69B5FCC5612AA94912BBEA" Usage="internal" />
+                    <Variable UUID="D6A6A0924FF29AF635CADABF7EA95FF5" Name="dw_mask" Type="DWORD" TypeUUID="53CAB7E947643F098D755BB9A02688FA" Usage="internal" />
+                    <Variable UUID="5BDC7C2248F796837A0B4CAB08B65F28" Name="Flags_GTD" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="11" Array="TRUE" Usage="internal" />
+                    <Variable UUID="438DA8FF4E97D64D5B88A3B22BA5BAFC" Name="temp_mode_string" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" InitialValue="&apos;FALSE&apos;" Usage="internal" />
+                    <Variable UUID="B93B51FB4209E9E10585049214AB37EC" Name="temp_status_string" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Usage="internal" />
+                    <Variable UUID="834953464F37A901EC89529DD3BC6735" Name="delay" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="2AB1FCD74C1D19724DAB909367C15212" Name="ESDb" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="1402FB7E4C2187BC8303859A70CFF006" Name="ESDw" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="77138F2740085DFD13B28CA591DFA325" Name="NSDb" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="AFEEA4FB448312A58B1990B336F4EB30" Name="NSDw" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="E2C141014F9720A7CEF1C79B9D10A316" Name="KOLg" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[ESDb := APS_TASK = INT#6; // Аварийный останов со стравливанием
+ESDw := APS_TASK = INT#5; // Аварийный останов без стравливания
+NSDb := APS_TASK = INT#4; // Нормальный останов
+NSDw := APS_TASK = INT#3; // КОЛЬЦО КЦ-1
+KOLg := APS_TASK = INT#2; // Кольцо ГПА КЦ-1
+
+//////////////////////////////////////////////////////////////////////////////////////////
+temp_mode_string := '';
+temp_status_string := '';
+// Экстренный останов КС
+//IF  THEN
+//	MD.EAO_KS  := BOOL#1;
+//	delay := LREAL#300;
+//END_IF;
+
+// Экстренный останов КЦ-2
+IF (SHKU17_A3_DI_HMI.EAO_KC_PU OR SHKU17_A3_DI_HMI.EAO_KC_PEAO) AND NOT MD.EAO_KS THEN
+	MD.EAO_KC2  := BOOL#1; 
+	delay := LREAL#300;
+END_IF;
+IF Deblock AND (delay <= LREAL#0) THEN
+	MD.EAO_KS := BOOL#0;
+	MD.EAO_KC2 := BOOL#0;
+END_IF;
+
+IF MD.EAO_KC2 THEN
+	temp_mode_string := 'ЭО КЦ-2';
+	IF delay > LREAL#0.5 THEN
+		delay := delay - cycleTime_MAIN;
+		temp_status_string := FORMAT_LREAL(delay, UINT#0) + ' сек.';
+	ELSE
+		delay := LREAL#0;
+		temp_status_string := 'Нажмите Сброс';
+	END_IF;
+END_IF;
+IF MD.EAO_KS THEN
+	temp_mode_string := 'ЭО КС';
+	IF delay > LREAL#0.5 THEN
+		delay := delay - cycleTime_MAIN;
+		temp_status_string := FORMAT_LREAL(delay, UINT#0) + ' сек.';
+	ELSE
+		delay := LREAL#0;
+		temp_status_string := 'Нажмите Сброс';
+	END_IF;
+END_IF;
+
+// Аварийный останов со стравливанием
+MD.AOS := NOT (MD.EAO_KC2 OR MD.EAO_KS) AND (ESDb OR drumAOS.run);
+IF MD.AOS THEN
+	temp_mode_string := 'АО со стравливанием';
+	IF drumAOS.step = INT#0 THEN
+		temp_status_string := 'До завершения: ' + FORMAT_LREAL(drumAOS.TMR2, UINT#0) + ' сек.';
+	END_IF;
+	IF drumAOS.done_ok THEN
+		temp_status_string := 'Алгоритм АО КЦ-2 СС завершён$n$nНажмите Сброс';
+	END_IF;
+	IF drumAOS.done_flt THEN
+		temp_status_string := 'Алгоритм АО КЦ-2 СС завершён некорректно$n$nНажмите Сброс';
+	END_IF;
+END_IF;
+
+// Аварийный останов без стравливания
+MD.AOB := NOT (MD.EAO_KC2 OR MD.EAO_KS OR MD.AOS) AND (ESDw OR drumAOB.run);
+IF MD.AOB THEN
+	temp_mode_string := 'АО без стравливания';
+	IF drumAOB.step = INT#0 THEN
+		temp_status_string := 'До завершения: ' + FORMAT_LREAL(drumAOB.TMR2, UINT#0) + ' сек.';
+	END_IF;
+	IF drumAOB.done_ok THEN
+		temp_status_string := 'Алгоритм АО КЦ-2 БС завершён$n$nНажмите Сброс';
+	END_IF;
+	IF drumAOB.done_flt THEN
+		temp_status_string := 'Алгоритм АО КЦ-2 БС завершён некорректно$n$nНажмите Сброс';
+	END_IF;
+END_IF;
+
+// Нормальный останов
+MD.NO := NOT (MD.EAO_KC2 OR MD.EAO_KS OR MD.AOS OR MD.AOB) AND (NSDb OR drumNO.run);
+IF MD.NO THEN
+	temp_mode_string := 'Нормальный останов';
+	IF drumNO.step = INT#0 THEN
+		temp_status_string := 'До завершения: ' + FORMAT_LREAL(drumNO.TMR2, UINT#0) + ' сек.';
+	END_IF;
+	IF drumNO.done_ok THEN
+		temp_status_string := 'Алгоритм НО КЦ-2 завершён$n$nНажмите Сброс';
+	END_IF;
+	IF drumNO.done_flt THEN
+		temp_status_string := 'Алгоритм НО КЦ-2 завершён некорректно$n$nНажмите Сброс';
+	END_IF;
+END_IF;
+
+// КЦ-1 Кольцо
+MD.KOL_KC2 := NOT (MD.EAO_KC2 OR MD.EAO_KS OR MD.AOS OR MD.AOB OR MD.NO) AND (NSDw OR drumKOL.run);
+IF MD.KOL_KC2 THEN
+	temp_mode_string := 'КЦ-2 Кольцо';
+	IF drumKOL.step = INT#0 THEN
+		temp_status_string := 'До завершения: ' + FORMAT_LREAL(drumKOL.TMR2, UINT#0) + ' сек.';
+	END_IF;
+	IF drumKOL.done_ok THEN
+		temp_status_string := 'Алгоритм КЦ-2 Кольцо завершён$n$nНажмите Сброс';
+	END_IF;
+	IF drumKOL.done_flt THEN
+		temp_status_string := 'Алгоритм КЦ-2 Кольцо завершён некорректно$n$nНажмите Сброс';
+	END_IF;
+END_IF;
+
+// ГПА Кольцо
+MD.KOL_GPA := NOT (MD.EAO_KC2 OR MD.EAO_KS OR MD.AOS OR MD.AOB OR MD.NO OR MD.KOL_KC2) AND (KOLg OR drumKOL_GPA.run);
+IF MD.KOL_GPA THEN
+	temp_mode_string := 'ГПА Кольцо';
+	IF drumKOL_GPA.step = INT#0 THEN
+		temp_status_string := 'До завершения: ' + FORMAT_LREAL(drumKOL_GPA.TMR2, UINT#0) + ' сек.';
+	END_IF;
+	IF drumKOL_GPA.done_ok THEN
+		temp_status_string := 'Алгоритм Кольцо ГПА КЦ-2 завершён$n$nНажмите Сброс';
+	END_IF;
+	IF drumKOL_GPA.done_flt THEN
+		temp_status_string := 'Алгоритм Кольцо ГПА КЦ-2 завершён некорректно$n$nНажмите Сброс';
+	END_IF;
+END_IF;
+
+// КЦ-2 Магистраль
+MD.MAG := NOT (MD.EAO_KC2 OR MD.EAO_KS OR MD.AOS OR MD.AOB OR MD.NO OR MD.KOL_KC2 OR MD.KOL_GPA) AND
+		  (Link_GPA7.MD_M OR Link_GPA8.MD_M OR Link_GPA9.MD_M) AND true
+			(*состояние каких-то кранов*);
+IF MD.MAG THEN
+	temp_mode_string := 'КЦ-2 Магистраль';
+END_IF;
+
+// Пуск КЦ-2
+MD.PUSK := NOT (MD.EAO_KC2 OR MD.EAO_KS OR MD.AOS OR MD.AOB OR MD.NO OR MD.KOL_KC2 OR MD.KOL_GPA OR MD.MAG) AND
+		  (Link_GPA7.MD_APK OR Link_GPA7.MD_APM OR Link_GPA8.MD_APK OR Link_GPA8.MD_APM OR Link_GPA9.MD_APK OR Link_GPA9.MD_APM);
+IF MD.PUSK THEN
+	temp_mode_string := 'Пуск КЦ-2';
+END_IF;
+
+// КЦ-2 остановлен (контур заполнен газом)
+MD.STOP_G := NOT (MD.EAO_KC2 OR MD.EAO_KS OR MD.AOS OR MD.AOB OR MD.NO OR MD.KOL_KC2 OR MD.KOL_GPA OR MD.MAG OR MD.PUSK) AND true
+			(*еще какие-то условия*);
+IF MD.STOP_G THEN
+	temp_mode_string := 'КЦ-2 остановлен (контур заполнен газом)';
+END_IF;
+
+// КЦ2 остановлен (контур без газа)
+MD.STOP := NOT (MD.EAO_KC2 OR MD.EAO_KS OR MD.AOS OR MD.AOB OR MD.NO OR MD.KOL_KC2 OR MD.KOL_GPA OR MD.MAG OR MD.PUSK OR MD.STOP_G) AND true
+			(*еще какие-то условия*);
+IF MD.STOP THEN
+	temp_mode_string := 'КЦ-2 остановлен (контур без газа)';
+END_IF;
+
+// Неопределённый режим
+MD.UND :=  NOT (MD.EAO_KC2 OR MD.EAO_KS OR MD.AOS OR MD.AOB OR MD.NO OR MD.KOL_KC2 OR MD.KOL_GPA OR MD.MAG OR MD.PUSK OR MD.STOP_G OR MD.STOP);
+IF MD.UND THEN
+	temp_mode_string := 'Неопределённый режим';
+END_IF;
+
+
+//Раскраска телевизора
+(*жёлтый*)			Global_TV.Color.0 := MD.KOL_KC2 OR MD.KOL_GPA OR MD.NO;
+(*красный*)			Global_TV.Color.1 := MD.EAO_KC2 OR MD.EAO_KS OR MD.AOS OR MD.AOB;
+(*зелёный*)			Global_TV.Color.2 := MD.PUSK;
+(*тёмно-зелёный*)	(*Global_TV.Color.3 := MD.MAG;*)
+(*коричневый*)		(*Global_TV.Color.4 := MD.STOP_G OR MD.STOP;*)
+(*серый*)			Global_TV.Color.5 := MD.UND OR MD.STOP_G OR MD.STOP;
+(*голубой*)			Global_TV.Color.6 := MD.MAG;
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+Global_TV.LG_System_mode_str := temp_mode_string;
+Global_TV.LG_System_status_str := temp_status_string;]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <FunctionBlock UUID="FC3659584F7E9A1B032F2EB588B15E81" Name="Archive">
+            <Variables />
+            <ST><![CDATA[(*
+Archive_CTU1.dP_BFS1    := CTU1_AI_PLC.dP_BFS1.PV;
+Archive_CTU1.dP_BFS2    := CTU1_AI_PLC.dP_BFS2.PV;
+Archive_CTU1.dP_BFS3    := CTU1_AI_PLC.dP_BFS3.PV;
+Archive_CTU1.dP_BFS4    := CTU1_AI_PLC.dP_BFS4.PV;
+Archive_CTU1.dP_BFS5    := CTU1_AI_PLC.dP_BFS5.PV;
+Archive_CTU1.dP_BFS6    := CTU1_AI_PLC.dP_BFS6.PV;
+Archive_CTU1.dP_BFS     := CTU1_AI_PLC.dP_BFS.PV;
+Archive_CTU1.T_E3       := CTU1_AI_PLC.T_E3.PV;
+Archive_CTU1.P_E3       := CTU1_AI_PLC.P_E3.PV;
+Archive_CTU1.L_E3       := CTU1_AI_PLC.L_E3.PV;
+Archive_CTU1.T_E2       := CTU1_AI_PLC.T_E2.PV;
+Archive_CTU1.P_g_inKC1  := CTU1_AI_PLC.P_g_inKC1.PV;
+Archive_CTU1.P_g_outKC1 := CTU1_AI_PLC.P_g_outKC1.PV;
+Archive_CTU1.T_air      := CTU1_AI_PLC.T_air.PV;
+Archive_CTU1.T_ground   := CTU1_AI_PLC.T_ground.PV;
+Archive_CTU1.P_air      := CTU1_AI_PLC.P_air.PV;
+Archive_CTU1.T_air_BB   := CTU1_AI_PLC.T_air_BB.PV;
+Archive_CTU1.Reserve_01 := CTU1_AI_PLC.Reserve_01.PV;
+Archive_CTU1.Reserve_02 := CTU1_AI_PLC.Reserve_02.PV;
+Archive_CTU1.Reserve_03 := CTU1_AI_PLC.Reserve_03.PV;
+Archive_CTU1.Reserve_04 := CTU1_AI_PLC.Reserve_04.PV;
+Archive_CTU1.Reserve_05 := CTU1_AI_PLC.Reserve_05.PV;
+Archive_CTU1.Reserve_06 := CTU1_AI_PLC.Reserve_06.PV;
+Archive_CTU1.Reserve_07 := CTU1_AI_PLC.Reserve_07.PV;
+Archive_CTU1.Reserve_08 := CTU1_AI_PLC.Reserve_08.PV;
+Archive_CTU1.Reserve_09 := CTU1_AI_PLC.Reserve_09.PV;
+Archive_CTU1.Reserve_10 := CTU1_AI_PLC.Reserve_10.PV;
+Archive_CTU1.Reserve_11 := CTU1_AI_PLC.Reserve_11.PV;
+Archive_CTU1.Reserve_12 := CTU1_AI_PLC.Reserve_12.PV;
+Archive_CTU1.L_min_E2   := CTU1_AI_PLC.L_min_E2.PV;
+Archive_CTU1.L_max_E2   := CTU1_AI_PLC.L_max_E2.PV;
+Archive_CTU1.L_min_E3   := CTU1_AI_PLC.L_min_E3.PV;
+Archive_CTU1.L_max_E3   := CTU1_AI_PLC.L_max_E3.PV;
+Archive_CTU1.dP_KR7     := CTU1_AI_PLC.dP_KR7.PV;
+Archive_CTU1.dP_KR7a    := CTU1_AI_PLC.dP_KR7a.PV;
+Archive_CTU1.dP_KR8     := CTU1_AI_PLC.dP_KR8.PV;
+Archive_CTU1.dP_KRG_20_5:= CTU1_AI_PLC.dP_KRG_20_5.PV;
+Archive_CTU1.Reserve_13 := CTU1_AI_PLC.Reserve_13.PV;
+Archive_CTU1.Reserve_14 := CTU1_AI_PLC.Reserve_14.PV;
+Archive_CTU1.Reserve_15 := CTU1_AI_PLC.Reserve_15.PV;
+Archive_CTU1.U_main     := CTU1_AI_PLC.U_main.PV;
+Archive_CTU1.U_backup   := CTU1_AI_PLC.U_backup.PV;
+Archive_CTU1.Reserve_16 := CTU1_AI_PLC.Reserve_16.PV;
+Archive_CTU1.Reserve_17 := CTU1_AI_PLC.Reserve_17.PV;
+*)]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="0DEB5E1642B7CA983E2A3DB75DD05F50" Name="block_Link">
+            <Variables />
+            <ST><![CDATA[// ШКУ17 А1
+(*
+CTU1_SHKU17_A1.KR7_OFF := CTU1_DI_HMI.KR7_OFF;
+CTU1_SHKU17_A1.KR7_ON := CTU1_DI_HMI.KR7_ON;
+CTU1_SHKU17_A1.KR7a_OFF := CTU1_DI_HMI.KR7a_OFF;
+CTU1_SHKU17_A1.KR7a_ON := CTU1_DI_HMI.KR7a_ON;
+CTU1_SHKU17_A1.KR8_OFF := CTU1_DI_HMI.KR8_OFF;
+CTU1_SHKU17_A1.KR8_ON := CTU1_DI_HMI.KR8_ON;
+CTU1_SHKU17_A1.KR17_ON := CTU1_DI_HMI.KR17_ON;
+CTU1_SHKU17_A1.KR17_OFF := CTU1_DI_HMI.KR17_OFF;
+CTU1_SHKU17_A1.KR18_ON := CTU1_DI_HMI.KR18_ON;
+CTU1_SHKU17_A1.KR18_OFF := CTU1_DI_HMI.KR18_OFF;
+CTU1_SHKU17_A1.KRG_20_5_OFF := CTU1_DI_HMI.KRG_20_5_OFF;
+CTU1_SHKU17_A1.KRG_20_5_ON := CTU1_DI_HMI.KRG_20_5_ON;
+CTU1_SHKU17_A1.KR1026_OFF := CTU1_DI_HMI.KR1026_OFF;
+CTU1_SHKU17_A1.KR1026_ON := CTU1_DI_HMI.KR1026_ON;
+CTU1_SHKU17_A1.KR1029_OFF := CTU1_DI_HMI.KR1029_OFF;
+CTU1_SHKU17_A1.KR1029_ON := CTU1_DI_HMI.KR1029_ON;
+CTU1_SHKU17_A1.P_g_inKC1_PV := CTU1_AI_PLC.P_g_inKC1.PV;
+CTU1_SHKU17_A1.P_g_outKC1_PV := CTU1_AI_PLC.P_g_outKC1.PV;
+CTU1_SHKU17_A1.P_g_inKC1_flt := CTU1_AI_PLC.P_g_inKC1.flt;
+CTU1_SHKU17_A1.P_g_outKC1_flt := CTU1_AI_PLC.P_g_outKC1.flt;
+
+// AS36
+CTU1_AS36.P_g_inKC1_PV := CTU1_AI_PLC.P_g_inKC1.PV;
+CTU1_AS36.P_g_outKC1_PV := CTU1_AI_PLC.P_g_outKC1.PV;
+
+// PERF
+CTU1_PERF.P_g_inKC1_PV := CTU1_AI_PLC.P_g_inKC1.PV;
+CTU1_PERF.P_g_outKC1_PV := CTU1_AI_PLC.P_g_outKC1.PV;
+*)]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="1AD13A9D46DF643D1E27DF99C8A631B2" Name="block_PRU">
+            <Variables />
+            <ST><![CDATA[//Передаем параметры в структуру Global_PRU
+Global_PRU.Heat_APK_state	:= SHKU17_IM.Heat_APK.state;
+Global_PRU.P3_30_state		:= SHKU17_IM.P3_30.state;
+Global_PRU.PL_KC2_state		:= SHKU17_IM.PL_KC2.state;
+Global_PRU.KR30B_state		:= SHKU17_IM.KR30B.state;
+Global_PRU.KR30Bbis_state	:= SHKU17_IM.KR30Bbis.state;
+Global_PRU.KR7B_state		:= SHKU17_IM.KR7B.state;
+Global_PRU.KR7zak_state		:= SHKU17_IM.KR7zak.state;
+Global_PRU.KR8B_state		:= SHKU17_IM.KR8B.state;
+Global_PRU.KR8Bbis_state	:= SHKU17_IM.KR8Bbis.state;
+Global_PRU.KR17B_state		:= SHKU17_IM.KR17B.state;
+Global_PRU.KR18B_state		:= SHKU17_IM.KR18B.state;
+Global_PRU.KR6B_state		:= SHKU17_IM.KR6B.state;
+Global_PRU.KR6BR_state		:= SHKU17_IM.KR6BR.state;
+Global_PRU.KRA_state		:= SHKU17_IM.KRA.state;
+Global_PRU.KRC_state		:= SHKU17_IM.KRC.state;
+Global_PRU.KR6_9_state		:= SHKU17_IM.KR6_9.state;
+
+Global_PRU.Heat_APK_RA		:= SHKU17_IM.Heat_APK.DA;
+Global_PRU.P3_30_RA			:= SHKU17_IM.P3_30.DA;
+Global_PRU.PL_KC2_RA		:= SHKU17_IM.PL_KC2.DA;
+Global_PRU.KR30B_RA			:= SHKU17_IM.KR30B.DA;
+Global_PRU.KR30Bbis_RA		:= SHKU17_IM.KR30Bbis.DA;
+Global_PRU.KR7B_RA			:= SHKU17_IM.KR7B.DA;
+Global_PRU.KR7zak_RA		:= SHKU17_IM.KR7zak.DA;
+Global_PRU.KR8B_RA			:= SHKU17_IM.KR8B.DA;
+Global_PRU.KR8Bbis_RA		:= SHKU17_IM.KR8Bbis.DA;
+Global_PRU.KR17B_RA			:= SHKU17_IM.KR17B.DA;
+Global_PRU.KR18B_RA			:= SHKU17_IM.KR18B.DA;
+Global_PRU.KR6B_RA			:= SHKU17_IM.KR6B.DA;
+Global_PRU.KR6BR_RA			:= SHKU17_IM.KR6BR.DA;
+Global_PRU.KRA_RA			:= SHKU17_IM.KRA.DA;
+Global_PRU.KRC_RA			:= SHKU17_IM.KRC.DA;
+Global_PRU.KR6_9_RA			:= SHKU17_IM.KR6_9.DA;
+
+Global_PRU.Heat_APK_flt_all	:= SHKU17_IM.Heat_APK.general;
+Global_PRU.P3_30_flt_all	:= SHKU17_IM.P3_30.general;
+Global_PRU.P3_30_flt_all	:= SHKU17_IM.P3_30.general;
+Global_PRU.KR30B_flt_all	:= SHKU17_IM.KR30B.general;
+Global_PRU.KR30Bbis_flt_all	:= SHKU17_IM.KR30Bbis.general;
+Global_PRU.KR7B_flt_all		:= SHKU17_IM.KR7B.general;
+Global_PRU.KR7zak_flt_all	:= SHKU17_IM.KR7zak.general;
+Global_PRU.KR8B_flt_all		:= SHKU17_IM.KR8B.general;
+Global_PRU.KR8Bbis_flt_all	:= SHKU17_IM.KR8Bbis.general;
+Global_PRU.KR17B_flt_all	:= SHKU17_IM.KR17B.general;
+Global_PRU.KR18B_flt_all	:= SHKU17_IM.KR18B.general;
+Global_PRU.KR6B_flt_all		:= SHKU17_IM.KR6B.general;
+Global_PRU.KR6BR_flt_all	:= SHKU17_IM.KR6BR.general;
+Global_PRU.KRA_flt_all		:= SHKU17_IM.KRA.general;
+Global_PRU.KRC_flt_all		:= SHKU17_IM.KRC.general;
+Global_PRU.KR6_9_flt_all	:= SHKU17_IM.KR6_9.general;
+]]></ST>
+        </FunctionBlock>
+    </FBLibrary>
+</Program>

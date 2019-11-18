@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_DI_A4_raw" Kind="Struct" UUID="CA11AE8E4888E7A7D968C286504E53A9">
+    <Fields>
+        <Field Name="DI_3_1" Type="BOOL" UUID="AAB32BA94C4603D0F014C1B66D04B275" Comment="Неиспр. питания шкафа АРМ" />
+        <Field Name="DI_3_2" Type="BOOL" UUID="A9D3A6444922254B9FCA21831FA29311" Comment="Наличие пит. ШАРМ от инв." />
+        <Field Name="DI_3_3" Type="BOOL" UUID="2CB96A904B2BEBC033E58FBE7B190C13" Comment="Автоматы пит. ШАРМ включены" />
+        <Field Name="DI_3_4" Type="BOOL" UUID="AFA56CC843E249250FCB578E84844D7D" Comment="Двери ШАРМ открыты" />
+        <Field Name="DI_3_5" Type="BOOL" UUID="C95EDC614D3FE18317B25298E01F9C2F" Comment="Неиспр. пит. устр. серверного" />
+        <Field Name="DI_3_6" Type="BOOL" UUID="22E19B9E46DBF3F6ABE12B95B77F02A3" Comment="Наличие пит. УС от инв." />
+        <Field Name="DI_3_7" Type="BOOL" UUID="2B3018654462059EEE05FC945DC07C15" Comment="Автоматы пит. УС включены" />
+        <Field Name="DI_3_8" Type="BOOL" UUID="04087A0C4D4347FB3C2CF08990A3BC0E" Comment="Двери УС открыты" />
+        <Field Name="DI_3_9" Type="BOOL" UUID="3408BDCE4BE53CA3D1E44189E3350089" Comment="Неиспр. осн. пит. ШСО" />
+        <Field Name="DI_3_10" Type="BOOL" UUID="4EE8E4A94339494692A945BBA5A0E31C" Comment="Неиспр. рез. пит. ШСО" />
+        <Field Name="DI_3_11" Type="BOOL" UUID="4F6C4AD64F93FC6F9AB630A1701534DF" Comment="Автоматы пит. ШСО включены" />
+        <Field Name="DI_3_12" Type="BOOL" UUID="885854AA4F359338169C089C647F7324" Comment="Двери ШСО открыты" />
+        <Field Name="DI_3_13" Type="BOOL" UUID="FBDC62CF4A86EA977F0BEBB1D0ABF488" Comment="Резерв" />
+        <Field Name="DI_3_14" Type="BOOL" UUID="A58D61944B7B25DF45E5279D2CFC45AB" Comment="Резерв" />
+        <Field Name="DI_3_15" Type="BOOL" UUID="0C1F4A204E6A809F0F0A709A34E3D271" Comment="Резерв" />
+        <Field Name="DI_3_16" Type="BOOL" UUID="94F23DC640BE5D0FE183CC8038026489" Comment="Резерв" />
+        <Field Name="DI_4_1" Type="BOOL" UUID="86A77AB045CDC56ED5CDA2B01345A8ED" Comment="Кран 30Б Закрыт" />
+        <Field Name="DI_4_2" Type="BOOL" UUID="155E4CC94B9A2456E77B9B9D1D511593" Comment="Кран 30Б Открыт" />
+        <Field Name="DI_4_3" Type="BOOL" UUID="23A552F14447C08F73C8AD8D370C74CA" Comment="Кран 30Б Контроль цепи ИМ" />
+        <Field Name="DI_4_4" Type="BOOL" UUID="4DE474E24BBEC84B1230FEACC494417E" Comment="Кран 30Б Контроль цепи ВК" />
+        <Field Name="DI_4_5" Type="BOOL" UUID="91F9D88A47A1D79D4C914DA69F228E0D" Comment="Кран 30Ббис Закрыт" />
+        <Field Name="DI_4_6" Type="BOOL" UUID="F1001B99456833D8609BD7B53263AD90" Comment="Кран 30Ббис Открыт" />
+        <Field Name="DI_4_7" Type="BOOL" UUID="F66CBEF4472F39F44B395FBE3E12DAC3" Comment="Кран 30Ббис Контроль цепи ИМ" />
+        <Field Name="DI_4_8" Type="BOOL" UUID="B4D97AC14880D34A2F3E1B90FE1DD257" Comment="Кран 30Ббис Контроль цепи ВК" />
+        <Field Name="DI_4_9" Type="BOOL" UUID="FDE6CB9649F2B7F0D8901185FF3667EB" Comment="Кран 7Б Закрыт" />
+        <Field Name="DI_4_10" Type="BOOL" UUID="E46BF7C34FB2285E444F0E8140A1662C" Comment="Кран 7Б Открыт" />
+        <Field Name="DI_4_11" Type="BOOL" UUID="F55FACE44B712CDFAD84438D219A5C42" Comment="Кран 7Б Контроль цепи ИМ" />
+        <Field Name="DI_4_12" Type="BOOL" UUID="71580FF94ADA4FE0C6682AA0F6766AAB" Comment="Кран 7Б Контроль цепи ВК" />
+        <Field Name="DI_4_13" Type="BOOL" UUID="B351EB944E5563310DEC4BB0E4F60E78" Comment="Кран 7Б зак Закрыт" />
+        <Field Name="DI_4_14" Type="BOOL" UUID="179F219442EE1C98E85EBBBAF272C445" Comment="Резерв" />
+        <Field Name="DI_4_15" Type="BOOL" UUID="B7CF776249DFF50B7E7F1CBCFB03266B" Comment="Кран 7Б зак Контроль цепи ИМ" />
+        <Field Name="DI_4_16" Type="BOOL" UUID="500D4E8D4C6ECAB2B2227EB45DE7CECE" Comment="Кран 7Б зак Контроль цепи ВК" />
+        <Field Name="DI_5_1" Type="BOOL" UUID="54AF8EDC4C455FD16A83CDB85B56DCEA" Comment="Кран 8Б Закрыт" />
+        <Field Name="DI_5_2" Type="BOOL" UUID="348CB71743BB9458FB0A9DBB6E5C1873" Comment="Кран 8Б Открыт" />
+        <Field Name="DI_5_3" Type="BOOL" UUID="5D77FA5D4E4B3977A55BC580C03BBCA9" Comment="Кран 8Б Контроль цепи ИМ" />
+        <Field Name="DI_5_4" Type="BOOL" UUID="8601BFD1484A3BDE4325649CA9EDC666" Comment="Кран 8Б Контроль цепи ВК" />
+        <Field Name="DI_5_5" Type="BOOL" UUID="4016EF394A117B5E42D537BFFE179DA7" Comment="Кран 8Ббис Закрыт" />
+        <Field Name="DI_5_6" Type="BOOL" UUID="646118D24EE684CE21DB7BBC45FA0F02" Comment="Кран 8Ббис Открыт" />
+        <Field Name="DI_5_7" Type="BOOL" UUID="CB8D8D2542832761BEA36E919D5A427B" Comment="Кран 8Ббис Контроль цепи ИМ" />
+        <Field Name="DI_5_8" Type="BOOL" UUID="53E360674C9CA4F080D4BC860AE62248" Comment="Кран 8Ббис Контроль цепи ВК" />
+        <Field Name="DI_5_9" Type="BOOL" UUID="ED732DBC45E4D233D7A7C194A27720CD" Comment="Резерв" />
+        <Field Name="DI_5_10" Type="BOOL" UUID="82CDCDB8455B6AE13461CFBE8B98FC1F" Comment="Резерв" />
+        <Field Name="DI_5_11" Type="BOOL" UUID="C6BB5AA34A73A879D704428C557D885F" Comment="Резерв" />
+        <Field Name="DI_5_12" Type="BOOL" UUID="E98C6BFA4CDF02AEADE702985C778F0B" Comment="Резерв" />
+        <Field Name="DI_5_13" Type="BOOL" UUID="F5DB39CE4E833879505E05BF92728918" Comment="Резерв" />
+        <Field Name="DI_5_14" Type="BOOL" UUID="BAA096C5403CC7B7D97043B6073C0801" Comment="Резерв" />
+        <Field Name="DI_5_15" Type="BOOL" UUID="6E376D7A400E57BD33D0878E8EBFA9AD" Comment="Резерв" />
+        <Field Name="DI_5_16" Type="BOOL" UUID="BCC269494918CAB66EE849AC3BB76E30" Comment="Резерв" />
+        <Field Name="DI_6_1" Type="BOOL" UUID="0712F1E642C7361910249C9F5F875489" Comment="Кран 17Б Закрыт" />
+        <Field Name="DI_6_2" Type="BOOL" UUID="4FEAF8C04CF83A783A17B1A827EAAA01" Comment="Кран 17Б Открыт" />
+        <Field Name="DI_6_3" Type="BOOL" UUID="D516C7174660D68274C1528DCB1BD45E" Comment="Кран 17Б Контроль цепи ИМ" />
+        <Field Name="DI_6_4" Type="BOOL" UUID="C2190A6B47B667F516D9EE9458EE1C36" Comment="Кран 17Б Контроль цепи ВК" />
+        <Field Name="DI_6_5" Type="BOOL" UUID="B35487784ED9715312D15EBD4357A67F" Comment="Кран 18Б Закрыт" />
+        <Field Name="DI_6_6" Type="BOOL" UUID="97B73C6142BE00842DF0EC85430370A3" Comment="Кран 18Б Открыт" />
+        <Field Name="DI_6_7" Type="BOOL" UUID="DCAE3228405884128A43C1A3FF91E3A9" Comment="Кран 18Б Контроль цепи ИМ" />
+        <Field Name="DI_6_8" Type="BOOL" UUID="D609E9C64DFD10A39A01A0A91084BD7C" Comment="Кран 18Б Контроль цепи ВК" />
+        <Field Name="DI_6_9" Type="BOOL" UUID="F8D401484816972536A3F8B5806BE5CB" Comment="Резерв" />
+        <Field Name="DI_6_10" Type="BOOL" UUID="029882CC4E9FF1EFE461F9BE1D702203" Comment="Резерв" />
+        <Field Name="DI_6_11" Type="BOOL" UUID="90AAA3CB45B8C5D995C82097D6458868" Comment="Резерв" />
+        <Field Name="DI_6_12" Type="BOOL" UUID="42537294479844AA58B9C18846807549" Comment="Резерв" />
+        <Field Name="DI_6_13" Type="BOOL" UUID="083779D6416D6BCEC7B0229F57E34309" Comment="Кран 6Б Закрыт" />
+        <Field Name="DI_6_14" Type="BOOL" UUID="5475DB7742FD0D9C5A04C893B404CE48" Comment="Кран 6Б Открыт" />
+        <Field Name="DI_6_15" Type="BOOL" UUID="978B1B7C4919DA80CE80169C61441375" Comment="Кран 6Б Контроль цепи ИМ" />
+        <Field Name="DI_6_16" Type="BOOL" UUID="66AC9D4442D9BA81C49CE6B0C3A2C9B9" Comment="Кран 6Б Контроль цепи ВК" />
+    </Fields>
+</Type>

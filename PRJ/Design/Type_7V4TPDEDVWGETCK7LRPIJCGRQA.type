@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_A5_APS" Kind="Struct" UUID="6BCED0F542F395F35A5AA3A8724CF8FD">
+    <Fields>
+        <Field Name="kr6BR_OFF" Type="BOOL" UUID="9C809D0B460818B7D87FEEBFC090D453" Comment="Кран 6БР Закрыт" />
+        <Field Name="kr6BR_ON" Type="BOOL" UUID="1C675E784FB7D28C4995B9900C2FF224" Comment="Кран 6БР Открыт" />
+        <Field Name="kr6BR_IM" Type="BOOL" UUID="F6B6EC9B46359DE9EA257592AE38063C" Comment="Кран 6БР Контроль цепи ИМ - неисправность" />
+        <Field Name="kr6BR_VK" Type="BOOL" UUID="11937B3A4A4FAF85488189A0B59F4B36" Comment="Кран 6БР Контроль цепи ВК - неисправность" />
+        <Field Name="krA_OFF" Type="BOOL" UUID="9F3B399440F4A2A5812A1BAA1ED66A4C" Comment="Кран А Закрыт" />
+        <Field Name="krA_ON" Type="BOOL" UUID="6C93508243E47630641C9BBC4D3D0CA9" Comment="Кран А Открыт" />
+        <Field Name="krA_IM" Type="BOOL" UUID="3CDEC4E24BD6971D79DE028B1E6BD595" Comment="Кран А Контроль цепи ИМ - неисправность" />
+        <Field Name="krA_VK" Type="BOOL" UUID="9EF71AF34D8C664254221F94DE931B25" Comment="Кран А Контроль цепи ВК - неисправность" />
+        <Field Name="krC_OFF" Type="BOOL" UUID="05AAFA0D4C2BD7E34360148EB8B29DFD" Comment="Кран С Закрыт" />
+        <Field Name="krC_ON" Type="BOOL" UUID="C5D172024862FA168B4EC5A5BEA0461A" Comment="Кран С Открыт" />
+        <Field Name="krC_IM" Type="BOOL" UUID="F0A80DB3487BCC6B813EE4AC30FC8F5F" Comment="Кран С Контроль цепи ИМ - неисправность" />
+        <Field Name="krC_VK" Type="BOOL" UUID="CCF48E264AF33461060718BBA8332D2C" Comment="Кран С Контроль цепи ВК - неисправность" />
+        <Field Name="kr6_9_OFF" Type="BOOL" UUID="F2A5EB234A66A67671061A8815BCB0EA" Comment="Кран 6-9 Закрыт" />
+        <Field Name="kr6_9_ON" Type="BOOL" UUID="74F56EDC430343C12AF5D580288D7C2D" Comment="Кран 6-9 Открыт" />
+        <Field Name="kr6_9_IM" Type="BOOL" UUID="D50D77084DD6433E44D479BCE62E3A33" Comment="Кран 6-9 Контроль цепи ИМ - неисправность" />
+        <Field Name="kr6_9_VK" Type="BOOL" UUID="47F4AB3543FC50D2A409A6A25DB57B13" Comment="Кран 6-9 Контроль цепи ВК - неисправность" />
+    </Fields>
+</Type>

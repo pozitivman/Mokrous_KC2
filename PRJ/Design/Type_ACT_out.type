@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="ACT_Out" Kind="Struct" UUID="EF06966C4B92B5BFAD5680A4E3E4A6A7">
+    <Fields>
+        <Field Name="outon" Type="BYTE" UUID="F667F7D94948573E99A575B79FB68CB1" Comment="Управляющая команда &apos;включить/открыть&apos; на механизм" />
+        <Field Name="outoff" Type="BYTE" UUID="D30A2C6D47150544B19A3FB86E6EF771" Comment="Управляющая команда &apos;отключить/закрыть&apos; на механизм" />
+        <Field Name="dummy" Type="BYTE" UUID="4FDB28FA463D4C3F8FD03DB6206E7A97" Comment="Резерв" />
+        <Field Name="dummy2" Type="BYTE" UUID="DC1021DF4ADB119F31CDB5BB62704656" Comment="Резерв" />
+    </Fields>
+</Type>

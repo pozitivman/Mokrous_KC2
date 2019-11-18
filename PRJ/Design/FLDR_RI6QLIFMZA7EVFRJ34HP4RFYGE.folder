@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Test_speed">
+    <Items>
+        <Item Name="AT_BGN3Z7BZHTYERHTSIFH4T2YJJ4.int" />
+        <Item Name="AT_TOWSVF2R26NUBKRLQAZL6KBW34.int" />
+        <Item Name="AT_UAEDGNFAGXAELFECKFCS2GWHAI.int" />
+        <Item Name="AT_VCEVI546333E5F55DUGCSMSH2Y.int" />
+    </Items>
+</Folder>

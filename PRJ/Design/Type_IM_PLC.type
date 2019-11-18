@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="IM_PLC" Kind="Struct" Comment="Управление ИМ из PLC и их АПС" UUID="C1697AFE4AF951CFD2394E8E3622C1B2">
+    <Fields>
+        <Field Name="aOn" Type="BOOL" UUID="8A559E9B458AA54B0CA181A6569A1065" Comment="Включение" />
+        <Field Name="aOff" Type="BOOL" UUID="6E974714492EAFA66AECD88FFA011996" Comment="Отключение" />
+        <Field Name="APS" Type="948723BC4D336C2DD9B225A33B949D39" UUID="EA186CB84E91B6EC19C192AE056DA4EF" Comment="Список АПС" />
+    </Fields>
+</Type>

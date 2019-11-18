@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_DI_A2_raw" Kind="Struct" UUID="85E4B5EC4AFA9C7F8638E5AE9DBB3A9C">
+    <Fields>
+        <Field Name="DI_9_1" Type="BOOL" UUID="4A5F09B1426542F1F8B8BC8786633E0D" Comment="Сигнализация исправности питания преобразователей" />
+        <Field Name="DI_9_2" Type="BOOL" UUID="AF87DE6A467B557CF244AB8EFF723D89" Comment="Резерв" />
+        <Field Name="DI_9_3" Type="BOOL" UUID="CB7FCD1447010136C23BC78C577640DC" Comment="Резерв" />
+        <Field Name="DI_9_4" Type="BOOL" UUID="988D6DD646B6C643DE4384B79A8C0DE7" Comment="Резерв" />
+        <Field Name="DI_9_5" Type="BOOL" UUID="C4B110A84B64089373593B9EF1C35BD7" Comment="Резерв" />
+        <Field Name="DI_9_6" Type="BOOL" UUID="6DD6ED20447D62B9214FBBBFE09E0CAF" Comment="Резерв" />
+        <Field Name="DI_9_7" Type="BOOL" UUID="9C69BDDC4304CA59B446029E6E9A0DF6" Comment="Давление газа на выходном шлейфе" />
+        <Field Name="DI_9_8" Type="BOOL" UUID="41AB70C346CE34F841511885ED683361" Comment="Отсутствие напряжения в схеме аварийно-вытяжных вентиляторов группы 3" />
+        <Field Name="DI_9_9" Type="BOOL" UUID="D832BC3E442AD2377AE93CA30C61E3BC" Comment="Отсутствие напряжения в схеме приточного вентилятора №5" />
+        <Field Name="DI_9_10" Type="BOOL" UUID="FC8932994FA0C00A1841008C0C0B7A12" Comment="Отсутствие напряжения в схеме приточного вентилятора №6" />
+        <Field Name="DI_9_11" Type="BOOL" UUID="5865B4BE4323A86FDB09B8AC3AB65326" Comment="Ввод №1 включен" />
+        <Field Name="DI_9_12" Type="BOOL" UUID="D726B0344602F7DECF96AA852D410C0C" Comment="Ввод №1 отлючен" />
+        <Field Name="DI_9_13" Type="BOOL" UUID="681849AA4CC304CD99564EB7D997584F" Comment="Ввод №2 включен" />
+        <Field Name="DI_9_14" Type="BOOL" UUID="1CD92C0E47EA1EE1A49191AF880F6109" Comment="Ввод №2 отлючен" />
+        <Field Name="DI_9_15" Type="BOOL" UUID="A2C2F37A49AB3743943F558F9A6B366F" Comment="Секционный выключатель включен" />
+        <Field Name="DI_9_16" Type="BOOL" UUID="FAB20750449920381B3D5DB824F8B3FE" Comment="Секционный выключатель отлючен" />
+        <Field Name="DI_10_1" Type="BOOL" UUID="544A3CCB47935FE63525B382BEB1BFE7" Comment="АПК открыт" />
+        <Field Name="DI_10_2" Type="BOOL" UUID="2E0AC5C84F63730C08C1159E9970563F" Comment="АПК закрыт" />
+        <Field Name="DI_10_3" Type="BOOL" UUID="905D4670450EC34FAF05A89E1FA5557B" Comment="АПК обогрев включен" />
+        <Field Name="DI_10_4" Type="BOOL" UUID="FDCAE9FD45E71AC266A75A975EB6A8F0" Comment="11ГД-100 №1 в работе" />
+        <Field Name="DI_10_5" Type="BOOL" UUID="58CDE06A4652CE834FCA429FAD3AB085" Comment="Авария 11ГД-100 №1" />
+        <Field Name="DI_10_6" Type="BOOL" UUID="6046B52C4FEDA089833BD6B62593E6D6" Comment="11ГД-100 №2 в работе" />
+        <Field Name="DI_10_7" Type="BOOL" UUID="858B3105437DD1B3D24E1C9F1520421D" Comment="Авария 11ГД-100 №2" />
+        <Field Name="DI_10_8" Type="BOOL" UUID="F6A130F54F47687A4119FFACBCB3CBBD" Comment="АС-804 неисправна" />
+        <Field Name="DI_10_9" Type="BOOL" UUID="D09411434D346CAD60985391A5622916" Comment="АС-804 в работе" />
+        <Field Name="DI_10_10" Type="BOOL" UUID="165FB45F4BD067D6681A96B9DDB6496A" Comment="АС-804 в резерве" />
+        <Field Name="DI_10_11" Type="BOOL" UUID="2A965E8D40F71141F81757955A4D954B" Comment="Авария теплогенератора №2" />
+        <Field Name="DI_10_12" Type="BOOL" UUID="562F086749D6AB435ECFAC8561EAB828" Comment="Насос РЗ-30 ГСМ включен" />
+        <Field Name="DI_10_13" Type="BOOL" UUID="815A24C54466AFA3E8AAD883BDC3E11C" Comment="КВР насоса РЗ-30 ГСМ в положении автомат" />
+        <Field Name="DI_10_14" Type="BOOL" UUID="D583C697478F09139372E49C2A7E8CB2" Comment="Резерв" />
+        <Field Name="DI_10_15" Type="BOOL" UUID="EF45C91C4EBB2480621733ABD040EBDD" Comment="Резерв" />
+        <Field Name="DI_10_16" Type="BOOL" UUID="09517BF74D761A74807EC78FC52D1628" Comment="Контроль 24 В ТС" />
+    </Fields>
+</Type>

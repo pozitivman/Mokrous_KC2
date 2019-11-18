@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="ACT_Cfg" Kind="Struct" UUID="6D63867E4EAEA6E77997CCA9428AE797">
+    <Fields>
+        <Field Name="tmrCmdSP" Type="LREAL" UUID="5FC7B8EC4CF918BB986C3680B3274107" Comment="таймер подачи команды" />
+        <Field Name="tmrPressSP" Type="LREAL" UUID="802040604BCDBF85174F8D940702E9BA" Comment="таймер дожима" />
+    </Fields>
+</Type>

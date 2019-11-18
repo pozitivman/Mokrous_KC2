@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="support_ACT" Kind="Struct" UUID="0209C2A3445A6A14C63266A0E52B929B">
+    <Fields>
+        <Field Name="Config" Type="6D63867E4EAEA6E77997CCA9428AE797" UUID="C128AC9F4B6FC9CAE98F99929AB61438" Comment="конфигурационные параметры" />
+        <Field Name="Control" Type="1E808FD44FD17288C2202DB8C35DB4DC" UUID="9A0D205548B279A70FCE5AAC91CD9AAD" Comment="управляющие команды" />
+        <Field Name="Ins" Type="5F7A8D2F4FF995FFA39AF192D8894387" UUID="D36203864CAC129BA092BABA6B5C5CCA" Comment="входные сигналы" />
+        <Field Name="Outs" Type="EF06966C4B92B5BFAD5680A4E3E4A6A7" UUID="42F147E24EE30E8BA4D0AA8D3994A7A2" Comment="выходные команды" />
+        <Field Name="Oper" Type="53217BE648723612F5836C83CCD229E0" UUID="B5837346411737AA71AEF5A2F846CB96" Comment="параметры для интерфейса" />
+        <Field Name="Debug" Type="EFD6591C4A753B7C2DD7DD8FB0D790F3" UUID="72308134420C94E25CC2CFB61EBFE43D" Comment="отладочные параметры" />
+    </Fields>
+</Type>

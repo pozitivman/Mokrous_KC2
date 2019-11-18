@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="dPID" Kind="Struct" UUID="15A3BD1144F8631CB7A9CF9E182D60FB">
+    <Fields>
+        <Field Name="loop_type" Type="INT" UUID="4EEB935141A9C1F265F7B79FD4B90C00" />
+        <Field Name="loop_num" Type="INT" UUID="EC415A094FFE071A0810F89F85CCBF41" />
+        <Field Name="loop_priority" Type="INT" UUID="5630D5584862B4AED3998DB1372B3474" />
+        <Field Name="loop_enable" Type="BOOL" UUID="448ADD734DF2076B996996B78E932C4F" />
+        <Field Name="loop_valid" Type="BOOL" UUID="F45E9E6C49733062FD03D89B6D0BF8DC" />
+        <Field Name="rem_loc" Type="BOOL" UUID="8E65D47B40D5AA643940F5B3FB5DAE85" />
+        <Field Name="auto_man" Type="BOOL" UUID="FE99B4EE418CB285AC1ED3BEB1096CDD" />
+        <Field Name="loop_direct" Type="BOOL" UUID="46B96040492030150406E287D5089A4F" />
+        <Field Name="delt_t" Type="REAL" UUID="7982EB7F4482A52074495BA089514A05" />
+        <Field Name="SP_ramp_rate" Type="REAL" UUID="A7E6593D45C341CC5E29E9B6C22A6DFB" />
+        <Field Name="DB" Type="REAL" UUID="916CD52F498BB70B33FFE6BF6D8E3499" />
+        <Field Name="SP_gain" Type="REAL" UUID="973C2426478F93D1DA1B8784F639C1AD" />
+        <Field Name="SP_bias" Type="REAL" UUID="D96DA5484DE6E583D43C18AA5B8DC9ED" />
+        <Field Name="PV_gain" Type="REAL" UUID="D43D64004B82E5D93BF884B56BCA7593" />
+        <Field Name="PV_bias" Type="REAL" UUID="04E00A2E4864F2B52BE1EF8931F3A9A4" />
+        <Field Name="SP_LowClamp" Type="REAL" UUID="98B3FF03476C93AEF5FA9F9DAB543ECF" />
+        <Field Name="SP_HighClamp" Type="REAL" UUID="E9737BCF4D54BD2B414325B7B97A1C8C" />
+        <Field Name="KP" Type="REAL" UUID="5AB0B88C4F9742611A2B92BD9BB8CDD7" />
+        <Field Name="KI" Type="REAL" UUID="D8B7578F4D83166E0D446494EF4AF0AE" />
+        <Field Name="non_conv_D_part_enable" Type="BOOL" UUID="D2E51B8A4C746B1AE9349884A8FA7EEC" />
+        <Field Name="D_part_clamp" Type="REAL" UUID="1B74747C439876AE6AE6FE9D03AD3489" />
+        <Field Name="dMax_value" Type="REAL" UUID="BA0CF8D24DA4CEA7C13BADB8F3080A3A" />
+        <Field Name="dMin_value" Type="REAL" UUID="AF5843DF40E129334F556F9646DFC2C5" />
+        <Field Name="Reset_D_max_value" Type="BOOL" UUID="7924A85342D96FA172099AABA8878418" />
+        <Field Name="KD" Type="REAL" UUID="0C8FFD7B4FB6E64770963B841EF68D11" />
+        <Field Name="PV_failure" Type="BOOL" UUID="D7D710324E0F7A804687CB9D0AA0DA5C" />
+        <Field Name="SwitchFlag" Type="BOOL" UUID="AF90C86745E79E11A576A08608C86AC9" />
+        <Field Name="PV" Type="REAL" UUID="61A42002494E6D1EB807F5BC3536DE36" />
+        <Field Name="real_PV" Type="REAL" UUID="DE8E922C4FC491DB460C49B102AB05E2" />
+        <Field Name="real_SP" Type="REAL" UUID="439D196547B241109F509AB948766604" />
+        <Field Name="local_SP" Type="REAL" UUID="ED29B467492AD23A7D8C19AA4E9E94C6" />
+        <Field Name="remote_SP" Type="REAL" UUID="983499AA4C1D326C5C539E8DC9B0A70B" />
+        <Field Name="limit_SP" Type="REAL" UUID="327083CB4CCB5100DCAF5993CAC9B166" />
+        <Field Name="act_SP" Type="REAL" UUID="85900D124A25FFF395545BABD8409C9E" />
+        <Field Name="active" Type="BOOL" UUID="048B639744BB73202FCB439F91103A8E" />
+        <Field Name="cur_act" Type="BOOL" UUID="81A092434BA8496FCCE8D68E4687B4C1" />
+        <Field Name="goal_dir" Type="BOOL" UUID="700E092D4A6BF47186D092A43728C509" />
+        <Field Name="limit_goal" Type="BOOL" UUID="EDF7554849226CB28BA773A888F292E6" />
+        <Field Name="err" Type="REAL" UUID="037336734E26E47B9A8BCCBC6BE1F27E" />
+        <Field Name="P_part" Type="REAL" UUID="4F97094640DE482E485BE49C7134890E" />
+        <Field Name="dI_part" Type="REAL" UUID="160EF5854B05BB62C89B31B8CF909836" />
+        <Field Name="D_part" Type="REAL" UUID="3D24FE88467E35C253D68585B65DC9C8" />
+        <Field Name="PplusD_part" Type="REAL" UUID="85534D9E444B23CE8E608897D0DBFB58" />
+        <Field Name="m_mGOV" Type="REAL" UUID="30334BB941858C0629A86B8D9C27C58F" />
+        <Field Name="derivative_threshold" Type="REAL" UUID="93140BA348636CC3D852C095C2F10F56" />
+        <Field Name="d_PV" Type="REAL" UUID="DA918C3342BE285BB067E798373B961D" />
+    </Fields>
+</Type>

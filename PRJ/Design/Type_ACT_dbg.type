@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="ACT_Dbg" Kind="Struct" UUID="EFD6591C4A753B7C2DD7DD8FB0D790F3">
+    <Fields>
+        <Field Name="rev" Type="DWORD" UUID="523E6FD54252C6F48B9CD8A0A9B58654" Comment="дата разработки ревизии блока (число, месяц, год)" />
+        <Field Name="tmrCmdon" Type="LREAL" UUID="95DD922A4665D89F245954BFD333F723" Comment="Таймер команды &apos;включить&apos;: текущее значение" />
+        <Field Name="tmrCmdoff" Type="LREAL" UUID="532D90284AC1370B647B91939E2DF5A1" Comment="Таймер команды &apos;выключить&apos;: текущее значение" />
+        <Field Name="tmrPresson" Type="LREAL" UUID="F94992664E922629E17EDF9E9EBFA97B" Comment="Таймер дожима &apos;включить&apos;: текущее значение" />
+        <Field Name="tmrPressoff" Type="LREAL" UUID="4F340B7B4CEF0061BC1303AFB42B4AF8" Comment="Таймер дожима &apos;выключить&apos;: текущее значение" />
+        <Field Name="spDelayncon" Type="LREAL" UUID="22BE4D054887EA320E1A798B508E5B0D" Comment="Уставка таймера задержки сигнала &apos;не открыт&apos;" />
+        <Field Name="spDelayncoff" Type="LREAL" UUID="CEF957054BFEDBA5BB3880BC3E846A7C" Comment="Уставка таймера задержки сигнала &apos;не закрыт&apos;" />
+        <Field Name="tmrDelayncon" Type="LREAL" UUID="7CE3FB2D49F80561F49E519413549264" Comment="Таймер задержки сигнала &apos;не открыт&apos;" />
+        <Field Name="tmrDelayncoff" Type="LREAL" UUID="5DF45A6D42A69C38CEFB07946CC4361F" Comment="Таймер задержки сигнала &apos;не закрыт&apos;" />
+        <Field Name="cmdon" Type="BYTE" UUID="7B8C5C5E43B8EA9861027CB60D88AF2F" Comment="Внутренняя команда &apos;включить/открыть&apos;" />
+        <Field Name="cmdoff" Type="BYTE" UUID="5CAF6BE948E310D1242DE1BC90E6DD29" Comment="Внутренняя команда &apos;выключить/закрыть&apos;" />
+        <Field Name="ONScmdon" Type="BYTE" UUID="5DD1E7AE4166F967CF25D1981A0BEBCF" Comment="Команда оператора &apos;включить&apos;-на один цикл" />
+        <Field Name="ONScmdoff" Type="BYTE" UUID="8F79C4FC45129E9BD806DE80E256B1B2" Comment="Команда оператора &apos;выключить&apos;-на один цикл" />
+        <Field Name="ONSon" Type="BYTE" UUID="AAACA97F486F5D2054BC8C90CB2D1DE9" Comment="Включен (открыт)-на один цикл" />
+        <Field Name="ONSoff" Type="BYTE" UUID="A83EB9C749722FADFB35C9843F16EDDF" Comment="Выключен (открыт)-на один цикл" />
+        <Field Name="ONSrep" Type="BYTE" UUID="686055E8464E72A577603F885DCE4847" Comment="Повторить последнюю команду-на один цикл" />
+        <Field Name="tmp" Type="BYTE" UUID="98032FB240110A38E290D7ACDC997456" Comment="Вспомогательная переменная для ONScmdon" />
+        <Field Name="tmp2" Type="BYTE" UUID="D1017C5643F8024A41272A886C2C6039" Comment="Вспомогательная переменная для ONSon" />
+        <Field Name="tmp3" Type="BYTE" UUID="AF8FB49343098BEF281A239A408A36E0" Comment="Вспомогательная переменная для ONScmdoff" />
+        <Field Name="tmp4" Type="BYTE" UUID="4E58906D406AC8BC52322E894F62BC58" Comment="Вспомогательная переменная для ONSoff" />
+        <Field Name="tmp5" Type="BYTE" UUID="187398BC4C7E06D5227A9FA46B2DD6B2" Comment="Вспомогательная переменная для ONSrep" />
+        <Field Name="storeCmdon" Type="BYTE" UUID="04D883F4483A0B71E445BBAEB8732E13" Comment="Подавалась команда оператора &apos;включить&apos;-запомнить" />
+        <Field Name="storeCmdoff" Type="BYTE" UUID="E046312940C857E2114086BE451D28CD" Comment="Подавалась команда оператора &apos;выключить&apos;-запомнить" />
+        <Field Name="storeOn" Type="BYTE" UUID="0FF2F10545ABE32C7A4D278CAD23EC22" Comment="Срабатывал концевик положения &apos;включен&apos;-запомнить" />
+        <Field Name="storeOff" Type="BYTE" UUID="6B4FB4D144E9613B6E8731B8CD9FB41E" Comment="Срабатывал концевик положения &apos;выключен&apos;-запомнить" />
+        <Field Name="storeNon" Type="BYTE" UUID="B928D2544460054293C69B969F60B7C1" Comment="Условия формирования флага &apos;не открыт&apos;-запомнить" />
+        <Field Name="storeNoff" Type="BYTE" UUID="03399E1E463C4AB28EE395B807BB24D6" Comment="Условия формирования флага &apos;не закрыт&apos;-запомнить" />
+        <Field Name="storeRep" Type="BYTE" UUID="2326BC7A45CD0A021B427384457AFF96" Comment="Условия формирования флага &apos;повтор последней команды&apos;-запомнить" />
+        <Field Name="prevOuton" Type="BYTE" UUID="03B94E7848CC387CE3EBA4BC7CEB3554" Comment="Состояние команды &apos;включить/открыть&apos; на предыдущем цикле" />
+        <Field Name="prevOutoff" Type="BYTE" UUID="968731204B11C9A24892F8A74F2006D3" Comment="Состояние команды &apos;выключить/закрыть&apos; на предыдущем цикле" />
+        <Field Name="chngOuton" Type="BYTE" UUID="84E01BFB45FAED8C4DFBAE91DCD69BE3" Comment="Задний фронт команды &apos;включить/открыть&apos;" />
+        <Field Name="chngOutoff" Type="BYTE" UUID="7086F09C41B4123CA8D2D9BAD4CCBE79" Comment="Задний фронт команды &apos;выключить/закрыть&apos;" />
+        <Field Name="fstExe" Type="BYTE" UUID="A6CACC7C4544D1DD6468F1B219B08E15" Comment="При первом выполнении равен нулю" />
+        <Field Name="starter" Type="BYTE" UUID="672B0B434F62B49954267CBF89A35477" Comment="Классический пускатель (справедливо для механизма типа 12)" />
+    </Fields>
+</Type>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="funct" Kind="Struct" UUID="298F1732415F6FF903FB968EFC51D878">
+    <Fields>
+        <Field Name="Nel" Type="INT" UUID="92E7C34849F1042535298E976DC16BC5" />
+        <Field Name="Fx" Type="REAL" UUID="E08536CE408DA893DE9EA1A0828662EB" ArraySize="12" />
+        <Field Name="x" Type="REAL" UUID="6CDA66244C227DB45BE14A898205DC59" ArraySize="12" />
+    </Fields>
+</Type>

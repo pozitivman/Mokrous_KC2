@@ -19,3 +19,6 @@ Runtime/
 
 # ignore all files in the PATH/ directory
 PATH/
+
+# ignore all files in the PRU/ directory
+PRU/

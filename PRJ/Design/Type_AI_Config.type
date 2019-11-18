@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="AI_Config" Kind="Struct" UUID="C4DCAECF4EF1FAE3DE160B870755A027">
+    <Fields>
+        <Field Name="Span" Type="LREAL" UUID="4517D8014BA5F1A31DC490A2FCD8E76C" Comment="диапазон датчика в EU" />
+        <Field Name="Offset" Type="LREAL" UUID="625B09604DB57060C6C6D9827263FB2B" Comment="смещение датчика в EU" />
+        <Field Name="gain" Type="LREAL" UUID="E8C5F5114E8FDA42A3894991253BBACF" Comment="диапазон калибровки канала" />
+        <Field Name="bias" Type="LREAL" UUID="E3A7F5EE4A6A89CBB7AB0EA58E189C69" Comment="смещение калибровки канала" />
+        <Field Name="ROC" Type="LREAL" UUID="8FDDC5F142B3E3FD3E64F296CC14CF38" Comment="скорость изменения сигнала" />
+        <Field Name="Tf" Type="LREAL" UUID="DAE597984FC2AFA050E92B89986AE362" Comment="постоянная фильтра &gt; 0.001" />
+        <Field Name="Manual_Target" Type="LREAL" UUID="DAE8C99E4AC2A2FFD926D99C5A1C4101" Comment="задание для выхода блока в ручном режиме" />
+        <Field Name="Manual_Rate" Type="LREAL" UUID="1C0121064E4AD06F66B3878676614D38" Comment="скорость изменения выхода блока в ручном режиме" />
+        <Field Name="min_fault_sensor_Eu" Type="LREAL" UUID="8392C9FF4B63129DB1C5A5A5BF293B29" Comment="если сигнал с датчика Status.Input_sensor_eu меньше этого значения, то отказ канала [5]" />
+        <Field Name="max_fault_sensor_Eu" Type="LREAL" UUID="0B3A58DE4B6F9A69D574C1A5202FA3D9" Comment="если сигнал с датчика Status.Input_sensor_eu больше этого значения, то отказ канала [7]" />
+        <Field Name="recovery_time" Type="LREAL" UUID="1568C2D746CAB3E44D7DD794373B2957" Comment="время восстановления канала после исчезновения неисправности" />
+        <Field Name="repair_time" Type="LREAL" UUID="DFEE44C24DDA9848DAE5728113B9F98E" Comment="время через которое канал будет автоматически выведен из ручного режима" />
+        <Field Name="min_ADC" Type="LREAL" UUID="A875986F466C964AEDE6E09BAC1A420F" Comment="минимальное значение в единицах АЦП для обрабатываемого канала" />
+        <Field Name="max_ADC" Type="LREAL" UUID="EEEBBC024094CD578E5CC690A42B31BA" Comment="максимальное значение в единицах АЦП для обрабатываемого канала" />
+        <Field Name="Eu_sensor" Type="INT" UUID="DD0C2FD94FDC5B075E8EF3B0976396FA" Comment="номер единицы измерения датчика из initEU" />
+        <Field Name="Eu_PV" Type="INT" UUID="FE78DF8A49E2C0290692989A746BB472" Comment="номер единицы измерения параметра из initEU" />
+        <Field Name="Eu_user" Type="INT" UUID="D14C10A6499566BA5E16118672FFEB92" Comment="номер единицы измерения пользовательского параметра из initEU" />
+        <Field Name="TypePolynom" Type="INT" UUID="D512793C40FE66F0B75F7385CA7266F9" Comment="тип полинома при обработке датчика температуры" />
+        <Field Name="Manual_Enable" Type="BYTE" UUID="FBCDD0414B10DB6493C7C8B6EDD7A350" Comment="разрешение работы блока в ручном режиме" />
+        <Field Name="Manual_Auto" Type="BYTE" UUID="D218EFEB43A6B44F29A49093FD91251D" Comment="команда перевода блока в ручной режим" />
+        <Field Name="derivative_Enable" Type="BYTE" UUID="ED41C85B410EF42D53B165A3F5065F93" Comment="включение вычисления производной по 12-ти точкам" />
+        <Field Name="ROC_Enable" Type="BYTE" UUID="FA5F1E584485BFA64539D184086F7725" Comment="включить контроль за максимальным и минимальным значениями ROC" />
+        <Field Name="reset" Type="BYTE" UUID="8962095743492D1AA5ED9D8540DAE4AA" Comment="команда сброса блока" />
+        <Field Name="Dummy" Type="BYTE" UUID="F179480A40ED28CE5CA45E92B3EEB8CD" Comment="резерв" />
+    </Fields>
+</Type>

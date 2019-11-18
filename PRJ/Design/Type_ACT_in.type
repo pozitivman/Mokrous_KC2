@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="ACT_In" Kind="Struct" UUID="5F7A8D2F4FF995FFA39AF192D8894387">
+    <Fields>
+        <Field Name="on" Type="BYTE" UUID="01C69AF94D51500C37AC7EA94CC76521" Comment="включен (открыт)" />
+        <Field Name="off" Type="BYTE" UUID="3646458945E05F268E776294D710283E" Comment="выключен (закрыт)" />
+        <Field Name="con" Type="BYTE" UUID="160A3CC94C2AFB9DB43B649B3B269A96" Comment="контроль цепи включения (открытия)" />
+        <Field Name="coff" Type="BYTE" UUID="243D85F2475A066F95F984A4FA4E52A3" Comment="контроль цепи выключения (закрытия)" />
+    </Fields>
+</Type>

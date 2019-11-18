@@ -1,0 +1,1512 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="CF4AA41E4AE482DEB91282A2F037FF9E" Name="main_SHKU17_A1" Period="100" PutDataAtEndOfCycle="false">
+    <Variables>
+        <Variable UUID="8AE8D56F4A5BD1C3C662A485821DD514" Name="clock_MAIN_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="225274604CDB9612C680E7BD85812BDD" Name="clock_MAIN_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="765971E04892586B6C2A9EBF1371B63D" Name="delay" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="A5BCF4994E0884236951EA86CACE6FF0" Name="AI_fb" Type="block_AI" TypeUUID="F2DF7F234C9EC1DE93442C8A08CF09BB" Usage="internal" />
+        <Variable UUID="19FC3D954D3C699771E0559EAE60114D" Name="DI_fb" Type="block_DI" TypeUUID="996FFC01410FAAA19E620CB4DD7B4D05" Usage="internal" />
+        <Variable UUID="1BFD23A943F7A242E42F7CB6615710E5" Name="APS_fb" Type="block_APS" TypeUUID="97011E5B4333944A336F59817F2BB612" Usage="internal" />
+        <Variable UUID="AAE37AB0401F0D767F1D599C4B4C52C1" Name="Arch_fb" Type="Archive" TypeUUID="FC3659584F7E9A1B032F2EB588B15E81" Usage="internal" />
+        <Variable UUID="A84911F14A55AF36F3B094943DBA8C2B" Name="ALG_fb" Type="block_ALG" TypeUUID="C8FD4D8B4E6B016D906A7BB168892D92" Usage="internal" />
+        <Variable UUID="7891091F4D51F49091BA4EB93C6232A7" Name="PRU_fb" Type="block_PRU" TypeUUID="1AD13A9D46DF643D1E27DF99C8A631B2" Usage="internal" />
+        <Variable UUID="DACD290045533143D5532B8FA00C18A8" Name="Link_fb" Type="block_Link" TypeUUID="0DEB5E1642B7CA983E2A3DB75DD05F50" Usage="internal" />
+        <Variable UUID="0326BF8A49A6DAD422CFDC94346B3DC6" Name="AO_fb" Type="block_AO" TypeUUID="1A349BF849FA7DC6FBE3C2B4FE3BC96F" Usage="internal" />
+        <Variable UUID="A763B3B24271CA368976EFAB5E0B7A53" Name="pause_link" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[clock_MAIN_cur := CLOCK();
+IF FirstScan_MAIN THEN clock_MAIN_prev := clock_MAIN_cur; END_IF;
+cycleTime_MAIN := clock_MAIN_cur - clock_MAIN_prev;
+clock_MAIN_prev := clock_MAIN_cur;
+
+// Исправность SHKU17 (1 Гц)
+delay := delay + cycleTime_MAIN;
+//IF delay > LREAL#1 THEN CTU1_DO_HMI.PLC_OK := NOT CTU1_DO_HMI.PLC_OK; delay := LREAL#0; END_IF;
+
+
+//Проверка связи с ПРУ
+if not Global_PRU.Check_link_bit then
+	pause_link := pause_link + cycleTime_MAIN;
+else
+	pause_link := lreal#0.0;
+end_if;
+if pause_link >= lreal#5.0 then
+	PRU_Link := word#2;
+else
+	PRU_Link := word#0;	
+end_if;
+Global_PRU.Check_link_bit := false;  
+
+
+IMIT := Global_BTN.IMIT;
+Deblock := Global_BTN.Deblock;
+Kvitir  := Global_BTN.Kvitir OR Kvitir_ALL_DI;
+
+AI_fb();
+DI_fb();
+
+ALG_fb();
+
+//IM_fb();
+
+APS_fb();
+
+//DO_fb();
+AO_fb();
+
+// Данные для архива
+//Arch_fb();
+
+// Данные для ПРУ
+//PRU_fb();
+
+// Данные для соседних узлов
+//Link_fb();
+
+IF FirstScan_MAIN THEN FirstScan_MAIN := BOOL#0; END_IF;
+clock_MAIN_cur := CLOCK();
+cycleTime_MAIN_sys := clock_MAIN_cur - clock_MAIN_prev;]]></ST>
+    <DataTypes>
+        <Struct UUID="C4DCAECF4EF1FAE3DE160B870755A027" Name="AI_Config">
+            <Field UUID="4517D8014BA5F1A31DC490A2FCD8E76C" Name="Span" Comment="диапазон датчика в EU" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="625B09604DB57060C6C6D9827263FB2B" Name="Offset" Comment="смещение датчика в EU" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="E8C5F5114E8FDA42A3894991253BBACF" Name="gain" Comment="диапазон калибровки канала" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="E3A7F5EE4A6A89CBB7AB0EA58E189C69" Name="bias" Comment="смещение калибровки канала" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="8FDDC5F142B3E3FD3E64F296CC14CF38" Name="ROC" Comment="скорость изменения сигнала" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="DAE597984FC2AFA050E92B89986AE362" Name="Tf" Comment="постоянная фильтра &gt; 0.001" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="DAE8C99E4AC2A2FFD926D99C5A1C4101" Name="Manual_Target" Comment="задание для выхода блока в ручном режиме" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="1C0121064E4AD06F66B3878676614D38" Name="Manual_Rate" Comment="скорость изменения выхода блока в ручном режиме" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="8392C9FF4B63129DB1C5A5A5BF293B29" Name="min_fault_sensor_Eu" Comment="если сигнал с датчика Status.Input_sensor_eu меньше этого значения, то отказ канала [5]" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="0B3A58DE4B6F9A69D574C1A5202FA3D9" Name="max_fault_sensor_Eu" Comment="если сигнал с датчика Status.Input_sensor_eu больше этого значения, то отказ канала [7]" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="1568C2D746CAB3E44D7DD794373B2957" Name="recovery_time" Comment="время восстановления канала после исчезновения неисправности" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="DFEE44C24DDA9848DAE5728113B9F98E" Name="repair_time" Comment="время через которое канал будет автоматически выведен из ручного режима" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="A875986F466C964AEDE6E09BAC1A420F" Name="min_ADC" Comment="минимальное значение в единицах АЦП для обрабатываемого канала" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="EEEBBC024094CD578E5CC690A42B31BA" Name="max_ADC" Comment="максимальное значение в единицах АЦП для обрабатываемого канала" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="DD0C2FD94FDC5B075E8EF3B0976396FA" Name="Eu_sensor" Comment="номер единицы измерения датчика из initEU" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="FE78DF8A49E2C0290692989A746BB472" Name="Eu_PV" Comment="номер единицы измерения параметра из initEU" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="D14C10A6499566BA5E16118672FFEB92" Name="Eu_user" Comment="номер единицы измерения пользовательского параметра из initEU" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="D512793C40FE66F0B75F7385CA7266F9" Name="TypePolynom" Comment="тип полинома при обработке датчика температуры" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="FBCDD0414B10DB6493C7C8B6EDD7A350" Name="Manual_Enable" Comment="разрешение работы блока в ручном режиме" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="D218EFEB43A6B44F29A49093FD91251D" Name="Manual_Auto" Comment="команда перевода блока в ручной режим" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="ED41C85B410EF42D53B165A3F5065F93" Name="derivative_Enable" Comment="включение вычисления производной по 12-ти точкам" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="FA5F1E584485BFA64539D184086F7725" Name="ROC_Enable" Comment="включить контроль за максимальным и минимальным значениями ROC" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="8962095743492D1AA5ED9D8540DAE4AA" Name="reset" Comment="команда сброса блока" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="F179480A40ED28CE5CA45E92B3EEB8CD" Name="Dummy" Comment="резерв" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+        </Struct>
+        <Struct UUID="EF914658497BE5184FB6DAAEAA080E19" Name="AI_Dbg">
+            <Field UUID="822FEFA14B48E2A770D14CBD34A10B69" Name="rev" Comment="дата разработки ревизии блока (число, месяц, год)" Type="DWORD" TypeUUID="53CAB7E947643F098D755BB9A02688FA" />
+            <Field UUID="71C2F45A4D402F4D0FF69FA766FDF8F5" Name="vData" Comment="EU -&gt; 0..1" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="60F61306485F85381318F39EBF53829C" Name="PrevSpan" Comment="pAI.Config.Span на предыдущем цикле" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="A2907BDE48E1318096C5CFB3C5C09B42" Name="PrevOffset" Comment="pAI.Config.Offset на предыдущем цикле" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="181ADBB442E788AF2FB4B78D1C5E65F7" Name="Gain_user" Comment="gain_user для вычисления PV_user" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="1C52F9D24DD2BEFA1A95C7B858900E6B" Name="Bias_user" Comment="bias_user для вычисления PV_user" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="432CB21E49AD1501D72CE0980A7DE140" Name="Reset_time_delay" Comment="время, оставшееся до восстановления канала после ухода отказа" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="D6A533284EAC0A7242D2839B0F19FB77" Name="valueReal" Comment="буфер для Status.Input_sensor_eu, используется для ROC" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Size="4" Array="TRUE" />
+            <Field UUID="CAB98A81424C8807ADF4EEBDB9383DF3" Name="valueFilt" Comment="буфер для фильтр значений отображенных на 0..1, 12=Status.pid" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Size="13" Array="TRUE" />
+            <Field UUID="3582F6594775E1865F09C0873064E1D8" Name="remaining_repain_time" Comment="тоже, что Status.remaining_repair_time, но = Config.repair_time при норм работе" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="0D0C16C242AD7F128F75269F9CA5A24F" Name="Manual_Rate" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="61623D914440D27D1EF888B1287A72AF" Name="Manual_Target" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="A505C15042B28798A999A9BECB71D669" Name="PrevTypePolynom" Comment="pAI.Config.TypePolynom на предыдущем цикле" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="31868FF34C857A6C116855992391F194" Name="Eu_sensor" Comment="pAI.Config.Eu_sensor на предыдущем цикле" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="85DAFB944821BD7AFB02DEB8E75292D5" Name="Eu_PV" Comment="pAI.Config.EU_PV на предыдущем цикле" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="724505764CC94736CC58F99A3FBF7604" Name="Eu_user" Comment="pAI.Config.EU_user на предыдущем цикле" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="4B84FCA94175AD0A050DCB99EE1DB029" Name="ROC_Enable" Comment="pAI.Config.ROC_Enable на предыдущем цикле" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="E07EC107421E6F67D91AAB98ADFA3AEE" Name="PrevManual" Comment="значение Manual на предыдущем цикле" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="DF257C1B462BDED976767283D26EFBAD" Name="Manual" Comment="временная переменная для Config.Manual_Auto" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="1BE9B69C4235DB8F7EA3D8B1C3161674" Name="fault_code_0" Comment="fault_code[0] на предыдущем цикле" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="331BCB524DCDAB04DD3E44B698A9DDCC" Name="derivative_Enable" Comment="Config.derivative_Enable на предыдущем цикле" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="ECA59B6947B07BFF5AEEBE8C8F3C8C39" Name="Dummy" Comment="резерв" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" Size="3" Array="TRUE" />
+        </Struct>
+        <Struct UUID="AC1F8EF44E60D7473D928D81E1F0BA7E" Name="AI_HMI_el">
+            <Field UUID="6DA25EB64457F8BC1B432796A1A66249" Name="PV" Comment="Текущее значение" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" />
+            <Field UUID="E2D09078462D4EE2900331AD762C3383" Name="Flt" Comment="Отказ канала" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="AAC597CA485F39A5711C6685D6CC8228" Name="Descr" Comment="Название аналога" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" />
+            <Field UUID="2A62001841FF026F1DEFC5813FA63D5E" Name="Units_main" Comment="Единицы измерения датчика (для уставок)" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" />
+            <Field UUID="AA07025C4BDEB55F11A868B8669C7D14" Name="Units_rep" Comment="Единицы измерения Eu_PV (для ручного задания)" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" />
+            <Field UUID="0E64E8D647866CD02581798E46286DD8" Name="Units" Comment="Единицы измерения (текущие)" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" />
+            <Field UUID="376CDF7D48A6A1C8EE32B8B42219C97D" Name="DA" Comment="0 - работа, 1 - ремонт" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="64450BD84E1E709EE06C8BB93AD51FAB" Name="Man" Comment="Ручное задание в PV_calc_eu" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" />
+            <Field UUID="C3970D5B49559615061B84B0420FB5BF" Name="UP_AS_ctrl" Comment="Верхняя аварийная уставка (0 - отключена, 1 - включена)" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="678BF93D439775B3CCBBC3B41F5AA3BB" Name="UP_PS_ctrl" Comment="Верхняя предупредительная уставка (0 - отключена, 1 - включена)" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="53C108154DDD0DABFBED8B9017A227B0" Name="Down_PS_ctrl" Comment="Нижняя предупредительная уставка (0 - отключена, 1 - включена)" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="254C611C41D42669EBA613B36B8A6610" Name="Down_AS_ctrl" Comment="Нижняя аварийная уставка (0 - отключена, 1 - включена)" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="2BEC631C48C1D3C7072A4F8A21D6667C" Name="UP_AS" Comment="Верхняя аварийная уставка" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" />
+            <Field UUID="AE52D99747DF35E18FFFA3B53B7B0EC5" Name="UP_PS" Comment="Верхняя предупредительная уставка" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" />
+            <Field UUID="766CBBB64984EE86976F8C96C0098281" Name="Down_PS" Comment="Нижняя предупредительная уставка" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" />
+            <Field UUID="C855119B43B8A18D714D909107BEB1F8" Name="Down_AS" Comment="Нижняя аварийная уставка" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" />
+            <Field UUID="21CA75284B8D3D0D1EDAD29619D28A6D" Name="Config" Comment="Флаг &quot;Конфигурация AI&quot;" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="3CE4FF7E469FF752704ABA8145B6B34C" Name="Rem_repair_time" Comment="Оставшееся время в ремонте" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="3AC5975F484C23506179A5A2F2AF87CD" Name="Units_type" Comment="0 - PV_sensor_eu(Eu_sensor), 1 - PV_calc_eu(Eu_PV), 2 - PV_user(Eu_user), 3 - PV_calc_SIdU" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="0CB79C4A4FFD0EA81BA73EB06BB0D49C" Name="Min" Comment="Нижняя граница (Eu_sensor)" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="D150803C45CE57716FFA0D8FF6A8C646" Name="Max" Comment="Верхняя граница (Eu_sensor)" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="C0B5B3A44BD216735A92B4B6B291D477" Name="PS" Comment="Жёлтый фон" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="3CF70A37428BE4C494C17283E28B2C8D" Name="AS" Comment="Красный фон" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="384D07E444679FB6780AD29E27663205" Name="Min_rep" Comment="Нижняя граница (Eu_PV)" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="F0AD752F427988391CF33BB4E098E8D5" Name="Max_rep" Comment="Верхняя граница (Eu_PV)" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="BF1A18FC4B88622DC9C4E9B38F5F1811" Name="Cfg_Span" Comment="Конфигурационный параметр. Ширина диапазона датчика (вычисляется по формуле: max значение датчика - min значение датчика)" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="9F1BF5E14BB5D15C3AEC369E0B99A6AF" Name="Cfg_Offset" Comment="Конфигурационный параметр. Смещение диапазона датчика (минимальная граница)" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="ECE6B08B450502105AF4F0BCE95B9E49" Name="Cfg_min_fault" Comment="Конфигурационный параметр. Уставка для &quot;обрыва&quot;" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="4E3BB8E94FCAAB2A269FBCAA9DDE4B1D" Name="Cfg_max_fault" Comment="Конфигурационный параметр. Уставка для &quot;КЗ&quot;" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="B175B5D147CCE4B81B805297DD8E9BBC" Name="Cfg_repair_time" Comment="Конфигурационный параметр. Время канала в ремонте" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="287437274219BBB8C66DBA868A0A7FB5" Name="Cfg_min_ADC" Comment="Конфигурационный параметр. Минимальное значение АЦП" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="16AE5B234E51DFEA359E73A0C3CA443C" Name="Cfg_max_ADC" Comment="Конфигурационный параметр. Максимальное значение АЦП" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="F9E10CB64CB55DEC6D5A72A8EDC185B7" Name="Cfg_ROC" Comment="Конфигурационный параметр. Предельная скорость изменения сигнала за 1 сек" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+        </Struct>
+        <Struct UUID="3AE03EEE41E689B18053AF8A2A509A01" Name="AI_Oper">
+            <Field UUID="60B72BF545F4AE46D70897A35B8CBEE1" Name="In" Comment="входной сигнал" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="6680870F41E57E1CD12DE7BD939D5023" Name="PV_calc_eu" Comment="сигнал с датчика, преобразованный к единицам Config.Eu_PV" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="7A87352B49C8CB38C656E1A1CFA4E6B0" Name="PV_sensor_eu" Comment="сигнал с датчика в инженерных единицах датчика Config.Eu_sensor" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="6D15E55E46CC5037C519119244707FAC" Name="PV_calc_SIdU" Comment="сигнал с датчика, преобразованный к единицам СИ" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="9D4B46F5447EC3EDC8E93796EA46C83B" Name="PV_user" Comment="сигнал с датчика, преобразованный к единицам Config.Eu_user" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="ABDC2E134E9C00A6130C79956556F230" Name="Input_sensor_eu" Comment="сигнал с датчика в единицах датчика (для термометра будут Ом-ы)" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="A70F51954A5EC3620F5CE89B65BC6521" Name="pid" Comment="фильтрованное значение входного сигнала в диапазоне 0..1" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="2BEE6DB44C971279794FC7A860DE1E8D" Name="Span" Comment="диапазон для вычисления параметра Status.PV_calc_eu" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="739714974BF6C5D05FF06D9ADC6A9B34" Name="Offset" Comment="смещение для вычисления параметра Status.PV_calc_eu" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="7F9A64E942E9C3230B7D77B02AE9B088" Name="Span_SIdU" Comment="диапазон датчика в единицах СИ" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="F2BAB0B14BE0511E727E1C94143EC2B4" Name="Offset_SIdU" Comment="смещение датчика в единицах СИ" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="00FE3B0F4496D33E61F986BF56927A13" Name="ROC_max" Comment="максимальное значение ROC, если ROC_enable = 1" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="8A14BDC34EB871AFF63759AA38809FB0" Name="ROC_min" Comment="минимальное значение ROC, если ROC_enable = 1" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="0F9230254ABFB33678C3908A2E5EEEDB" Name="derivative" Comment="производная по 12-ти точкам в диапазоне 0..1" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="D667A86941F501C69C684BB68D9923A5" Name="derivative_eu" Comment="derivative * Status.Span" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="65B9EDBD4C9234D7E11C3B9ABFD8F320" Name="remaining_repair_time" Comment="время, оставшееся до перевода канала в автомат" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="F548944D4A7DC828DEA66BA8786ED508" Name="fault_code" Comment="коды отказов канала" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" Size="32" Array="TRUE" />
+        </Struct>
+        <Struct UUID="93D73BBC489EFF6DE350C9980CDE6EBB" Name="AI_PLC">
+            <Field UUID="F331BE784DA6A2AF0202BDB53F1C2462" Name="PV" Comment="Текущее значение" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" />
+            <Field UUID="DF4966B9447DB12C4E7206BA38F37562" Name="flt" Comment="Отказ измерения" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="63061C114692C886E122A5BFF2DBCA80" Name="obriv" Comment="Обрыв канала измерения" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+            <Field UUID="BAC28B0A4AFBB205744B72900FE244DE" Name="kz" Comment="КЗ канала измерения" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+        </Struct>
+        <Struct UUID="356CFA8D4666FC25F9B3A59C2C708E73" Name="support_AI">
+            <Field UUID="98292A4244CEC586AB0D90A88781030F" Name="Oper" Comment="Вычисленные переменные" Type="AI_Oper" TypeUUID="3AE03EEE41E689B18053AF8A2A509A01" />
+            <Field UUID="69B5262E44356F990EAB9A80D859EFD7" Name="Config" Comment="Конфигурационные параметры" Type="AI_Config" TypeUUID="C4DCAECF4EF1FAE3DE160B870755A027" />
+            <Field UUID="BE0ABC8948C2FE38AC542A8F92BFFD11" Name="Debug" Comment="Отладочные переменные" Type="AI_Dbg" TypeUUID="EF914658497BE5184FB6DAAEAA080E19" />
+        </Struct>
+    </DataTypes>
+    <FBLibrary>
+        <Folder Name="APS" Comment="" Data="" UUID="48D97BBF45ACD8C0F8011E870867834D">
+            <FunctionBlock UUID="97011E5B4333944A336F59817F2BB612" Name="block_APS">
+                <Variables>
+                    <Variable UUID="577764ED4B44CFA6C9862E8628DD3491" Name="clock_APS_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="1A1A536B41572521AF42D1B5D7C773A7" Name="clock_APS_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="B8FCD4E34135F762D7C6AEA403CFCA60" Name="APS_TASK_alg" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="747E079E4918BDF1E01417AF30FE4BC9" Name="APL" Type="proc_AE" TypeUUID="665F4B4646FC5E75565ABCB2FD5974AF" Usage="internal" />
+                    <Variable UUID="22F837DA47A3DB91DF1E7FBFD277CEBE" Name="Deblock_last" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[clock_APS_cur := CLOCK();
+IF FirstScan_MAIN THEN clock_APS_prev := clock_APS_cur; END_IF;
+cycleTime_APS := clock_APS_cur - clock_APS_prev;
+clock_APS_prev := clock_APS_cur;
+APS_TASK_alg :=INT#0;
+IF Deblock AND NOT Deblock_last THEN
+	APS_TASK := INT#0;
+END_IF;
+Deblock_last := Deblock;
+
+
+//АПС
+APL(INT#0, SHKU17_AI_PLC.Tnv.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tnv_kz); //КЗ канал - Температура наружного воздуха
+APL(INT#1, SHKU17_AI_PLC.Tgr.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tgr_kz); //КЗ канал - Температура грунта
+APL(INT#2, SHKU17_AI_PLC.Tg1kr7B.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg1kr7B_kz); //КЗ канал - Температура газа до крана 7Б
+APL(INT#3, SHKU17_AI_PLC.Tg2kr8B.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg2kr8B_kz); //КЗ канал - Температура газа после крана 8Б
+APL(INT#4, SHKU17_AI_PLC.Tg1kr8Bbis.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg1kr8Bbis_kz); //КЗ канал - Температура газа до крана 8Ббис
+APL(INT#5, SHKU17_AI_PLC.Tg2kr8Bbis.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg2kr8Bbis_kz); //КЗ канал - Температура газа после крана 8Ббис
+APL(INT#6, SHKU17_AI_PLC.Pg2kr8Bbis.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg2kr8Bbis_kz); //КЗ канал - Давление газа после крана 8Ббис
+APL(INT#7, SHKU17_AI_PLC.Pg1kr7B.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg1kr7B_kz); //КЗ канал - Давление газа до крана 7Б
+APL(INT#8, SHKU17_AI_PLC.rez_01.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_01_kz); //КЗ канал - Резерв
+APL(INT#9, SHKU17_AI_PLC.Patm.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Patm_kz); //КЗ канал - Давление атмосферного воздуха
+APL(INT#10, SHKU17_AI_PLC.PozAPK3.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.PozAPK3_kz); //КЗ канал - Положение АПК №3
+APL(INT#11, SHKU17_AI_PLC.rez_02.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_02_kz); //КЗ канал - Резерв
+APL(INT#12, SHKU17_AI_PLC.rez_03.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_03_kz); //КЗ канал - Резерв
+APL(INT#13, SHKU17_AI_PLC.rez_04.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_04_kz); //КЗ канал - Резерв
+APL(INT#14, SHKU17_AI_PLC.rez_05.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_05_kz); //КЗ канал - Резерв
+APL(INT#15, SHKU17_AI_PLC.Ctrl24VTI1.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ctrl24VTI1_kz); //КЗ канал - Контроль 24 В ТИ
+APL(INT#16, SHKU17_AI_PLC.Tg1PU.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg1PU_kz); //КЗ канал - Температура газа  до  ПУ
+APL(INT#17, SHKU17_AI_PLC.Tg2PU.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg2PU_kz); //КЗ канал - Температура газа  после ПУ
+APL(INT#18, SHKU17_AI_PLC.rez_06.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_06_kz); //КЗ канал - Резерв
+APL(INT#19, SHKU17_AI_PLC.Pg1PU.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg1PU_kz); //КЗ канал - Давление газа  до  ПУ
+APL(INT#20, SHKU17_AI_PLC.Pg2PU.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg2PU_kz); //КЗ канал - Давление газа  после ПУ
+APL(INT#21, SHKU17_AI_PLC.rez_07.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_07_kz); //КЗ канал - Резерв
+APL(INT#22, SHKU17_AI_PLC.Tg1gr_2.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg1gr_2_kz); //КЗ канал - Температура газа на входе  группы 2
+APL(INT#23, SHKU17_AI_PLC.Tg2gr_2.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg2gr_2_kz); //КЗ канал - Температура газа на выходе  группы 2
+APL(INT#24, SHKU17_AI_PLC.Pg2plum.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg2plum_kz); //КЗ канал - Давление газа на выходном шлейфе  
+APL(INT#25, SHKU17_AI_PLC.rez_08.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_08_kz); //КЗ канал - Резерв
+APL(INT#26, SHKU17_AI_PLC.Pcompr_v.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pcompr_v_kz); //КЗ канал - Давление сжатого воздуха
+APL(INT#27, SHKU17_AI_PLC.Ttg.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ttg_kz); //КЗ канал - Температура топливного газа
+APL(INT#28, SHKU17_AI_PLC.Tpg.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tpg_kz); //КЗ канал - Температура пускового газа
+APL(INT#29, SHKU17_AI_PLC.Ptg.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ptg_kz); //КЗ канал - Давление топливного  газа
+APL(INT#30, SHKU17_AI_PLC.Ppg.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ppg_kz); //КЗ канал - Давление пускового газа
+APL(INT#31, SHKU17_AI_PLC.Ctrl24VTI2.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ctrl24VTI2_kz); //КЗ канал - Контроль 24 В ТИ
+APL(INT#32, SHKU17_AI_PLC.Lpe1.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Lpe1_kz); //КЗ канал - Уровень в пожарной емкости №1
+APL(INT#33, SHKU17_AI_PLC.Lpe2.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Lpe2_kz); //КЗ канал - Уровень в пожарной емкости №2
+APL(INT#34, SHKU17_AI_PLC.Lpe3.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Lpe3_kz); //КЗ канал - Уровень в пожарной емкости №3
+APL(INT#35, SHKU17_AI_PLC.Lpe7.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Lpe7_kz); //КЗ канал - Уровень в пожарной емкости №7
+APL(INT#36, SHKU17_AI_PLC.Lpe8.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Lpe8_kz); //КЗ канал - Уровень в пожарной емкости №8
+APL(INT#37, SHKU17_AI_PLC.Tozh.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tozh_kz); //КЗ канал - Температура охлаждающей жидкости
+APL(INT#38, SHKU17_AI_PLC.rez_09.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_09_kz); //КЗ канал - Резерв
+APL(INT#39, SHKU17_AI_PLC.rez_10.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_10_kz); //КЗ канал - Резерв
+APL(INT#40, SHKU17_AI_PLC.rez_11.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_11_kz); //КЗ канал - Резерв
+APL(INT#41, SHKU17_AI_PLC.rez_12.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_12_kz); //КЗ канал - Резерв
+APL(INT#42, SHKU17_AI_PLC.rez_13.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_13_kz); //КЗ канал - Резерв
+APL(INT#43, SHKU17_AI_PLC.rez_14.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_14_kz); //КЗ канал - Резерв
+APL(INT#44, SHKU17_AI_PLC.rez_15.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_15_kz); //КЗ канал - Резерв
+APL(INT#45, SHKU17_AI_PLC.rez_16.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_16_kz); //КЗ канал - Резерв
+APL(INT#46, SHKU17_AI_PLC.rez_17.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_17_kz); //КЗ канал - Резерв
+APL(INT#47, SHKU17_AI_PLC.Ctrl24VTI3.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ctrl24VTI3_kz); //КЗ канал - Контроль 24 В ТИ
+APL(INT#48, SHKU17_AI_PLC.rez_18.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_18_kz); //КЗ канал - Резерв
+APL(INT#49, SHKU17_AI_PLC.rez_19.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_19_kz); //КЗ канал - Резерв
+APL(INT#50, SHKU17_AI_PLC.Uosn_p_SHKU17.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Uosn_p_SHKU17_kz); //КЗ канал - Напряжение основного питания ШКУ-17
+APL(INT#51, SHKU17_AI_PLC.Urez_p_SHKU17.kz, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Urez_p_SHKU17_kz); //КЗ канал - Напряжение резервного питания ШКУ-17
+
+APL(INT#52, SHKU17_AI_PLC.Tnv.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tnv_obriv); //Обрыв канал - Температура наружного воздуха
+APL(INT#53, SHKU17_AI_PLC.Tgr.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tgr_obriv); //Обрыв канал - Температура грунта
+APL(INT#54, SHKU17_AI_PLC.Tg1kr7B.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg1kr7B_obriv); //Обрыв канал - Температура газа до крана 7Б
+APL(INT#55, SHKU17_AI_PLC.Tg2kr8B.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg2kr8B_obriv); //Обрыв канал - Температура газа после крана 8Б
+APL(INT#56, SHKU17_AI_PLC.Tg1kr8Bbis.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg1kr8Bbis_obriv); //Обрыв канал - Температура газа до крана 8Ббис
+APL(INT#57, SHKU17_AI_PLC.Tg2kr8Bbis.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg2kr8Bbis_obriv); //Обрыв канал - Температура газа после крана 8Ббис
+APL(INT#58, SHKU17_AI_PLC.Pg2kr8Bbis.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg2kr8Bbis_obriv); //Обрыв канал - Давление газа после крана 8Ббис
+APL(INT#59, SHKU17_AI_PLC.Pg1kr7B.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg1kr7B_obriv); //Обрыв канал - Давление газа до крана 7Б
+APL(INT#60, SHKU17_AI_PLC.rez_01.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_01_obriv); //Обрыв канал - Резерв
+APL(INT#61, SHKU17_AI_PLC.Patm.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Patm_obriv); //Обрыв канал - Давление атмосферного воздуха
+APL(INT#62, SHKU17_AI_PLC.PozAPK3.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.PozAPK3_obriv); //Обрыв канал - Положение АПК №3
+APL(INT#63, SHKU17_AI_PLC.rez_02.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_02_obriv); //Обрыв канал - Резерв
+APL(INT#64, SHKU17_AI_PLC.rez_03.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_03_obriv); //Обрыв канал - Резерв
+APL(INT#65, SHKU17_AI_PLC.rez_04.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_04_obriv); //Обрыв канал - Резерв
+APL(INT#66, SHKU17_AI_PLC.rez_05.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_05_obriv); //Обрыв канал - Резерв
+APL(INT#67, SHKU17_AI_PLC.Ctrl24VTI1.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ctrl24VTI1_obriv); //Обрыв канал - Контроль 24 В ТИ
+APL(INT#68, SHKU17_AI_PLC.Tg1PU.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg1PU_obriv); //Обрыв канал - Температура газа  до  ПУ
+APL(INT#69, SHKU17_AI_PLC.Tg2PU.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg2PU_obriv); //Обрыв канал - Температура газа  после ПУ
+APL(INT#70, SHKU17_AI_PLC.rez_06.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_06_obriv); //Обрыв канал - Резерв
+APL(INT#71, SHKU17_AI_PLC.Pg1PU.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg1PU_obriv); //Обрыв канал - Давление газа  до  ПУ
+APL(INT#72, SHKU17_AI_PLC.Pg2PU.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg2PU_obriv); //Обрыв канал - Давление газа  после ПУ
+APL(INT#73, SHKU17_AI_PLC.rez_07.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_07_obriv); //Обрыв канал - Резерв
+APL(INT#74, SHKU17_AI_PLC.Tg1gr_2.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg1gr_2_obriv); //Обрыв канал - Температура газа на входе  группы 2
+APL(INT#75, SHKU17_AI_PLC.Tg2gr_2.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tg2gr_2_obriv); //Обрыв канал - Температура газа на выходе  группы 2
+APL(INT#76, SHKU17_AI_PLC.Pg2plum.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg2plum_obriv); //Обрыв канал - Давление газа на выходном шлейфе  
+APL(INT#77, SHKU17_AI_PLC.rez_08.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_08_obriv); //Обрыв канал - Резерв
+APL(INT#78, SHKU17_AI_PLC.Pcompr_v.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pcompr_v_obriv); //Обрыв канал - Давление сжатого воздуха
+APL(INT#79, SHKU17_AI_PLC.Ttg.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ttg_obriv); //Обрыв канал - Температура топливного газа
+APL(INT#80, SHKU17_AI_PLC.Tpg.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tpg_obriv); //Обрыв канал - Температура пускового газа
+APL(INT#81, SHKU17_AI_PLC.Ptg.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ptg_obriv); //Обрыв канал - Давление топливного  газа
+APL(INT#82, SHKU17_AI_PLC.Ppg.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ppg_obriv); //Обрыв канал - Давление пускового газа
+APL(INT#83, SHKU17_AI_PLC.Ctrl24VTI2.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ctrl24VTI2_obriv); //Обрыв канал - Контроль 24 В ТИ
+APL(INT#84, SHKU17_AI_PLC.Lpe1.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Lpe1_obriv); //Обрыв канал - Уровень в пожарной емкости №1
+APL(INT#85, SHKU17_AI_PLC.Lpe2.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Lpe2_obriv); //Обрыв канал - Уровень в пожарной емкости №2
+APL(INT#86, SHKU17_AI_PLC.Lpe3.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Lpe3_obriv); //Обрыв канал - Уровень в пожарной емкости №3
+APL(INT#87, SHKU17_AI_PLC.Lpe7.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Lpe7_obriv); //Обрыв канал - Уровень в пожарной емкости №7
+APL(INT#88, SHKU17_AI_PLC.Lpe8.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Lpe8_obriv); //Обрыв канал - Уровень в пожарной емкости №8
+APL(INT#89, SHKU17_AI_PLC.Tozh.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tozh_obriv); //Обрыв канал - Температура охлаждающей жидкости
+APL(INT#90, SHKU17_AI_PLC.rez_09.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_09_obriv); //Обрыв канал - Резерв
+APL(INT#91, SHKU17_AI_PLC.rez_10.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_10_obriv); //Обрыв канал - Резерв
+APL(INT#92, SHKU17_AI_PLC.rez_11.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_11_obriv); //Обрыв канал - Резерв
+APL(INT#93, SHKU17_AI_PLC.rez_12.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_12_obriv); //Обрыв канал - Резерв
+APL(INT#94, SHKU17_AI_PLC.rez_13.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_13_obriv); //Обрыв канал - Резерв
+APL(INT#95, SHKU17_AI_PLC.rez_14.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_14_obriv); //Обрыв канал - Резерв
+APL(INT#96, SHKU17_AI_PLC.rez_15.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_15_obriv); //Обрыв канал - Резерв
+APL(INT#97, SHKU17_AI_PLC.rez_16.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_16_obriv); //Обрыв канал - Резерв
+APL(INT#98, SHKU17_AI_PLC.rez_17.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_17_obriv); //Обрыв канал - Резерв
+APL(INT#99, SHKU17_AI_PLC.Ctrl24VTI3.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ctrl24VTI3_obriv); //Обрыв канал - Контроль 24 В ТИ
+APL(INT#100, SHKU17_AI_PLC.rez_18.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_18_obriv); //Обрыв канал - Резерв
+APL(INT#101, SHKU17_AI_PLC.rez_19.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_19_obriv); //Обрыв канал - Резерв
+APL(INT#102, SHKU17_AI_PLC.Uosn_p_SHKU17.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Uosn_p_SHKU17_obriv); //Обрыв канал - Напряжение основного питания ШКУ-17
+APL(INT#103, SHKU17_AI_PLC.Urez_p_SHKU17.obriv, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Urez_p_SHKU17_obriv); //Обрыв канал - Напряжение резервного питания ШКУ-17
+
+APL(INT#104, SHKU17_A1_DI_HMI.Ala_ispr_Ppr, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ala_ispr_Ppr);   // Неисправность питания преобразователей
+APL(INT#105, SHKU17_A1_DI_HMI.rez_01, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_01);   // Резерв
+APL(INT#106, SHKU17_A1_DI_HMI.rez_02, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_02);   // Резерв
+APL(INT#107, SHKU17_A1_DI_HMI.rez_03, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_03);   // Резерв
+APL(INT#108, SHKU17_A1_DI_HMI.rez_04, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_04);   // Резерв
+APL(INT#109, SHKU17_A1_DI_HMI.rez_05, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_05);   // Резерв
+APL(INT#110, SHKU17_A1_DI_HMI.Pg2_plum, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg2_plum);   // Давление газа на выходном шлейфе
+APL(INT#111, SHKU17_A1_DI_HMI.No_U_AVVgr_3, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.No_U_AVVgr_3);   // Отсутствие напряжения в схеме аварийно-вытяжных вентиляторов группы 3
+APL(INT#112, SHKU17_A1_DI_HMI.no_U_PV5, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.no_U_PV5);   // Отсутствие напряжения в схеме приточного вентилятора №5
+APL(INT#113, SHKU17_A1_DI_HMI.no_U_PV6, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.no_U_PV6);   // Отсутствие напряжения в схеме приточного вентилятора №6
+APL(INT#114, SHKU17_A1_DI_HMI.Inc1_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Inc1_ON);   // Ввод №1 включен
+APL(INT#115, SHKU17_A1_DI_HMI.Inc1_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Inc1_OFF);   // Ввод №1 отлючен
+APL(INT#116, SHKU17_A1_DI_HMI.Inc2_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Inc2_ON);   // Ввод №2 включен
+APL(INT#117, SHKU17_A1_DI_HMI.Inc2_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Inc2_OFF);   // Ввод №2 отлючен
+APL(INT#118, SHKU17_A1_DI_HMI.SS_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.SS_ON);   // Секционный выключатель включен
+APL(INT#119, SHKU17_A1_DI_HMI.SS_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.SS_OFF);   // Секционный выключатель отлючен
+APL(INT#120, SHKU17_A1_DI_HMI.APK_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.APK_ON);   // АПК открыт
+APL(INT#121, SHKU17_A1_DI_HMI.APK_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.APK_OFF);   // АПК закрыт
+APL(INT#122, SHKU17_A1_DI_HMI.APK_Heat_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.APK_Heat_ON);   // АПК обогрев включен
+APL(INT#123, SHKU17_A1_DI_HMI.N11GD100_1_WORK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.N11GD100_1_WORK);   // 11ГД-100 №1 в работе
+APL(INT#124, SHKU17_A1_DI_HMI.N11GD100_1_FLT, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.N11GD100_1_FLT);   // Авария 11ГД-100 №1
+APL(INT#125, SHKU17_A1_DI_HMI.N11GD100_2_WORK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.N11GD100_2_WORK);   // 11ГД-100 №2 в работе
+APL(INT#126, SHKU17_A1_DI_HMI.N11GD100_2_FLT, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.N11GD100_2_FLT);   // Авария 11ГД-100 №2
+APL(INT#127, SHKU17_A1_DI_HMI.AC804_FLT, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.AC804_FLT);   // АС-804 неисправна
+APL(INT#128, SHKU17_A1_DI_HMI.AC804_WORK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.AC804_WORK);   // АС-804 в работе
+APL(INT#129, SHKU17_A1_DI_HMI.AC804_REZ, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.AC804_REZ);   // АС-804 в резерве
+APL(INT#130, SHKU17_A1_DI_HMI.TG2_FLT, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.TG2_FLT);   // Авария теплогенератора №2
+APL(INT#131, SHKU17_A1_DI_HMI.P3_30_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.P3_30_ON);   // Насос РЗ-30 ГСМ включен
+APL(INT#132, SHKU17_A1_DI_HMI.P3_30_KVR_AUTO, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.P3_30_KVR_AUTO);   // КВР насоса РЗ-30 ГСМ в положении автомат
+APL(INT#133, SHKU17_A1_DI_HMI.rez_06, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_06);   // Резерв
+APL(INT#134, SHKU17_A1_DI_HMI.rez_07, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_07);   // Резерв
+APL(INT#135, SHKU17_A1_DI_HMI.Ctrl24_TC_1, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ctrl24_TC_1);   // Контроль 24 В ТС №1
+
+APL(INT#136, SHKU17_AI_PLC.Pg2plum.PV >= Global_Ust.Pg2KC_H_PS and SHKU17_AI_PLC.Pg2plum.PV < Global_Ust.Pg2KC_H_AS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg2plum_over_PS);   // Предупреждение - Давление газа на выходном шлейфе >= 5,5 МПа
+APL(INT#137, SHKU17_AI_PLC.Pg2plum.PV >= Global_Ust.Pg2KC_H_AS, BOOL#1, BOOL#0, LREAL#1, INT#7, APS_TASK_alg, SHKU17_A1_APS.Pg2plum_over_AS);   // Авария - Давление газа на выходном шлейфе >= 5,65 МПа
+APL(INT#138, SHKU17_AI_PLC.Tozh.PV >= Global_Ust.Tozh_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tozh_H_PS);   // Температура охлаждающей жидкости - высокая
+APL(INT#139, SHKU17_AI_PLC.Ttg.PV <= Global_Ust.Ttg_L_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ttg_L_PS);   // Температура топливного газа низкая
+APL(INT#140, SHKU17_AI_PLC.Ttg.PV >= Global_Ust.Ttg_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ttg_H_PS);   // Температура топливного газа высокая
+APL(INT#141, SHKU17_AI_PLC.Ptg.PV <= Global_Ust.Ptg_L_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ptg_L_PS);   // Давление топливного  газа низкое
+APL(INT#142, SHKU17_AI_PLC.Ptg.PV >= Global_Ust.Ptg_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ptg_H_PS);   // Давление топливного  газа высокое
+
+APL(INT#143, PRU_Link > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.PRU_Link_flt); //Ошибка связи с ПРУ
+APL(INT#144, Global_PRU.Btn_AOS, BOOL#1, BOOL#0, LREAL#0, INT#6, APS_TASK_alg, SHKU17_A1_APS.PRU_btn_AOS);	//Кнопка АОС с ПРУ
+APL(INT#145, Global_PRU.Btn_AOB, BOOL#1, BOOL#0, LREAL#0, INT#5, APS_TASK_alg, SHKU17_A1_APS.PRU_btn_AOB);	//Кнопка АОБ с ПРУ
+APL(INT#146, Global_PRU.Btn_NO, BOOL#1, BOOL#0, LREAL#0, INT#4, APS_TASK_alg, SHKU17_A1_APS.PRU_btn_NO);	//Кнопка НО с ПРУ
+//APL(INT#143, SHKU17_AI_PLC..PV >= Global_Ust., BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.);   //
+
+
+//Выходы АПС
+IF APS_TASK_alg > APS_TASK THEN
+	APS_TASK := APS_TASK_alg;
+END_IF;
+
+clock_APS_cur := CLOCK();
+cycleTime_APS_sys := clock_APS_cur - clock_APS_prev;]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="665F4B4646FC5E75565ABCB2FD5974AF" Name="proc_AE">
+                <Variables>
+                    <Variable UUID="F12965654FA5488211461A8777F6ECEA" Name="Numb" Comment="Порядковый номер. (от 0 и до размер TMR-1 или Active_prev1-1)" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                    <Variable UUID="EE794E1141A0E648C9EFEB886B56CB3B" Name="Condition" Comment="Условие срабатывания" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="66B8745E4168E5093F29FB91F4AAA6CC" Name="Permition" Comment="Взвод" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="E05DB7D5430D0C4BAF1C8B9741111CBB" Name="Invers" Comment="Инверсия" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="430BAA714BC4DC96ACD2748E6D2CFAB7" Name="Delay" Comment="Задержка, сек" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                    <Variable UUID="F42A99374ACF8554471F1688B944836C" Name="Action" Comment="Тип воздействия на логику (7 - Превышение Pг на вых цеха, 6 - АОС, 5 - АОБ, 4 - НО, 3 - Кольцо, 2 - КОЛ ГПА, 1 - ПС, 0 - ничего)" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                    <Variable UUID="857628FC46456576C472EAA1809370F2" Name="OUT_task" Comment="Воздействие на логику" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="inout" />
+                    <Variable UUID="7E7FB469496625FC2AEE98B3723AEE6B" Name="Active" Comment="Признак сработки АПС" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                    <Variable UUID="99360B6645CB57E08DA6EA8AEBA6BAC3" Name="TMR" Comment="Задержка, сек" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Size="147" Array="TRUE" Usage="internal" />
+                    <Variable UUID="80FD67B945B9C562E3EFD9B58CB34FC4" Name="Active_prev1" Comment="Признак сработки АПС на предыдущем цикле" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="147" Array="TRUE" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[IF (Condition XOR Invers) AND Permition THEN
+	IF NOT Active THEN TMR[Numb] := TMR[Numb] + cycleTime_APS; END_IF;
+ELSE
+	TMR[Numb] := LREAL#0;
+END_IF;
+
+//Если TMR[Numb] > Delay, то защита сработала
+IF TMR[Numb] > Delay THEN
+	Active := BOOL#1;
+END_IF;
+//OUT_nofiks := TMR[Numb] > Delay;
+
+//Снятие признака защиты по деблокировке
+IF Deblock AND TMR[Numb] = LREAL#0 THEN
+	Active := BOOL#0;
+	TMR[Numb] := LREAL#0;
+END_IF;
+
+//Определение воздействия на логику (6 - АОС, 5 - АОБ, 4 - НО, 3 - Кольцо, 2 - КОЛ ГПА, 1 - ПС, 0 - ничего)
+IF Active THEN
+	IF Action > OUT_task THEN
+		OUT_task := Action;
+	END_IF;
+END_IF;
+
+//Включение звука
+IF Active AND NOT Active_prev1[Numb] THEN
+	IF Action = INT#1  THEN Sound_PS := BOOL#1; END_IF;
+	IF Action >= INT#5 THEN Sound_AS := BOOL#1; Sound_PS := BOOL#0; END_IF;
+END_IF;
+IF Kvitir THEN Sound_PS := BOOL#0; Sound_AS := BOOL#0; END_IF;
+
+Active_prev1[Numb] := Active;]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <Folder Name="IM" Comment="" Data="" UUID="0D630A2147DFA0DD3B10B8B581157BC5" />
+        <Folder Name="IO" Comment="" Data="" UUID="ABF998A641A050C363DD08AD77F052D4">
+            <Folder Name="AIO" Comment="" Data="" UUID="F9AA026042E1EC2948CB859ADD6FACAF">
+                <Function UUID="3DD713AC41B4BF44C6A065B482C426D9" Name="AI_Init_Shil" ResultTypeUUID="356CFA8D4666FC25F9B3A59C2C708E73">
+                    <Variables>
+                        <Variable UUID="28FEBDC9489926F80F57F9B7E37E101A" Name="Span" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                        <Variable UUID="A405905B4AA34B6E9FFF57BB5EC1D5D0" Name="Offset" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                        <Variable UUID="0CEF865C423600D270BB6AB0CFF3E6A5" Name="Tf" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                        <Variable UUID="3EC6955243EC8399C147F386AB7D2BFE" Name="repair_time" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                        <Variable UUID="A3BAF5E54BD58611EEABE58103B2E833" Name="min_ADC" Type="DINT" TypeUUID="AF9665534C6D5BDEF9AE77B026938B65" Usage="input" />
+                        <Variable UUID="1EC59A4F48F156B0B54A0BAFAF38522B" Name="max_ADC" Type="DINT" TypeUUID="AF9665534C6D5BDEF9AE77B026938B65" Usage="input" />
+                        <Variable UUID="1F6D25A64F2CAF7E7D168A8C589287DC" Name="Eu_sensor" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                        <Variable UUID="2C50848347D413EC52A2D0A85AD1AB39" Name="Eu_PV" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                        <Variable UUID="073A14D642BD2BAA4D7EB1BBE3121D1B" Name="Eu_user" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                        <Variable UUID="777262424688A89277C175A27A6F0DAD" Name="Descr" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" InitialValue="&apos;FALSE&apos;" Usage="input" />
+                        <Variable UUID="5CC02D83403A6B742CA5DE9164B56A89" Name="Manual_Enable" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" Usage="input" />
+                        <Variable UUID="090BB4104BFCF1C35294978CE04F61EE" Name="HMI_descr" Type="AI_HMI_el" TypeUUID="AC1F8EF44E60D7473D928D81E1F0BA7E" Usage="inout" />
+                    </Variables>
+                    <ST><![CDATA[AI_Init_Shil.Config.Span:=Span;
+AI_Init_Shil.Config.Offset:=Offset;
+AI_Init_Shil.Config.gain := LREAL#0.0;
+AI_Init_Shil.Config.bias := LREAL#0.0;
+AI_Init_Shil.Config.ROC := Span/LREAL#2;
+AI_Init_Shil.Config.Tf:=Tf;
+AI_Init_Shil.Config.Manual_Target := LREAL#0;
+AI_Init_Shil.Config.Manual_Rate := Span/LREAL#20;
+AI_Init_Shil.Config.min_fault_sensor_Eu := Offset-Span*LREAL#0.03125;
+AI_Init_Shil.Config.max_fault_sensor_Eu := Span+Offset+Span*LREAL#0.012;
+AI_Init_Shil.Config.recovery_time := LREAL#0.5;
+AI_Init_Shil.Config.repair_time := repair_time;
+AI_Init_Shil.Config.min_ADC := DINT_TO_LREAL(min_ADC);
+AI_Init_Shil.Config.max_ADC := DINT_TO_LREAL(max_ADC);
+AI_Init_Shil.Config.Eu_sensor := Eu_sensor;
+AI_Init_Shil.Config.Eu_PV := Eu_PV;
+AI_Init_Shil.Config.Eu_user := Eu_user;
+AI_Init_Shil.Config.TypePolynom := INT#0;
+AI_Init_Shil.Config.Manual_Enable := Manual_Enable;
+AI_Init_Shil.Config.Manual_Auto := BYTE#0;
+AI_Init_Shil.Config.derivative_Enable := BYTE#0;
+AI_Init_Shil.Config.ROC_Enable := BYTE#0;
+AI_Init_Shil.Config.reset := BYTE#0;
+
+HMI_descr.Descr := Descr;
+HMI_descr.Cfg_Span := Span;
+HMI_descr.Cfg_Offset := Offset;
+HMI_descr.Cfg_repair_time := repair_time;
+HMI_descr.Cfg_min_ADC := AI_Init_Shil.Config.min_ADC;
+HMI_descr.Cfg_max_ADC := AI_Init_Shil.Config.max_ADC;
+HMI_descr.Cfg_ROC := AI_Init_Shil.Config.ROC;
+
+// Единицы измерения для ремонта
+HMI_descr.Units_rep := AI_table_units[Eu_PV - INT#1];
+//Единицы измерения для уставок
+HMI_descr.Units_main := AI_table_units[Eu_sensor - INT#1];
+
+// Минимальное значение AI (Eu_sensor)
+HMI_descr.Min := AI_Init_Shil.Config.Offset;
+// Максимальное значение AI (Eu_sensor)
+HMI_descr.Max := AI_Init_Shil.Config.Span + AI_Init_Shil.Config.Offset;
+
+// Минимальное значение AI (Eu_PV)
+HMI_descr.Min_rep := AI_Init_Shil.Oper.Offset;
+// Максимальное значение AI (Eu_PV)
+HMI_descr.Max_rep := AI_Init_Shil.Oper.Span + AI_Init_Shil.Oper.Offset;]]></ST>
+                </Function>
+                <FunctionBlock UUID="DDE768AE43A7928BD7BE9288DA121529" Name="AI_Proc_Shil">
+                    <Variables>
+                        <Variable UUID="C9107B0D43D48F373C4469ABC5C4C9C8" Name="SEN_AI" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="inout" />
+                        <Variable UUID="3EB8F32648529E0D0150A99689C5FFDB" Name="AI_raw" Type="DINT" TypeUUID="AF9665534C6D5BDEF9AE77B026938B65" Usage="input" />
+                        <Variable UUID="F790E56046F83939A34259AF992C189B" Name="cycleTime" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                        <Variable UUID="35D1DA694063ACBC78DCD4B5DA84FE5B" Name="AI_LGC" Type="AI_PLC" TypeUUID="93D73BBC489EFF6DE350C9980CDE6EBB" Usage="output" />
+                        <Variable UUID="E5F6C4EE48C09A47DDE6A8A941D87C9C" Name="AI_HMI_str" Type="AI_HMI_el" TypeUUID="AC1F8EF44E60D7473D928D81E1F0BA7E" Usage="inout" />
+                        <Variable UUID="B9BC4CA5414A56D6F6F74E9D65D1A8FB" Name="AI_C_BLK" Type="proc_AI" TypeUUID="E0D63CC74D1606235F84069D885963D7" Usage="internal" />
+                        <Variable UUID="2E8F6E1A4CE0146289456CB7B6B7C32F" Name="Units_type_prev" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[//IF SEN_AI.Config.Eu_PV <= INT#0 OR SEN_AI.Config.Eu_PV > INT#378 THEN SEN_AI.Config.Eu_PV := INT#1; END_IF;
+//IF SEN_AI.Config.Eu_sensor <= INT#0 OR SEN_AI.Config.Eu_sensor > INT#378 THEN SEN_AI.Config.Eu_sensor := INT#1; END_IF;
+//IF SEN_AI.Config.Eu_user <= INT#0 OR SEN_AI.Config.Eu_user > INT#378 THEN SEN_AI.Config.Eu_user := INT#1; END_IF;
+
+//Конфигурация. Изменения со СКАДЫ
+IF AI_HMI_str.Config THEN
+	SEN_AI.Config.Span := AI_HMI_str.Cfg_Span;
+	SEN_AI.Config.Offset := AI_HMI_str.Cfg_Offset;
+	SEN_AI.Config.min_fault_sensor_Eu := SEN_AI.Config.Offset-SEN_AI.Config.Span*LREAL#0.03125;
+	SEN_AI.Config.max_fault_sensor_Eu := SEN_AI.Config.Span+SEN_AI.Config.Offset+SEN_AI.Config.Span*LREAL#0.012;
+	SEN_AI.Config.repair_time := AI_HMI_str.Cfg_repair_time;
+	SEN_AI.Config.min_ADC := AI_HMI_str.Cfg_min_ADC;
+	SEN_AI.Config.max_ADC := AI_HMI_str.Cfg_max_ADC;
+	SEN_AI.Config.ROC := AI_HMI_str.Cfg_ROC;
+END_IF;
+
+// Запись сырого значения в структуру
+SEN_AI.Oper.In := DINT_TO_LREAL(AI_raw);
+// Запись в структуру признака ремонта канала
+SEN_AI.Config.Manual_Auto.0 := AI_HMI_str.DA;
+// Запись в структуру задания канала в ручном режиме
+SEN_AI.Config.Manual_Target := REAL_TO_LREAL(AI_HMI_str.Man);
+
+// Вызов C-блока
+AI_C_BLK(SEN_AI, cycleTime);
+
+// Если блок вернул канал в автомат
+AI_HMI_str.DA := SEN_AI.Config.Manual_Auto.0;
+// Обработанное значение для логики
+AI_LGC.PV := LREAL_TO_REAL(SEN_AI.Oper.PV_calc_eu);
+// Обработанное значение для SCADA
+CASE AI_HMI_str.Units_type OF
+ 0: AI_HMI_str.PV := LREAL_TO_REAL(SEN_AI.Oper.PV_sensor_eu);
+	IF AI_HMI_str.Units_type <> Units_type_prev or FirstScan_MAIN THEN AI_HMI_str.Units := AI_table_units[SEN_AI.Config.Eu_sensor - INT#1]; END_IF;
+ 1: AI_HMI_str.PV    := LREAL_TO_REAL(SEN_AI.Oper.PV_calc_eu);
+	IF AI_HMI_str.Units_type <> Units_type_prev THEN AI_HMI_str.Units := AI_table_units[SEN_AI.Config.Eu_PV - INT#1]; END_IF;
+ 2: AI_HMI_str.PV := LREAL_TO_REAL(SEN_AI.Oper.PV_user);
+	IF AI_HMI_str.Units_type <> Units_type_prev THEN AI_HMI_str.Units := AI_table_units[SEN_AI.Config.Eu_user - INT#1]; END_IF;
+ 3: AI_HMI_str.PV := LREAL_TO_REAL(SEN_AI.Oper.PV_calc_SIdU);
+	IF AI_HMI_str.Units_type <> Units_type_prev THEN AI_HMI_str.Units := AI_table_units[((SEN_AI.Config.Eu_PV - INT#1)/INT#21)*INT#21]; END_IF;
+END_CASE;
+Units_type_prev := AI_HMI_str.Units_type;
+
+// Ошибка канала (обобщённая)
+AI_HMI_str.Flt	:= SEN_AI.Oper.fault_code[00].0;
+AI_LGC.flt		:= SEN_AI.Oper.fault_code[00].0 OR AI_HMI_str.DA;
+AI_LGC.kz		:= SEN_AI.Oper.fault_code[4].0; //короткое замыкание канала
+AI_LGC.obriv	:= SEN_AI.Oper.fault_code[5].0; //обрыв канала
+
+// Время, оставшееся до перевода канала в автомат
+AI_HMI_str.Rem_repair_time := SEN_AI.Oper.remaining_repair_time;
+// Безударный переход Работа - ремонт
+AI_HMI_str.Man := LREAL_TO_REAL(SEN_AI.Config.Manual_Target);
+
+IF AI_HMI_str.Config THEN
+	// Минимальное значение AI (Eu_sensor)
+	AI_HMI_str.Min := SEN_AI.Config.Offset;
+	// Максимальное значение AI (Eu_sensor)
+	AI_HMI_str.Max := SEN_AI.Config.Span + SEN_AI.Config.Offset;
+
+	// Минимальное значение AI (Eu_PV)
+	AI_HMI_str.Min_rep := SEN_AI.Oper.Offset;
+	// Максимальное значение AI (Eu_PV)
+	AI_HMI_str.Max_rep := SEN_AI.Oper.Span + SEN_AI.Oper.Offset;
+END_IF;
+
+// Единицы измерения для ремонта
+//AI_HMI_str.Units_rep := AI_table_units[SEN_AI.Config.Eu_PV - INT#1];
+//Единицы измерения для уставок
+//AI_HMI_str.Units_main := AI_table_units[SEN_AI.Config.Eu_sensor - INT#1];
+
+//Окрашивание фона
+AI_HMI_str.AS := (LREAL_TO_REAL(SEN_AI.Oper.PV_sensor_eu) >= AI_HMI_str.UP_AS) AND AI_HMI_str.UP_AS_ctrl OR (LREAL_TO_REAL(SEN_AI.Oper.PV_sensor_eu) <= AI_HMI_str.Down_AS) AND AI_HMI_str.Down_AS_ctrl;
+AI_HMI_str.PS := ((LREAL_TO_REAL(SEN_AI.Oper.PV_sensor_eu) >= AI_HMI_str.UP_PS) AND AI_HMI_str.UP_PS_ctrl OR (LREAL_TO_REAL(SEN_AI.Oper.PV_sensor_eu) <= AI_HMI_str.Down_PS) AND AI_HMI_str.Down_PS_ctrl) AND NOT AI_HMI_str.AS;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="B2B6151A4E0706CF5C4D0C94596E6AD3" Name="Array_units_init">
+                    <Variables />
+                    <ST><![CDATA[AI_table_units[000] := 'кПа';
+AI_table_units[001] := 'атм';
+AI_table_units[002] := 'атм';
+AI_table_units[003] := 'бар';
+AI_table_units[004] := 'дм.вд.ст';
+AI_table_units[005] := 'кг/см^2';
+AI_table_units[006] := 'мбар';
+AI_table_units[007] := 'мм.вд.ст';
+AI_table_units[008] := 'Па';
+AI_table_units[009] := 'фунт/дюйм^2';
+AI_table_units[010] := 'бар (изб)';
+AI_table_units[011] := 'кг/см^2 (изб)';
+AI_table_units[012] := 'кПа (изб)';
+AI_table_units[013] := 'фунт/дюйм^2 (изб)';
+AI_table_units[014] := 'МПа (изб)';
+AI_table_units[015] := 'МПа';
+AI_table_units[016] := 'мбар (изб)';
+AI_table_units[017] := 'мм.рт.ст';
+AI_table_units[018] := 'атм (изб)';
+AI_table_units[019] := 'атм (изб)';
+AI_table_units[020] := 'Па (изб)';
+AI_table_units[021] := 'К';
+AI_table_units[022] := '°С';
+AI_table_units[023] := '°F';
+AI_table_units[024] := '-';
+AI_table_units[025] := '-';
+AI_table_units[026] := '-';
+AI_table_units[027] := '-';
+AI_table_units[028] := '-';
+AI_table_units[029] := '-';
+AI_table_units[030] := '-';
+AI_table_units[031] := '-';
+AI_table_units[032] := '-';
+AI_table_units[033] := '-';
+AI_table_units[034] := '-';
+AI_table_units[035] := '-';
+AI_table_units[036] := '-';
+AI_table_units[037] := '-';
+AI_table_units[038] := '-';
+AI_table_units[039] := '-';
+AI_table_units[040] := '-';
+AI_table_units[041] := '-';
+AI_table_units[042] := 'Гц';
+AI_table_units[043] := 'об/мин';
+AI_table_units[044] := 'кГц';
+AI_table_units[045] := 'рад/с';
+AI_table_units[046] := '-';
+AI_table_units[047] := '-';
+AI_table_units[048] := '-';
+AI_table_units[049] := '-';
+AI_table_units[050] := '-';
+AI_table_units[051] := '-';
+AI_table_units[052] := '-';
+AI_table_units[053] := '-';
+AI_table_units[054] := '-';
+AI_table_units[055] := '-';
+AI_table_units[056] := '-';
+AI_table_units[057] := '-';
+AI_table_units[058] := '-';
+AI_table_units[059] := '-';
+AI_table_units[060] := '-';
+AI_table_units[061] := '-';
+AI_table_units[062] := '-';
+AI_table_units[063] := 'кВт';
+AI_table_units[064] := 'МВт';
+AI_table_units[065] := 'л.с.';
+AI_table_units[066] := 'Вт';
+AI_table_units[067] := '-';
+AI_table_units[068] := '-';
+AI_table_units[069] := '-';
+AI_table_units[070] := '-';
+AI_table_units[071] := '-';
+AI_table_units[072] := '-';
+AI_table_units[073] := '-';
+AI_table_units[074] := '-';
+AI_table_units[075] := '-';
+AI_table_units[076] := '-';
+AI_table_units[077] := '-';
+AI_table_units[078] := '-';
+AI_table_units[079] := '-';
+AI_table_units[080] := '-';
+AI_table_units[081] := '-';
+AI_table_units[082] := '-';
+AI_table_units[083] := '-';
+AI_table_units[084] := 'м';
+AI_table_units[085] := 'км';
+AI_table_units[086] := 'см';
+AI_table_units[087] := 'мм';
+AI_table_units[088] := 'мкм';
+AI_table_units[089] := '-';
+AI_table_units[090] := '-';
+AI_table_units[091] := '-';
+AI_table_units[092] := '-';
+AI_table_units[093] := '-';
+AI_table_units[094] := '-';
+AI_table_units[095] := '-';
+AI_table_units[096] := '-';
+AI_table_units[097] := '-';
+AI_table_units[098] := '-';
+AI_table_units[099] := '-';
+AI_table_units[100] := '-';
+AI_table_units[101] := '-';
+AI_table_units[102] := '-';
+AI_table_units[103] := '-';
+AI_table_units[104] := '-';
+AI_table_units[105] := 'м^3/с';
+AI_table_units[106] := 'м^3/мин';
+AI_table_units[107] := 'м^3/сут';
+AI_table_units[108] := 'м^3/ч';
+AI_table_units[109] := 'нм^3/мин';
+AI_table_units[110] := 'нл/сут';
+AI_table_units[111] := 'нл/ч';
+AI_table_units[112] := 'нм^3/ч';
+AI_table_units[113] := 'нл/мин';
+AI_table_units[114] := '-';
+AI_table_units[115] := '-';
+AI_table_units[116] := '-';
+AI_table_units[117] := '-';
+AI_table_units[118] := '-';
+AI_table_units[119] := '-';
+AI_table_units[120] := '-';
+AI_table_units[121] := '-';
+AI_table_units[122] := '-';
+AI_table_units[123] := '-';
+AI_table_units[124] := '-';
+AI_table_units[125] := '-';
+AI_table_units[126] := 'кг/с';
+AI_table_units[127] := 'кг/мин';
+AI_table_units[128] := 'кг/ч';
+AI_table_units[129] := '-';
+AI_table_units[130] := '-';
+AI_table_units[131] := '-';
+AI_table_units[132] := '-';
+AI_table_units[133] := '-';
+AI_table_units[134] := '-';
+AI_table_units[135] := '-';
+AI_table_units[136] := '-';
+AI_table_units[137] := '-';
+AI_table_units[138] := '-';
+AI_table_units[139] := '-';
+AI_table_units[140] := '-';
+AI_table_units[141] := '-';
+AI_table_units[142] := '-';
+AI_table_units[143] := '-';
+AI_table_units[144] := '-';
+AI_table_units[145] := '-';
+AI_table_units[146] := '-';
+AI_table_units[147] := 'А';
+AI_table_units[148] := 'кА';
+AI_table_units[149] := 'мА';
+AI_table_units[150] := 'A_rms';
+AI_table_units[151] := 'kA_rms';
+AI_table_units[152] := '-';
+AI_table_units[153] := '-';
+AI_table_units[154] := '-';
+AI_table_units[155] := '-';
+AI_table_units[156] := '-';
+AI_table_units[157] := '-';
+AI_table_units[158] := '-';
+AI_table_units[159] := '-';
+AI_table_units[160] := '-';
+AI_table_units[161] := '-';
+AI_table_units[162] := '-';
+AI_table_units[163] := '-';
+AI_table_units[164] := '-';
+AI_table_units[165] := '-';
+AI_table_units[166] := '-';
+AI_table_units[167] := '-';
+AI_table_units[168] := 'В';
+AI_table_units[169] := 'кВ';
+AI_table_units[170] := 'мВ';
+AI_table_units[171] := 'V_rms';
+AI_table_units[172] := 'kV_rms';
+AI_table_units[173] := '-';
+AI_table_units[174] := '-';
+AI_table_units[175] := '-';
+AI_table_units[176] := '-';
+AI_table_units[177] := '-';
+AI_table_units[178] := '-';
+AI_table_units[179] := '-';
+AI_table_units[180] := '-';
+AI_table_units[181] := '-';
+AI_table_units[182] := '-';
+AI_table_units[183] := '-';
+AI_table_units[184] := '-';
+AI_table_units[185] := '-';
+AI_table_units[186] := '-';
+AI_table_units[187] := '-';
+AI_table_units[188] := '-';
+AI_table_units[189] := 'Ом';
+AI_table_units[190] := 'кОм';
+AI_table_units[191] := 'МОм';
+AI_table_units[192] := '-';
+AI_table_units[193] := '-';
+AI_table_units[194] := '-';
+AI_table_units[195] := '-';
+AI_table_units[196] := '-';
+AI_table_units[197] := '-';
+AI_table_units[198] := '-';
+AI_table_units[199] := '-';
+AI_table_units[200] := '-';
+AI_table_units[201] := '-';
+AI_table_units[202] := '-';
+AI_table_units[203] := '-';
+AI_table_units[204] := '-';
+AI_table_units[205] := '-';
+AI_table_units[206] := '-';
+AI_table_units[207] := '-';
+AI_table_units[208] := '-';
+AI_table_units[209] := '-';
+AI_table_units[210] := '%';
+AI_table_units[211] := 'доля';
+AI_table_units[212] := '-';
+AI_table_units[213] := '-';
+AI_table_units[214] := '-';
+AI_table_units[215] := '-';
+AI_table_units[216] := '-';
+AI_table_units[217] := '-';
+AI_table_units[218] := '-';
+AI_table_units[219] := '-';
+AI_table_units[220] := '-';
+AI_table_units[221] := '-';
+AI_table_units[222] := '-';
+AI_table_units[223] := '-';
+AI_table_units[224] := '-';
+AI_table_units[225] := '-';
+AI_table_units[226] := '-';
+AI_table_units[227] := '-';
+AI_table_units[228] := '-';
+AI_table_units[229] := '-';
+AI_table_units[230] := '-';
+AI_table_units[231] := 'рад';
+AI_table_units[232] := '°';
+AI_table_units[233] := '$'';
+AI_table_units[234] := '"';
+AI_table_units[235] := '-';
+AI_table_units[236] := '-';
+AI_table_units[237] := '-';
+AI_table_units[238] := '-';
+AI_table_units[239] := '-';
+AI_table_units[240] := '-';
+AI_table_units[241] := '-';
+AI_table_units[242] := '-';
+AI_table_units[243] := '-';
+AI_table_units[244] := '-';
+AI_table_units[245] := '-';
+AI_table_units[246] := '-';
+AI_table_units[247] := '-';
+AI_table_units[248] := '-';
+AI_table_units[249] := '-';
+AI_table_units[250] := '-';
+AI_table_units[251] := '-';
+AI_table_units[252] := 'Н';
+AI_table_units[253] := '-';
+AI_table_units[254] := '-';
+AI_table_units[255] := '-';
+AI_table_units[256] := '-';
+AI_table_units[257] := '-';
+AI_table_units[258] := '-';
+AI_table_units[259] := '-';
+AI_table_units[260] := '-';
+AI_table_units[261] := '-';
+AI_table_units[262] := '-';
+AI_table_units[263] := '-';
+AI_table_units[264] := '-';
+AI_table_units[265] := '-';
+AI_table_units[266] := '-';
+AI_table_units[267] := '-';
+AI_table_units[268] := '-';
+AI_table_units[269] := '-';
+AI_table_units[270] := '-';
+AI_table_units[271] := '-';
+AI_table_units[272] := '-';
+AI_table_units[273] := 'м/с';
+AI_table_units[274] := 'мм/с';
+AI_table_units[275] := '-';
+AI_table_units[276] := '-';
+AI_table_units[277] := '-';
+AI_table_units[278] := '-';
+AI_table_units[279] := '-';
+AI_table_units[280] := '-';
+AI_table_units[281] := '-';
+AI_table_units[282] := '-';
+AI_table_units[283] := '-';
+AI_table_units[284] := '-';
+AI_table_units[285] := '-';
+AI_table_units[286] := '-';
+AI_table_units[287] := '-';
+AI_table_units[288] := '-';
+AI_table_units[289] := '-';
+AI_table_units[290] := '-';
+AI_table_units[291] := '-';
+AI_table_units[292] := '-';
+AI_table_units[293] := '-';
+AI_table_units[294] := 'Н*м';
+AI_table_units[295] := '-';
+AI_table_units[296] := '-';
+AI_table_units[297] := '-';
+AI_table_units[298] := '-';
+AI_table_units[299] := '-';
+AI_table_units[300] := '-';
+AI_table_units[301] := '-';
+AI_table_units[302] := '-';
+AI_table_units[303] := '-';
+AI_table_units[304] := '-';
+AI_table_units[305] := '-';
+AI_table_units[306] := '-';
+AI_table_units[307] := '-';
+AI_table_units[308] := '-';
+AI_table_units[309] := '-';
+AI_table_units[310] := '-';
+AI_table_units[311] := '-';
+AI_table_units[312] := '-';
+AI_table_units[313] := '-';
+AI_table_units[314] := '-';
+AI_table_units[315] := 'м^3';
+AI_table_units[316] := 'л';
+AI_table_units[317] := '-';
+AI_table_units[318] := '-';
+AI_table_units[319] := '-';
+AI_table_units[320] := '-';
+AI_table_units[321] := '-';
+AI_table_units[322] := '-';
+AI_table_units[323] := '-';
+AI_table_units[324] := '-';
+AI_table_units[325] := '-';
+AI_table_units[326] := '-';
+AI_table_units[327] := '-';
+AI_table_units[328] := '-';
+AI_table_units[329] := '-';
+AI_table_units[330] := '-';
+AI_table_units[331] := '-';
+AI_table_units[332] := '-';
+AI_table_units[333] := '-';
+AI_table_units[334] := '-';
+AI_table_units[335] := '-';
+AI_table_units[336] := 'кг/м^3';
+AI_table_units[337] := '-';
+AI_table_units[338] := '-';
+AI_table_units[339] := '-';
+AI_table_units[340] := '-';
+AI_table_units[341] := '-';
+AI_table_units[342] := '-';
+AI_table_units[343] := '-';
+AI_table_units[344] := '-';
+AI_table_units[345] := '-';
+AI_table_units[346] := '-';
+AI_table_units[347] := '-';
+AI_table_units[348] := '-';
+AI_table_units[349] := '-';
+AI_table_units[350] := '-';
+AI_table_units[351] := '-';
+AI_table_units[352] := '-';
+AI_table_units[353] := '-';
+AI_table_units[354] := '-';
+AI_table_units[355] := '-';
+AI_table_units[356] := '-';
+AI_table_units[357] := 'с';
+AI_table_units[358] := 'мин';
+AI_table_units[359] := 'ч';
+AI_table_units[360] := '-';
+AI_table_units[361] := '-';
+AI_table_units[362] := '-';
+AI_table_units[363] := '-';
+AI_table_units[364] := '-';
+AI_table_units[365] := '-';
+AI_table_units[366] := '-';
+AI_table_units[367] := '-';
+AI_table_units[368] := '-';
+AI_table_units[369] := '-';
+AI_table_units[370] := '-';
+AI_table_units[371] := '-';
+AI_table_units[372] := '-';
+AI_table_units[373] := '-';
+AI_table_units[374] := '-';
+AI_table_units[375] := '-';
+AI_table_units[376] := '-';
+AI_table_units[377] := '-';]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="F2DF7F234C9EC1DE93442C8A08CF09BB" Name="block_AI">
+                    <Variables>
+                        <Variable UUID="64EBCF3249A2F35B4A08CFB2C616F6CB" Name="clock_AI_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                        <Variable UUID="3F50689B4589D930B51474B7BDB5B258" Name="clock_AI_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                        <Variable UUID="1CFA678B43840F20C23B65843BD5930F" Name="INIT_units" Type="Array_units_init" TypeUUID="B2B6151A4E0706CF5C4D0C94596E6AD3" Usage="internal" />
+                        <Variable UUID="D60861F943360BABCA5583BF2FB65EC1" Name="IMIT_ON" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                        <Variable UUID="7F02B2724DE32A8F94285992860E9C8B" Name="IMIT_ON_bool" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="79001CB94B0112011DA9B7814602A444" Name="SEN_Tnv" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="CBE6F41A4846EC5CAC9604A233C3E72F" Name="SEN_Tgr" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="2374D06643E7130048E89BB08D78B1B3" Name="SEN_Tg1kr7B" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="9F45A24E4791D16E3863A98C32E69D12" Name="SEN_Tg2kr8B" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="9EB807F3435C4DEAC70BF3A2CE0BA927" Name="SEN_Tg1kr8Bbis" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="A20C383240B875605583D8BFF2F842F2" Name="SEN_Tg2kr8Bbis" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="3F1905764052FEC2A5BCF3B43C727533" Name="SEN_Pg2kr8Bbis" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="F0B1ACE04D690AD01BD230896D8A740A" Name="SEN_Pg1kr7B" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="43AF86624184F5B7A92C8184A910D52D" Name="SEN_rez_01" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="A3C264CD4E1C31C0B4D11F91FCA8E22A" Name="SEN_Patm" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="F229EEA64D7E8A5B81C6F292FB58FDE3" Name="SEN_PozAPK3" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="E8CC48EA4775D9E22A61B8B81406E7A6" Name="SEN_rez_02" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="DE63165048CBFECCD92D69B81A7593DF" Name="SEN_rez_03" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="54BE01D24A2BE6DB6AA3EDBFEECE1A4A" Name="SEN_rez_04" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="E5E1E85248F6A7466A9BC7897516EBFE" Name="SEN_rez_05" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="3D4785E844701E1820D834A19B367015" Name="SEN_Ctrl24VTI1" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="5268221B4494FBD361E2CB8D501C6A53" Name="SEN_Tg1PU" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="FA6F9C614A2D7477C8F5A4BF96E6DC17" Name="SEN_Tg2PU" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="99C6496B40AA33548F9F93A6AA8700CD" Name="SEN_rez_06" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="43417F00468E7C020CCC18A20C84AF26" Name="SEN_Pg1PU" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="7F4EAE4B44BC15697FAB98AC40DC9FED" Name="SEN_Pg2PU" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="30F09E7645362C6F807C8D8A9F0D57C1" Name="SEN_rez_07" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="AC46011242E5CA7EB212B0915B8B2E2C" Name="SEN_Tg1gr_2" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="CAA0A5944CB527AF3693ADB9F900B87D" Name="SEN_Tg2gr_2" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="7019BD0D446447F7BD913D85107FCE98" Name="SEN_Pg2plum" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="37FA7AEC45F7ADE8A32D019E528BD7DC" Name="SEN_rez_08" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="2C3CF70B48D916A15EAA3BA1693291FE" Name="SEN_Pcompr_v" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="DAD9F4F641D98E915DDDBDB0E29EC162" Name="SEN_Ttg" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="1D54B92A4BC11A587BAB0A90E9AE771E" Name="SEN_Tpg" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="493BA5544AA9076B29E954AB0622D0E9" Name="SEN_Ptg" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="883FB9C949C01C43265D179F20BD6F13" Name="SEN_Ppg" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="46A1D643439420515C798A9F7BF17E11" Name="SEN_Ctrl24VTI2" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="3665ECF54C004B2A57DCC8AD9B0AE32A" Name="SEN_Lpe1" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="C893E50C4BA82B5E6B4A10BD5C50CE4F" Name="SEN_Lpe2" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="C491796D420BD076B701089EC9426474" Name="SEN_Lpe3" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="74D24AE44CAFB2E4CAEC01A77CE12E6D" Name="SEN_Lpe7" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="5C3C602C4BF47CC8D291FE9F680C071C" Name="SEN_Lpe8" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="CC149B574ABBBF83AE3D8AA5AB4E65B3" Name="SEN_Tozh" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="4CCBDDDF4DCAA829A721F39C68C35B5B" Name="SEN_rez_09" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="8D72642E42AC647CD78BE382C03C0174" Name="SEN_rez_10" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="1F04C61C489792C01F5A05B822AFD488" Name="SEN_rez_11" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="ADBA3EEF445AEE271526359976775529" Name="SEN_rez_12" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="0AB896B34D972534B76998A6AC277CEC" Name="SEN_rez_13" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="B45C042C484E07C693A1169D274B9DE8" Name="SEN_rez_14" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="7488CD898A134A71AB983BB5A3253BCE" Name="SEN_rez_15" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="878CDA38C2224295A5589DFDB6D426BA" Name="SEN_rez_16" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="E49BDB9CE2E8425ABE13BF18DD13FB76" Name="SEN_rez_17" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="676A6E5FEBCA45BD87F89965E5B8A0BC" Name="SEN_Ctrl24VTI3" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="87B1674208D64F34A6A6EE8798E9DA87" Name="SEN_rez_18" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="97B99FD62EDA4A198DAD4F2BF43E929F" Name="SEN_rez_19" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="802356FB75BC404DAE5211B42BB109D2" Name="SEN_Uosn_p_SHKU17" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="F7AC24E41ABA4DEBBF05B3A6A7F97F9E" Name="SEN_Urez_p_SHKU17" Type="support_AI" TypeUUID="356CFA8D4666FC25F9B3A59C2C708E73" Usage="internal" />
+                        <Variable UUID="723FC1A04BF1CF4A0EB60FB572DFBFF6" Name="AI_001" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="4E2BBCF2484D65757CEC1887BDEDABAF" Name="AI_002" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="A0B6F7204B100ACC941DCF8A1371DCD5" Name="AI_003" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="C58A6E0040DD9F63CC19B4B98359777E" Name="AI_004" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="5C327DA24BA1280A1BF01C8283E6B9BB" Name="AI_005" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="5E7E05CD4217D60E5354DFA7AD0F1A76" Name="AI_006" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="54CF31D44410AE1D976E9A9D1F232A79" Name="AI_007" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="95231ADB425A144A677918AB7B62CC63" Name="AI_008" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="AED4002749FAB259DE4845A16278F799" Name="AI_009" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="AB5D77CA410EBB49173A42B5138A43A1" Name="AI_010" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="D86FD1CA4BA12B60FBECC8AA85D40800" Name="AI_011" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="D2F8F57B46E79C01C94CA693FEF9F902" Name="AI_012" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="2147B30342EA87D74C96F098D805D48A" Name="AI_013" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="DC8DDF6146B6C436E82FB18E8F75915C" Name="AI_014" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="B1C3A4564A71365340B418AAE76E4A58" Name="AI_015" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="EC8ACA8B4CFB92DC791CF7A6FD1180DA" Name="AI_016" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="3B7095654E72E535E397AB85211E9D3E" Name="AI_017" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="13487EF34FC26361666CECAC696B3E9E" Name="AI_018" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="E239E20E47AEB932A74F369AD2474763" Name="AI_019" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="6D174D1A4ADCFC48BDA192B3D2D930FB" Name="AI_020" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="E8D1D28DA040469E876C5EAAD9E9F91C" Name="AI_021" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="AFE1077803F0461FAB312C61BD12AFC5" Name="AI_022" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="5493A7437F774466AA732E4A7F21FF7D" Name="AI_023" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="030D3F705AE3433CB961F772D2EC8F07" Name="AI_024" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="A3E0B50F9103479084D85F06BFD4A2E1" Name="AI_025" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="868C99E5490F44F88AF704D3BFB2C53E" Name="AI_026" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="E15AFF1F96D544E19E50A372151383C9" Name="AI_027" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="3DBDBC3A53B04AAD87F9AF7A350B3720" Name="AI_028" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="240CF0B3498A4EDE8C8137092DA37E62" Name="AI_029" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="460C00D3B01C471AB6A4DFE07CEAE610" Name="AI_030" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="AB28D175DD56447AA5EBBC5F3B373AB2" Name="AI_031" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="E598C4BE771D48E48B33675B8BDF9F9B" Name="AI_032" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="88649D20DB114646AB8545DEE8660BD6" Name="AI_033" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="16DB276D7D8D41FFA6E385EAF0110185" Name="AI_034" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="EFDE1B4BEF3443F1B48287D3EA60027E" Name="AI_035" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="08A94D6402D14F1BBF1AAE80ED1A8E8A" Name="AI_036" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="63E74C47707842659CADDE3ACAF23206" Name="AI_037" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="71B3C7C56BBE45E6AC9852A895AC8EF0" Name="AI_038" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="D42EEA64CA1D450D9A82B8B07A3CDD4C" Name="AI_039" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="F8D5FAA3EA9D4D458AAFAF3E87BC668F" Name="AI_040" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="179FA097CFF34099BA569BC63D30A188" Name="AI_041" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="E7F9F36A1A164DB8B8CD7F84429533F0" Name="AI_042" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="73992372CD4E4FD5857C5883312029FC" Name="AI_043" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="8722B8B2A49649F19FA524ABD48BE546" Name="AI_044" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="5A8B3E4969AF47E7A4930DF1F525C147" Name="AI_045" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="8067DA67DA884FD5A06FC190CA4A502F" Name="AI_046" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="8FB00FF8D21A4A87BB7C555DC64ABD6D" Name="AI_047" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="64B392FB27704ED9A73F440B83071D53" Name="AI_048" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="39D34C45EE184DBFA0C9BEC1241F47A7" Name="AI_049" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="4DA7A75DC8A34DA08BDF421DD85A7C36" Name="AI_050" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="F6E4C3A8F0F540F693C40EF474DBF137" Name="AI_051" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                        <Variable UUID="0E9955A635B74F678325E96D9AF627D8" Name="AI_052" Type="AI_Proc_Shil" TypeUUID="DDE768AE43A7928BD7BE9288DA121529" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[clock_AI_cur := CLOCK();
+IF FirstScan_MAIN THEN
+	clock_AI_prev := clock_AI_cur;
+	INIT_units();
+END_IF;
+cycleTime_AI := clock_AI_cur - clock_AI_prev;
+clock_AI_prev := clock_AI_cur;
+
+
+IF FirstScan_MAIN THEN
+	SEN_Tnv				:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура наружного воздуха'			,	BYTE#0	,	SHKU17_AI_HMI.Tnv);
+	SEN_Tgr				:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура грунта'					,	BYTE#0	,	SHKU17_AI_HMI.Tgr);
+	SEN_Tg1kr7B			:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура газа до крана 7Б'			,	BYTE#0	,	SHKU17_AI_HMI.Tg1kr7B);
+	SEN_Tg2kr8B			:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура газа после крана 8Б'		,	BYTE#0	,	SHKU17_AI_HMI.Tg2kr8B);
+	SEN_Tg1kr8Bbis		:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура газа до крана 8Ббис'		,	BYTE#0	,	SHKU17_AI_HMI.Tg1kr8Bbis);
+	SEN_Tg2kr8Bbis		:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура газа после крана 8Ббис'	,	BYTE#0	,	SHKU17_AI_HMI.Tg2kr8Bbis);
+	SEN_Pg2kr8Bbis		:=	AI_init_Shil(LREAL#10.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#16, 	INT#16, 	INT#16, 	'Давление газа после крана 8Ббис'		,	BYTE#0	,	SHKU17_AI_HMI.Pg2kr8Bbis);
+	SEN_Pg1kr7B			:=	AI_init_Shil(LREAL#10.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#16, 	INT#16, 	INT#16, 	'Давление газа до крана 7Б'				,	BYTE#0	,	SHKU17_AI_HMI.Pg1kr7B);
+	SEN_rez_01			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_01);
+	SEN_Patm			:=	AI_init_Shil(LREAL#160.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#16, 	INT#16, 	INT#16, 	'Давление атмосферного воздуха'			,	BYTE#0	,	SHKU17_AI_HMI.Patm);
+	SEN_PozAPK3			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#211, 	INT#150, 	INT#150, 	'Положение АПК №3'						,	BYTE#0	,	SHKU17_AI_HMI.PozAPK3);
+	SEN_rez_02			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_02);
+	SEN_rez_03			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_03);
+	SEN_rez_04			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_04);
+	SEN_rez_05			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_05);
+	SEN_Ctrl24VTI1		:=	AI_init_Shil(LREAL#40.0, 	LREAL#7.3, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Контроль 24 В ТИ'						,	BYTE#0	,	SHKU17_AI_HMI.Ctrl24VTI1);
+	SEN_Tg1PU			:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура газа  до  ПУ'				,	BYTE#0	,	SHKU17_AI_HMI.Tg1PU);
+	SEN_Tg2PU			:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура газа  после ПУ'			,	BYTE#0	,	SHKU17_AI_HMI.Tg2PU);
+	SEN_rez_06			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_06);
+	SEN_Pg1PU			:=	AI_init_Shil(LREAL#10.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#16, 	INT#16, 	INT#16, 	'Давление газа  до  ПУ'					,	BYTE#0	,	SHKU17_AI_HMI.Pg1PU);
+	SEN_Pg2PU			:=	AI_init_Shil(LREAL#10.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#16, 	INT#16, 	INT#16, 	'Давление газа  после ПУ'				,	BYTE#0	,	SHKU17_AI_HMI.Pg2PU);
+	SEN_rez_07			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_07);
+	SEN_Tg1gr_2			:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура газа на входе  группы 2'	,	BYTE#0	,	SHKU17_AI_HMI.Tg1gr_2);
+	SEN_Tg2gr_2			:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура газа на выходе  группы 2'	,	BYTE#0	,	SHKU17_AI_HMI.Tg2gr_2);
+	SEN_Pg2plum			:=	AI_init_Shil(LREAL#10.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#16, 	INT#16, 	INT#16, 	'Давление газа на выходном шлейфе  '	,	BYTE#0	,	SHKU17_AI_HMI.Pg2plum);
+	SEN_rez_08			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_08);
+	SEN_Pcompr_v		:=	AI_init_Shil(LREAL#1.6, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#16, 	INT#16, 	INT#16, 	'Давление сжатого воздуха'				,	BYTE#0	,	SHKU17_AI_HMI.Pcompr_v);
+	SEN_Ttg				:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура топливного газа'			,	BYTE#0	,	SHKU17_AI_HMI.Ttg);
+	SEN_Tpg				:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура пускового газа'			,	BYTE#0	,	SHKU17_AI_HMI.Tpg);
+	SEN_Ptg				:=	AI_init_Shil(LREAL#4.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#16, 	INT#16, 	INT#16, 	'Давление топливного  газа'				,	BYTE#0	,	SHKU17_AI_HMI.Ptg);
+	SEN_Ppg				:=	AI_init_Shil(LREAL#4.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#16, 	INT#16, 	INT#16, 	'Давление пускового газа'				,	BYTE#0	,	SHKU17_AI_HMI.Ppg);
+	SEN_Ctrl24VTI2		:=	AI_init_Shil(LREAL#40.0, 	LREAL#7.3, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Контроль 24 В ТИ'						,	BYTE#0	,	SHKU17_AI_HMI.Ctrl24VTI2);
+	SEN_Lpe1			:=	AI_init_Shil(LREAL#2500.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Уровень в пожарной емкости №1'			,	BYTE#0	,	SHKU17_AI_HMI.Lpe1);
+	SEN_Lpe2			:=	AI_init_Shil(LREAL#2500.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Уровень в пожарной емкости №2'			,	BYTE#0	,	SHKU17_AI_HMI.Lpe2);
+	SEN_Lpe3			:=	AI_init_Shil(LREAL#2500.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Уровень в пожарной емкости №3'			,	BYTE#0	,	SHKU17_AI_HMI.Lpe3);
+	SEN_Lpe7			:=	AI_init_Shil(LREAL#2500.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Уровень в пожарной емкости №7'			,	BYTE#0	,	SHKU17_AI_HMI.Lpe7);
+	SEN_Lpe8			:=	AI_init_Shil(LREAL#2500.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Уровень в пожарной емкости №8'			,	BYTE#0	,	SHKU17_AI_HMI.Lpe8);
+	SEN_Tozh			:=	AI_init_Shil(LREAL#240.0, 	LREAL#-60.0,LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#23, 	INT#23,  	INT#23, 	'Температура охлаждающей жидкости'		,	BYTE#0	,	SHKU17_AI_HMI.Tozh);
+	SEN_rez_09			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_09);
+	SEN_rez_10			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_10);
+	SEN_rez_11			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_11);
+	SEN_rez_12			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_12);
+	SEN_rez_13			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_13);
+	SEN_rez_14			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_14);
+	SEN_rez_15			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_15);
+	SEN_rez_16			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_16);
+	SEN_rez_17			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_17);
+	SEN_Ctrl24VTI3		:=	AI_init_Shil(LREAL#40.0, 	LREAL#7.3, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Контроль 24 В ТИ'						,	BYTE#0	,	SHKU17_AI_HMI.Ctrl24VTI3);
+	SEN_rez_18			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_18);
+	SEN_rez_19			:=	AI_init_Shil(LREAL#100.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#150, 	INT#150, 	INT#150, 	'Резерв'								,	BYTE#0	,	SHKU17_AI_HMI.rez_19);
+	SEN_Uosn_p_SHKU17	:=	AI_init_Shil(LREAL#370.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#169, 	INT#169, 	INT#169, 	'Напряжение основного питания ШКУ-17'	,	BYTE#0	,	SHKU17_AI_HMI.Uosn_p_SHKU17);
+	SEN_Urez_p_SHKU17	:=	AI_init_Shil(LREAL#370.0, 	LREAL#0.0, 	LREAL#0.1,	LREAL#3600.0,	DINT#11937,	DINT#59550,	INT#169, 	INT#169, 	INT#169, 	'Напряжение резервного питания ШКУ-17'	,	BYTE#0	,	SHKU17_AI_HMI.Urez_p_SHKU17);
+END_IF;
+
+
+(*
+Вызов блока:
+AI_Proc(SEN_AI, AI_raw, cycleTime, AI_LGC, AI_HMI_str);
+где:
+SEN_AI		- support_AI	- имя структуры support_AI;
+AI_raw		- DINT			- "сырое" значение AI (из драйвера);
+cycleTime	- LREAL			- текущее время цикла ПЛК;
+AI_LGC		- AI_PLC		- структура AI для PLC;
+AI_HMI_str	- AI_HMI_Shil	- структура AI для SCADA
+*)
+
+IF NOT IMIT THEN
+	AI_001(SEN_Tnv,			SHKU17_A1_AI_raw.AI_3_1,	cycleTime_AI,	SHKU17_AI_PLC.Tnv			SHKU17_AI_HMI.Tnv);
+	AI_002(SEN_Tgr,			SHKU17_A1_AI_raw.AI_3_2,	cycleTime_AI,	SHKU17_AI_PLC.Tgr			SHKU17_AI_HMI.Tgr);
+	AI_003(SEN_Tg1kr7B,		SHKU17_A1_AI_raw.AI_3_3,	cycleTime_AI,	SHKU17_AI_PLC.Tg1kr7B		SHKU17_AI_HMI.Tg1kr7B);
+	AI_004(SEN_Tg2kr8B,		SHKU17_A1_AI_raw.AI_3_4,	cycleTime_AI,	SHKU17_AI_PLC.Tg2kr8B		SHKU17_AI_HMI.Tg2kr8B);
+	AI_005(SEN_Tg1kr8Bbis,	SHKU17_A1_AI_raw.AI_4_1,	cycleTime_AI,	SHKU17_AI_PLC.Tg1kr8Bbis	SHKU17_AI_HMI.Tg1kr8Bbis);
+	AI_006(SEN_Tg2kr8Bbis,	SHKU17_A1_AI_raw.AI_4_2,	cycleTime_AI,	SHKU17_AI_PLC.Tg2kr8Bbis	SHKU17_AI_HMI.Tg2kr8Bbis);
+	AI_007(SEN_Pg2kr8Bbis,	SHKU17_A1_AI_raw.AI_4_3,	cycleTime_AI,	SHKU17_AI_PLC.Pg2kr8Bbis	SHKU17_AI_HMI.Pg2kr8Bbis);
+	AI_008(SEN_Pg1kr7B,		SHKU17_A1_AI_raw.AI_4_4,	cycleTime_AI,	SHKU17_AI_PLC.Pg1kr7B		SHKU17_AI_HMI.Pg1kr7B);
+	AI_009(SEN_rez_01,		SHKU17_A1_AI_raw.AI_5_1,	cycleTime_AI,	SHKU17_AI_PLC.rez_01		SHKU17_AI_HMI.rez_01);
+	AI_010(SEN_Patm,		SHKU17_A1_AI_raw.AI_5_2,	cycleTime_AI,	SHKU17_AI_PLC.Patm			SHKU17_AI_HMI.Patm);
+	AI_011(SEN_PozAPK3,		SHKU17_A1_AI_raw.AI_5_3,	cycleTime_AI,	SHKU17_AI_PLC.PozAPK3		SHKU17_AI_HMI.PozAPK3);
+	AI_012(SEN_rez_02,		SHKU17_A1_AI_raw.AI_5_4,	cycleTime_AI,	SHKU17_AI_PLC.rez_02		SHKU17_AI_HMI.rez_02);
+	AI_013(SEN_rez_03,		SHKU17_A1_AI_raw.AI_6_1,	cycleTime_AI,	SHKU17_AI_PLC.rez_03		SHKU17_AI_HMI.rez_03);
+	AI_014(SEN_rez_04,		SHKU17_A1_AI_raw.AI_6_2,	cycleTime_AI,	SHKU17_AI_PLC.rez_04		SHKU17_AI_HMI.rez_04);
+	AI_015(SEN_rez_05,		SHKU17_A1_AI_raw.AI_6_3,	cycleTime_AI,	SHKU17_AI_PLC.rez_05		SHKU17_AI_HMI.rez_05);
+	AI_016(SEN_Ctrl24VTI1,	SHKU17_A1_AI_raw.AI_6_4,	cycleTime_AI,	SHKU17_AI_PLC.Ctrl24VTI1	SHKU17_AI_HMI.Ctrl24VTI1);
+	AI_017(SEN_Tg1PU,		SHKU17_A1_AI_raw.AI_7_1,	cycleTime_AI,	SHKU17_AI_PLC.Tg1PU			SHKU17_AI_HMI.Tg1PU);
+	AI_018(SEN_Tg2PU,		SHKU17_A1_AI_raw.AI_7_2,	cycleTime_AI,	SHKU17_AI_PLC.Tg2PU			SHKU17_AI_HMI.Tg2PU);
+	AI_019(SEN_rez_06,		SHKU17_A1_AI_raw.AI_7_3,	cycleTime_AI,	SHKU17_AI_PLC.rez_06		SHKU17_AI_HMI.rez_06);
+	AI_020(SEN_Pg1PU,		SHKU17_A1_AI_raw.AI_7_4,	cycleTime_AI,	SHKU17_AI_PLC.Pg1PU			SHKU17_AI_HMI.Pg1PU);
+	AI_021(SEN_Pg2PU,		SHKU17_A1_AI_raw.AI_8_1,	cycleTime_AI,	SHKU17_AI_PLC.Pg2PU			SHKU17_AI_HMI.Pg2PU);
+	AI_022(SEN_rez_07,		SHKU17_A1_AI_raw.AI_8_2,	cycleTime_AI,	SHKU17_AI_PLC.rez_07		SHKU17_AI_HMI.rez_07);
+	AI_023(SEN_Tg1gr_2,		SHKU17_A1_AI_raw.AI_8_3,	cycleTime_AI,	SHKU17_AI_PLC.Tg1gr_2		SHKU17_AI_HMI.Tg1gr_2);
+	AI_024(SEN_Tg2gr_2,		SHKU17_A1_AI_raw.AI_8_4,	cycleTime_AI,	SHKU17_AI_PLC.Tg2gr_2		SHKU17_AI_HMI.Tg2gr_2);
+	AI_025(SEN_Pg2plum,		SHKU17_A1_AI_raw.AI_9_1,	cycleTime_AI,	SHKU17_AI_PLC.Pg2plum		SHKU17_AI_HMI.Pg2plum);
+	AI_026(SEN_rez_08,		SHKU17_A1_AI_raw.AI_9_2,	cycleTime_AI,	SHKU17_AI_PLC.rez_08		SHKU17_AI_HMI.rez_08);
+	AI_027(SEN_Pcompr_v,	SHKU17_A1_AI_raw.AI_9_3,	cycleTime_AI,	SHKU17_AI_PLC.Pcompr_v		SHKU17_AI_HMI.Pcompr_v);
+	AI_028(SEN_Ttg,			SHKU17_A1_AI_raw.AI_9_4,	cycleTime_AI,	SHKU17_AI_PLC.Ttg			SHKU17_AI_HMI.Ttg);
+	AI_029(SEN_Tpg,			SHKU17_A1_AI_raw.AI_10_1,	cycleTime_AI,	SHKU17_AI_PLC.Tpg			SHKU17_AI_HMI.Tpg);
+	AI_030(SEN_Ptg,			SHKU17_A1_AI_raw.AI_10_2,	cycleTime_AI,	SHKU17_AI_PLC.Ptg			SHKU17_AI_HMI.Ptg);
+	AI_031(SEN_Ppg,			SHKU17_A1_AI_raw.AI_10_3,	cycleTime_AI,	SHKU17_AI_PLC.Ppg			SHKU17_AI_HMI.Ppg);
+	AI_032(SEN_Ctrl24VTI2,	SHKU17_A1_AI_raw.AI_10_4,	cycleTime_AI,	SHKU17_AI_PLC.Ctrl24VTI2	SHKU17_AI_HMI.Ctrl24VTI2);
+	AI_033(SEN_Lpe1,		SHKU17_A2_AI_raw.AI_3_1,	cycleTime_AI,	SHKU17_AI_PLC.Lpe1			SHKU17_AI_HMI.Lpe1);
+	AI_034(SEN_Lpe2,		SHKU17_A2_AI_raw.AI_3_2,	cycleTime_AI,	SHKU17_AI_PLC.Lpe2			SHKU17_AI_HMI.Lpe2);
+	AI_035(SEN_Lpe3,		SHKU17_A2_AI_raw.AI_3_3,	cycleTime_AI,	SHKU17_AI_PLC.Lpe3			SHKU17_AI_HMI.Lpe3);
+	AI_036(SEN_Lpe7,		SHKU17_A2_AI_raw.AI_3_4,	cycleTime_AI,	SHKU17_AI_PLC.Lpe7			SHKU17_AI_HMI.Lpe7);
+	AI_037(SEN_Lpe8,		SHKU17_A2_AI_raw.AI_4_1,	cycleTime_AI,	SHKU17_AI_PLC.Lpe8			SHKU17_AI_HMI.Lpe8);
+	AI_038(SEN_Tozh,		SHKU17_A2_AI_raw.AI_4_2,	cycleTime_AI,	SHKU17_AI_PLC.Tozh			SHKU17_AI_HMI.Tozh);
+	AI_039(SEN_rez_09,		SHKU17_A2_AI_raw.AI_4_3,	cycleTime_AI,	SHKU17_AI_PLC.rez_09		SHKU17_AI_HMI.rez_09);
+	AI_040(SEN_rez_10,		SHKU17_A2_AI_raw.AI_4_4,	cycleTime_AI,	SHKU17_AI_PLC.rez_10		SHKU17_AI_HMI.rez_10);
+	AI_041(SEN_rez_11,		SHKU17_A2_AI_raw.AI_5_1,	cycleTime_AI,	SHKU17_AI_PLC.rez_11		SHKU17_AI_HMI.rez_11);
+	AI_042(SEN_rez_12,		SHKU17_A2_AI_raw.AI_5_2,	cycleTime_AI,	SHKU17_AI_PLC.rez_12		SHKU17_AI_HMI.rez_12);
+	AI_043(SEN_rez_13,		SHKU17_A2_AI_raw.AI_5_3,	cycleTime_AI,	SHKU17_AI_PLC.rez_13		SHKU17_AI_HMI.rez_13);
+	AI_044(SEN_rez_14,		SHKU17_A2_AI_raw.AI_5_4,	cycleTime_AI,	SHKU17_AI_PLC.rez_14		SHKU17_AI_HMI.rez_14);
+	AI_045(SEN_rez_15,		SHKU17_A2_AI_raw.AI_6_1,	cycleTime_AI,	SHKU17_AI_PLC.rez_15		SHKU17_AI_HMI.rez_15);
+	AI_046(SEN_rez_16,		SHKU17_A2_AI_raw.AI_6_2,	cycleTime_AI,	SHKU17_AI_PLC.rez_16		SHKU17_AI_HMI.rez_16);
+	AI_047(SEN_rez_17,		SHKU17_A2_AI_raw.AI_6_3,	cycleTime_AI,	SHKU17_AI_PLC.rez_17		SHKU17_AI_HMI.rez_17);
+	AI_048(SEN_Ctrl24VTI3,	SHKU17_A2_AI_raw.AI_6_4,	cycleTime_AI,	SHKU17_AI_PLC.Ctrl24VTI3	SHKU17_AI_HMI.Ctrl24VTI3);
+	AI_049(SEN_rez_18,		SHKU17_A2_AI_raw.AI_7_1,	cycleTime_AI,	SHKU17_AI_PLC.rez_18		SHKU17_AI_HMI.rez_18);
+	AI_050(SEN_rez_19,		SHKU17_A2_AI_raw.AI_7_2,	cycleTime_AI,	SHKU17_AI_PLC.rez_19		SHKU17_AI_HMI.rez_19);
+	AI_051(SEN_Uosn_p_SHKU17,SHKU17_A2_AI_raw.AI_7_3,	cycleTime_AI,	SHKU17_AI_PLC.Uosn_p_SHKU17	SHKU17_AI_HMI.Uosn_p_SHKU17);
+	AI_052(SEN_Urez_p_SHKU17,SHKU17_A2_AI_raw.AI_7_4,	cycleTime_AI,	SHKU17_AI_PLC.Urez_p_SHKU17	SHKU17_AI_HMI.Urez_p_SHKU17);
+
+ELSE
+//При вкюченной иммитации значение управляющего выхода клапана АПК заводим на его входной канал текущей позиции
+	SHKU17_AI_HMI.PozAPK3.PV	:= SHKU17_A1_AO_HMI.APK3_pos;
+END_IF;
+
+
+IMIT_ON(IMIT, IMIT_ON_bool);
+IF IMIT_ON_bool THEN
+	SHKU17_AI_PLC.Tnv.flt			:= BOOL#0;	SHKU17_AI_HMI.Tnv.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Tgr.flt			:= BOOL#0;	SHKU17_AI_HMI.Tgr.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Tg1kr7B.flt		:= BOOL#0;	SHKU17_AI_HMI.Tg1kr7B.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.Tg2kr8B.flt		:= BOOL#0;	SHKU17_AI_HMI.Tg2kr8B.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.Tg1kr8Bbis.flt	:= BOOL#0;	SHKU17_AI_HMI.Tg1kr8Bbis.Flt	:= BOOL#0;
+	SHKU17_AI_PLC.Tg2kr8Bbis.flt	:= BOOL#0;	SHKU17_AI_HMI.Tg2kr8Bbis.Flt	:= BOOL#0;
+	SHKU17_AI_PLC.Pg2kr8Bbis.flt	:= BOOL#0;	SHKU17_AI_HMI.Pg2kr8Bbis.Flt	:= BOOL#0;
+	SHKU17_AI_PLC.Pg1kr7B.flt		:= BOOL#0;	SHKU17_AI_HMI.Pg1kr7B.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_01.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_01.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.Patm.flt			:= BOOL#0;	SHKU17_AI_HMI.Patm.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.PozAPK3.flt		:= BOOL#0;	SHKU17_AI_HMI.PozAPK3.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_02.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_02.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_03.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_03.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_04.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_04.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_05.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_05.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.Ctrl24VTI1.flt	:= BOOL#0;	SHKU17_AI_HMI.Ctrl24VTI1.Flt	:= BOOL#0;
+	SHKU17_AI_PLC.Tg1PU.flt			:= BOOL#0;	SHKU17_AI_HMI.Tg1PU.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Tg2PU.flt			:= BOOL#0;	SHKU17_AI_HMI.Tg2PU.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.rez_06.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_06.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.Pg1PU.flt			:= BOOL#0;	SHKU17_AI_HMI.Pg1PU.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Pg2PU.flt			:= BOOL#0;	SHKU17_AI_HMI.Pg2PU.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.rez_07.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_07.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.Tg1gr_2.flt		:= BOOL#0;	SHKU17_AI_HMI.Tg1gr_2.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.Tg2gr_2.flt		:= BOOL#0;	SHKU17_AI_HMI.Tg2gr_2.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.Pg2plum.flt		:= BOOL#0;	SHKU17_AI_HMI.Pg2plum.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_08.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_08.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.Pcompr_v.flt		:= BOOL#0;	SHKU17_AI_HMI.Pcompr_v.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.Ttg.flt			:= BOOL#0;	SHKU17_AI_HMI.Ttg.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Tpg.flt			:= BOOL#0;	SHKU17_AI_HMI.Tpg.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Ptg.flt			:= BOOL#0;	SHKU17_AI_HMI.Ptg.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Ppg.flt			:= BOOL#0;	SHKU17_AI_HMI.Ppg.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Ctrl24VTI2.flt	:= BOOL#0;	SHKU17_AI_HMI.Ctrl24VTI2.Flt	:= BOOL#0;
+	SHKU17_AI_PLC.Lpe1.flt			:= BOOL#0;	SHKU17_AI_HMI.Lpe1.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Lpe2.flt			:= BOOL#0;	SHKU17_AI_HMI.Lpe2.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Lpe3.flt			:= BOOL#0;	SHKU17_AI_HMI.Lpe3.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Lpe7.flt			:= BOOL#0;	SHKU17_AI_HMI.Lpe7.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Lpe8.flt			:= BOOL#0;	SHKU17_AI_HMI.Lpe8.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.Tozh.flt			:= BOOL#0;	SHKU17_AI_HMI.Tozh.Flt			:= BOOL#0;
+	SHKU17_AI_PLC.rez_09.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_09.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_10.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_10.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_11.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_11.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_12.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_12.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_13.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_13.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_14.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_14.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_15.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_15.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_16.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_16.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_17.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_17.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.Ctrl24VTI3.flt	:= BOOL#0;	SHKU17_AI_HMI.Ctrl24VTI3.Flt	:= BOOL#0;
+	SHKU17_AI_PLC.rez_18.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_18.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.rez_19.flt		:= BOOL#0;	SHKU17_AI_HMI.rez_19.Flt		:= BOOL#0;
+	SHKU17_AI_PLC.Uosn_p_SHKU17.flt	:= BOOL#0;	SHKU17_AI_HMI.Uosn_p_SHKU17.Flt	:= BOOL#0;
+	SHKU17_AI_PLC.Urez_p_SHKU17.flt	:= BOOL#0;	SHKU17_AI_HMI.Urez_p_SHKU17.Flt	:= BOOL#0;											
+END_IF;
+
+
+clock_AI_cur := CLOCK();
+cycleTime_AI_sys := clock_AI_cur - clock_AI_prev;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="1A349BF849FA7DC6FBE3C2B4FE3BC96F" Name="block_AO">
+                    <Variables>
+                        <Variable UUID="9725B4F5482765934D5E72A618DD8C49" Name="AO_min" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+                        <Variable UUID="23B7D56442EAB96696C443B564B07B9B" Name="AO_max" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[//Масштабирование AO для выходного модуля
+AO_min := REAL#13107;
+AO_max := REAL#65535;
+
+SHKU17_A2_AO_raw.AO_8_1 := AO_min + (AO_max - AO_min)*SHKU17_A1_AO_HMI.APK3_pos;
+SHKU17_A2_AO_raw.AO_8_2 := AO_min + (AO_max - AO_min)*SHKU17_A1_AO_HMI.rez_01;
+SHKU17_A2_AO_raw.AO_8_3 := AO_min + (AO_max - AO_min)*SHKU17_A1_AO_HMI.rez_02;
+SHKU17_A2_AO_raw.AO_8_4 := AO_min + (AO_max - AO_min)*SHKU17_A1_AO_HMI.rez_03;]]></ST>
+                </FunctionBlock>
+            </Folder>
+            <Folder Name="DIO" Comment="" Data="" UUID="2BAA73074BA9A47D50226DBB6AA7E652">
+                <FunctionBlock UUID="68199DEB4787394BB7C709A7AC58774F" Name="DI_Proc">
+                    <Variables>
+                        <Variable UUID="C710DEEE4025E1A7FBEC3AB69D10EB95" Name="Numb" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                        <Variable UUID="A55187544BF14F871DFAAFBEFA4D73E7" Name="DI_raw" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="57D10F9A4EBA338294FAD79532728AE7" Name="cycle_set" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                        <Variable UUID="C0030F2546D0531C72976CAA199383CB" Name="Inv" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="52174AB240497E60923815B0C58ACA7C" Name="DI_out" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="output" />
+                        <Variable UUID="EF897D2E4471E85C56052AB99C3143C5" Name="cycle_val" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Size="32" Array="TRUE" Usage="internal" />
+                        <Variable UUID="0C0A43644A71081B09CFCB86B5F34B8D" Name="DI_in_last" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="32" Array="TRUE" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[IF DI_Raw = DI_in_last[Numb] THEN
+	cycle_val[Numb] := cycle_val[Numb] + INT#1;
+ELSE
+	cycle_val[Numb] := INT#0;
+END_IF;
+
+IF cycle_val[Numb] >= cycle_set THEN
+	DI_out := DI_Raw XOR Inv;
+	cycle_val[Numb] := cycle_val[Numb] - INT#1;
+END_IF;
+
+DI_in_last[Numb] := DI_Raw;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="996FFC01410FAAA19E620CB4DD7B4D05" Name="block_DI">
+                    <Variables>
+                        <Variable UUID="E0711C66460CCD34145CB4ABB4AE60E2" Name="clock_DI_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                        <Variable UUID="C1AACD3B4B75FDD66863319DC9AE3CAF" Name="clock_DI_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                        <Variable UUID="123516FD4C830D51212C2AA9B2952C8C" Name="IMIT_ON" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                        <Variable UUID="3BD784024DF6264F8475698A2D31A958" Name="IMIT_ON_bool" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="12A5215540E65C4A89F777BD1EE14D8E" Name="PDI" Type="DI_Proc" TypeUUID="68199DEB4787394BB7C709A7AC58774F" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[clock_DI_cur := CLOCK();
+IF FirstScan_MAIN THEN
+	clock_DI_prev := clock_DI_cur;
+END_IF;
+cycleTime_DI := clock_DI_cur - clock_DI_prev;
+clock_DI_prev := clock_DI_cur;
+
+IF NOT IMIT THEN
+	PDI(INT#0,	SHKU17_A2_DI_raw.DI_9_1,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.Ala_ispr_Ppr);
+	PDI(INT#1,	SHKU17_A2_DI_raw.DI_9_2,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.rez_01);
+	PDI(INT#2,	SHKU17_A2_DI_raw.DI_9_3,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.rez_02);
+	PDI(INT#3,	SHKU17_A2_DI_raw.DI_9_4,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.rez_03);
+	PDI(INT#4,	SHKU17_A2_DI_raw.DI_9_5,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.rez_04);
+	PDI(INT#5,	SHKU17_A2_DI_raw.DI_9_6,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.rez_05);
+	PDI(INT#6,	SHKU17_A2_DI_raw.DI_9_7,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.Pg2_plum);
+	PDI(INT#7,	SHKU17_A2_DI_raw.DI_9_8,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.No_U_AVVgr_3);
+	PDI(INT#8,	SHKU17_A2_DI_raw.DI_9_9,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.no_U_PV5);
+	PDI(INT#9,	SHKU17_A2_DI_raw.DI_9_10,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.no_U_PV6);
+	PDI(INT#10,	SHKU17_A2_DI_raw.DI_9_11,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.Inc1_ON);
+	PDI(INT#11,	SHKU17_A2_DI_raw.DI_9_12,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.Inc1_OFF);
+	PDI(INT#12,	SHKU17_A2_DI_raw.DI_9_13,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.Inc2_ON);
+	PDI(INT#13,	SHKU17_A2_DI_raw.DI_9_14,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.Inc2_OFF);
+	PDI(INT#14,	SHKU17_A2_DI_raw.DI_9_15,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.SS_ON);
+	PDI(INT#15,	SHKU17_A2_DI_raw.DI_9_16,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.SS_OFF);
+	PDI(INT#16,	SHKU17_A2_DI_raw.DI_10_1,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.APK_ON);
+	PDI(INT#17,	SHKU17_A2_DI_raw.DI_10_2,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.APK_OFF);
+	PDI(INT#18,	SHKU17_A2_DI_raw.DI_10_3,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.APK_Heat_ON);
+	PDI(INT#19,	SHKU17_A2_DI_raw.DI_10_4,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.N11GD100_1_WORK);
+	PDI(INT#20,	SHKU17_A2_DI_raw.DI_10_5,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.N11GD100_1_FLT);
+	PDI(INT#21,	SHKU17_A2_DI_raw.DI_10_6,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.N11GD100_2_WORK);
+	PDI(INT#22,	SHKU17_A2_DI_raw.DI_10_7,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.N11GD100_2_FLT);
+	PDI(INT#23,	SHKU17_A2_DI_raw.DI_10_8,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.AC804_FLT);
+	PDI(INT#24,	SHKU17_A2_DI_raw.DI_10_9,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.AC804_WORK);
+	PDI(INT#25,	SHKU17_A2_DI_raw.DI_10_10,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.AC804_REZ);
+	PDI(INT#26,	SHKU17_A2_DI_raw.DI_10_11,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.TG2_FLT);
+	PDI(INT#27,	SHKU17_A2_DI_raw.DI_10_12,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.P3_30_ON);
+	PDI(INT#28,	SHKU17_A2_DI_raw.DI_10_13,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.P3_30_KVR_AUTO);
+	PDI(INT#29,	SHKU17_A2_DI_raw.DI_10_14,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.rez_06);
+	PDI(INT#30,	SHKU17_A2_DI_raw.DI_10_15,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.rez_07);
+	PDI(INT#31,	SHKU17_A2_DI_raw.DI_10_16,	INT#3,	BOOL#0,	SHKU17_A1_DI_HMI.Ctrl24_TC_1);
+ELSE
+END_IF;
+
+//При иммитации однократно инициализируем конечники кранов
+IMIT_ON(IMIT, IMIT_ON_bool);
+IF IMIT_ON_bool THEN
+
+END_IF;
+
+clock_DI_cur := CLOCK();
+cycleTime_DI_sys := clock_DI_cur - clock_DI_prev;]]></ST>
+                </FunctionBlock>
+            </Folder>
+        </Folder>
+        <FunctionBlock UUID="FC3659584F7E9A1B032F2EB588B15E81" Name="Archive">
+            <Variables />
+            <ST><![CDATA[(*
+Archive_CTU1.dP_BFS1    := CTU1_AI_PLC.dP_BFS1.PV;
+Archive_CTU1.dP_BFS2    := CTU1_AI_PLC.dP_BFS2.PV;
+Archive_CTU1.dP_BFS3    := CTU1_AI_PLC.dP_BFS3.PV;
+Archive_CTU1.dP_BFS4    := CTU1_AI_PLC.dP_BFS4.PV;
+Archive_CTU1.dP_BFS5    := CTU1_AI_PLC.dP_BFS5.PV;
+Archive_CTU1.dP_BFS6    := CTU1_AI_PLC.dP_BFS6.PV;
+Archive_CTU1.dP_BFS     := CTU1_AI_PLC.dP_BFS.PV;
+Archive_CTU1.T_E3       := CTU1_AI_PLC.T_E3.PV;
+Archive_CTU1.P_E3       := CTU1_AI_PLC.P_E3.PV;
+Archive_CTU1.L_E3       := CTU1_AI_PLC.L_E3.PV;
+Archive_CTU1.T_E2       := CTU1_AI_PLC.T_E2.PV;
+Archive_CTU1.P_g_inKC1  := CTU1_AI_PLC.P_g_inKC1.PV;
+Archive_CTU1.P_g_outKC1 := CTU1_AI_PLC.P_g_outKC1.PV;
+Archive_CTU1.T_air      := CTU1_AI_PLC.T_air.PV;
+Archive_CTU1.T_ground   := CTU1_AI_PLC.T_ground.PV;
+Archive_CTU1.P_air      := CTU1_AI_PLC.P_air.PV;
+Archive_CTU1.T_air_BB   := CTU1_AI_PLC.T_air_BB.PV;
+Archive_CTU1.Reserve_01 := CTU1_AI_PLC.Reserve_01.PV;
+Archive_CTU1.Reserve_02 := CTU1_AI_PLC.Reserve_02.PV;
+Archive_CTU1.Reserve_03 := CTU1_AI_PLC.Reserve_03.PV;
+Archive_CTU1.Reserve_04 := CTU1_AI_PLC.Reserve_04.PV;
+Archive_CTU1.Reserve_05 := CTU1_AI_PLC.Reserve_05.PV;
+Archive_CTU1.Reserve_06 := CTU1_AI_PLC.Reserve_06.PV;
+Archive_CTU1.Reserve_07 := CTU1_AI_PLC.Reserve_07.PV;
+Archive_CTU1.Reserve_08 := CTU1_AI_PLC.Reserve_08.PV;
+Archive_CTU1.Reserve_09 := CTU1_AI_PLC.Reserve_09.PV;
+Archive_CTU1.Reserve_10 := CTU1_AI_PLC.Reserve_10.PV;
+Archive_CTU1.Reserve_11 := CTU1_AI_PLC.Reserve_11.PV;
+Archive_CTU1.Reserve_12 := CTU1_AI_PLC.Reserve_12.PV;
+Archive_CTU1.L_min_E2   := CTU1_AI_PLC.L_min_E2.PV;
+Archive_CTU1.L_max_E2   := CTU1_AI_PLC.L_max_E2.PV;
+Archive_CTU1.L_min_E3   := CTU1_AI_PLC.L_min_E3.PV;
+Archive_CTU1.L_max_E3   := CTU1_AI_PLC.L_max_E3.PV;
+Archive_CTU1.dP_KR7     := CTU1_AI_PLC.dP_KR7.PV;
+Archive_CTU1.dP_KR7a    := CTU1_AI_PLC.dP_KR7a.PV;
+Archive_CTU1.dP_KR8     := CTU1_AI_PLC.dP_KR8.PV;
+Archive_CTU1.dP_KRG_20_5:= CTU1_AI_PLC.dP_KRG_20_5.PV;
+Archive_CTU1.Reserve_13 := CTU1_AI_PLC.Reserve_13.PV;
+Archive_CTU1.Reserve_14 := CTU1_AI_PLC.Reserve_14.PV;
+Archive_CTU1.Reserve_15 := CTU1_AI_PLC.Reserve_15.PV;
+Archive_CTU1.U_main     := CTU1_AI_PLC.U_main.PV;
+Archive_CTU1.U_backup   := CTU1_AI_PLC.U_backup.PV;
+Archive_CTU1.Reserve_16 := CTU1_AI_PLC.Reserve_16.PV;
+Archive_CTU1.Reserve_17 := CTU1_AI_PLC.Reserve_17.PV;
+*)]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="C8FD4D8B4E6B016D906A7BB168892D92" Name="block_ALG">
+            <Variables>
+                <Variable UUID="65500F8F4B9B1FA8A8C7868A0B102215" Name="delay" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                <Variable UUID="3178578F4EF78503CF6F1AB00162B20C" Name="AOS_duration" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="0DEB5E1642B7CA983E2A3DB75DD05F50" Name="block_Link">
+            <Variables />
+            <ST><![CDATA[// ШКУ17 А1
+(*
+CTU1_SHKU17_A1.KR7_OFF := CTU1_DI_HMI.KR7_OFF;
+CTU1_SHKU17_A1.KR7_ON := CTU1_DI_HMI.KR7_ON;
+CTU1_SHKU17_A1.KR7a_OFF := CTU1_DI_HMI.KR7a_OFF;
+CTU1_SHKU17_A1.KR7a_ON := CTU1_DI_HMI.KR7a_ON;
+CTU1_SHKU17_A1.KR8_OFF := CTU1_DI_HMI.KR8_OFF;
+CTU1_SHKU17_A1.KR8_ON := CTU1_DI_HMI.KR8_ON;
+CTU1_SHKU17_A1.KR17_ON := CTU1_DI_HMI.KR17_ON;
+CTU1_SHKU17_A1.KR17_OFF := CTU1_DI_HMI.KR17_OFF;
+CTU1_SHKU17_A1.KR18_ON := CTU1_DI_HMI.KR18_ON;
+CTU1_SHKU17_A1.KR18_OFF := CTU1_DI_HMI.KR18_OFF;
+CTU1_SHKU17_A1.KRG_20_5_OFF := CTU1_DI_HMI.KRG_20_5_OFF;
+CTU1_SHKU17_A1.KRG_20_5_ON := CTU1_DI_HMI.KRG_20_5_ON;
+CTU1_SHKU17_A1.KR1026_OFF := CTU1_DI_HMI.KR1026_OFF;
+CTU1_SHKU17_A1.KR1026_ON := CTU1_DI_HMI.KR1026_ON;
+CTU1_SHKU17_A1.KR1029_OFF := CTU1_DI_HMI.KR1029_OFF;
+CTU1_SHKU17_A1.KR1029_ON := CTU1_DI_HMI.KR1029_ON;
+CTU1_SHKU17_A1.P_g_inKC1_PV := CTU1_AI_PLC.P_g_inKC1.PV;
+CTU1_SHKU17_A1.P_g_outKC1_PV := CTU1_AI_PLC.P_g_outKC1.PV;
+CTU1_SHKU17_A1.P_g_inKC1_flt := CTU1_AI_PLC.P_g_inKC1.flt;
+CTU1_SHKU17_A1.P_g_outKC1_flt := CTU1_AI_PLC.P_g_outKC1.flt;
+
+// AS36
+CTU1_AS36.P_g_inKC1_PV := CTU1_AI_PLC.P_g_inKC1.PV;
+CTU1_AS36.P_g_outKC1_PV := CTU1_AI_PLC.P_g_outKC1.PV;
+
+// PERF
+CTU1_PERF.P_g_inKC1_PV := CTU1_AI_PLC.P_g_inKC1.PV;
+CTU1_PERF.P_g_outKC1_PV := CTU1_AI_PLC.P_g_outKC1.PV;
+*)]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="1AD13A9D46DF643D1E27DF99C8A631B2" Name="block_PRU">
+            <Variables />
+            <ST><![CDATA[(*
+Global_PRU_CTU1.P_g_inKC1 := CTU1_AI_PLC.P_g_inKC1.PV;
+Global_PRU_CTU1.P_g_outKC1 := CTU1_AI_PLC.P_g_outKC1.PV;
+Global_PRU_CTU1.E := (CTU1_AI_PLC.P_g_outKC1.PV + REAL#0.098)/(CTU1_AI_PLC.P_g_inKC1.PV + REAL#0.098);
+Global_PRU_CTU1.dP_BFS1 := CTU1_AI_PLC.dP_BFS1.PV;
+Global_PRU_CTU1.dP_BFS2 := CTU1_AI_PLC.dP_BFS2.PV;
+Global_PRU_CTU1.dP_BFS3 := CTU1_AI_PLC.dP_BFS3.PV;
+Global_PRU_CTU1.dP_BFS4 := CTU1_AI_PLC.dP_BFS4.PV;
+Global_PRU_CTU1.dP_BFS5 := CTU1_AI_PLC.dP_BFS5.PV;
+Global_PRU_CTU1.dP_BFS6 := CTU1_AI_PLC.dP_BFS6.PV;
+Global_PRU_CTU1.dP_BFS := CTU1_AI_PLC.dP_BFS.PV;
+Global_PRU_CTU1.T_E3 := CTU1_AI_PLC.T_E3.PV;
+Global_PRU_CTU1.P_E3 := CTU1_AI_PLC.P_E3.PV;
+Global_PRU_CTU1.L_E3 := CTU1_AI_PLC.L_E3.PV;
+Global_PRU_CTU1.T_E2 := CTU1_AI_PLC.T_E2.PV;
+Global_PRU_CTU1.dP_KR7 := CTU1_AI_PLC.dP_KR7.PV;
+Global_PRU_CTU1.dP_KR7a := CTU1_AI_PLC.dP_KR7a.PV;
+Global_PRU_CTU1.dP_KR8 := CTU1_AI_PLC.dP_KR8.PV;
+Global_PRU_CTU1.dP_KRG_20_5 := CTU1_AI_PLC.dP_KRG_20_5.PV;
+
+Global_PRU_CTU1.P_g_inKC1_flt := CTU1_AI_PLC.P_g_inKC1.flt;
+Global_PRU_CTU1.P_g_outKC1_flt := CTU1_AI_PLC.P_g_outKC1.flt;
+Global_PRU_CTU1.dP_BFS1_flt := CTU1_AI_PLC.dP_BFS1.flt;
+Global_PRU_CTU1.dP_BFS2_flt := CTU1_AI_PLC.dP_BFS2.flt;
+Global_PRU_CTU1.dP_BFS3_flt := CTU1_AI_PLC.dP_BFS3.flt;
+Global_PRU_CTU1.dP_BFS4_flt := CTU1_AI_PLC.dP_BFS4.flt;
+Global_PRU_CTU1.dP_BFS5_flt := CTU1_AI_PLC.dP_BFS5.flt;
+Global_PRU_CTU1.dP_BFS6_flt := CTU1_AI_PLC.dP_BFS6.flt;
+Global_PRU_CTU1.dP_BFS_flt := CTU1_AI_PLC.dP_BFS.flt;
+Global_PRU_CTU1.T_E3_flt := CTU1_AI_PLC.T_E3.flt;
+Global_PRU_CTU1.P_E3_flt := CTU1_AI_PLC.P_E3.flt;
+Global_PRU_CTU1.L_E3_flt := CTU1_AI_PLC.L_E3.flt;
+Global_PRU_CTU1.T_E2_flt := CTU1_AI_PLC.T_E2.flt;
+Global_PRU_CTU1.dP_KR7_flt := CTU1_AI_PLC.dP_KR7.flt;
+Global_PRU_CTU1.dP_KR7a_flt := CTU1_AI_PLC.dP_KR7a.flt;
+Global_PRU_CTU1.dP_KR8_flt := CTU1_AI_PLC.dP_KR8.flt;
+Global_PRU_CTU1.dP_KRG_20_5_flt := CTU1_AI_PLC.dP_KRG_20_5.flt;
+
+Global_PRU_CTU1.KR1026_state := CTU1_IM.KR1026.state;
+Global_PRU_CTU1.KR1029_state := CTU1_IM.KR1029.state;
+Global_PRU_CTU1.KR7_state := CTU1_IM.KR7.state;
+Global_PRU_CTU1.KR7b_state := CTU1_IM.KR7b.state;
+Global_PRU_CTU1.KR7a_state := CTU1_IM.KR7a.state;
+Global_PRU_CTU1.KR7ab_state := CTU1_IM.KR7ab.state;
+Global_PRU_CTU1.KR17_state := CTU1_IM.KR17.state;
+Global_PRU_CTU1.KR18_state := CTU1_IM.KR18.state;
+Global_PRU_CTU1.KR8_state := CTU1_IM.KR8.state;
+Global_PRU_CTU1.KR8ab_state := CTU1_IM.KR8ab.state;
+Global_PRU_CTU1.KR20_state := CTU1_IM.KRG20_5.state;
+Global_PRU_CTU1.KRBFS1_state := CTU1_IM.KRBFS1.state;
+Global_PRU_CTU1.KRBFS2_state := CTU1_IM.KRBFS2.state;
+Global_PRU_CTU1.KRBFS3_state := CTU1_IM.KRBFS3.state;
+Global_PRU_CTU1.KRBFS4_state := CTU1_IM.KRBFS4.state;
+Global_PRU_CTU1.KRBFS5_state := CTU1_IM.KRBFS5.state;
+Global_PRU_CTU1.KRBFS6_state := CTU1_IM.KRBFS6.state;
+Global_PRU_CTU1.KRE3_state := CTU1_IM.KRE3.state;
+Global_PRU_CTU1.KR3d2_1_state := CTU1_IM.KR3d2_1.state;
+Global_PRU_CTU1.KRE2_state := CTU1_IM.KRE2.state;
+*)]]></ST>
+        </FunctionBlock>
+    </FBLibrary>
+</Program>

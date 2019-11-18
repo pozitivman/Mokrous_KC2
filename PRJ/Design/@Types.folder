@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Типы данных">
+    <Items>
+        <Item Name="FLDR_Button.folder" />
+        <Item Name="FLDR_IM.folder" />
+        <Item Name="FLDR_IO.folder" />
+        <Item Name="FLDR_Modbus.folder" />
+        <Item Name="FLDR_Scada.folder" />
+        <Item Name="FLDR_TSZ6TAMG67DEBPHWG5ZEOL6EZU.folder" />
+        <Item Name="FLDR_ULXLCPDSJDJUTHF32MSVHF6C5U.folder" />
+        <Item Name="FLDR_UZNHGAROQN2UZKSGXPB6TW7ROE.folder" />
+        <Item Name="FLDR_Y3XUJCBBO5HETMZLPRQEZOF3U4.folder" />
+        <Item Name="Type_7RLOYJO2EUOERJEEQ2UGJ46DXU.type" />
+        <Item Name="Type_ADSXQ4T6MDHUDA2LSUT5DZTC3Q.type" />
+        <Item Name="Type_DRBE7DQOTZVUXKXDQHREKJ4IPI.type" />
+        <Item Name="Type_OT2VC25YRBAUPJH532VK644UGA.type" />
+        <Item Name="Type_W43YXNHHU3HETH66IWU7GNC2FM.type" />
+        <Item Name="Type_X77YSJPVFWXUPCE7GVGJGWQCUM.type" />
+    </Items>
+</Folder>

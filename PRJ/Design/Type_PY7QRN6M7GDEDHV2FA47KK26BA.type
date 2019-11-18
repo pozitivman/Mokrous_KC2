@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_DI_A5_raw" Kind="Struct" UUID="80E104F948073ACE688BD39B03A1D630">
+    <Fields>
+        <Field Name="DI_3_1" Type="BOOL" UUID="312D41CF4C152D5CE56261B810ED9E9A" Comment="Кран 6БР Закрыт" />
+        <Field Name="DI_3_2" Type="BOOL" UUID="538839024F6873360F83AB99A0013D8C" Comment="Кран 6БР Открыт" />
+        <Field Name="DI_3_3" Type="BOOL" UUID="676AF4F4442F9FE93AAD67A1CC8C08DC" Comment="Кран 6БР Контроль цепи ИМ" />
+        <Field Name="DI_3_4" Type="BOOL" UUID="D60C803F4C1477C11B12ABBDD6A0ED85" Comment="Кран 6БР Контроль цепи ВК" />
+        <Field Name="DI_3_5" Type="BOOL" UUID="0143181E452F943C497B55804A61CF5E" Comment="Кран А Закрыт" />
+        <Field Name="DI_3_6" Type="BOOL" UUID="9C5AC569465E1F99A27D8385869D4C62" Comment="Кран А Открыт" />
+        <Field Name="DI_3_7" Type="BOOL" UUID="D427F9E74A116B5ACAC8DDAB98F2038A" Comment="Кран А Контроль цепи ИМ" />
+        <Field Name="DI_3_8" Type="BOOL" UUID="78875ED742EC925817DC4F933F8C3CB6" Comment="Кран А Контроль цепи ВК" />
+        <Field Name="DI_3_9" Type="BOOL" UUID="DB7C323B40A384AF515455B66BF8607A" Comment="Кран С Закрыт" />
+        <Field Name="DI_3_10" Type="BOOL" UUID="FF9F57EA495A8F81B0FBEB9D1316F713" Comment="Кран С Открыт" />
+        <Field Name="DI_3_11" Type="BOOL" UUID="603ECBD8412F5509E4866F9FA2C21DFF" Comment="Кран С Контроль цепи ИМ" />
+        <Field Name="DI_3_12" Type="BOOL" UUID="38BDAF1948AC9433C7CEB18636C000A9" Comment="Кран С Контроль цепи ВК" />
+        <Field Name="DI_3_13" Type="BOOL" UUID="DECC2FA94D4F5DED47238398E05A8278" Comment="Кран 6-9 Закрыт" />
+        <Field Name="DI_3_14" Type="BOOL" UUID="BF47EE9A4F24E482246DB0AE0DBE017D" Comment="Кран 6-9 Открыт" />
+        <Field Name="DI_3_15" Type="BOOL" UUID="E467A3BC499EA87696C6C2BB6F5531FB" Comment="Кран 6-9 Контроль цепи ИМ" />
+        <Field Name="DI_3_16" Type="BOOL" UUID="8E2C38FA41F01D466A6058B8D5C4579C" Comment="Кран 6-9 Контроль цепи ВК" />
+    </Fields>
+</Type>

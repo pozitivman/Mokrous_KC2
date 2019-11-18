@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="AI_HMI_el" Kind="Struct" UUID="AC1F8EF44E60D7473D928D81E1F0BA7E">
+    <Fields>
+        <Field Name="PV" Type="REAL" UUID="6DA25EB64457F8BC1B432796A1A66249" Comment="Текущее значение" />
+        <Field Name="Flt" Type="BOOL" UUID="E2D09078462D4EE2900331AD762C3383" Comment="Отказ канала" />
+        <Field Name="Descr" Type="STRING" UUID="AAC597CA485F39A5711C6685D6CC8228" Comment="Название аналога" />
+        <Field Name="Units_main" Type="STRING" UUID="2A62001841FF026F1DEFC5813FA63D5E" Comment="Единицы измерения датчика (для уставок)" />
+        <Field Name="Units_rep" Type="STRING" UUID="AA07025C4BDEB55F11A868B8669C7D14" Comment="Единицы измерения Eu_PV (для ручного задания)" />
+        <Field Name="Units" Type="STRING" UUID="0E64E8D647866CD02581798E46286DD8" Comment="Единицы измерения (текущие)" />
+        <Field Name="DA" Type="BOOL" UUID="376CDF7D48A6A1C8EE32B8B42219C97D" Comment="0 - работа, 1 - ремонт" />
+        <Field Name="Man" Type="REAL" UUID="64450BD84E1E709EE06C8BB93AD51FAB" Comment="Ручное задание в PV_calc_eu" />
+        <Field Name="UP_AS_ctrl" Type="BOOL" UUID="C3970D5B49559615061B84B0420FB5BF" Comment="Верхняя аварийная уставка (0 - отключена, 1 - включена)" />
+        <Field Name="UP_PS_ctrl" Type="BOOL" UUID="678BF93D439775B3CCBBC3B41F5AA3BB" Comment="Верхняя предупредительная уставка (0 - отключена, 1 - включена)" />
+        <Field Name="Down_PS_ctrl" Type="BOOL" UUID="53C108154DDD0DABFBED8B9017A227B0" Comment="Нижняя предупредительная уставка (0 - отключена, 1 - включена)" />
+        <Field Name="Down_AS_ctrl" Type="BOOL" UUID="254C611C41D42669EBA613B36B8A6610" Comment="Нижняя аварийная уставка (0 - отключена, 1 - включена)" />
+        <Field Name="UP_AS" Type="REAL" UUID="2BEC631C48C1D3C7072A4F8A21D6667C" Comment="Верхняя аварийная уставка" />
+        <Field Name="UP_PS" Type="REAL" UUID="AE52D99747DF35E18FFFA3B53B7B0EC5" Comment="Верхняя предупредительная уставка" />
+        <Field Name="Down_PS" Type="REAL" UUID="766CBBB64984EE86976F8C96C0098281" Comment="Нижняя предупредительная уставка" />
+        <Field Name="Down_AS" Type="REAL" UUID="C855119B43B8A18D714D909107BEB1F8" Comment="Нижняя аварийная уставка" />
+        <Field Name="Config" Type="BOOL" UUID="21CA75284B8D3D0D1EDAD29619D28A6D" Comment="Флаг &quot;Конфигурация AI&quot;" />
+        <Field Name="Rem_repair_time" Type="LREAL" UUID="3CE4FF7E469FF752704ABA8145B6B34C" Comment="Оставшееся время в ремонте" />
+        <Field Name="Units_type" Type="INT" UUID="3AC5975F484C23506179A5A2F2AF87CD" Comment="0 - PV_sensor_eu(Eu_sensor), 1 - PV_calc_eu(Eu_PV), 2 - PV_user(Eu_user), 3 - PV_calc_SIdU" />
+        <Field Name="Min" Type="LREAL" UUID="0CB79C4A4FFD0EA81BA73EB06BB0D49C" Comment="Нижняя граница (Eu_sensor)" />
+        <Field Name="Max" Type="LREAL" UUID="D150803C45CE57716FFA0D8FF6A8C646" Comment="Верхняя граница (Eu_sensor)" />
+        <Field Name="PS" Type="BOOL" UUID="C0B5B3A44BD216735A92B4B6B291D477" Comment="Жёлтый фон" />
+        <Field Name="AS" Type="BOOL" UUID="3CF70A37428BE4C494C17283E28B2C8D" Comment="Красный фон" />
+        <Field Name="Min_rep" Type="LREAL" UUID="384D07E444679FB6780AD29E27663205" Comment="Нижняя граница (Eu_PV)" />
+        <Field Name="Max_rep" Type="LREAL" UUID="F0AD752F427988391CF33BB4E098E8D5" Comment="Верхняя граница (Eu_PV)" />
+        <Field Name="Cfg_Span" Type="LREAL" UUID="BF1A18FC4B88622DC9C4E9B38F5F1811" Comment="Конфигурационный параметр. Ширина диапазона датчика (вычисляется по формуле: max значение датчика - min значение датчика)" />
+        <Field Name="Cfg_Offset" Type="LREAL" UUID="9F1BF5E14BB5D15C3AEC369E0B99A6AF" Comment="Конфигурационный параметр. Смещение диапазона датчика (минимальная граница)" />
+        <Field Name="Cfg_min_fault" Type="LREAL" UUID="ECE6B08B450502105AF4F0BCE95B9E49" Comment="Конфигурационный параметр. Уставка для &quot;обрыва&quot;" />
+        <Field Name="Cfg_max_fault" Type="LREAL" UUID="4E3BB8E94FCAAB2A269FBCAA9DDE4B1D" Comment="Конфигурационный параметр. Уставка для &quot;КЗ&quot;" />
+        <Field Name="Cfg_repair_time" Type="LREAL" UUID="B175B5D147CCE4B81B805297DD8E9BBC" Comment="Конфигурационный параметр. Время канала в ремонте" />
+        <Field Name="Cfg_min_ADC" Type="LREAL" UUID="287437274219BBB8C66DBA868A0A7FB5" Comment="Конфигурационный параметр. Минимальное значение АЦП" />
+        <Field Name="Cfg_max_ADC" Type="LREAL" UUID="16AE5B234E51DFEA359E73A0C3CA443C" Comment="Конфигурационный параметр. Максимальное значение АЦП" />
+        <Field Name="Cfg_ROC" Type="LREAL" UUID="F9E10CB64CB55DEC6D5A72A8EDC185B7" Comment="Конфигурационный параметр. Предельная скорость изменения сигнала за 1 сек" />
+    </Fields>
+</Type>

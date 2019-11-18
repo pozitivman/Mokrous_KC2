@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE SubAppType v. 1.3 >
+<SubAppType Name="DRV_A2" Kind="DRIVER.SONET.MODBUS" Args="" Comment="" UUID="682C28574977B8BC6D7067A8173F0248">
+    <InterfaceList>
+        <Signal Name="@PID" UUID="DB65A6D0437C00D0222520933DD2319E" Type="STRING" Usage="output" />
+        <Signal Name="@STATE" UUID="17E7FE844BFB4F403A300E8706052EBC" Type="STRING" Usage="output" />
+        <Signal Name="@COMMAND" UUID="F07649574D17530DAE3C9F842124FE1D" Type="STRING" />
+        <Signal Name="@COMMAND_VALUE" UUID="5D2B87AB44039686766A29B722A46D51" Type="STRING" />
+        <Signal Name="@MESSAGE" UUID="87A71D4B4FB27A73D3951BAFA337556D" Type="STRING" Usage="output" />
+        <Signal Name="@MESSAGE_FRAMEWORK" UUID="981AE36D4853D773B6D8318F546C5B0A" Type="STRING" Usage="output" />
+        <Signal Name="@EVENT" UUID="276446264EBFFE0F663D339AFFB3F233" Type="STRING" />
+        <Signal Name="@RESERVED" UUID="102B810649FEE074B6DC0A9945B92748" Type="BOOL" />
+        <Signal Name="@RESERVE" UUID="CDE5C2514501A8052E7DA9AF41701589" Type="BOOL" />
+        <Signal Name="@LICENSE" UUID="B604D1A849DB8D37FAE43BA7D8A1D9E8" Type="STRING" Usage="output" />
+        <Signal Name="@NODE_RUN" UUID="11CFC95F39784D0797BFCEAB0F98BF6A" Type="BOOL" />
+        <Signal Name="SHKU17_A2_AI_raw" UUID="373180F542F6F85096F441ABA1DE1198" Type="8A7BCE3C446D7C204B34ACA623AD8747" Usage="" Global="TRUE" Comment="ШКУ-17. AI. Данные с А2" />
+        <Signal Name="SHKU17_A2_DI_raw" UUID="E7C7A2CD482717E1613B8D91D83CEE14" Type="85E4B5EC4AFA9C7F8638E5AE9DBB3A9C" Usage="" Global="TRUE" Comment="ШКУ-17. DI. Данные с А2" />
+        <Signal Name="SHKU17_A2_AO_raw" UUID="9586426F4772A19FCE12B087BE4DB0FC" Type="7E6064DB4867FED92887F9A178D1C1D1" Usage="" Global="TRUE" Comment="ШКУ-17. AO. Данные для А2" />
+        <Signal Name="SHKU17_A2_status" UUID="128E9371404EC6B1A3E933A068CAEA09" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А2" />
+    </InterfaceList>
+</SubAppType>

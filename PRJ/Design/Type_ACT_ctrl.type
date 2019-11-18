@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="ACT_Ctrl" Kind="Struct" UUID="1E808FD44FD17288C2202DB8C35DB4DC">
+    <Fields>
+        <Field Name="RA" Type="BYTE" UUID="B521CCB54178366AC90E38A8F01C4BDD" Comment="дистанционный или автоматический режим управления" />
+        <Field Name="noR" Type="BYTE" UUID="FF6E228A4F4252AF7B044E93BF1C4CF9" Comment="блокировка дистанционного режима управления" />
+        <Field Name="rOnOff" Type="BYTE" UUID="D36AA2784D178751B98A68BA90AE140A" Comment="команда &apos;включить/выключить&apos; (&apos;открыть/закрыть&apos;) в дистанционном режиме" />
+        <Field Name="aOnOff" Type="BYTE" UUID="AEFB037F488E7878DD36EC977CBD0949" Comment="команда &apos;включить/выключить&apos; (&apos;открыть/закрыть&apos;) в автоматич режиме" />
+        <Field Name="rep" Type="BYTE" UUID="234E1C79444037E76DA479B95D64F8D4" Comment="повторить последнюю команду" />
+        <Field Name="cwOn" Type="BYTE" UUID="5F7B9A594BF0F6B0E30C3CB1709DCC4A" Comment="не учитывать контроль цепи управления команды &apos;открыть&apos;" />
+        <Field Name="cwOff" Type="BYTE" UUID="013167D54FE220938D38F893DC2670CF" Comment="не учитывать контроль цепи управления команды &apos;закрыть&apos;" />
+        <Field Name="dummy" Type="BYTE" UUID="1A18D4AB4C52B0B9C231259E0399BE82" Comment="резерв" />
+    </Fields>
+</Type>

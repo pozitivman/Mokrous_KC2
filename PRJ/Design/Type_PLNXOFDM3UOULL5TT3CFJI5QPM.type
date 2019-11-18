@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="AS36_struct" Kind="Struct" UUID="451CBCFB43885A4E3D000AAF3394BE87">
+    <Fields>
+        <Field Name="Shop_YR3" Type="REAL" UUID="96086EBD4F0300C03724E2B9EACEBCBF" />
+        <Field Name="Shop_Yr3_valid" Type="BOOL" UUID="963C2AA6445770473A5CE6AC277FF2BD" />
+        <Field Name="AS_CV_out" Type="REAL" UUID="D720EF814EDCA524CB1283809C104FCB" />
+        <Field Name="CV_Manual" Type="REAL" UUID="CBFC43EC4E7613881515A49B71881233" />
+        <Field Name="BTN_Load" Type="BOOL" UUID="CD5B51314239E7D5BA6056BF43BE9B16" />
+        <Field Name="BTN_Unload" Type="BOOL" UUID="D95FAF4B4CFEADB141F21B835F3D911E" />
+        <Field Name="Discr_PS" Type="BOOL" UUID="2DC863C54632183E61141A9570D4B5D9" />
+        <Field Name="SP_manual_rate" Type="REAL" UUID="C1A57B544DD6CDC73EBC43BF4F88B669" />
+        <Field Name="SP_Pout" Type="REAL" UUID="BA4AA9494D2869E4291C5E9C3DDCFA39" />
+        <Field Name="SP_PoutPin" Type="REAL" UUID="C5BB09E74C6D26F052CA90B43CE7A557" />
+        <Field Name="SP_S" Type="REAL" UUID="6B1D0DB0492ACE3031B584B2AA5B4D9D" />
+    </Fields>
+</Type>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Proc">
+    <Items>
+        <Item Name="AT_2PKOLZ4YL6CUJOKYPZH27Q2M64.int" />
+        <Item Name="AT_73I4C7W62QYUBHRXD43SJVVZCU.int" />
+        <Item Name="AT_7ZW5HKBI4VJEXLKUD7G6PCSSN4.int" />
+        <Item Name="AT_K2YXNVLEBPSU5AFCMBGKBHI274.int" />
+        <Item Name="AT_MBGGW4A2IEDEJB2NNQGFV4YE6I.int" />
+        <Item Name="AT_SCADA.int" />
+        <Item Name="AT_T7KQZ7UGL3EETLZVJONCGXSNZQ.int" />
+        <Item Name="AT_VSVKUNRGDQ2EFEHBI4SVYQGUF4.int" />
+        <Item Name="AT_Y4ZHRM35Q4YETPANVGVTFABNQA.int" />
+    </Items>
+</Folder>

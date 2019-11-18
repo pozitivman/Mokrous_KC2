@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TKXR" Kind="Struct" UUID="635099BE48C9258F4BA926BFCBAA0549">
+    <Fields>
+        <Field Name="DA" Type="BOOL" UUID="69E95CF14D52B35600E98D8E5A91A59A" Comment="0 - автомат, 1 - ручное" />
+        <Field Name="BTN_Unload" Type="BOOL" UUID="DE041D574754341BCE4C36BE906E1DB2" Comment="Кнопка &quot;Разгрузка&quot;" />
+        <Field Name="BTN_Load" Type="BOOL" UUID="49F500F7416A59785A4B62AF5836650F" Comment="Кнопка &quot;Загрузка&quot;" />
+        <Field Name="SP_manual" Type="REAL" UUID="20357677483720AD8C8768B54BFB34A5" Comment="Задание в ручном режиме, % (с HMI)" />
+        <Field Name="SP_algoritm" Type="REAL" UUID="62B0593741605E42B2F734BA4E9FCEAB" Comment="Задание от алгоритма, %" />
+        <Field Name="State" Type="WORD" UUID="8FED28CA460295E32A5286A135B0D19D" Comment="Текущее положение КХР" />
+        <Field Name="block_DA" Type="BOOL" UUID="64A7742E4E69BA7D5C32A5B519F213C1" Comment="Блокировка ручного управления" />
+    </Fields>
+</Type>

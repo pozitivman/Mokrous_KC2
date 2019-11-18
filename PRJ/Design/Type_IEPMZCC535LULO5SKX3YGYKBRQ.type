@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="dSEL" Kind="Struct" UUID="DA56C2BC463D79102699DABEDD1175B4">
+    <Fields>
+        <Field Name="pid_struct" Type="15A3BD1144F8631CB7A9CF9E182D60FB" UUID="D5F1C9854B1D39A878BFED8A7FAD6F37" ArraySize="10" />
+        <Field Name="local_SP" Type="REAL" UUID="65CFE9F3443BABE048FC4484BA55A176" />
+        <Field Name="remote_SP" Type="REAL" UUID="59FC3CE44723E2A40A069BBDDA4FBF85" />
+        <Field Name="act_SP" Type="REAL" UUID="2BEA246A42ED467CBEC156B6664A8905" />
+        <Field Name="manual_target" Type="REAL" UUID="CA10DEB64D97084AD8942EA0EE461FCF" />
+        <Field Name="PplusD_selected" Type="REAL" UUID="61BE9EED46FC1146C78F948C5B83EF43" />
+        <Field Name="dI_selected" Type="REAL" UUID="77880A774B5377FB73F78DA5214ACED7" />
+        <Field Name="goal_dir_selected" Type="BOOL" UUID="2A0EF4514587C172F66969ADA04405FE" />
+        <Field Name="priority_selected" Type="INT" UUID="A7F6617448061C7E396A20B2925E36D7" />
+        <Field Name="main_loop" Type="INT" UUID="64F7342146C99AA9CAAF4F8BA5624159" />
+        <Field Name="state" Type="INT" UUID="94A344F340CFE5FD3E4D0FAD141F6EF9" />
+        <Field Name="act_control_mode" Type="INT" UUID="3D42C4814A0BE25662193EB392A5C8E4" />
+        <Field Name="N_loops" Type="INT" UUID="0F87EF6246A1698F4BF911BEA7B97757" />
+        <Field Name="tune_mode" Type="BOOL" UUID="E7C736964BFBC23147C2C990C8A9E1D0" />
+        <Field Name="auto_man" Type="BOOL" UUID="7C55B20F4FD68DBACCA1208559C77ADE" />
+        <Field Name="manual_enable" Type="BOOL" UUID="2451FABB494D3A50DE9BF5873F1E6A8E" />
+        <Field Name="rem_loc" Type="BOOL" UUID="3E27220E483C8E76ADF6C0B6DB52DF2B" />
+        <Field Name="lim_in_man_enable" Type="BOOL" UUID="F53959624274516A554431AA80CE438B" />
+        <Field Name="lim_in_man_type" Type="INT" UUID="2960CEF94A2823E9FA16AAB26F114DF0" />
+        <Field Name="rem_SP_filt_const" Type="REAL" UUID="400CCFE44FE5EC8CF0D976BB24902755" />
+        <Field Name="manual_r_rate_s" Type="REAL" UUID="314D5FCF4BE90151F17883B7C82EA2C8" />
+        <Field Name="manual_r_rate_f" Type="REAL" UUID="8B63EFE141F83651971912B824FD0442" />
+        <Field Name="loop_selected" Type="INT" UUID="425B8FD5435348FB98811781C649A330" />
+        <Field Name="LimitCondition" Type="BOOL" UUID="A3CE714E454354BDF9002D97E124B888" />
+        <Field Name="force_out_of_limit" Type="BOOL" UUID="A85860664CD6722EC7B197A71942CB6F" />
+        <Field Name="last_goal_dir" Type="BOOL" UUID="66CF6F6C43E4F108A202B5BC527E95BE" />
+        <Field Name="limit_goal" Type="BOOL" UUID="E1ADC5E2429A8FA1B387A6AAB19AEC9F" />
+        <Field Name="oppos_limits" Type="BOOL" UUID="1EEDDD16414988E435CB2F834BC1009F" />
+        <Field Name="high_clamp" Type="REAL" UUID="EDC8E7364BA3529AE366DFA0875B7D37" />
+        <Field Name="low_clamp" Type="REAL" UUID="D77CD34644E710876FDF18A78F12CDEA" />
+        <Field Name="clamp" Type="INT" UUID="DD4D5548444346366A5F82A144715E09" />
+        <Field Name="vel_high_limit" Type="REAL" UUID="6075470947B188AC58B2019924750576" />
+        <Field Name="vel_low_limit" Type="REAL" UUID="3DC7B0D74C0B8873E1DB4780FA2C977A" />
+        <Field Name="vel_limit_ind" Type="BOOL" UUID="C46FE3B742531C25289931B090500654" />
+        <Field Name="hyst" Type="REAL" UUID="51B4B8294ABD19D451093C8097D90B11" />
+        <Field Name="FCV_reverse" Type="BOOL" UUID="359F1DFD49505376E65525BE93415DE9" />
+        <Field Name="CV" Type="REAL" UUID="A470B242463B1CB07A466697A0EB6311" />
+        <Field Name="FCV" Type="REAL" UUID="6244EFDA4D8D16DBFAE5A5B3ACDCE484" />
+        <Field Name="d_out_min" Type="REAL" UUID="8D4378DA415760FDF5F863957465AB25" />
+        <Field Name="d_out_max" Type="REAL" UUID="090159294D002C66E81B0EB40E03C005" />
+        <Field Name="delta_time" Type="DINT" UUID="7987241846F0C7978B75E39982F6BD24" />
+        <Field Name="had_ESD" Type="BOOL" UUID="982555C94B3EE4C1748414A19505E542" />
+        <Field Name="had_SD" Type="BOOL" UUID="D024CDCF4DB89057910980AA79C4470B" />
+    </Fields>
+</Type>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE SubAppType v. 1.3 >
+<SubAppType Name="main_SHKU17_A5" Kind="APPLICATION.ST.CONSOLE" Args="" Comment="" UUID="3FDD16D8404540D165706D88B11791DC">
+    <InterfaceList>
+        <Signal Name="@PID" UUID="471BD4464C63CFBECECD8989518200E2" Type="STRING" Usage="output" />
+        <Signal Name="@STATE" UUID="500F21B54150D88DFCA366A969130ED2" Type="STRING" Usage="output" />
+        <Signal Name="@COMMAND" UUID="09F1AA744E15AE7D06ECD5B642F1C41F" Type="STRING" />
+        <Signal Name="@COMMAND_VALUE" UUID="BD4D3D7F44EE92F9C03735ACC82F585D" Type="STRING" />
+        <Signal Name="@MESSAGE" UUID="F27BBEB847E6AE672235F79732D03566" Type="STRING" Usage="output" />
+        <Signal Name="@MESSAGE_FRAMEWORK" UUID="3E8F91FC4DE34624A6AE628B7A25EC24" Type="STRING" Usage="output" />
+        <Signal Name="@EVENT" UUID="6CF8C44041BFBB9DC2C75C9A96FDD657" Type="STRING" />
+        <Signal Name="@RESERVED" UUID="3EA72CAF4A2CEDCF545B518B47A289FA" Type="BOOL" />
+        <Signal Name="@RESERVE" UUID="5CC7279A4DECF937D31A0A96FBEE0173" Type="BOOL" />
+        <Signal Name="@LICENSE" UUID="1FA560D241B4D10D1B3A798E184A4E8F" Type="STRING" Usage="output" />
+        <Signal Name="@NODE_RUN" UUID="5204C12643060037E1F0099D8F30D2BB" Type="BOOL" />
+        <Signal Name="FirstScan_MAIN" UUID="CD386C7A435FB658AD739DA54A75DF4C" Type="BOOL" InitialValue="TRUE" Usage="" Comment="Флаг первого цикла" />
+        <Signal Name="Deblock" UUID="5C64ACAB4DBB6387E9AAD49D1D26F435" Type="BOOL" Usage="" Comment="Деблокировка" />
+        <Signal Name="Kvitir" UUID="D18746874EECDF33234AE4B8C914A95A" Type="BOOL" Usage="" Comment="Квитирование" />
+        <Signal Name="IMIT" UUID="8B03C34641C366F1BC003D95E0D7AEA5" Type="BOOL" Usage="" Comment="Режим имитации. False - OFF, True - ON" />
+        <Signal Name="AI_table_units" UUID="C2DC065A4F02B3375FFF1D85D3CEF392" Type="STRING" ArraySize="378" Usage="" />
+        <Signal Name="cycleTime_MAIN" UUID="209AD697458EAD95B74A4687BF8C4D75" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_MAIN_sys" UUID="BDF315BE469A60C003092A9B6DFC529D" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_AI" UUID="9F4C5C4145059BC50F5469828946A1C4" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_AI_sys" UUID="06B123BA4EA38FB3147DC29923E88952" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_DI" UUID="6D3BBBA54C177757285AE0BDBC287F1F" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_DI_sys" UUID="4415F2A943B3537CC531379E2164EA57" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_VLV" UUID="6D67862248927DD990F24CA76D09CDE7" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_VLV_sys" UUID="228C63674422F70108ED8C89AA256039" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_APS" UUID="535F2A61452C2DB409E2A68F07C380AC" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_APS_sys" UUID="A211B7574C7DE955E088E793C913AB72" Type="LREAL" Usage="" />
+        <Signal Name="Global_BTN" UUID="A84CA5C0430DB609139481B146CA8668" Type="3ABCD8324DFB751E8CAE308269A30199" Usage="" Global="TRUE" Comment="Scada. Кнопки" />
+        <Signal Name="Kvitir_ALL_DI" UUID="8DD29A3845784BFAFE7E13937175B357" Type="BOOL" Usage="" Global="TRUE" Comment="Съём звука" />
+        <Signal Name="APS_TASK" UUID="8169C9CF4F69836C56475FAEBFF899E9" Type="INT" Usage="" Global="TRUE" Comment="Воздействие на логику" />
+        <Signal Name="Sound_PS" UUID="C2A81D004C2F7FFA8ED24DA4C26066BF" Type="BOOL" Usage="" Global="TRUE" Comment="Звук ПС" />
+        <Signal Name="Sound_AS" UUID="3696E1F84C0E4BB9B4D61793CC54CAE2" Type="BOOL" Usage="" Global="TRUE" Comment="Звук АС" />
+        <Signal Name="SHKU17_A5_DI_raw" UUID="62EE6C6247CD438230CE74AC4F9B181B" Type="80E104F948073ACE688BD39B03A1D630" Usage="" Global="TRUE" Comment="ШКУ-17. DI. Данные с А5" />
+        <Signal Name="SHKU17_A5_DI_HMI" UUID="FAE426184EE9D093E29B92BF40C712C2" Type="83D6A1A84499B0D96A933883FF30176C" Usage="" Global="TRUE" Comment="ШКУ-17. Данные с А5 для HMI" />
+        <Signal Name="SHKU17_A5_DO_raw" UUID="ED8EE30244D48E936A4D098DA6F6CBA3" Type="29963D534E6165DF73ADC9B8D27CA92D" Usage="" Global="TRUE" Comment="ШКУ-17. DO. Данные для А5" />
+        <Signal Name="SHKU17_A5_DO_HMI" UUID="767A3BDD4AC4AF60B2EB3CA3EF5F1558" Type="D99542974EEA16D9B49143BD3837731A" Usage="" Global="TRUE" Comment="ШКУ-17. DO. Данные для HMI" />
+        <Signal Name="SHKU17_A5_APS" UUID="FC34A9E14E2984AD2329A6A8DDDC7C8E" Type="6BCED0F542F395F35A5AA3A8724CF8FD" Usage="" Global="TRUE" Comment="ШКУ17. АПС с А5" />
+    </InterfaceList>
+</SubAppType>

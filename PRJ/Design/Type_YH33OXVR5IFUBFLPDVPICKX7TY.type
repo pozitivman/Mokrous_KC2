@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TLink_A3_A1" Kind="Struct" UUID="7BBF09AE465F562CFEC8A596890C76D3">
+    <Fields>
+        <Field Name="var" Type="BOOL" UUID="DDCF0AEF4C3A304D0AF389946D14D8DD" />
+    </Fields>
+</Type>

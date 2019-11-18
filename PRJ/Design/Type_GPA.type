@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TGPA" Kind="Struct" UUID="FBA07BFA420F40EAC2D41A949BC69296">
+    <Fields>
+        <Field Name="Link" Type="WORD" UUID="0A285DAC41A8EA676A9F20B4EC37DA57" Comment="Состояние связи с ГПА" />
+        <Field Name="MD_REP" Type="BOOL" UUID="27DE69D54E26D60F5E3663B262D8B8EA" Comment="Режим. Ремонт" />
+        <Field Name="MD_HR" Type="BOOL" UUID="94B6457E446A89F05DF6F7A1FCBAC8D7" Comment="Режим. Холодный резерв" />
+        <Field Name="MD_GR" Type="BOOL" UUID="7492E5DC4627DF6050EDA6A7B729BF72" Comment="Режим. Горячий резерв" />
+        <Field Name="MD_KPK" Type="BOOL" UUID="F2C3C932425A50B49020BF92B318ED51" Comment="Режим. КПК" />
+        <Field Name="MD_PZ" Type="BOOL" UUID="5DE91D72461956BBC155F3AE39B582DF" Comment="Режим. Проверка защит" />
+        <Field Name="MD_HP" Type="BOOL" UUID="96A7D55640D1898ED9F88F8FDCF38566" Comment="Режим. ХП" />
+        <Field Name="MD_APK" Type="BOOL" UUID="D3244A44436A9D55C6EB59B94305CC79" Comment="Режим. Пуск на К" />
+        <Field Name="MD_APM" Type="BOOL" UUID="08604D3F4E8A9BC60D49F79ECCC73DF9" Comment="Режим. Пуск в М" />
+        <Field Name="MD_K" Type="BOOL" UUID="748948B74F24F5C308C192B03374807C" Comment="Режим. Кольцо" />
+        <Field Name="MD_M" Type="BOOL" UUID="0CEBA9B14941FCDDBF27F5BE57F805B2" Comment="Режим. Магистраль" />
+        <Field Name="MD_MK" Type="BOOL" UUID="685DB831449E17F527FB96A02E738323" Comment="Режим. Переход М-К" />
+        <Field Name="MD_KM" Type="BOOL" UUID="B6E78FE041C5BA86894A018A24B415B3" Comment="Режим. Переход К-М" />
+        <Field Name="MD_AOS" Type="BOOL" UUID="E19A48BD453F9C759D262A86310C7101" Comment="Режим. АОсс" />
+        <Field Name="MD_AOB" Type="BOOL" UUID="CF9089234E1A0154EEA460888C616C4E" Comment="Режим. АОбс" />
+        <Field Name="MD_VOS" Type="BOOL" UUID="30088DC44D5A186A63973D94408C4937" Comment="Режим. ВОсс" />
+        <Field Name="MD_VOB" Type="BOOL" UUID="145768B44A857638EFE6369F5E6AC79B" Comment="Режим. ВОбс" />
+        <Field Name="MD_NOS" Type="BOOL" UUID="47A7C91D454DB116A6DA93AF467C6E24" Comment="Режим. НОсс" />
+        <Field Name="MD_NOB" Type="BOOL" UUID="4B2D7AEC47E6B5D3FFC546BE298A249A" Comment="Режим. НОбс" />
+        <Field Name="MD_STOP" Type="BOOL" UUID="F860EC1042D3F3172EAEB7B6C9058095" Comment="Режим. ГПА остановлен" />
+        <Field Name="Pin" Type="REAL" UUID="9420F9624C19CA69AFD2BA8D31013ADE" Comment="Давление газа на входе, МПа" />
+        <Field Name="Pout" Type="REAL" UUID="F75D28594A5AE78EC94EFD9406E86308" Comment="Давление газа на выходе, МПа" />
+        <Field Name="dPconf" Type="REAL" UUID="3506D611428654DB5900C2B856B46393" Comment="Перепад давления на конфузоре, кПа" />
+        <Field Name="Tin" Type="REAL" UUID="A4694B1E4535CCE3BC42F488F9E93315" Comment="Температура газа на входе, °C" />
+        <Field Name="Tout" Type="REAL" UUID="ED9DFD60446A2B0C9942788BA8A3EE4F" Comment="Температура газа на выходе, °C" />
+        <Field Name="E" Type="REAL" UUID="4DBF5193407F82C03708669FC1B42311" Comment="Степень сжатия через ГПА" />
+        <Field Name="Nst" Type="REAL" UUID="BCBC738A43548B7288A3EC961BD297DD" Comment="Обороты СТ, об/мин" />
+        <Field Name="Nst_proc" Type="REAL" UUID="B4A53C294A043B9E9E171CB22874F9F8" />
+        <Field Name="SP_Nst" Type="REAL" UUID="80E85CAE417B8D1F334FDD93CF1DB997" Comment="Задание. Обороты СТ, об/мин" />
+        <Field Name="Nvd_r" Type="REAL" UUID="1CE6ED134E2EDE9AB551EF92B33E95E5" Comment="Обороты ВД приведённый, об/мин" />
+        <Field Name="KPD" Type="REAL" UUID="A3B253DA4CDC65C6E8F3BDBD2162E0D5" Comment="Политропический КПД, %" />
+        <Field Name="Qv" Type="REAL" UUID="18F85135496B99EA0FED97A4AC710D10" Comment="Объёмный расход, м³/мин" />
+        <Field Name="Qpriv" Type="REAL" UUID="0AFA52CF4B4FC69207E3FE876A69AAC0" Comment="Приведённый расход газа, м³/мин" />
+        <Field Name="Q_proc" Type="REAL" UUID="76AD392C499BB312ADBF44AA546DEAA6" />
+        <Field Name="S" Type="REAL" UUID="D52919FE491D8DF6CB0C648D437FB84A" Comment="Запас по помпажу, %" />
+        <Field Name="N" Type="REAL" UUID="080516444CD66AABE66268B1B804F897" Comment="Мощность, МВт" />
+        <Field Name="State_6p" Type="REAL" UUID="605DBE6E41701241502CF3A52746CFE4" Comment="Положение Кран 6р, %" />
+        <Field Name="State_3p" Type="REAL" UUID="228E0C9B4356C29F64963D9564A61D5B" Comment="Положение Кран 3р, %" />
+        <Field Name="max_vibr" Type="REAL" UUID="D24149A54EC393E42527BF91D8CAEC06" Comment="Вибрация максимальная, мкм" />
+        <Field Name="OS" Type="REAL" UUID="FC9B00114CDCF02ECBD7B2A10D59733B" Comment="Осевой сдвиг, мм" />
+        <Field Name="T_oil_bearings_max" Type="REAL" UUID="2457D8ED428C467A655DCAB5590742A7" Comment="Т масла подшипников максимальная, °C" />
+        <Field Name="KR1_state" Type="WORD" UUID="40CAFCC646F5363ED9A3D794A4F65A75" Comment="Кран 1. Состояние (0 - промежуточное, 1 - закрыт, 2 - открыт, 3 - оба концевика)" />
+        <Field Name="KR4_state" Type="WORD" UUID="99D4AC504FFF2F57D264AFA41A494FDB" Comment="Кран 4. Состояние (0 - промежуточное, 1 - закрыт, 2 - открыт, 3 - оба концевика)" />
+        <Field Name="KR1_1_state" Type="WORD" UUID="8533254848499033FC6F6AA2650A5373" Comment="Кран 1-1. Состояние (0 - промежуточное, 1 - закрыт, 2 - открыт, 3 - оба концевика)" />
+        <Field Name="KR4_1_state" Type="WORD" UUID="F870CB4647554C00500573B8A53B55C2" Comment="Кран 4-1. Состояние (0 - промежуточное, 1 - закрыт, 2 - открыт, 3 - оба концевика)" />
+        <Field Name="KR2_state" Type="WORD" UUID="6580795E4BF31EC5FF5A91923F10EDD7" Comment="Кран 2. Состояние (0 - промежуточное, 1 - закрыт, 2 - открыт, 3 - оба концевика)" />
+        <Field Name="KR2a_state" Type="WORD" UUID="22D11CDF4F42A90141A7C9B0F93C8764" Comment="Кран 2а. Состояние (0 - промежуточное, 1 - закрыт, 2 - открыт, 3 - оба концевика)" />
+        <Field Name="KR2_1_state" Type="WORD" UUID="A0D3D3C9470CBB3927CCC69D8FD6E753" Comment="Кран 2-1. Состояние (0 - промежуточное, 1 - закрыт, 2 - открыт, 3 - оба концевика)" />
+        <Field Name="KR5_state" Type="WORD" UUID="FB6009454BB5CE943DF98AAD73D670CB" Comment="Кран 5. Состояние (0 - промежуточное, 1 - закрыт, 2 - открыт, 3 - оба концевика)" />
+        <Field Name="KR6_state" Type="WORD" UUID="3D21A97D4923A3F8497BD3A787C1BD5C" Comment="Кран 6. Состояние (0 - промежуточное, 1 - закрыт, 2 - открыт, 3 - оба концевика)" />
+        <Field Name="KR6p_state" Type="WORD" UUID="E8A013C3443C72ECB7D780B4B9F18285" Comment="Кран 6р. Состояние (0 - промежуточное, 1 - закрыт, 2 - открыт, 3 - оба концевика)" />
+        <Field Name="KR3p_state" Type="WORD" UUID="B98FD35248F41982096AEA842B919D29" Comment="Кран 3р. Состояние (0 - промежуточное, 1 - закрыт, 2 - открыт, 3 - оба концевика)" />
+        <Field Name="online" Type="BOOL" UUID="5C23399D457E769DE6855E87552444E3" Comment="Связь с ГПА исправна" />
+        <Field Name="run" Type="BOOL" UUID="ECC06A0A408DD183A7ED93827B73F2A2" Comment="Режим ГПА магистраль" />
+        <Field Name="remote" Type="BOOL" UUID="C6B46C184DFA7BEEA8C5D1B906265623" Comment="ГПА переведён в режим управления от САР" />
+        <Field Name="ask_remote" Type="BOOL" UUID="88D6A6054F40A48F57574CBACE6DB0A9" Comment="Запрос в ГПА на перевод под управление КЦ" />
+        <Field Name="limit_GPA" Type="BOOL" UUID="1CF41C7542D351CFB90FA6A6AD8D3050" Comment="ГПА стал на ограничение" />
+        <Field Name="OUT_SP_cv" Type="REAL" UUID="3D90763F41A09042D2CA2190A0192056" Comment="Задание по оборотам СТ от САР в ГПА" />
+        <Field Name="Command_AOB" Type="BOOL" UUID="E221C6AE4583DC6E60470BB871802B90" Comment="Команда в ГПА. АОБ" />
+        <Field Name="Command_AOS" Type="BOOL" UUID="4A3A16214FDC089B1131A494DE20FDDF" Comment="Команда в ГПА. АОС" />
+        <Field Name="Command_HP" Type="BOOL" UUID="02D9550A4855E0CC7BCA9D9DE7299174" Comment="Команда в ГПА. ХП" />
+        <Field Name="Command_KM" Type="BOOL" UUID="B3E61E6543A4CC5418E781800B20B11E" Comment="Команда в ГПА. Магистраль" />
+        <Field Name="Command_MK" Type="BOOL" UUID="EA6D3EED4987B41EEB269A881B22D43C" Comment="Команда в ГПА. Кольцо" />
+        <Field Name="Command_NOB" Type="BOOL" UUID="47EC35F34628CD2590082898C9D1E30E" Comment="Команда в ГПА. НОБ" />
+        <Field Name="Command_NOS" Type="BOOL" UUID="CC7608F340C9CB7ACC8162B4B1A5EA83" Comment="Команда в ГПА. НОС" />
+        <Field Name="Command_APK" Type="BOOL" UUID="A6979C8040707B1F0BB5748DE3377083" Comment="Команда в ГПА. АПК" />
+    </Fields>
+</Type>

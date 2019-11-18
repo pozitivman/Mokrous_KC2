@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="shop_str" Kind="Struct" UUID="281325D34B9E0412DA6D6689C005003F">
+    <Fields>
+        <Field Name="chosen_Q" Type="REAL" UUID="6CC46796444AD5D14D7580B130144EF2" />
+        <Field Name="chosen_Eout" Type="REAL" UUID="8B0385004B030782E198458AFBFEDF97" />
+        <Field Name="chosen_Nst" Type="REAL" UUID="ED1F4A914EACA3BAEF3A71A72D1D04B9" />
+        <Field Name="chosen_Nvd_r" Type="REAL" UUID="0A3DD55840CA79F55211E4849B5704BA" />
+        <Field Name="chosen_S" Type="REAL" UUID="7384D2A049A381B7D6B7EE92D7135EFE" />
+        <Field Name="ls_type" Type="INT" UUID="205FE3DD4ED5055CFEC59A9B3B262612" />
+        <Field Name="ls_choice_type" Type="INT" UUID="4E16A32B4913F3C70CBD00BD8BDC8FAF" />
+        <Field Name="Q" Type="REAL" UUID="7347988E43D3CDA41B99FBB650559FAF" />
+        <Field Name="EoutEin" Type="REAL" UUID="51638285456FF0FB7BAE8EA082921087" />
+        <Field Name="Eout" Type="REAL" UUID="254495F84B113BAD2A6FE4A153EA55CE" />
+        <Field Name="Ein" Type="REAL" UUID="AD9032F54119DEB5BA8A679F75A9DEC1" />
+        <Field Name="ls_type_prev" Type="INT" UUID="21980E9F43BD97BCBBF4C78E9300D863" />
+        <Field Name="num_rem_gpa" Type="REAL" UUID="D23A40F242218823DFB961871870E8E6" />
+        <Field Name="Fail" Type="INT" UUID="CEE11F7447461B5B9576BDA57FBA8535" />
+        <Field Name="limit" Type="REAL" UUID="87F9C1664E34363A2F69359124F32332" ArraySize="5" />
+    </Fields>
+</Type>

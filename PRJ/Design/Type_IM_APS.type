@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="IM_APS" Kind="Struct" UUID="948723BC4D336C2DD9B225A33B949D39">
+    <Fields>
+        <Field Name="non" Type="BOOL" UUID="51FBCDA840A6C6EF41BCD9B62955BAE6" Comment="ИМ &quot;Не открыт&quot;" />
+        <Field Name="noff" Type="BOOL" UUID="A2ED7FC44BD72BADC474D894CBD03A8E" Comment="ИМ &quot;Не закрыт&quot;" />
+        <Field Name="nstart" Type="BOOL" UUID="E893A9AF46FE58DD36A615A882B0844B" Comment="ИМ &quot;Не стронулся&quot;" />
+        <Field Name="selfon" Type="BOOL" UUID="1563692E45AA35491B67DDBA8E80B51E" Comment="ИМ &quot;Самопроизвольное открытие&quot;" />
+        <Field Name="selfoff" Type="BOOL" UUID="67BE6EC24165A1C57E23708ADC476672" Comment="ИМ &quot;Самопроизвольное закрытие&quot;" />
+        <Field Name="flt" Type="BOOL" UUID="DF7EE7994432C98C5535BDBF5A0D3943" Comment="ИМ &quot;Ошибка концевиков&quot;" />
+        <Field Name="ncon" Type="BOOL" UUID="CD634B294F172C1F8991B6B874D49623" Comment="ИМ &quot;Нет КЦУ открытия&quot;" />
+        <Field Name="ncoff" Type="BOOL" UUID="F7FD59F847F41D41A416F7867BED6E18" Comment="ИМ &quot;Нет КЦУ закрытия&quot;" />
+    </Fields>
+</Type>

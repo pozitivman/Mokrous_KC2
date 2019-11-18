@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="ACT_Oper" Kind="Struct" UUID="53217BE648723612F5836C83CCD229E0">
+    <Fields>
+        <Field Name="non" Type="BYTE" UUID="63CBB398402DC985D61AC996AD5FCB8E" Comment="Не включен (не открыт)" />
+        <Field Name="noff" Type="BYTE" UUID="CFBEFF5C4039215506069BB7EE7259E5" Comment="Не выключен (не закрыт)" />
+        <Field Name="nstart" Type="BYTE" UUID="28EAEC3E4E56AFA4F8FAE4BBB853ACBA" Comment="Не стронулся" />
+        <Field Name="selfon" Type="BYTE" UUID="1A0EC4E6457C42C7BC41FA9E3402BA2B" Comment="Самопроизвольное включение (открытие)" />
+        <Field Name="selfoff" Type="BYTE" UUID="3979071A40215F915671DA9DF1C54259" Comment="Самопроизвольное закрытие (выключение)" />
+        <Field Name="flt" Type="BYTE" UUID="A502DED244B99EC30C85AF850291F940" Comment="Неисправность концевых выключателей" />
+        <Field Name="ncon" Type="BYTE" UUID="E77A54F841B412D712D7749212ED7557" Comment="Нет контроля цепи включения (открытия)" />
+        <Field Name="ncoff" Type="BYTE" UUID="DCECC5484F293734DD9717B24B0DC132" Comment="Нет контроля цепи выключения (закрытия)" />
+    </Fields>
+</Type>

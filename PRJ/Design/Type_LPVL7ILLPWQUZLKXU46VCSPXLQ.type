@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_AO_A1_hmi" Kind="Struct" UUID="E1FDF27A40DBAB04EBFC8D9987F52577">
+    <Fields>
+        <Field Name="APK3_pos" Type="REAL" UUID="BFF1AB87407CB5418633F1A5670D7613" Comment="Управление АПК3" />
+        <Field Name="rez_01" Type="REAL" UUID="962318394405C2591E196F87F08C3891" Comment="Резерв" />
+        <Field Name="rez_02" Type="REAL" UUID="1D9F558340F9E1B2CFE6D684C5F03AAB" Comment="Резерв" />
+        <Field Name="rez_03" Type="REAL" UUID="B61D2EC747161C18F2BF92943589250E" Comment="Резерв" />
+    </Fields>
+</Type>

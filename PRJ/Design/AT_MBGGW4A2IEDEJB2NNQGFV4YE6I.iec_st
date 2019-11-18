@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="786DBB07480B8E40C286EDBFF0DB8E7A" Name="main_SRV_MAIN" Period="100" PutDataAtEndOfCycle="false">
+    <Variables>
+        <Variable UUID="0F43701344F3073D9044D0ABF2EDB48B" Name="clock_MAIN_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="7CC1B4394FEC4F4AFFDDB3BA117A03A3" Name="clock_MAIN_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="729162434CF56FB536068AA9BAA1D503" Name="APS_fb" Type="block_APS" TypeUUID="97011E5B4333944A336F59817F2BB612" Usage="internal" />
+        <Variable UUID="DE771F9342799E6931C9A29ACEE32DC9" Name="ALG_fb" Type="block_ALG" TypeUUID="C8FD4D8B4E6B016D906A7BB168892D92" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[clock_MAIN_cur := CLOCK();
+IF FirstScan_MAIN THEN clock_MAIN_prev := clock_MAIN_cur; END_IF;
+cycleTime_MAIN := clock_MAIN_cur - clock_MAIN_prev;
+clock_MAIN_prev := clock_MAIN_cur;
+
+
+IMIT := Global_BTN.IMIT;
+Deblock := Global_BTN.Deblock;
+Kvitir  := Global_BTN.Kvitir OR Kvitir_ALL_DI;
+
+
+APS_fb();
+
+ALG_fb();
+
+
+IF FirstScan_MAIN THEN FirstScan_MAIN := BOOL#0; END_IF;
+clock_MAIN_cur := CLOCK();
+cycleTime_MAIN_sys := clock_MAIN_cur - clock_MAIN_prev;]]></ST>
+    <DataTypes />
+    <FBLibrary>
+        <Folder Name="APS" Comment="" Data="" UUID="FB69CDC6425BC57ACFF597B00C469BAA">
+            <FunctionBlock UUID="97011E5B4333944A336F59817F2BB612" Name="block_APS">
+                <Variables>
+                    <Variable UUID="577764ED4B44CFA6C9862E8628DD3491" Name="clock_APS_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="1A1A536B41572521AF42D1B5D7C773A7" Name="clock_APS_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="B8FCD4E34135F762D7C6AEA403CFCA60" Name="APS_TASK_alg" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="747E079E4918BDF1E01417AF30FE4BC9" Name="APL" Type="proc_AE" TypeUUID="665F4B4646FC5E75565ABCB2FD5974AF" Usage="internal" />
+                    <Variable UUID="22F837DA47A3DB91DF1E7FBFD277CEBE" Name="Deblock_last" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[clock_APS_cur := CLOCK();
+IF FirstScan_MAIN THEN clock_APS_prev := clock_APS_cur; END_IF;
+cycleTime_APS := clock_APS_cur - clock_APS_prev;
+clock_APS_prev := clock_APS_cur;
+APS_TASK_alg :=INT#0;
+IF Deblock AND NOT Deblock_last THEN
+	APS_TASK := INT#0;
+END_IF;
+Deblock_last := Deblock;
+
+
+//АПС
+APL(INT#0, SHKU17_A1_status[1] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A1_3); //ШКУ-17. Ошибка модуля Сонет: A1_3
+APL(INT#1, SHKU17_A1_status[2] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A1_4); //ШКУ-17. Ошибка модуля Сонет: A1_4
+APL(INT#2, SHKU17_A1_status[3] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A1_5); //ШКУ-17. Ошибка модуля Сонет: A1_5
+APL(INT#3, SHKU17_A1_status[4] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A1_6); //ШКУ-17. Ошибка модуля Сонет: A1_6
+APL(INT#4, SHKU17_A1_status[5] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A1_7); //ШКУ-17. Ошибка модуля Сонет: A1_7
+APL(INT#5, SHKU17_A1_status[6] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A1_8); //ШКУ-17. Ошибка модуля Сонет: A1_8
+APL(INT#6, SHKU17_A1_status[7] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A1_9); //ШКУ-17. Ошибка модуля Сонет: A1_9
+APL(INT#7, SHKU17_A1_status[8] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A1_10); //ШКУ-17. Ошибка модуля Сонет: A1_10
+APL(INT#8, SHKU17_A2_status[1] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A2_3); //ШКУ-17. Ошибка модуля Сонет: A2_3
+APL(INT#9, SHKU17_A2_status[2] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A2_4); //ШКУ-17. Ошибка модуля Сонет: A2_4
+APL(INT#10, SHKU17_A2_status[3] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A2_5); //ШКУ-17. Ошибка модуля Сонет: A2_5
+APL(INT#11, SHKU17_A2_status[4] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A2_6); //ШКУ-17. Ошибка модуля Сонет: A2_6
+APL(INT#12, SHKU17_A2_status[5] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A2_7); //ШКУ-17. Ошибка модуля Сонет: A2_7
+APL(INT#13, SHKU17_A2_status[6] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A2_8); //ШКУ-17. Ошибка модуля Сонет: A2_8
+APL(INT#14, SHKU17_A2_status[7] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A2_9); //ШКУ-17. Ошибка модуля Сонет: A2_9
+APL(INT#15, SHKU17_A2_status[8] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A2_10); //ШКУ-17. Ошибка модуля Сонет: A2_10
+APL(INT#16, SHKU17_A3_status[1] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A3_3); //ШКУ-17. Ошибка модуля Сонет: A3_3
+APL(INT#17, SHKU17_A3_status[2] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A3_4); //ШКУ-17. Ошибка модуля Сонет: A3_4
+APL(INT#18, SHKU17_A3_status[3] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A3_5); //ШКУ-17. Ошибка модуля Сонет: A3_5
+APL(INT#19, SHKU17_A3_status[4] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A3_6); //ШКУ-17. Ошибка модуля Сонет: A3_6
+APL(INT#20, SHKU17_A3_status[5] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A3_7); //ШКУ-17. Ошибка модуля Сонет: A3_7
+APL(INT#21, SHKU17_A3_status[6] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A3_8); //ШКУ-17. Ошибка модуля Сонет: A3_8
+APL(INT#22, SHKU17_A3_status[7] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A3_9); //ШКУ-17. Ошибка модуля Сонет: A3_9
+APL(INT#23, SHKU17_A3_status[8] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A3_10); //ШКУ-17. Ошибка модуля Сонет: A3_10
+APL(INT#24, SHKU17_A4_status[1] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A4_3); //ШКУ-17. Ошибка модуля Сонет: A4_3
+APL(INT#25, SHKU17_A4_status[2] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A4_4); //ШКУ-17. Ошибка модуля Сонет: A4_4
+APL(INT#26, SHKU17_A4_status[3] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A4_5); //ШКУ-17. Ошибка модуля Сонет: A4_5
+APL(INT#27, SHKU17_A4_status[4] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A4_6); //ШКУ-17. Ошибка модуля Сонет: A4_6
+APL(INT#28, SHKU17_A4_status[5] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A4_7); //ШКУ-17. Ошибка модуля Сонет: A4_7
+APL(INT#29, SHKU17_A4_status[6] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A4_8); //ШКУ-17. Ошибка модуля Сонет: A4_8
+APL(INT#30, SHKU17_A4_status[7] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A4_9); //ШКУ-17. Ошибка модуля Сонет: A4_9
+APL(INT#31, SHKU17_A4_status[8] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A4_10); //ШКУ-17. Ошибка модуля Сонет: A4_10
+APL(INT#32, SHKU17_A5_status[1] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A5_3); //ШКУ-17. Ошибка модуля Сонет: A5_3
+APL(INT#33, SHKU17_A5_status[2] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A5_4); //ШКУ-17. Ошибка модуля Сонет: A5_4
+APL(INT#34, SHKU17_A5_status[3] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A5_5); //ШКУ-17. Ошибка модуля Сонет: A5_5
+APL(INT#35, SHKU17_A5_status[4] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A5_6); //ШКУ-17. Ошибка модуля Сонет: A5_6
+APL(INT#36, SHKU17_A5_status[5] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A5_7); //ШКУ-17. Ошибка модуля Сонет: A5_7
+APL(INT#37, SHKU17_A5_status[6] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A5_8); //ШКУ-17. Ошибка модуля Сонет: A5_8
+APL(INT#38, SHKU17_A5_status[7] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A5_9); //ШКУ-17. Ошибка модуля Сонет: A5_9
+APL(INT#39, SHKU17_A5_status[8] > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SERVER_APS.SHKU17_A5_10); //ШКУ-17. Ошибка модуля Сонет: A5_10
+
+
+//Выходы АПС
+IF APS_TASK_alg > APS_TASK THEN
+	APS_TASK := APS_TASK_alg;
+END_IF;
+
+clock_APS_cur := CLOCK();
+cycleTime_APS_sys := clock_APS_cur - clock_APS_prev;]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="665F4B4646FC5E75565ABCB2FD5974AF" Name="proc_AE">
+                <Variables>
+                    <Variable UUID="F12965654FA5488211461A8777F6ECEA" Name="Numb" Comment="Порядковый номер. (от 0 и до размер TMR-1 или Active_prev1-1)" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                    <Variable UUID="EE794E1141A0E648C9EFEB886B56CB3B" Name="Condition" Comment="Условие срабатывания" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="66B8745E4168E5093F29FB91F4AAA6CC" Name="Permition" Comment="Взвод" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="E05DB7D5430D0C4BAF1C8B9741111CBB" Name="Invers" Comment="Инверсия" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="430BAA714BC4DC96ACD2748E6D2CFAB7" Name="Delay" Comment="Задержка, сек" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                    <Variable UUID="F42A99374ACF8554471F1688B944836C" Name="Action" Comment="Тип воздействия на логику (6 - АОС, 5 - АОБ, 4 - НО, 3 - Кольцо, 2 - КОЛ ГПА, 1 - ПС, 0 - ничего)" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                    <Variable UUID="857628FC46456576C472EAA1809370F2" Name="OUT_task" Comment="Воздействие на логику" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="inout" />
+                    <Variable UUID="7E7FB469496625FC2AEE98B3723AEE6B" Name="Active" Comment="Признак сработки АПС" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                    <Variable UUID="99360B6645CB57E08DA6EA8AEBA6BAC3" Name="TMR" Comment="Задержка, сек" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Size="303" Array="TRUE" Usage="internal" />
+                    <Variable UUID="80FD67B945B9C562E3EFD9B58CB34FC4" Name="Active_prev1" Comment="Признак сработки АПС на предыдущем цикле" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="303" Array="TRUE" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[IF (Condition XOR Invers) AND Permition THEN
+	IF NOT Active THEN TMR[Numb] := TMR[Numb] + cycleTime_APS; END_IF;
+ELSE
+	TMR[Numb] := LREAL#0;
+END_IF;
+
+//Если TMR[Numb] > Delay, то защита сработала
+IF TMR[Numb] > Delay THEN
+	Active := BOOL#1;
+END_IF;
+//OUT_nofiks := TMR[Numb] > Delay;
+
+//Снятие признака защиты по деблокировке
+IF Deblock AND TMR[Numb] = LREAL#0 THEN
+	Active := BOOL#0;
+	TMR[Numb] := LREAL#0;
+END_IF;
+
+//Определение воздействия на логику (6 - АОС, 5 - АОБ, 4 - НО, 3 - Кольцо, 2 - КОЛ ГПА, 1 - ПС, 0 - ничего)
+IF Active THEN
+	IF Action > OUT_task THEN
+		OUT_task := Action;
+	END_IF;
+END_IF;
+
+//Включение звука
+IF Active AND NOT Active_prev1[Numb] THEN
+	IF Action = INT#1  THEN Sound_PS := BOOL#1; END_IF;
+	IF Action >= INT#5 THEN Sound_AS := BOOL#1; Sound_PS := BOOL#0; END_IF;
+END_IF;
+IF Kvitir THEN Sound_PS := BOOL#0; Sound_AS := BOOL#0; END_IF;
+
+Active_prev1[Numb] := Active;]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <FunctionBlock UUID="C8FD4D8B4E6B016D906A7BB168892D92" Name="block_ALG">
+            <Variables>
+                <Variable UUID="65500F8F4B9B1FA8A8C7868A0B102215" Name="delay" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                <Variable UUID="3178578F4EF78503CF6F1AB00162B20C" Name="AOS_duration" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[]]></ST>
+        </FunctionBlock>
+    </FBLibrary>
+</Program>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_DI_A5_hmi" Kind="Struct" UUID="83D6A1A84499B0D96A933883FF30176C">
+    <Fields>
+        <Field Name="kr6BR_OFF" Type="BOOL" UUID="718E488A4669B17EBD89CD9D34CA337A" Comment="Кран 6БР Закрыт" />
+        <Field Name="kr6BR_ON" Type="BOOL" UUID="AFA395804E31101DB41251936CF43F3E" Comment="Кран 6БР Открыт" />
+        <Field Name="kr6BR_IM" Type="BOOL" UUID="FE1BD2B04957492C7CF966AD1C49D27D" Comment="Кран 6БР Контроль цепи ИМ" />
+        <Field Name="kr6BR_VK" Type="BOOL" UUID="2D87E11445BEA7505AB12B9FA330F429" Comment="Кран 6БР Контроль цепи ВК" />
+        <Field Name="krA_OFF" Type="BOOL" UUID="096E470940989B6F9EC822A061ACF3B8" Comment="Кран А Закрыт" />
+        <Field Name="krA_ON" Type="BOOL" UUID="7A32F4EE44A52A7A58161493A835D8EC" Comment="Кран А Открыт" />
+        <Field Name="krA_IM" Type="BOOL" UUID="C5E655A24160F1CE5255D289F3ADCB72" Comment="Кран А Контроль цепи ИМ" />
+        <Field Name="krA_VK" Type="BOOL" UUID="4EEE993445A8DEACB58AD1B9E8F39A91" Comment="Кран А Контроль цепи ВК" />
+        <Field Name="krC_OFF" Type="BOOL" UUID="A5282A35452AD0C5E417A5B7719062A9" Comment="Кран С Закрыт" />
+        <Field Name="krC_ON" Type="BOOL" UUID="D8B11E8B4C283D07CFCBA7AB26DF9C2A" Comment="Кран С Открыт" />
+        <Field Name="krC_IM" Type="BOOL" UUID="855F51B8421753144FD49D8454DE1119" Comment="Кран С Контроль цепи ИМ" />
+        <Field Name="krC_VK" Type="BOOL" UUID="152E9803488634753C144E8DEE3FA7C5" Comment="Кран С Контроль цепи ВК" />
+        <Field Name="kr6_9_OFF" Type="BOOL" UUID="D0DFAC7E4F7B3A8F3749F4BC0CB6A512" Comment="Кран 6-9 Закрыт" />
+        <Field Name="kr6_9_ON" Type="BOOL" UUID="9BECA34B433215E5807EA58D8CBEC7DE" Comment="Кран 6-9 Открыт" />
+        <Field Name="kr6_9_IM" Type="BOOL" UUID="45CE781B4940817E4985809C1A724051" Comment="Кран 6-9 Контроль цепи ИМ" />
+        <Field Name="kr6_9_VK" Type="BOOL" UUID="6D88A6A3453B6B8ECFE776B8B369140D" Comment="Кран 6-9 Контроль цепи ВК" />
+        <Field Name="dummy" Type="BOOL" UUID="0079683A469AEEC637CF098506C5459E" Comment="Заглушка" />
+    </Fields>
+</Type>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="AI_Oper" Kind="Struct" UUID="3AE03EEE41E689B18053AF8A2A509A01">
+    <Fields>
+        <Field Name="In" Type="LREAL" UUID="60B72BF545F4AE46D70897A35B8CBEE1" Comment="входной сигнал" />
+        <Field Name="PV_calc_eu" Type="LREAL" UUID="6680870F41E57E1CD12DE7BD939D5023" Comment="сигнал с датчика, преобразованный к единицам Config.Eu_PV" />
+        <Field Name="PV_sensor_eu" Type="LREAL" UUID="7A87352B49C8CB38C656E1A1CFA4E6B0" Comment="сигнал с датчика в инженерных единицах датчика Config.Eu_sensor" />
+        <Field Name="PV_calc_SIdU" Type="LREAL" UUID="6D15E55E46CC5037C519119244707FAC" Comment="сигнал с датчика, преобразованный к единицам СИ" />
+        <Field Name="PV_user" Type="LREAL" UUID="9D4B46F5447EC3EDC8E93796EA46C83B" Comment="сигнал с датчика, преобразованный к единицам Config.Eu_user" />
+        <Field Name="Input_sensor_eu" Type="LREAL" UUID="ABDC2E134E9C00A6130C79956556F230" Comment="сигнал с датчика в единицах датчика (для термометра будут Ом-ы)" />
+        <Field Name="pid" Type="LREAL" UUID="A70F51954A5EC3620F5CE89B65BC6521" Comment="фильтрованное значение входного сигнала в диапазоне 0..1" />
+        <Field Name="Span" Type="LREAL" UUID="2BEE6DB44C971279794FC7A860DE1E8D" Comment="диапазон для вычисления параметра Status.PV_calc_eu" />
+        <Field Name="Offset" Type="LREAL" UUID="739714974BF6C5D05FF06D9ADC6A9B34" Comment="смещение для вычисления параметра Status.PV_calc_eu" />
+        <Field Name="Span_SIdU" Type="LREAL" UUID="7F9A64E942E9C3230B7D77B02AE9B088" Comment="диапазон датчика в единицах СИ" />
+        <Field Name="Offset_SIdU" Type="LREAL" UUID="F2BAB0B14BE0511E727E1C94143EC2B4" Comment="смещение датчика в единицах СИ" />
+        <Field Name="ROC_max" Type="LREAL" UUID="00FE3B0F4496D33E61F986BF56927A13" Comment="максимальное значение ROC, если ROC_enable = 1" />
+        <Field Name="ROC_min" Type="LREAL" UUID="8A14BDC34EB871AFF63759AA38809FB0" Comment="минимальное значение ROC, если ROC_enable = 1" />
+        <Field Name="derivative" Type="LREAL" UUID="0F9230254ABFB33678C3908A2E5EEEDB" Comment="производная по 12-ти точкам в диапазоне 0..1" />
+        <Field Name="derivative_eu" Type="LREAL" UUID="D667A86941F501C69C684BB68D9923A5" Comment="derivative * Status.Span" />
+        <Field Name="remaining_repair_time" Type="LREAL" UUID="65B9EDBD4C9234D7E11C3B9ABFD8F320" Comment="время, оставшееся до перевода канала в автомат" />
+        <Field Name="fault_code" Type="BYTE" UUID="F548944D4A7DC828DEA66BA8786ED508" ArraySize="32" Comment="коды отказов канала" />
+    </Fields>
+</Type>

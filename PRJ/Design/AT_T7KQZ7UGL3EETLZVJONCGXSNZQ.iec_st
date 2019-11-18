@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="3FDD16D8404540D165706D88B11791DC" Name="main_SHKU17_A5" Period="100" PutDataAtEndOfCycle="false">
+    <Variables>
+        <Variable UUID="8AE8D56F4A5BD1C3C662A485821DD514" Name="clock_MAIN_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="225274604CDB9612C680E7BD85812BDD" Name="clock_MAIN_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="765971E04892586B6C2A9EBF1371B63D" Name="delay" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="19FC3D954D3C699771E0559EAE60114D" Name="DI_fb" Type="block_DI" TypeUUID="996FFC01410FAAA19E620CB4DD7B4D05" Usage="internal" />
+        <Variable UUID="1BFD23A943F7A242E42F7CB6615710E5" Name="APS_fb" Type="block_APS" TypeUUID="97011E5B4333944A336F59817F2BB612" Usage="internal" />
+        <Variable UUID="AAE37AB0401F0D767F1D599C4B4C52C1" Name="Arch_fb" Type="Archive" TypeUUID="FC3659584F7E9A1B032F2EB588B15E81" Usage="internal" />
+        <Variable UUID="A84911F14A55AF36F3B094943DBA8C2B" Name="ALG_fb" Type="block_ALG" TypeUUID="C8FD4D8B4E6B016D906A7BB168892D92" Usage="internal" />
+        <Variable UUID="7891091F4D51F49091BA4EB93C6232A7" Name="PRU_fb" Type="block_PRU" TypeUUID="1AD13A9D46DF643D1E27DF99C8A631B2" Usage="internal" />
+        <Variable UUID="DACD290045533143D5532B8FA00C18A8" Name="Link_fb" Type="block_Link" TypeUUID="0DEB5E1642B7CA983E2A3DB75DD05F50" Usage="internal" />
+        <Variable UUID="780371BE4A56425C09EE37931B99EDB4" Name="DO_fb" Type="block_DO" TypeUUID="AA8ADA744B25C48EFB08D59D8312319A" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[clock_MAIN_cur := CLOCK();
+IF FirstScan_MAIN THEN clock_MAIN_prev := clock_MAIN_cur; END_IF;
+cycleTime_MAIN := clock_MAIN_cur - clock_MAIN_prev;
+clock_MAIN_prev := clock_MAIN_cur;
+
+// Исправность SHKU17 (1 Гц)
+delay := delay + cycleTime_MAIN;
+//IF delay > LREAL#1 THEN CTU1_DO_HMI.PLC_OK := NOT CTU1_DO_HMI.PLC_OK; delay := LREAL#0; END_IF;
+
+IMIT := Global_BTN.IMIT;
+Deblock := Global_BTN.Deblock;
+Kvitir  := Global_BTN.Kvitir OR Kvitir_ALL_DI;
+
+//AI_fb();
+DI_fb();
+
+ALG_fb();
+
+//IM_fb();
+
+APS_fb();
+
+DO_fb();
+//AO_fb();
+
+// Данные для архива
+//Arch_fb();
+
+// Данные для ПРУ
+//PRU_fb();
+
+// Данные для соседних узлов
+//Link_fb();
+
+IF FirstScan_MAIN THEN FirstScan_MAIN := BOOL#0; END_IF;
+clock_MAIN_cur := CLOCK();
+cycleTime_MAIN_sys := clock_MAIN_cur - clock_MAIN_prev;]]></ST>
+    <DataTypes />
+    <FBLibrary>
+        <Folder Name="APS" Comment="" Data="" UUID="BFD8BCD544EE825006733586BC673D20">
+            <FunctionBlock UUID="97011E5B4333944A336F59817F2BB612" Name="block_APS">
+                <Variables>
+                    <Variable UUID="577764ED4B44CFA6C9862E8628DD3491" Name="clock_APS_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="1A1A536B41572521AF42D1B5D7C773A7" Name="clock_APS_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="B8FCD4E34135F762D7C6AEA403CFCA60" Name="APS_TASK_alg" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="747E079E4918BDF1E01417AF30FE4BC9" Name="APL" Type="proc_AE" TypeUUID="665F4B4646FC5E75565ABCB2FD5974AF" Usage="internal" />
+                    <Variable UUID="22F837DA47A3DB91DF1E7FBFD277CEBE" Name="Deblock_last" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[clock_APS_cur := CLOCK();
+IF FirstScan_MAIN THEN clock_APS_prev := clock_APS_cur; END_IF;
+cycleTime_APS := clock_APS_cur - clock_APS_prev;
+clock_APS_prev := clock_APS_cur;
+APS_TASK_alg :=INT#0;
+IF Deblock AND NOT Deblock_last THEN
+	APS_TASK := INT#0;
+END_IF;
+Deblock_last := Deblock;
+
+
+//АПС
+APL(INT#0, SHKU17_A5_DI_HMI.kr6BR_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.kr6BR_OFF);   // Кран 6БР Закрыт
+APL(INT#1, SHKU17_A5_DI_HMI.kr6BR_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.kr6BR_ON);   // Кран 6БР Открыт
+APL(INT#2, SHKU17_A5_DI_HMI.kr6BR_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.kr6BR_IM);   // Кран 6БР Контроль цепи ИМ - неисправность
+APL(INT#3, SHKU17_A5_DI_HMI.kr6BR_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.kr6BR_VK);   // Кран 6БР Контроль цепи ВК - неисправность
+APL(INT#4, SHKU17_A5_DI_HMI.krA_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.krA_OFF);   // Кран А Закрыт
+APL(INT#5, SHKU17_A5_DI_HMI.krA_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.krA_ON);   // Кран А Открыт
+APL(INT#6, SHKU17_A5_DI_HMI.krA_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.krA_IM);   // Кран А Контроль цепи ИМ - неисправность
+APL(INT#7, SHKU17_A5_DI_HMI.krA_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.krA_VK);   // Кран А Контроль цепи ВК - неисправность
+APL(INT#8, SHKU17_A5_DI_HMI.krC_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.krC_OFF);   // Кран С Закрыт
+APL(INT#9, SHKU17_A5_DI_HMI.krC_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.krC_ON);   // Кран С Открыт
+APL(INT#10, SHKU17_A5_DI_HMI.krC_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.krC_IM);   // Кран С Контроль цепи ИМ - неисправность
+APL(INT#11, SHKU17_A5_DI_HMI.krC_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.krC_VK);   // Кран С Контроль цепи ВК - неисправность
+APL(INT#12, SHKU17_A5_DI_HMI.kr6_9_OFF, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.kr6_9_OFF);   // Кран 6-9 Закрыт
+APL(INT#13, SHKU17_A5_DI_HMI.kr6_9_ON, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.kr6_9_ON);   // Кран 6-9 Открыт
+APL(INT#14, SHKU17_A5_DI_HMI.kr6_9_IM, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.kr6_9_IM);   // Кран 6-9 Контроль цепи ИМ - неисправность
+APL(INT#15, SHKU17_A5_DI_HMI.kr6_9_VK, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A5_APS.kr6_9_VK);   // Кран 6-9 Контроль цепи ВК - неисправность
+
+
+//Выходы АПС
+IF APS_TASK_alg > APS_TASK THEN
+	APS_TASK := APS_TASK_alg;
+END_IF;
+
+clock_APS_cur := CLOCK();
+cycleTime_APS_sys := clock_APS_cur - clock_APS_prev;]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="665F4B4646FC5E75565ABCB2FD5974AF" Name="proc_AE">
+                <Variables>
+                    <Variable UUID="F12965654FA5488211461A8777F6ECEA" Name="Numb" Comment="Порядковый номер. (от 0 и до размер TMR-1 или Active_prev1-1)" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                    <Variable UUID="EE794E1141A0E648C9EFEB886B56CB3B" Name="Condition" Comment="Условие срабатывания" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="66B8745E4168E5093F29FB91F4AAA6CC" Name="Permition" Comment="Взвод" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="E05DB7D5430D0C4BAF1C8B9741111CBB" Name="Invers" Comment="Инверсия" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="430BAA714BC4DC96ACD2748E6D2CFAB7" Name="Delay" Comment="Задержка, сек" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                    <Variable UUID="F42A99374ACF8554471F1688B944836C" Name="Action" Comment="Тип воздействия на логику (6 - АОС, 5 - АОБ, 4 - НО, 3 - Кольцо, 2 - КОЛ ГПА, 1 - ПС, 0 - ничего)" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                    <Variable UUID="857628FC46456576C472EAA1809370F2" Name="OUT_task" Comment="Воздействие на логику" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="inout" />
+                    <Variable UUID="7E7FB469496625FC2AEE98B3723AEE6B" Name="Active" Comment="Признак сработки АПС" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                    <Variable UUID="99360B6645CB57E08DA6EA8AEBA6BAC3" Name="TMR" Comment="Задержка, сек" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Size="303" Array="TRUE" Usage="internal" />
+                    <Variable UUID="80FD67B945B9C562E3EFD9B58CB34FC4" Name="Active_prev1" Comment="Признак сработки АПС на предыдущем цикле" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="303" Array="TRUE" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[IF (Condition XOR Invers) AND Permition THEN
+	IF NOT Active THEN TMR[Numb] := TMR[Numb] + cycleTime_APS; END_IF;
+ELSE
+	TMR[Numb] := LREAL#0;
+END_IF;
+
+//Если TMR[Numb] > Delay, то защита сработала
+IF TMR[Numb] > Delay THEN
+	Active := BOOL#1;
+END_IF;
+//OUT_nofiks := TMR[Numb] > Delay;
+
+//Снятие признака защиты по деблокировке
+IF Deblock AND TMR[Numb] = LREAL#0 THEN
+	Active := BOOL#0;
+	TMR[Numb] := LREAL#0;
+END_IF;
+
+//Определение воздействия на логику (6 - АОС, 5 - АОБ, 4 - НО, 3 - Кольцо, 2 - КОЛ ГПА, 1 - ПС, 0 - ничего)
+IF Active THEN
+	IF Action > OUT_task THEN
+		OUT_task := Action;
+	END_IF;
+END_IF;
+
+//Включение звука
+IF Active AND NOT Active_prev1[Numb] THEN
+	IF Action = INT#1  THEN Sound_PS := BOOL#1; END_IF;
+	IF Action >= INT#5 THEN Sound_AS := BOOL#1; Sound_PS := BOOL#0; END_IF;
+END_IF;
+IF Kvitir THEN Sound_PS := BOOL#0; Sound_AS := BOOL#0; END_IF;
+
+Active_prev1[Numb] := Active;]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <Folder Name="IM" Comment="" Data="" UUID="BCA46E574F607EB1E4B14291288FD09D" />
+        <Folder Name="IO" Comment="" Data="" UUID="F0A168C7455B520FD8B61FA8C32493B3">
+            <Folder Name="AIO" Comment="" Data="" UUID="0AD7B28241D9517C87C4E7A764078005" />
+            <Folder Name="DIO" Comment="" Data="" UUID="691B00E847417332497FB484A9455529">
+                <FunctionBlock UUID="68199DEB4787394BB7C709A7AC58774F" Name="DI_Proc">
+                    <Variables>
+                        <Variable UUID="C710DEEE4025E1A7FBEC3AB69D10EB95" Name="Numb" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                        <Variable UUID="A55187544BF14F871DFAAFBEFA4D73E7" Name="DI_raw" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="57D10F9A4EBA338294FAD79532728AE7" Name="cycle_set" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                        <Variable UUID="C0030F2546D0531C72976CAA199383CB" Name="Inv" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="52174AB240497E60923815B0C58ACA7C" Name="DI_out" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="output" />
+                        <Variable UUID="EF897D2E4471E85C56052AB99C3143C5" Name="cycle_val" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Size="16" Array="TRUE" Usage="internal" />
+                        <Variable UUID="0C0A43644A71081B09CFCB86B5F34B8D" Name="DI_in_last" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="16" Array="TRUE" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[IF DI_Raw = DI_in_last[Numb] THEN
+	cycle_val[Numb] := cycle_val[Numb] + INT#1;
+ELSE
+	cycle_val[Numb] := INT#0;
+END_IF;
+
+IF cycle_val[Numb] >= cycle_set THEN
+	DI_out := DI_Raw XOR Inv;
+	cycle_val[Numb] := cycle_val[Numb] - INT#1;
+END_IF;
+
+DI_in_last[Numb] := DI_Raw;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="996FFC01410FAAA19E620CB4DD7B4D05" Name="block_DI">
+                    <Variables>
+                        <Variable UUID="E0711C66460CCD34145CB4ABB4AE60E2" Name="clock_DI_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                        <Variable UUID="C1AACD3B4B75FDD66863319DC9AE3CAF" Name="clock_DI_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                        <Variable UUID="123516FD4C830D51212C2AA9B2952C8C" Name="IMIT_ON" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                        <Variable UUID="3BD784024DF6264F8475698A2D31A958" Name="IMIT_ON_bool" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="12A5215540E65C4A89F777BD1EE14D8E" Name="PDI" Type="DI_Proc" TypeUUID="68199DEB4787394BB7C709A7AC58774F" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[clock_DI_cur := CLOCK();
+IF FirstScan_MAIN THEN
+	clock_DI_prev := clock_DI_cur;
+END_IF;
+cycleTime_DI := clock_DI_cur - clock_DI_prev;
+clock_DI_prev := clock_DI_cur;
+
+IF NOT IMIT THEN
+	PDI(INT#0,	SHKU17_A5_DI_raw.DI_3_1,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.kr6BR_OFF);
+	PDI(INT#1,	SHKU17_A5_DI_raw.DI_3_2,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.kr6BR_ON);
+	PDI(INT#2,	SHKU17_A5_DI_raw.DI_3_3,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.kr6BR_IM);
+	PDI(INT#3,	SHKU17_A5_DI_raw.DI_3_4,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.kr6BR_VK);
+	PDI(INT#4,	SHKU17_A5_DI_raw.DI_3_5,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.krA_OFF);
+	PDI(INT#5,	SHKU17_A5_DI_raw.DI_3_6,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.krA_ON);
+	PDI(INT#6,	SHKU17_A5_DI_raw.DI_3_7,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.krA_IM);
+	PDI(INT#7,	SHKU17_A5_DI_raw.DI_3_8,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.krA_VK);
+	PDI(INT#8,	SHKU17_A5_DI_raw.DI_3_9,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.krC_OFF);
+	PDI(INT#9,	SHKU17_A5_DI_raw.DI_3_10,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.krC_ON);
+	PDI(INT#10,	SHKU17_A5_DI_raw.DI_3_11,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.krC_IM);
+	PDI(INT#11,	SHKU17_A5_DI_raw.DI_3_12,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.krC_VK);
+	PDI(INT#12,	SHKU17_A5_DI_raw.DI_3_13,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.kr6_9_OFF);
+	PDI(INT#13,	SHKU17_A5_DI_raw.DI_3_14,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.kr6_9_ON);
+	PDI(INT#14,	SHKU17_A5_DI_raw.DI_3_15,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.kr6_9_IM);
+	PDI(INT#15,	SHKU17_A5_DI_raw.DI_3_16,	INT#3,	BOOL#0,	SHKU17_A5_DI_HMI.kr6_9_VK);
+ELSE
+END_IF;
+
+//При иммитации однократно инициализируем конечники кранов
+IMIT_ON(IMIT, IMIT_ON_bool);
+IF IMIT_ON_bool THEN
+
+END_IF;
+
+clock_DI_cur := CLOCK();
+cycleTime_DI_sys := clock_DI_cur - clock_DI_prev;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="AA8ADA744B25C48EFB08D59D8312319A" Name="block_DO">
+                    <Variables />
+                    <ST><![CDATA[SHKU17_A5_DO_raw.DO_5_1		:=	SHKU17_A5_DO_HMI.Ind_AOB;
+SHKU17_A5_DO_raw.DO_5_2		:=	SHKU17_A5_DO_HMI.Ind_AOS;
+SHKU17_A5_DO_raw.DO_5_3		:=	SHKU17_A5_DO_HMI.Sound_warn;
+SHKU17_A5_DO_raw.DO_5_4		:=	SHKU17_A5_DO_HMI.Sound_ala;
+SHKU17_A5_DO_raw.DO_5_5		:=	SHKU17_A5_DO_HMI.PLC_flt;
+SHKU17_A5_DO_raw.DO_5_6		:=	SHKU17_A5_DO_HMI.nc_01;
+SHKU17_A5_DO_raw.DO_5_7		:=	SHKU17_A5_DO_HMI.nc_02;
+SHKU17_A5_DO_raw.DO_5_8		:=	SHKU17_A5_DO_HMI.nc_03;
+SHKU17_A5_DO_raw.DO_5_9		:=	SHKU17_A5_DO_HMI.nc_04;
+SHKU17_A5_DO_raw.DO_5_10	:=	SHKU17_A5_DO_HMI.nc_05;
+SHKU17_A5_DO_raw.DO_5_11	:=	SHKU17_A5_DO_HMI.nc_06;
+SHKU17_A5_DO_raw.DO_5_12	:=	SHKU17_A5_DO_HMI.nc_07;
+SHKU17_A5_DO_raw.DO_5_13	:=	SHKU17_A5_DO_HMI.nc_08;
+SHKU17_A5_DO_raw.DO_5_14	:=	SHKU17_A5_DO_HMI.nc_09;
+SHKU17_A5_DO_raw.DO_5_15	:=	SHKU17_A5_DO_HMI.nc_10;
+SHKU17_A5_DO_raw.DO_5_16	:=	SHKU17_A5_DO_HMI.nc_11;]]></ST>
+                </FunctionBlock>
+            </Folder>
+        </Folder>
+        <FunctionBlock UUID="FC3659584F7E9A1B032F2EB588B15E81" Name="Archive">
+            <Variables />
+            <ST><![CDATA[(*
+Archive_CTU1.dP_BFS1    := CTU1_AI_PLC.dP_BFS1.PV;
+Archive_CTU1.dP_BFS2    := CTU1_AI_PLC.dP_BFS2.PV;
+Archive_CTU1.dP_BFS3    := CTU1_AI_PLC.dP_BFS3.PV;
+Archive_CTU1.dP_BFS4    := CTU1_AI_PLC.dP_BFS4.PV;
+Archive_CTU1.dP_BFS5    := CTU1_AI_PLC.dP_BFS5.PV;
+Archive_CTU1.dP_BFS6    := CTU1_AI_PLC.dP_BFS6.PV;
+Archive_CTU1.dP_BFS     := CTU1_AI_PLC.dP_BFS.PV;
+Archive_CTU1.T_E3       := CTU1_AI_PLC.T_E3.PV;
+Archive_CTU1.P_E3       := CTU1_AI_PLC.P_E3.PV;
+Archive_CTU1.L_E3       := CTU1_AI_PLC.L_E3.PV;
+Archive_CTU1.T_E2       := CTU1_AI_PLC.T_E2.PV;
+Archive_CTU1.P_g_inKC1  := CTU1_AI_PLC.P_g_inKC1.PV;
+Archive_CTU1.P_g_outKC1 := CTU1_AI_PLC.P_g_outKC1.PV;
+Archive_CTU1.T_air      := CTU1_AI_PLC.T_air.PV;
+Archive_CTU1.T_ground   := CTU1_AI_PLC.T_ground.PV;
+Archive_CTU1.P_air      := CTU1_AI_PLC.P_air.PV;
+Archive_CTU1.T_air_BB   := CTU1_AI_PLC.T_air_BB.PV;
+Archive_CTU1.Reserve_01 := CTU1_AI_PLC.Reserve_01.PV;
+Archive_CTU1.Reserve_02 := CTU1_AI_PLC.Reserve_02.PV;
+Archive_CTU1.Reserve_03 := CTU1_AI_PLC.Reserve_03.PV;
+Archive_CTU1.Reserve_04 := CTU1_AI_PLC.Reserve_04.PV;
+Archive_CTU1.Reserve_05 := CTU1_AI_PLC.Reserve_05.PV;
+Archive_CTU1.Reserve_06 := CTU1_AI_PLC.Reserve_06.PV;
+Archive_CTU1.Reserve_07 := CTU1_AI_PLC.Reserve_07.PV;
+Archive_CTU1.Reserve_08 := CTU1_AI_PLC.Reserve_08.PV;
+Archive_CTU1.Reserve_09 := CTU1_AI_PLC.Reserve_09.PV;
+Archive_CTU1.Reserve_10 := CTU1_AI_PLC.Reserve_10.PV;
+Archive_CTU1.Reserve_11 := CTU1_AI_PLC.Reserve_11.PV;
+Archive_CTU1.Reserve_12 := CTU1_AI_PLC.Reserve_12.PV;
+Archive_CTU1.L_min_E2   := CTU1_AI_PLC.L_min_E2.PV;
+Archive_CTU1.L_max_E2   := CTU1_AI_PLC.L_max_E2.PV;
+Archive_CTU1.L_min_E3   := CTU1_AI_PLC.L_min_E3.PV;
+Archive_CTU1.L_max_E3   := CTU1_AI_PLC.L_max_E3.PV;
+Archive_CTU1.dP_KR7     := CTU1_AI_PLC.dP_KR7.PV;
+Archive_CTU1.dP_KR7a    := CTU1_AI_PLC.dP_KR7a.PV;
+Archive_CTU1.dP_KR8     := CTU1_AI_PLC.dP_KR8.PV;
+Archive_CTU1.dP_KRG_20_5:= CTU1_AI_PLC.dP_KRG_20_5.PV;
+Archive_CTU1.Reserve_13 := CTU1_AI_PLC.Reserve_13.PV;
+Archive_CTU1.Reserve_14 := CTU1_AI_PLC.Reserve_14.PV;
+Archive_CTU1.Reserve_15 := CTU1_AI_PLC.Reserve_15.PV;
+Archive_CTU1.U_main     := CTU1_AI_PLC.U_main.PV;
+Archive_CTU1.U_backup   := CTU1_AI_PLC.U_backup.PV;
+Archive_CTU1.Reserve_16 := CTU1_AI_PLC.Reserve_16.PV;
+Archive_CTU1.Reserve_17 := CTU1_AI_PLC.Reserve_17.PV;
+*)]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="C8FD4D8B4E6B016D906A7BB168892D92" Name="block_ALG">
+            <Variables>
+                <Variable UUID="65500F8F4B9B1FA8A8C7868A0B102215" Name="delay" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                <Variable UUID="3178578F4EF78503CF6F1AB00162B20C" Name="AOS_duration" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="0DEB5E1642B7CA983E2A3DB75DD05F50" Name="block_Link">
+            <Variables />
+            <ST><![CDATA[// ШКУ17 А1
+(*
+CTU1_SHKU17_A1.KR7_OFF := CTU1_DI_HMI.KR7_OFF;
+CTU1_SHKU17_A1.KR7_ON := CTU1_DI_HMI.KR7_ON;
+CTU1_SHKU17_A1.KR7a_OFF := CTU1_DI_HMI.KR7a_OFF;
+CTU1_SHKU17_A1.KR7a_ON := CTU1_DI_HMI.KR7a_ON;
+CTU1_SHKU17_A1.KR8_OFF := CTU1_DI_HMI.KR8_OFF;
+CTU1_SHKU17_A1.KR8_ON := CTU1_DI_HMI.KR8_ON;
+CTU1_SHKU17_A1.KR17_ON := CTU1_DI_HMI.KR17_ON;
+CTU1_SHKU17_A1.KR17_OFF := CTU1_DI_HMI.KR17_OFF;
+CTU1_SHKU17_A1.KR18_ON := CTU1_DI_HMI.KR18_ON;
+CTU1_SHKU17_A1.KR18_OFF := CTU1_DI_HMI.KR18_OFF;
+CTU1_SHKU17_A1.KRG_20_5_OFF := CTU1_DI_HMI.KRG_20_5_OFF;
+CTU1_SHKU17_A1.KRG_20_5_ON := CTU1_DI_HMI.KRG_20_5_ON;
+CTU1_SHKU17_A1.KR1026_OFF := CTU1_DI_HMI.KR1026_OFF;
+CTU1_SHKU17_A1.KR1026_ON := CTU1_DI_HMI.KR1026_ON;
+CTU1_SHKU17_A1.KR1029_OFF := CTU1_DI_HMI.KR1029_OFF;
+CTU1_SHKU17_A1.KR1029_ON := CTU1_DI_HMI.KR1029_ON;
+CTU1_SHKU17_A1.P_g_inKC1_PV := CTU1_AI_PLC.P_g_inKC1.PV;
+CTU1_SHKU17_A1.P_g_outKC1_PV := CTU1_AI_PLC.P_g_outKC1.PV;
+CTU1_SHKU17_A1.P_g_inKC1_flt := CTU1_AI_PLC.P_g_inKC1.flt;
+CTU1_SHKU17_A1.P_g_outKC1_flt := CTU1_AI_PLC.P_g_outKC1.flt;
+
+// AS36
+CTU1_AS36.P_g_inKC1_PV := CTU1_AI_PLC.P_g_inKC1.PV;
+CTU1_AS36.P_g_outKC1_PV := CTU1_AI_PLC.P_g_outKC1.PV;
+
+// PERF
+CTU1_PERF.P_g_inKC1_PV := CTU1_AI_PLC.P_g_inKC1.PV;
+CTU1_PERF.P_g_outKC1_PV := CTU1_AI_PLC.P_g_outKC1.PV;
+*)]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="1AD13A9D46DF643D1E27DF99C8A631B2" Name="block_PRU">
+            <Variables />
+            <ST><![CDATA[(*
+Global_PRU_CTU1.P_g_inKC1 := CTU1_AI_PLC.P_g_inKC1.PV;
+Global_PRU_CTU1.P_g_outKC1 := CTU1_AI_PLC.P_g_outKC1.PV;
+Global_PRU_CTU1.E := (CTU1_AI_PLC.P_g_outKC1.PV + REAL#0.098)/(CTU1_AI_PLC.P_g_inKC1.PV + REAL#0.098);
+Global_PRU_CTU1.dP_BFS1 := CTU1_AI_PLC.dP_BFS1.PV;
+Global_PRU_CTU1.dP_BFS2 := CTU1_AI_PLC.dP_BFS2.PV;
+Global_PRU_CTU1.dP_BFS3 := CTU1_AI_PLC.dP_BFS3.PV;
+Global_PRU_CTU1.dP_BFS4 := CTU1_AI_PLC.dP_BFS4.PV;
+Global_PRU_CTU1.dP_BFS5 := CTU1_AI_PLC.dP_BFS5.PV;
+Global_PRU_CTU1.dP_BFS6 := CTU1_AI_PLC.dP_BFS6.PV;
+Global_PRU_CTU1.dP_BFS := CTU1_AI_PLC.dP_BFS.PV;
+Global_PRU_CTU1.T_E3 := CTU1_AI_PLC.T_E3.PV;
+Global_PRU_CTU1.P_E3 := CTU1_AI_PLC.P_E3.PV;
+Global_PRU_CTU1.L_E3 := CTU1_AI_PLC.L_E3.PV;
+Global_PRU_CTU1.T_E2 := CTU1_AI_PLC.T_E2.PV;
+Global_PRU_CTU1.dP_KR7 := CTU1_AI_PLC.dP_KR7.PV;
+Global_PRU_CTU1.dP_KR7a := CTU1_AI_PLC.dP_KR7a.PV;
+Global_PRU_CTU1.dP_KR8 := CTU1_AI_PLC.dP_KR8.PV;
+Global_PRU_CTU1.dP_KRG_20_5 := CTU1_AI_PLC.dP_KRG_20_5.PV;
+
+Global_PRU_CTU1.P_g_inKC1_flt := CTU1_AI_PLC.P_g_inKC1.flt;
+Global_PRU_CTU1.P_g_outKC1_flt := CTU1_AI_PLC.P_g_outKC1.flt;
+Global_PRU_CTU1.dP_BFS1_flt := CTU1_AI_PLC.dP_BFS1.flt;
+Global_PRU_CTU1.dP_BFS2_flt := CTU1_AI_PLC.dP_BFS2.flt;
+Global_PRU_CTU1.dP_BFS3_flt := CTU1_AI_PLC.dP_BFS3.flt;
+Global_PRU_CTU1.dP_BFS4_flt := CTU1_AI_PLC.dP_BFS4.flt;
+Global_PRU_CTU1.dP_BFS5_flt := CTU1_AI_PLC.dP_BFS5.flt;
+Global_PRU_CTU1.dP_BFS6_flt := CTU1_AI_PLC.dP_BFS6.flt;
+Global_PRU_CTU1.dP_BFS_flt := CTU1_AI_PLC.dP_BFS.flt;
+Global_PRU_CTU1.T_E3_flt := CTU1_AI_PLC.T_E3.flt;
+Global_PRU_CTU1.P_E3_flt := CTU1_AI_PLC.P_E3.flt;
+Global_PRU_CTU1.L_E3_flt := CTU1_AI_PLC.L_E3.flt;
+Global_PRU_CTU1.T_E2_flt := CTU1_AI_PLC.T_E2.flt;
+Global_PRU_CTU1.dP_KR7_flt := CTU1_AI_PLC.dP_KR7.flt;
+Global_PRU_CTU1.dP_KR7a_flt := CTU1_AI_PLC.dP_KR7a.flt;
+Global_PRU_CTU1.dP_KR8_flt := CTU1_AI_PLC.dP_KR8.flt;
+Global_PRU_CTU1.dP_KRG_20_5_flt := CTU1_AI_PLC.dP_KRG_20_5.flt;
+
+Global_PRU_CTU1.KR1026_state := CTU1_IM.KR1026.state;
+Global_PRU_CTU1.KR1029_state := CTU1_IM.KR1029.state;
+Global_PRU_CTU1.KR7_state := CTU1_IM.KR7.state;
+Global_PRU_CTU1.KR7b_state := CTU1_IM.KR7b.state;
+Global_PRU_CTU1.KR7a_state := CTU1_IM.KR7a.state;
+Global_PRU_CTU1.KR7ab_state := CTU1_IM.KR7ab.state;
+Global_PRU_CTU1.KR17_state := CTU1_IM.KR17.state;
+Global_PRU_CTU1.KR18_state := CTU1_IM.KR18.state;
+Global_PRU_CTU1.KR8_state := CTU1_IM.KR8.state;
+Global_PRU_CTU1.KR8ab_state := CTU1_IM.KR8ab.state;
+Global_PRU_CTU1.KR20_state := CTU1_IM.KRG20_5.state;
+Global_PRU_CTU1.KRBFS1_state := CTU1_IM.KRBFS1.state;
+Global_PRU_CTU1.KRBFS2_state := CTU1_IM.KRBFS2.state;
+Global_PRU_CTU1.KRBFS3_state := CTU1_IM.KRBFS3.state;
+Global_PRU_CTU1.KRBFS4_state := CTU1_IM.KRBFS4.state;
+Global_PRU_CTU1.KRBFS5_state := CTU1_IM.KRBFS5.state;
+Global_PRU_CTU1.KRBFS6_state := CTU1_IM.KRBFS6.state;
+Global_PRU_CTU1.KRE3_state := CTU1_IM.KRE3.state;
+Global_PRU_CTU1.KR3d2_1_state := CTU1_IM.KR3d2_1.state;
+Global_PRU_CTU1.KRE2_state := CTU1_IM.KRE2.state;
+*)]]></ST>
+        </FunctionBlock>
+    </FBLibrary>
+</Program>

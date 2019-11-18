@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE UserList v. 1.0 >
+<GroupList CRC16="4001">
+    <Group Name="ALL" Rights="@SYSTEM_ColdRestart,@SYSTEM_HotRestart,@SYSTEM_RunApp,@SYSTEM_SetDateTime,@SYSTEM_Stop,AI_config,AI_control,IM_control,Sys_utilities,Ust_control">
+        <SessionRestrictions>
+            <Duration Restricted="FALSE" Value="T#0s" />
+            <Dates RestrictedFrom="FALSE" DateFrom="D#1970-01-01" RestrictedTo="FALSE" DateTo="D#1970-01-01" />
+            <WeekDays Restricted="FALSE">
+                <Sunday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Monday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Tuesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Wednesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Thursday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Friday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Saturday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+            </WeekDays>
+            <Nodes Restricted="FALSE" Items="" />
+        </SessionRestrictions>
+    </Group>
+    <Group Name="Администратор" Rights="@SYSTEM_BlockSysFunc,@SYSTEM_ColdRestart,@SYSTEM_HotRestart,@SYSTEM_RunApp,@SYSTEM_SetDateTime,@SYSTEM_Stop,Sys_utilities,security">
+        <SessionRestrictions>
+            <Duration Restricted="FALSE" Value="T#0s" />
+            <Dates RestrictedFrom="FALSE" DateFrom="D#1970-01-01" RestrictedTo="FALSE" DateTo="D#1970-01-01" />
+            <WeekDays Restricted="FALSE">
+                <Sunday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Monday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Tuesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Wednesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Thursday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Friday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Saturday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+            </WeekDays>
+            <Nodes Restricted="FALSE" Items="" />
+        </SessionRestrictions>
+    </Group>
+    <Group Name="Инженер КИПиА" Rights="AI_control,IM_control,Ust_control">
+        <SessionRestrictions>
+            <Duration Restricted="FALSE" Value="T#0s" />
+            <Dates RestrictedFrom="FALSE" DateFrom="D#1970-01-01" RestrictedTo="FALSE" DateTo="D#1970-01-01" />
+            <WeekDays Restricted="FALSE">
+                <Sunday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Monday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Tuesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Wednesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Thursday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Friday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Saturday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+            </WeekDays>
+            <Nodes Restricted="FALSE" Items="" />
+        </SessionRestrictions>
+    </Group>
+    <Group Name="Оператор" Rights="AI_control,IM_control,Ust_control">
+        <SessionRestrictions>
+            <Duration Restricted="FALSE" Value="T#0s" />
+            <Dates RestrictedFrom="FALSE" DateFrom="D#1970-01-01" RestrictedTo="FALSE" DateTo="D#1970-01-01" />
+            <WeekDays Restricted="FALSE">
+                <Sunday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Monday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Tuesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Wednesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Thursday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Friday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Saturday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+            </WeekDays>
+            <Nodes Restricted="FALSE" Items="" />
+        </SessionRestrictions>
+    </Group>
+    <Group Name="СБ" Rights="@SYSTEM_BlockSysFunc,@SYSTEM_ColdRestart,@SYSTEM_HotRestart,@SYSTEM_RunApp,@SYSTEM_SetDateTime,@SYSTEM_Stop,security" Comment="Служба безопасности">
+        <SessionRestrictions>
+            <Duration Restricted="FALSE" Value="T#0s" />
+            <Dates RestrictedFrom="FALSE" DateFrom="D#1970-01-01" RestrictedTo="FALSE" DateTo="D#1970-01-01" />
+            <WeekDays Restricted="FALSE">
+                <Sunday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Monday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Tuesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Wednesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Thursday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Friday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Saturday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+            </WeekDays>
+            <Nodes Restricted="FALSE" Items="" />
+        </SessionRestrictions>
+    </Group>
+</GroupList>
+
+<UserList CRC16="60219">
+    <User Name="1" LoginDisabled="FALSE" Hash="4FC82B26AECB47D2868C4EFBE3581732A3E7CBCC6C2EFB32062C08170A05EEB8" Hash2="5C6CB95C48755FA320E97245CA8C3A1B1E32F4FE0DDDEBB8D00533558F72DD22" Rights="" Groups="ALL">
+        <SessionRestrictions>
+            <Duration Restricted="FALSE" Value="T#0s" />
+            <Dates RestrictedFrom="FALSE" DateFrom="D#1970-01-01" RestrictedTo="FALSE" DateTo="D#1970-01-01" />
+            <WeekDays Restricted="FALSE">
+                <Sunday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Monday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Tuesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Wednesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Thursday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Friday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Saturday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+            </WeekDays>
+            <Nodes Restricted="FALSE" Items="" />
+        </SessionRestrictions>
+    </User>
+    <User Name="engeneer" LoginDisabled="FALSE" Hash="7FD4EBDD112E1B8F6ABA1765F75894413EE8F2D36BFF356D358A313B18F398D4" Hash2="AB46DCE8C025F3E0FAB9B71A19E59907D68F83A1D50D39E991CE17B90C5DB449" Rights="" Groups="Инженер КИПиА">
+        <SessionRestrictions>
+            <Duration Restricted="FALSE" Value="T#0s" />
+            <Dates RestrictedFrom="FALSE" DateFrom="D#1970-01-01" RestrictedTo="FALSE" DateTo="D#1970-01-01" />
+            <WeekDays Restricted="FALSE">
+                <Sunday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Monday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Tuesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Wednesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Thursday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Friday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Saturday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+            </WeekDays>
+            <Nodes Restricted="FALSE" Items="" />
+        </SessionRestrictions>
+    </User>
+    <User Name="operator" LoginDisabled="FALSE" Hash="941E65AF88E0945C9F7DB5C306B0EF0FC5763DF6BFC9D339FF235195885083A2" Hash2="FF3C285333CBB901328B9124B250C28641597F921EE0FAAF275056985535B92C" Rights="" Groups="Оператор">
+        <SessionRestrictions>
+            <Duration Restricted="FALSE" Value="T#0s" />
+            <Dates RestrictedFrom="FALSE" DateFrom="D#1970-01-01" RestrictedTo="FALSE" DateTo="D#1970-01-01" />
+            <WeekDays Restricted="FALSE">
+                <Sunday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Monday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Tuesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Wednesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Thursday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Friday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Saturday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+            </WeekDays>
+            <Nodes Restricted="FALSE" Items="" />
+        </SessionRestrictions>
+    </User>
+    <User Name="СБ" LoginDisabled="FALSE" Hash="491600A7D25D39206C2A8598A87FD4911B1367D4020C12754DFC4E97681F7DDF" Hash2="D321BC7AA86043C5AB2935F983F8DAD1DB4CF46F4AA52E353ACE3A1AAF6C892C" Rights="" Groups="СБ">
+        <SessionRestrictions>
+            <Duration Restricted="FALSE" Value="T#0s" />
+            <Dates RestrictedFrom="FALSE" DateFrom="D#1970-01-01" RestrictedTo="FALSE" DateTo="D#1970-01-01" />
+            <WeekDays Restricted="FALSE">
+                <Sunday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Monday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Tuesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Wednesday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Thursday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Friday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+                <Saturday Allowed="TRUE" TODFrom="TOD#00:00:00.000" TODTo="TOD#23:59:59.000" />
+            </WeekDays>
+            <Nodes Restricted="FALSE" Items="" />
+        </SessionRestrictions>
+    </User>
+</UserList>
+
+<SecurityPolicy CRC16="37677" Use="FALSE" MinPasswordLen="1" DiffCharCases="FALSE" SpecialChars="" />
+
+<RightsList Items="AI_config,AI_control,IM_control,Sys_utilities,Ust_control,security" />

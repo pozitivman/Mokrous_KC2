@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="AI">
+    <Items>
+        <Item Name="FLDR_AISHKU17.folder" />
+        <Item Name="Type_AI_Config.type" />
+        <Item Name="Type_AI_Dbg.type" />
+        <Item Name="Type_AI_HMI_Shil.type" />
+        <Item Name="Type_AI_Oper.type" />
+        <Item Name="Type_C3IDVYWRYBOEFC55T2M5V7IEZI.type" />
+        <Item Name="Type_FLJSLEBVBMCUHLAPWXKXJ67B3I.type" />
+        <Item Name="Type_support_AI.type" />
+    </Items>
+</Folder>

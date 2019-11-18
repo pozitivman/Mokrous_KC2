@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Ust" Kind="Struct" UUID="EA2FF984430F497B5477979FED08C455">
+    <Fields>
+        <Field Name="Pg2KC_H_PS" Type="REAL" UUID="717157704459BC7ACCCAE7B8A563E48B" Comment="Давление газа на выходе КЦ максимальное" />
+        <Field Name="Pg2KC_H_AS" Type="REAL" UUID="FD06ADB84A764A01D164E6ADD306B85E" Comment="Давление газа на выходе КЦ максимальное аварийное" />
+        <Field Name="Tozh_H_PS" Type="REAL" UUID="C077A4D54E20F1B2B3423F94547DD29D" Comment="Температура охлаждающей жидкости высокая" />
+        <Field Name="Ttg_L_PS" Type="REAL" UUID="21B74FB04C4AA0EDBCD5F694D950277F" Comment="Температура топливного газа низкая" />
+        <Field Name="Ttg_H_PS" Type="REAL" UUID="12E2DC3E4C600923527E56B92A6D8267" Comment="Температура топливного газа высокая" />
+        <Field Name="Ptg_L_PS" Type="REAL" UUID="0D0C90994D8DE8BC112A8DBF3C6419B2" Comment="Давление топливного  газа низкое" />
+        <Field Name="Ptg_H_PS" Type="REAL" UUID="BE4EA7594C6D9BF803138EBE6D3C5D0F" Comment="Давление топливного  газа высокое" />
+    </Fields>
+</Type>

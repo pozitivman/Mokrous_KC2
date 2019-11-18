@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_AI_A2_raw" Kind="Struct" UUID="8A7BCE3C446D7C204B34ACA623AD8747">
+    <Fields>
+        <Field Name="AI_3_1" Type="DINT" UUID="051422104410377867F57F90452636E2" Comment="Уровень в пожарной емкости №1" />
+        <Field Name="AI_3_2" Type="DINT" UUID="76EA496946525A05E9C593B3A7F11AE8" Comment="Уровень в пожарной емкости №2" />
+        <Field Name="AI_3_3" Type="DINT" UUID="86FA9B9D4A3116AC27ADD48ED90D3D93" Comment="Уровень в пожарной емкости №3" />
+        <Field Name="AI_3_4" Type="DINT" UUID="AF0345044D2F477F249900BF9F613373" Comment="Уровень в пожарной емкости №7" />
+        <Field Name="AI_4_1" Type="DINT" UUID="044A3A80489E877339B87391846808E4" Comment="Уровень в пожарной емкости №8" />
+        <Field Name="AI_4_2" Type="DINT" UUID="488FB97243B62E75D0F173B79CE9F9AF" Comment="Температура охлаждающей жидкости" />
+        <Field Name="AI_4_3" Type="DINT" UUID="67760B48420B60597162008C82A08009" Comment="Резерв" />
+        <Field Name="AI_4_4" Type="DINT" UUID="FC44432F49ED7310CE2AE49E49F475B8" Comment="Резерв" />
+        <Field Name="AI_5_1" Type="DINT" UUID="A5C49DBF45E34CC77A50ADB370846AF1" Comment="Резерв" />
+        <Field Name="AI_5_2" Type="DINT" UUID="9CABEBBF4F24935B7E0A6DB2523D7C4B" Comment="Резерв" />
+        <Field Name="AI_5_3" Type="DINT" UUID="1B89561246D2DA02241E88A0EDBCAAD0" Comment="Резерв" />
+        <Field Name="AI_5_4" Type="DINT" UUID="D931C4B848AB985591A74B9819B7D94A" Comment="Резерв" />
+        <Field Name="AI_6_1" Type="DINT" UUID="99AC0FB648E38D42066E03B3DCBEF19E" Comment="Резерв" />
+        <Field Name="AI_6_2" Type="DINT" UUID="2C1F31E74A6D30B12FFB6ABE0BB64D8A" Comment="Резерв" />
+        <Field Name="AI_6_3" Type="DINT" UUID="F808EC93447435813C93C19823FD2B7F" Comment="Резерв" />
+        <Field Name="AI_6_4" Type="DINT" UUID="E5BCFB304C0ADED4B80418ACEE086AAA" Comment="Контроль 24 В ТИ" />
+        <Field Name="AI_7_1" Type="DINT" UUID="A1922EFE4A71D69C4446EC91B70931E6" Comment="Резерв" />
+        <Field Name="AI_7_2" Type="DINT" UUID="DEBC85C540E85747DD352A9C6A2E2B97" Comment="Резерв" />
+        <Field Name="AI_7_3" Type="DINT" UUID="1FC034F74C7C8F1CE19B29B2031F3333" Comment="Напряжение основного питания ШКУ-17" />
+        <Field Name="AI_7_4" Type="DINT" UUID="BF79F0BA44BB1C7924140986D5CF7F8D" Comment="Напряжение резервного питания ШКУ-17" />
+    </Fields>
+</Type>

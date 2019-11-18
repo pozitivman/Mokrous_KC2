@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_A1_APS" Kind="Struct" UUID="37B721CE49F3D4A93DAEE8B5D5423B00">
+    <Fields>
+        <Field Name="Tnv_kz" Type="BOOL" UUID="FB9F4FDF46D6DB6361FCE5A38B085B94" Comment="КЗ канал - Температура наружного воздуха" />
+        <Field Name="Tgr_kz" Type="BOOL" UUID="FAF1DC4F45CD48BAD953C989EF79CFD7" Comment="КЗ канал - Температура грунта" />
+        <Field Name="Tg1kr7B_kz" Type="BOOL" UUID="9044606D4FD283044712F0AE10C66CD1" Comment="КЗ канал - Температура газа до крана 7Б" />
+        <Field Name="Tg2kr8B_kz" Type="BOOL" UUID="645DD72E4F623E9D3B87B1B6E37E6C40" Comment="КЗ канал - Температура газа после крана 8Б" />
+        <Field Name="Tg1kr8Bbis_kz" Type="BOOL" UUID="EB55636442A56A110957999076D49D83" Comment="КЗ канал - Температура газа до крана 8Ббис" />
+        <Field Name="Tg2kr8Bbis_kz" Type="BOOL" UUID="F95893F4434C5DC2FADE0A80A4BC0903" Comment="КЗ канал - Температура газа после крана 8Ббис" />
+        <Field Name="Pg2kr8Bbis_kz" Type="BOOL" UUID="DFD030BC4C0AC296A9B3FDA46209FBEC" Comment="КЗ канал - Давление газа после крана 8Ббис" />
+        <Field Name="Pg1kr7B_kz" Type="BOOL" UUID="6AA8777443C9FDC096DB7B8E0A37871B" Comment="КЗ канал - Давление газа до крана 7Б" />
+        <Field Name="rez_01_kz" Type="BOOL" UUID="5629E52A43ACE9E3F97F0285746F4A79" Comment="КЗ канал - Резерв" />
+        <Field Name="Patm_kz" Type="BOOL" UUID="266A0E734AF17EE8D86C56833106495F" Comment="КЗ канал - Давление атмосферного воздуха" />
+        <Field Name="PozAPK3_kz" Type="BOOL" UUID="E06FC65244EC6CA12C001FA03E138E2E" Comment="КЗ канал - Положение АПК №3" />
+        <Field Name="rez_02_kz" Type="BOOL" UUID="A97CA5B345C1651373BC5682427DFB00" Comment="КЗ канал - Резерв" />
+        <Field Name="rez_03_kz" Type="BOOL" UUID="D937B013416F86E71FE923B959C8339C" Comment="КЗ канал - Резерв" />
+        <Field Name="rez_04_kz" Type="BOOL" UUID="B50B38424964321344F1958BADE96139" Comment="КЗ канал - Резерв" />
+        <Field Name="rez_05_kz" Type="BOOL" UUID="038886DB4AF79BC6FF516E82AB9D815D" Comment="КЗ канал - Резерв" />
+        <Field Name="Ctrl24VTI1_kz" Type="BOOL" UUID="6734B3C644670E43318EF4BEB3CDD81D" Comment="КЗ канал - Контроль 24 В ТИ" />
+        <Field Name="Tg1PU_kz" Type="BOOL" UUID="8FABEF4D4FF58C74564DD5ABC25C55C3" Comment="КЗ канал - Температура газа  до  ПУ" />
+        <Field Name="Tg2PU_kz" Type="BOOL" UUID="5EE408294CE138BDA58C00B6652DD51A" Comment="КЗ канал - Температура газа  после ПУ" />
+        <Field Name="rez_06_kz" Type="BOOL" UUID="5E7029BF4E854E51B768E28D5A417808" Comment="КЗ канал - Резерв" />
+        <Field Name="Pg1PU_kz" Type="BOOL" UUID="CC1ECEA64D5070F234B999812CAE066E" Comment="КЗ канал - Давление газа  до  ПУ" />
+        <Field Name="Pg2PU_kz" Type="BOOL" UUID="B6BAF0A14AFE710B8118BF939094A6E6" Comment="КЗ канал - Давление газа  после ПУ" />
+        <Field Name="rez_07_kz" Type="BOOL" UUID="B6FB7B12491C6388605CF8A74649FDFE" Comment="КЗ канал - Резерв" />
+        <Field Name="Tg1gr_2_kz" Type="BOOL" UUID="90C6FEB84EDBFFD2A28F3BB4537E37A2" Comment="КЗ канал - Температура газа на входе  группы 2" />
+        <Field Name="Tg2gr_2_kz" Type="BOOL" UUID="AA0C01D9419A038F28480AA605352CF2" Comment="КЗ канал - Температура газа на выходе  группы 2" />
+        <Field Name="Pg2plum_kz" Type="BOOL" UUID="75F3C91A4FDDCD487E739FAA062BDFE6" Comment="КЗ канал - Давление газа на выходном шлейфе  " />
+        <Field Name="rez_08_kz" Type="BOOL" UUID="AA2C4B92444AB3898D7F40A934F587B4" Comment="КЗ канал - Резерв" />
+        <Field Name="Pcompr_v_kz" Type="BOOL" UUID="8A5BBF0C412B87A5D134BE9814F07C1A" Comment="КЗ канал - Давление сжатого воздуха" />
+        <Field Name="Ttg_kz" Type="BOOL" UUID="1A2FD2E24D34FBEF01DB22B19EBFD419" Comment="КЗ канал - Температура топливного газа" />
+        <Field Name="Tpg_kz" Type="BOOL" UUID="064F7D72424C68B9D87124B77BB7237A" Comment="КЗ канал - Температура пускового газа" />
+        <Field Name="Ptg_kz" Type="BOOL" UUID="1636190C44F2A4B31A92939FC88A26FD" Comment="КЗ канал - Давление топливного  газа" />
+        <Field Name="Ppg_kz" Type="BOOL" UUID="57F111B9403EC7AFD0E70B8E4E0EA37A" Comment="КЗ канал - Давление пускового газа" />
+        <Field Name="Ctrl24VTI2_kz" Type="BOOL" UUID="3DAD1EBB4FC77FD4C34B3CB3F2FC9DAD" Comment="КЗ канал - Контроль 24 В ТИ" />
+        <Field Name="Lpe1_kz" Type="BOOL" UUID="ACD29B4A45A5539CBCD0E7A85480EC77" Comment="КЗ канал - Уровень в пожарной емкости №1" />
+        <Field Name="Lpe2_kz" Type="BOOL" UUID="65B6841242AB1CFC55D77BBA7B8A103C" Comment="КЗ канал - Уровень в пожарной емкости №2" />
+        <Field Name="Lpe3_kz" Type="BOOL" UUID="563BBB8B49AE9BBE894CCD941D92D7D2" Comment="КЗ канал - Уровень в пожарной емкости №3" />
+        <Field Name="Lpe7_kz" Type="BOOL" UUID="9F166AC5498F3EF405AEA6BBE516C386" Comment="КЗ канал - Уровень в пожарной емкости №7" />
+        <Field Name="Lpe8_kz" Type="BOOL" UUID="1AD94AB34962EE4DA7B9BD9C8B4FD63C" Comment="КЗ канал - Уровень в пожарной емкости №8" />
+        <Field Name="Tozh_kz" Type="BOOL" UUID="C0E29263479ABCABEFBA18A4E8737BB9" Comment="КЗ канал - Температура охлаждающей жидкости" />
+        <Field Name="rez_09_kz" Type="BOOL" UUID="04A6D6C84703AAC9616B1C867E65C6C0" Comment="КЗ канал - Резерв" />
+        <Field Name="rez_10_kz" Type="BOOL" UUID="10BEB5524DEF953FB72545B729126E0A" Comment="КЗ канал - Резерв" />
+        <Field Name="rez_11_kz" Type="BOOL" UUID="988E8442484EA4B7371A089E40DB3F54" Comment="КЗ канал - Резерв" />
+        <Field Name="rez_12_kz" Type="BOOL" UUID="11376D5C4B5F9EB5F10447ABDB99311B" Comment="КЗ канал - Резерв" />
+        <Field Name="rez_13_kz" Type="BOOL" UUID="D3C23EA24BB90D9D35D0DDA48107DB71" Comment="КЗ канал - Резерв" />
+        <Field Name="rez_14_kz" Type="BOOL" UUID="73A5C5DF4EFBC96F6824F3A9D8C6E290" Comment="КЗ канал - Резерв" />
+        <Field Name="rez_15_kz" Type="BOOL" UUID="B69E3DD445C7E2C025230D8EECF7688D" Comment="КЗ канал - Резерв" />
+        <Field Name="rez_16_kz" Type="BOOL" UUID="397DD9304F149A34CF01EEAE42DF6451" Comment="КЗ канал - Резерв" />
+        <Field Name="rez_17_kz" Type="BOOL" UUID="4945915348FDC18D1130AB90F6D9E7BB" Comment="КЗ канал - Резерв" />
+        <Field Name="Ctrl24VTI3_kz" Type="BOOL" UUID="7488AF2B4A95530562793A9EC54A18DB" Comment="КЗ канал - Контроль 24 В ТИ" />
+        <Field Name="rez_18_kz" Type="BOOL" UUID="EEAC115B4EB9BFDB95E834B3739517D8" Comment="КЗ канал - Резерв" />
+        <Field Name="rez_19_kz" Type="BOOL" UUID="CE89F68644A764566A44B1AD9FBFA2E3" Comment="КЗ канал - Резерв" />
+        <Field Name="Uosn_p_SHKU17_kz" Type="BOOL" UUID="811F7FDE4FD41127D437E9B099541294" Comment="КЗ канал - Напряжение основного питания ШКУ-17" />
+        <Field Name="Urez_p_SHKU17_kz" Type="BOOL" UUID="CA023C5A42AC92059F694A9D3C820F24" Comment="КЗ канал - Напряжение резервного питания ШКУ-17" />
+        <Field Name="Tnv_obriv" Type="BOOL" UUID="D1F2C8284B666E2D9B1BEDA98AFAC682" Comment="Обрыв канал - Температура наружного воздуха" />
+        <Field Name="Tgr_obriv" Type="BOOL" UUID="291F9D5F42DA9202FC180397CF304777" Comment="Обрыв канал - Температура грунта" />
+        <Field Name="Tg1kr7B_obriv" Type="BOOL" UUID="95DAB93B498E0D07CE6E8ABE011CDC2F" Comment="Обрыв канал - Температура газа до крана 7Б" />
+        <Field Name="Tg2kr8B_obriv" Type="BOOL" UUID="2E65EC0045E02CB948947B8D182E792B" Comment="Обрыв канал - Температура газа после крана 8Б" />
+        <Field Name="Tg1kr8Bbis_obriv" Type="BOOL" UUID="939E137B47C15AB8672034972D7557CF" Comment="Обрыв канал - Температура газа до крана 8Ббис" />
+        <Field Name="Tg2kr8Bbis_obriv" Type="BOOL" UUID="AC1379B14C4EA1E93A61C88AFBCDC909" Comment="Обрыв канал - Температура газа после крана 8Ббис" />
+        <Field Name="Pg2kr8Bbis_obriv" Type="BOOL" UUID="855C62E54A120BFF827943A0022CB91A" Comment="Обрыв канал - Давление газа после крана 8Ббис" />
+        <Field Name="Pg1kr7B_obriv" Type="BOOL" UUID="9E85AD904B479267BF85A59CF45C2500" Comment="Обрыв канал - Давление газа до крана 7Б" />
+        <Field Name="rez_01_obriv" Type="BOOL" UUID="CAC2A689446635ADBEBFF3B05DF32D49" Comment="Обрыв канал - Резерв" />
+        <Field Name="Patm_obriv" Type="BOOL" UUID="B4C57C2F4A954AA59248A8B3C254152A" Comment="Обрыв канал - Давление атмосферного воздуха" />
+        <Field Name="PozAPK3_obriv" Type="BOOL" UUID="1F7051A449BA0E93DE1F778C8C124707" Comment="Обрыв канал - Положение АПК №3" />
+        <Field Name="rez_02_obriv" Type="BOOL" UUID="53A064114785A0C1D41D5F8F20B4F916" Comment="Обрыв канал - Резерв" />
+        <Field Name="rez_03_obriv" Type="BOOL" UUID="426BFDE44250D0ED7D3E938C4C1FF28E" Comment="Обрыв канал - Резерв" />
+        <Field Name="rez_04_obriv" Type="BOOL" UUID="6BB7CB454F496681D01D67B811417F2C" Comment="Обрыв канал - Резерв" />
+        <Field Name="rez_05_obriv" Type="BOOL" UUID="370CA9EE44E547265C6CBAB5AD32F607" Comment="Обрыв канал - Резерв" />
+        <Field Name="Ctrl24VTI1_obriv" Type="BOOL" UUID="E2517C8346805A6B0E79CCB10BBB4A8E" Comment="Обрыв канал - Контроль 24 В ТИ" />
+        <Field Name="Tg1PU_obriv" Type="BOOL" UUID="1A4B079B4B13932FB39317A7B36326D6" Comment="Обрыв канал - Температура газа  до  ПУ" />
+        <Field Name="Tg2PU_obriv" Type="BOOL" UUID="00DAE044455109D1B9CEA28E5E688EF4" Comment="Обрыв канал - Температура газа  после ПУ" />
+        <Field Name="rez_06_obriv" Type="BOOL" UUID="93EB20FD467BB79AF848B9875D038E0A" Comment="Обрыв канал - Резерв" />
+        <Field Name="Pg1PU_obriv" Type="BOOL" UUID="AF7CF85B44C5E83804232980DEAD15E0" Comment="Обрыв канал - Давление газа  до  ПУ" />
+        <Field Name="Pg2PU_obriv" Type="BOOL" UUID="78134A0B42D8B8EC6B0D12BCC1E2A410" Comment="Обрыв канал - Давление газа  после ПУ" />
+        <Field Name="rez_07_obriv" Type="BOOL" UUID="2EE041FB485B983615F19981CC1B81DC" Comment="Обрыв канал - Резерв" />
+        <Field Name="Tg1gr_2_obriv" Type="BOOL" UUID="F65D0CAB43D6E509EF71069BA4E143D7" Comment="Обрыв канал - Температура газа на входе  группы 2" />
+        <Field Name="Tg2gr_2_obriv" Type="BOOL" UUID="F03531ED40E3ACF5BDB46B8D0F12D01D" Comment="Обрыв канал - Температура газа на выходе  группы 2" />
+        <Field Name="Pg2plum_obriv" Type="BOOL" UUID="07B34DA84EF9388B7E5A8399FA04147F" Comment="Обрыв канал - Давление газа на выходном шлейфе  " />
+        <Field Name="rez_08_obriv" Type="BOOL" UUID="5CE2EF5545D43D6CD26BB49C91399027" Comment="Обрыв канал - Резерв" />
+        <Field Name="Pcompr_v_obriv" Type="BOOL" UUID="EB37E1F948EF013C75F4F1BEC4659BF9" Comment="Обрыв канал - Давление сжатого воздуха" />
+        <Field Name="Ttg_obriv" Type="BOOL" UUID="06DDA3854B19CDBE27F8EEA9CD969B9E" Comment="Обрыв канал - Температура топливного газа" />
+        <Field Name="Tpg_obriv" Type="BOOL" UUID="A5DE7AF04677826DD4EE76B0EF73D06A" Comment="Обрыв канал - Температура пускового газа" />
+        <Field Name="Ptg_obriv" Type="BOOL" UUID="B9FDD12D453699FFE97A83856A93643B" Comment="Обрыв канал - Давление топливного  газа" />
+        <Field Name="Ppg_obriv" Type="BOOL" UUID="C1788F7B46CE53B3CB97D98F593A453E" Comment="Обрыв канал - Давление пускового газа" />
+        <Field Name="Ctrl24VTI2_obriv" Type="BOOL" UUID="B3C7903644822F035302DBA25A6631A1" Comment="Обрыв канал - Контроль 24 В ТИ" />
+        <Field Name="Lpe1_obriv" Type="BOOL" UUID="1BCA212249AF2C297A6FA1A35B71F362" Comment="Обрыв канал - Уровень в пожарной емкости №1" />
+        <Field Name="Lpe2_obriv" Type="BOOL" UUID="ED745C4B47E60FEDE395369E0E20E754" Comment="Обрыв канал - Уровень в пожарной емкости №2" />
+        <Field Name="Lpe3_obriv" Type="BOOL" UUID="2E46FF01401783A79FA8B499EE5AE384" Comment="Обрыв канал - Уровень в пожарной емкости №3" />
+        <Field Name="Lpe7_obriv" Type="BOOL" UUID="BD76D6A14D4E453C2B9A20BFEF1094B2" Comment="Обрыв канал - Уровень в пожарной емкости №7" />
+        <Field Name="Lpe8_obriv" Type="BOOL" UUID="15280CBD4081B787E71DC387B290D8C9" Comment="Обрыв канал - Уровень в пожарной емкости №8" />
+        <Field Name="Tozh_obriv" Type="BOOL" UUID="BC9E31FF4786E5F047C1CDA6BA6068B0" Comment="Обрыв канал - Температура охлаждающей жидкости" />
+        <Field Name="rez_09_obriv" Type="BOOL" UUID="4C5B1DF64D6424303B82269E17762018" Comment="Обрыв канал - Резерв" />
+        <Field Name="rez_10_obriv" Type="BOOL" UUID="661636EF46EB408E0480C7B1C2E2BF61" Comment="Обрыв канал - Резерв" />
+        <Field Name="rez_11_obriv" Type="BOOL" UUID="CBBFC07D4B6BBB317E6879BE08CC343D" Comment="Обрыв канал - Резерв" />
+        <Field Name="rez_12_obriv" Type="BOOL" UUID="92DA0D3042800F0E889EAE8FFF02786C" Comment="Обрыв канал - Резерв" />
+        <Field Name="rez_13_obriv" Type="BOOL" UUID="862B21E04EDA780DF2E69E9888CAFE7D" Comment="Обрыв канал - Резерв" />
+        <Field Name="rez_14_obriv" Type="BOOL" UUID="E6C364F8441C4A893AE3B1AFD72D68ED" Comment="Обрыв канал - Резерв" />
+        <Field Name="rez_15_obriv" Type="BOOL" UUID="79F49E8F47717E5C15EE97A2D69F18E1" Comment="Обрыв канал - Резерв" />
+        <Field Name="rez_16_obriv" Type="BOOL" UUID="8A6CDBD14579C3B8E5DC6FBB1AF220FE" Comment="Обрыв канал - Резерв" />
+        <Field Name="rez_17_obriv" Type="BOOL" UUID="FD1475A642AAA0A3A879EAAB38F2B539" Comment="Обрыв канал - Резерв" />
+        <Field Name="Ctrl24VTI3_obriv" Type="BOOL" UUID="7A329DC248736FF62C18698751A738AC" Comment="Обрыв канал - Контроль 24 В ТИ" />
+        <Field Name="rez_18_obriv" Type="BOOL" UUID="5DE0C43D4C6B1705A7EE9CACAFE3FB8E" Comment="Обрыв канал - Резерв" />
+        <Field Name="rez_19_obriv" Type="BOOL" UUID="3D63CCFD47E55004C1137694635D519F" Comment="Обрыв канал - Резерв" />
+        <Field Name="Uosn_p_SHKU17_obriv" Type="BOOL" UUID="92CCEC8044D0C376F2703F9ABCD6EFC4" Comment="Обрыв канал - Напряжение основного питания ШКУ-17" />
+        <Field Name="Urez_p_SHKU17_obriv" Type="BOOL" UUID="020AF6C6429A07748CEC48B8254D144B" Comment="Обрыв канал - Напряжение резервного питания ШКУ-17" />
+        <Field Name="Ala_ispr_Ppr" Type="BOOL" UUID="5C982B174B2D02ABDF68FA9C55AADC29" Comment="Неисправность питания преобразователей" />
+        <Field Name="rez_01" Type="BOOL" UUID="4B4752ED400544887A3738B9A455B335" Comment="Резерв" />
+        <Field Name="rez_02" Type="BOOL" UUID="9A9DDCB6465C405B88A6E0ACBF7A0291" Comment="Резерв" />
+        <Field Name="rez_03" Type="BOOL" UUID="A34946684B7D9701D57008A25C3EC840" Comment="Резерв" />
+        <Field Name="rez_04" Type="BOOL" UUID="283650C142A962AC6C78F8B67DA033A2" Comment="Резерв" />
+        <Field Name="rez_05" Type="BOOL" UUID="FD608AAC4D7EDAA71EF59AAC5A961384" Comment="Резерв" />
+        <Field Name="Pg2_plum" Type="BOOL" UUID="9627117C4D8113CBA06A23BFA054FD63" Comment="Давление газа на выходном шлейфе" />
+        <Field Name="No_U_AVVgr_3" Type="BOOL" UUID="8B1FE06A4ABE9D7AE45BDB9ACA1A14B9" Comment="Отсутствие напряжения в схеме аварийно-вытяжных вентиляторов группы 3" />
+        <Field Name="no_U_PV5" Type="BOOL" UUID="0D6AE2364B72143A066E02BC8B7F1174" Comment="Отсутствие напряжения в схеме приточного вентилятора №5" />
+        <Field Name="no_U_PV6" Type="BOOL" UUID="9BDACC374E44474F6F0BDC92B4D042C6" Comment="Отсутствие напряжения в схеме приточного вентилятора №6" />
+        <Field Name="Inc1_ON" Type="BOOL" UUID="8A47FDDB41BDB9B16297D0ADEEF48176" Comment="Ввод №1 включен" />
+        <Field Name="Inc1_OFF" Type="BOOL" UUID="22DB5286443E17C45C1BE388CD7FC92C" Comment="Ввод №1 отлючен" />
+        <Field Name="Inc2_ON" Type="BOOL" UUID="7C6D0148492349945F2EF686FB1CFD31" Comment="Ввод №2 включен" />
+        <Field Name="Inc2_OFF" Type="BOOL" UUID="3A6120DE452609EDCD42B09505F4244D" Comment="Ввод №2 отлючен" />
+        <Field Name="SS_ON" Type="BOOL" UUID="1DBDBC8746AE4364750D27B130EA2417" Comment="Секционный выключатель включен" />
+        <Field Name="SS_OFF" Type="BOOL" UUID="5437596044A7658126E0EE9210F55DF4" Comment="Секционный выключатель отлючен" />
+        <Field Name="APK_ON" Type="BOOL" UUID="A74F12F34AA48FD2BB864D839768F485" Comment="АПК открыт" />
+        <Field Name="APK_OFF" Type="BOOL" UUID="191F2F39495936BDB96311B17D15A0E8" Comment="АПК закрыт" />
+        <Field Name="APK_Heat_ON" Type="BOOL" UUID="C1E2BD1446574617836BCEA752850F45" Comment="АПК обогрев включен" />
+        <Field Name="N11GD100_1_WORK" Type="BOOL" UUID="8EBCA7AB4825905E8E40EE8C11C9C682" Comment="11ГД-100 №1 в работе" />
+        <Field Name="N11GD100_1_FLT" Type="BOOL" UUID="3134417C4C450FCAC516ABAA6057D820" Comment="Авария 11ГД-100 №1" />
+        <Field Name="N11GD100_2_WORK" Type="BOOL" UUID="6EA16A644C77A340FC0FC283B2BB3E8B" Comment="11ГД-100 №2 в работе" />
+        <Field Name="N11GD100_2_FLT" Type="BOOL" UUID="AA2ADC21473B1FEAA3407EB697E2904C" Comment="Авария 11ГД-100 №2" />
+        <Field Name="AC804_FLT" Type="BOOL" UUID="DD5F6CAD4B843ED35C44008D4EFDEAEA" Comment="АС-804 неисправна" />
+        <Field Name="AC804_WORK" Type="BOOL" UUID="2959D9BE4FF6D15026DE6BA52CC7BB64" Comment="АС-804 в работе" />
+        <Field Name="AC804_REZ" Type="BOOL" UUID="561CF6744E7FAB02066C7EB5E1235308" Comment="АС-804 в резерве" />
+        <Field Name="TG2_FLT" Type="BOOL" UUID="9A9249EA4169CE866F9407AB42B1C533" Comment="Авария теплогенератора №2" />
+        <Field Name="P3_30_ON" Type="BOOL" UUID="EF63C6324E0EAA973FA211AFB2886978" Comment="Насос РЗ-30 ГСМ включен" />
+        <Field Name="P3_30_KVR_AUTO" Type="BOOL" UUID="330CF54948E633ED25D7FB8E8B7C6A35" Comment="КВР насоса РЗ-30 ГСМ в положении автомат" />
+        <Field Name="rez_06" Type="BOOL" UUID="E1E4AB4143D51D2F7107A8A9EB797A43" Comment="Резерв" />
+        <Field Name="rez_07" Type="BOOL" UUID="09FB48BE4CAD260F129F19A40861BA2A" Comment="Резерв" />
+        <Field Name="Ctrl24_TC_1" Type="BOOL" UUID="64F76FFB489C763EE6F3828BE0BCC354" Comment="Контроль 24 В ТС №1" />
+        <Field Name="Pg2plum_over_PS" Type="BOOL" UUID="7D314EC74F7291F9116211A3A60DF573" Comment="Предупреждение - Давление газа на выходном шлейфе &gt;= 5,5 МПа" />
+        <Field Name="Pg2plum_over_AS" Type="BOOL" UUID="76F9CA584E8BC98331012EA8A4589AD2" Comment="Авария - Давление газа на выходном шлейфе &gt;= 5,65 МПа" />
+        <Field Name="Tozh_H_PS" Type="BOOL" UUID="8E978DCF4D0AE14DE3D50289E2CA3150" Comment="Температура охлаждающей жидкости высокая" />
+        <Field Name="Ttg_L_PS" Type="BOOL" UUID="C2CBF5EE46C66B0F2B26EEAD361A8A30" Comment="Температура топливного газа низкая" />
+        <Field Name="Ttg_H_PS" Type="BOOL" UUID="8E4CE31B452DB0934A7D218036AE8B4C" Comment="Температура топливного газа высокая" />
+        <Field Name="Ptg_L_PS" Type="BOOL" UUID="293C1F7D495CFAB8DCE05DB8CC7DC6A0" Comment="Давление топливного  газа низкое" />
+        <Field Name="Ptg_H_PS" Type="BOOL" UUID="90867F42474484E300E84C9B507B698B" Comment="Давление топливного  газа высокое" />
+        <Field Name="PRU_Link_flt" Type="BOOL" UUID="B4EAB889435D069D56003987E5B3B6F3" Comment="Ошибка связи с ПРУ" />
+        <Field Name="PRU_btn_AOS" Type="BOOL" UUID="0204874F40D2ACA1E576219BCA7C7894" Comment="Нажата кнопка АОС на ПРУ" />
+        <Field Name="PRU_btn_AOB" Type="BOOL" UUID="409869AE4E689542C8573F8EDDB28B90" Comment="Нажата кнопка АОБ на ПРУ" />
+        <Field Name="PRU_btn_NO" Type="BOOL" UUID="38E706844458A700D7F523BA85E8D453" Comment="Нажата кнопка НО на ПРУ" />
+    </Fields>
+</Type>

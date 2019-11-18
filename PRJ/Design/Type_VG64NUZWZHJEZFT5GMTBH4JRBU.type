@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TAccept" Kind="Struct" UUID="2E4A332540A1301050E82DA7343EBAF9">
+    <Fields>
+        <Field Name="AOB_MG_cut" Type="BOOL" UUID="99F042AD451078718CCC66B0C62B11FD" Comment="Перекрытие МГ при АОБ" />
+        <Field Name="AOS_MG_cut" Type="BOOL" UUID="FFA7990545021B4DF8316AA4BAED4951" Comment="Перекрытие МГ при АОС" />
+        <Field Name="SODU_AOss_KC_next" Type="BOOL" UUID="37BD28254828AA5A641126A1A62A00E9" Comment="Кольцо ГПА КЦ-1 при &quot;АО СС КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_AOss_KC_prev" Type="BOOL" UUID="D718E66A4EAAD09010D6ED8D6E1E3BBF" Comment="Кольцо ГПА КЦ-1 при &quot;АО СС КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_AObs_KC_next" Type="BOOL" UUID="CF923AA240AD1F56BEB34B98C8537D83" Comment="Кольцо ГПА КЦ-1 при &quot;АО БС КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_AObs_KC_prev" Type="BOOL" UUID="A8D29C444096204FA2EB69870AA35FF8" Comment="Кольцо ГПА КЦ-1 при &quot;АО БС КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_EAO_KC_next" Type="BOOL" UUID="CB5546F94289563FEE8B2CAE646BDF80" Comment="Кольцо ГПА КЦ-1 при &quot;ЭО КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_EAO_KC_prev" Type="BOOL" UUID="23EB90C34D7A68B95378608F7850ED56" Comment="Кольцо ГПА КЦ-1 при &quot;ЭО КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_NO_KC_next" Type="BOOL" UUID="5896C5D1483B07D0E96A3D94327A7708" Comment="Кольцо ГПА КЦ-1 при &quot;НО КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_NO_KC_prev" Type="BOOL" UUID="30895CB14BE777852B546B878190D5B0" Comment="Кольцо ГПА КЦ-1 при &quot;НО КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_KOL_KC_next" Type="BOOL" UUID="A239F3BA47EB8EBEE617E0B96F5E32A7" Comment="Кольцо ГПА КЦ-1 при &quot;КОЛЬЦО КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_KOL_KC_prev" Type="BOOL" UUID="F46FD2E5454757E98A473B85AD93FE29" Comment="Кольцо ГПА КЦ-1 при &quot;КОЛЬЦО КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_AOss" Type="BOOL" UUID="573DE86448245A4DAA9EAC85559383DE" Comment="АОС при &quot;АО КЦ-1 СС&quot; с уровня СОДУ" />
+        <Field Name="SODU_AObs" Type="BOOL" UUID="76D5F4B54B0D8A0DA15661B22F748077" Comment="АОБ при &quot;АО КЦ-1 БС&quot; с уровня СОДУ" />
+        <Field Name="SODU_KOL" Type="BOOL" UUID="2891BB6F495B5B1735D2F09178EC15C0" Comment="КОЛЬЦО при &quot;КОЛЬЦО КЦ-1 БС&quot; с уровня СОДУ" />
+        <Field Name="Fire_DKU" Type="BOOL" UUID="75EBB04246993599A3E25EAD34C820FB" Comment="АО ДКУ при сигнале &quot;Пожар в ДКУ&quot;" />
+        <Field Name="Zagaz_2_DKU" Type="BOOL" UUID="7C8A13154D42896DB1B7EE955D03A231" Comment="АО ДКУ при сигнале &quot;Загазованность 2-й порог в ДКУ" />
+        <Field Name="GAP_in" Type="BOOL" UUID="8A9C088A40211619DDAAFAA251A3423E" Comment="АОБ при &quot;Разрыв входного коллектора компрессорного цеха&quot;" />
+        <Field Name="GAP_out" Type="BOOL" UUID="1A96C4B746034322A2FFE0BE1ED4A835" Comment="АОБ при &quot;Разрыв выходного коллектора компрессорного цеха&quot;" />
+        <Field Name="T_g_outKC_HH" Type="BOOL" UUID="FCF176674489F5931BFBCB9F807CB676" Comment="АОБ при &quot;Аварийная температура газа на выходе КЦ-1&quot;" />
+    </Fields>
+</Type>

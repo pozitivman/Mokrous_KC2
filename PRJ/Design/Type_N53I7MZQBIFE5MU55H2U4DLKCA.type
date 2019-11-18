@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_DO_A4_raw" Kind="Struct" UUID="4D3353E54386A585A66FD7BFD9CE5D8D">
+    <Fields>
+        <Field Name="DO_8_1" Type="BOOL" UUID="B51CA7F5499A347B1F46078DC18D44CF" Comment="Обогрев АПК  включить" />
+        <Field Name="DO_8_2" Type="BOOL" UUID="087E9331461E0D93B09C4EB1417154D5" Comment="Резерв" />
+        <Field Name="DO_8_3" Type="BOOL" UUID="F28F04D34132F46C7934FEAF269CDCD8" Comment="Резерв" />
+        <Field Name="DO_8_4" Type="BOOL" UUID="7310A1F34F4E3D3820526191C9ACEC09" Comment="Резерв" />
+        <Field Name="DO_8_5" Type="BOOL" UUID="68A6DB1446189257A9CB20A681781EF5" Comment="Резерв" />
+        <Field Name="DO_8_6" Type="BOOL" UUID="793B0DC6444C9A478AA3888AD871B697" Comment="Насос РЗ-30 ГСМ включить" />
+        <Field Name="DO_8_7" Type="BOOL" UUID="E95FDB1B45A0371FBC514290225E9019" Comment="Периметральное освещение КЦ 2 включить" />
+        <Field Name="DO_8_8" Type="BOOL" UUID="8B22B8204C0DE3B3C06A6E9B683251A9" Comment="Резерв" />
+        <Field Name="DO_8_9" Type="BOOL" UUID="1903881A43981C6A3BC8C595014C23A8" Comment="Резерв" />
+        <Field Name="DO_8_10" Type="BOOL" UUID="4A50FA4546161BE9F2584E8176F7E64B" Comment="Резерв" />
+        <Field Name="DO_8_11" Type="BOOL" UUID="78961895446D3EF7E3CFC1B28D270075" Comment="Резерв" />
+        <Field Name="DO_8_12" Type="BOOL" UUID="D98B36BE4BBF9A466CD3C5984155780B" Comment="Резерв" />
+        <Field Name="DO_8_13" Type="BOOL" UUID="2A603B1E475A8192874AB68476DEB0E9" Comment="Резерв" />
+        <Field Name="DO_8_14" Type="BOOL" UUID="DA4D5F984C663350E52183ADB6C7FEC9" Comment="Резерв" />
+        <Field Name="DO_8_15" Type="BOOL" UUID="F9C20BF24D9C6E66C20B8AA41C84F400" Comment="Резерв" />
+        <Field Name="DO_8_16" Type="BOOL" UUID="C0D5EA814F3E1DBE4C1B3EBA3F6DF788" Comment="Резерв" />
+        <Field Name="DO_9_1" Type="BOOL" UUID="57E6F0E74D673F4E00BE29B722567823" Comment="ГПА №7 Авария КЦ" />
+        <Field Name="DO_9_2" Type="BOOL" UUID="24AA17C844822F0272E9BCBCC543FA8F" Comment="ГПА №8 Авария КЦ" />
+        <Field Name="DO_9_3" Type="BOOL" UUID="2D2E1EB14F50D4224F9EAD83C49B1CED" Comment="ГПА №9 Авария КЦ" />
+        <Field Name="DO_9_4" Type="BOOL" UUID="496886D84331E528FCF4E7B0FB11B156" Comment="ГПА №7 Цех готов к пуску" />
+        <Field Name="DO_9_5" Type="BOOL" UUID="101C9A8944777E7C70190CBD7721E7EB" Comment="ГПА №7 АО в группе" />
+        <Field Name="DO_9_6" Type="BOOL" UUID="51A276E14EF097ACFE4352BD16B7E69D" Comment="ГПА №7 Кран 6 открыт" />
+        <Field Name="DO_9_7" Type="BOOL" UUID="42FFBA844F9B728E812D529DE6DC1D69" Comment="ГПА №8 Цех готов к пуску" />
+        <Field Name="DO_9_8" Type="BOOL" UUID="6EB73DD94D48836E8C9C839A56C296B0" Comment="ГПА №8 АО в группе" />
+        <Field Name="DO_9_9" Type="BOOL" UUID="AD50A7D74111535421728EBACB9FF0A2" Comment="ГПА №8 Кран 6 открыт" />
+        <Field Name="DO_9_10" Type="BOOL" UUID="A93327DA4C349F5E7E6639B25C314DEA" Comment="ГПА №9 Цех готов к пуску" />
+        <Field Name="DO_9_11" Type="BOOL" UUID="B1EADE2E4897FB08D204048799B45B07" Comment="ГПА №9 АО в группе" />
+        <Field Name="DO_9_12" Type="BOOL" UUID="2CC40DCC4D5573AAB57EE398927CEDAC" Comment="ГПА №9 Кран 6 открыт" />
+        <Field Name="DO_9_13" Type="BOOL" UUID="FE6891014F93D39C0827CF995B3E5861" Comment="Резерв" />
+        <Field Name="DO_9_14" Type="BOOL" UUID="3BF7007D4816DF71976E838318B5122B" Comment="Резерв" />
+        <Field Name="DO_9_15" Type="BOOL" UUID="ED87C05C42CE2BBC14F49AB52EA43221" Comment="Резерв" />
+        <Field Name="DO_9_16" Type="BOOL" UUID="2F1CA01C4CE7AB39CD830DA9F4D8928D" Comment="Резерв" />
+        <Field Name="DO_10_1" Type="BOOL" UUID="981159A34A5C721EE483CD98BF659D78" Comment="Кран 30Б закрыть" />
+        <Field Name="DO_10_2" Type="BOOL" UUID="F7E8356C4AF616F6888BA6AC01EE2E22" Comment="Кран 30Б открыть" />
+        <Field Name="DO_10_3" Type="BOOL" UUID="89D7B3E246283586B6A2C3867D1FEF24" Comment="Кран  30Б’ закрыть" />
+        <Field Name="DO_10_4" Type="BOOL" UUID="0694CFE34E4F428DC56C3EB1596432BF" Comment="Кран  30Б’ открыть" />
+        <Field Name="DO_10_5" Type="BOOL" UUID="9AB6DB3F4C72277477F7E2949DE593FA" Comment="Кран 7Б закрыть" />
+        <Field Name="DO_10_6" Type="BOOL" UUID="1B5061AB40C513D087A12E9EC8266654" Comment="Кран 7Б открыть" />
+        <Field Name="DO_10_7" Type="BOOL" UUID="F137C135448FB6B8533DAF8D5462BBD0" Comment="Кран 7Б зак закрыть" />
+        <Field Name="DO_10_8" Type="BOOL" UUID="4A033B6E4813DB2C6CF641AEFA8587FD" Comment="Кран 7Б зак открыть" />
+        <Field Name="DO_10_9" Type="BOOL" UUID="E225047D4EA5A713F629AC8511CBA6DF" Comment="Кран 8Б закрыть" />
+        <Field Name="DO_10_10" Type="BOOL" UUID="529F8B7844F899C6AA1C6B9594227E62" Comment="Кран 8Б открыть" />
+        <Field Name="DO_10_11" Type="BOOL" UUID="DB9ACE65495EC48B03E4E6AC02874566" Comment="Кран 8Б’ закрыть" />
+        <Field Name="DO_10_12" Type="BOOL" UUID="F8D762674F7CFB900CCB5D9B3C0A04A0" Comment="Кран 8Б’ открыть" />
+        <Field Name="DO_10_13" Type="BOOL" UUID="F54D0D4C4345098EC2DB37BA439D3E89" Comment="Резерв" />
+        <Field Name="DO_10_14" Type="BOOL" UUID="5B168B6746ED514DA752CB855C52C54C" Comment="Резерв" />
+        <Field Name="DO_10_15" Type="BOOL" UUID="C892F7E24831EE2B6B8C979ED449C795" Comment="Резерв" />
+        <Field Name="DO_10_16" Type="BOOL" UUID="B9891E38413822CFE697D9B031F22EF6" Comment="Резерв" />
+        <Field Name="DO_7_1" Type="BOOL" UUID="D69606F44558F2038DAF6CABF1B1BE46" Comment="Кран  17Б закрыть" />
+        <Field Name="DO_7_2" Type="BOOL" UUID="7A7D11D64029D1A3EC2F57851F0A6123" Comment="Кран  17Б открыть" />
+        <Field Name="DO_7_3" Type="BOOL" UUID="F94E50F940004FF9969167A0B782646A" Comment="Кран 18Б закрыть" />
+        <Field Name="DO_7_4" Type="BOOL" UUID="39653CC64CB9945CEEE9FA8B20392F40" Comment="Кран 18Б открыть" />
+        <Field Name="DO_7_5" Type="BOOL" UUID="0D97D77A45DAF2F76DF8EB806FB1D713" Comment="Резерв" />
+        <Field Name="DO_7_6" Type="BOOL" UUID="51C1E8BE43EA0FF60B2DB0A29E29BDFF" Comment="Резерв" />
+        <Field Name="DO_7_7" Type="BOOL" UUID="8D9068DF4F606D59435019A563F9DDC9" Comment="Кран 6Б закрыть" />
+        <Field Name="DO_7_8" Type="BOOL" UUID="92E7317A442B8819556FEBAC575AB851" Comment="Кран 6Б открыть" />
+        <Field Name="DO_7_9" Type="BOOL" UUID="E3F07EF648A5DF8E0B01E582997E5AFF" Comment="Кран 6БР закрыть" />
+        <Field Name="DO_7_10" Type="BOOL" UUID="9FF851F74C8889A2F3310492FE9A3AED" Comment="Кран 6БР открыть" />
+        <Field Name="DO_7_11" Type="BOOL" UUID="A474299842D7ECBB7EC1CFAED9A43D9B" Comment="Кран А закрыть" />
+        <Field Name="DO_7_12" Type="BOOL" UUID="29D858FE4CD5E9C14DBBC59C190E2E3F" Comment="Кран А открыть" />
+        <Field Name="DO_7_13" Type="BOOL" UUID="2117153B481DC9795667539833045A5E" Comment="Кран С закрыть" />
+        <Field Name="DO_7_14" Type="BOOL" UUID="5DF55F6240DB82BBDF8E309B0560C681" Comment="Кран С открыть" />
+        <Field Name="DO_7_15" Type="BOOL" UUID="AD1B52844612BC0DAA1BC086230CF7CA" Comment="Кран 6-9 закрыть" />
+        <Field Name="DO_7_16" Type="BOOL" UUID="F3F8F2494A971ECD723DFFA5BC97B970" Comment="Кран 6-9 открыть" />
+    </Fields>
+</Type>

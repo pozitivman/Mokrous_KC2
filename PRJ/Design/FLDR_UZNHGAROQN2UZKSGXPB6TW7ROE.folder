@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="ASU_APK">
+    <Items>
+        <Item Name="Type_BW5JE34SW2AUVO3BFDPJSFBRYI.type" />
+        <Item Name="Type_IEPMZCC535LULO5SKX3YGYKBRQ.type" />
+        <Item Name="Type_KNQZCA6S3C4ULLCEGZDXXW3QLA.type" />
+        <Item Name="Type_L4QRJPHBNJRUXPB6VOHVKMZWYE.type" />
+        <Item Name="Type_PLNXOFDM3UOULL5TT3CFJI5QPM.type" />
+        <Item Name="Type_TI6XYIZJZITUXOCDW2SYMK2VZQ.type" />
+        <Item Name="Type_YE4OQIAM4QNUDABVJ7V45DBJUM.type" />
+        <Item Name="Type_YEICJEGHP7UUPOEK7XL6YCV6ZA.type" />
+    </Items>
+</Folder>

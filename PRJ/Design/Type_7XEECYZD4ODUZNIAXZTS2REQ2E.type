@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_DI_A3_raw" Kind="Struct" UUID="F80BC04248204A7D24CA81B862CC54B1">
+    <Fields>
+        <Field Name="DI_3_1" Type="BOOL" UUID="D2F5744A4B5A7F2F126A7B8F01EDE8EE" Comment="Пожар в ГН КЦ 2" />
+        <Field Name="DI_3_2" Type="BOOL" UUID="93413BA44FCE1DE2C62679A91029502A" Comment="Пожар в маслобаке КЦ 2" />
+        <Field Name="DI_3_3" Type="BOOL" UUID="0B332A174E38A15820A5B2A03CE0ECD0" Comment="Пожар в АС-804" />
+        <Field Name="DI_3_4" Type="BOOL" UUID="8D3D7A0B4D0700848289B1969D937977" Comment="Пожар в ЭССН" />
+        <Field Name="DI_3_5" Type="BOOL" UUID="7E54C9424DDF45B36E77F2BEED624ECA" Comment="Пожар РУ-0,4 кВ" />
+        <Field Name="DI_3_6" Type="BOOL" UUID="351C463F47A6C79D18B6B6ABCA56FA29" Comment="Пожар в котельной" />
+        <Field Name="DI_3_7" Type="BOOL" UUID="CEB1B2BB435B53549085798181E5EC04" Comment="Загазованность в ГН КЦ 2 10%" />
+        <Field Name="DI_3_8" Type="BOOL" UUID="E8DF49604606E8E73EE4599A0B96BF23" Comment="Загазованность в ГН КЦ 2 20%" />
+        <Field Name="DI_3_9" Type="BOOL" UUID="42BB9A474338D7C158E4C48F387CB7BD" Comment="Загазованность в ПУ КЦ 2 10%" />
+        <Field Name="DI_3_10" Type="BOOL" UUID="49EE311A4EE3995652A1E5BF9252075D" Comment="Загазованность в ПУ КЦ 2  20%" />
+        <Field Name="DI_3_11" Type="BOOL" UUID="F692F4CB479D0147EAECA1B586BBD627" Comment="Загазованность в машзале ЭССН 10%" />
+        <Field Name="DI_3_12" Type="BOOL" UUID="4EB7B373442EC5BCCCEC6A85F4FCD099" Comment="Загазованность в машзале ЭССН  20%" />
+        <Field Name="DI_3_13" Type="BOOL" UUID="D506E21241025FB48187E1824374C0BB" Comment="Загазованность СН4  в котельной  10%" />
+        <Field Name="DI_3_14" Type="BOOL" UUID="07D2AC9346CCC47593D60EAA79AF7E30" Comment="Загазованность СН4  в котельной 20%" />
+        <Field Name="DI_3_15" Type="BOOL" UUID="8872412C404CD8C9F29D999E7F776483" Comment="Загазованность СО в котельной 20мг/м3" />
+        <Field Name="DI_3_16" Type="BOOL" UUID="527A18604AB14D841732E9B23CE6DC15" Comment="Загазованность СО в котельной 100мг/м3" />
+        <Field Name="DI_4_1" Type="BOOL" UUID="712AAB0040CD7B017C35798DA0D9D3CD" Comment="Неисправность системы ПО и КЗ" />
+        <Field Name="DI_4_2" Type="BOOL" UUID="F46D43F0476E75091165B4954134801D" Comment="Щит связи АС-804. Ввод №1: контактор №1 включен" />
+        <Field Name="DI_4_3" Type="BOOL" UUID="17604F434C6B155F952A92AE69996B1E" Comment="Щит связи АС-804. Ввод №1: контактор №1 отключен" />
+        <Field Name="DI_4_4" Type="BOOL" UUID="1B2517A64CA139BA212596BD6794110A" Comment="Щит связи АС-804. Ввод №2: контактор №2 включен" />
+        <Field Name="DI_4_5" Type="BOOL" UUID="9CF0B18D438D257399AA35A3A3288CFC" Comment="Щит связи АС-804. Ввод №2: контактор №2 отключен" />
+        <Field Name="DI_4_6" Type="BOOL" UUID="CFD257584E8E4D29F900A3996485FA6D" Comment="Вызов в цех №2" />
+        <Field Name="DI_4_7" Type="BOOL" UUID="D1D8BB92497615D5129C7489A6FF699C" Comment="Резерв" />
+        <Field Name="DI_4_8" Type="BOOL" UUID="5839A2D64C335FE757D8F4998DBE8A4C" Comment="Авария в котельной" />
+        <Field Name="DI_4_9" Type="BOOL" UUID="6A5CA02D43214DE2ECB1AD9CD10E26C7" Comment="Периметральное освещение КЦ 2 включено" />
+        <Field Name="DI_4_10" Type="BOOL" UUID="D2C8ECC941B7B9B4C361E2AC6E6ADCA9" Comment="Резерв" />
+        <Field Name="DI_4_11" Type="BOOL" UUID="883E5F064872A5EE03F65AB29C8426D4" Comment="Резерв" />
+        <Field Name="DI_4_12" Type="BOOL" UUID="F5E6C0F8438715410604D48969926CD9" Comment="Резерв" />
+        <Field Name="DI_4_13" Type="BOOL" UUID="FBB5249D4B8FB4137994D18F286F4DDB" Comment="Резерв" />
+        <Field Name="DI_4_14" Type="BOOL" UUID="119D64534073338C97687DA18F73C5AE" Comment="Резерв" />
+        <Field Name="DI_4_15" Type="BOOL" UUID="952528FB48E4F8A4DE1D4396951B3B01" Comment="Резерв" />
+        <Field Name="DI_4_16" Type="BOOL" UUID="629CB4DA4F137C78957735BAA26820FB" Comment="Контроль 24 В ТС" />
+        <Field Name="DI_5_1" Type="BOOL" UUID="B6B80033489B5F0118AFA7B4179E4CF4" Comment="ГПА №7 Включить звуковую сигнализацию" />
+        <Field Name="DI_5_2" Type="BOOL" UUID="19C42DC84D2743294AEF0DA984D09199" Comment="ГПА №8 Включить звуковую сигнализацию" />
+        <Field Name="DI_5_3" Type="BOOL" UUID="8FB8F272476B1D18029CF29F32D42800" Comment="ГПА №9 Включить звуковую сигнализацию" />
+        <Field Name="DI_5_4" Type="BOOL" UUID="49C6B0654B0127D36566B1981FFFDB71" Comment="Резерв" />
+        <Field Name="DI_5_5" Type="BOOL" UUID="30E24E1745A482E59E00C093C31DE5A0" Comment="Резерв" />
+        <Field Name="DI_5_6" Type="BOOL" UUID="656D4FE24045E4758568C995D258EE8A" Comment="Резерв" />
+        <Field Name="DI_5_7" Type="BOOL" UUID="39B0AEF8445E70EBB83D76AAAC55ACA3" Comment="ГПА №7 Останов в группе" />
+        <Field Name="DI_5_8" Type="BOOL" UUID="1431C23B4F6376B233D1349747B5F5BD" Comment="ГПА №8 Останов в группе" />
+        <Field Name="DI_5_9" Type="BOOL" UUID="689DD202487470313E51B9BED2C43EB0" Comment="ГПА №9 Останов в группе" />
+        <Field Name="DI_5_10" Type="BOOL" UUID="F89A798C45DC256820287B8FDBAD6695" Comment="Резерв" />
+        <Field Name="DI_5_11" Type="BOOL" UUID="6EF5D11748887137266975A146B7DFFE" Comment="Резерв" />
+        <Field Name="DI_5_12" Type="BOOL" UUID="1F3759274C5DFF4681C6F9A58281F804" Comment="Резерв" />
+        <Field Name="DI_5_13" Type="BOOL" UUID="5B2102EB46C7732885B3749FA3DF6092" Comment="Резерв" />
+        <Field Name="DI_5_14" Type="BOOL" UUID="E6F26CD84BCB539137FB4983BEC00500" Comment="Резерв" />
+        <Field Name="DI_5_15" Type="BOOL" UUID="6591B3014C3E5A5E2521B9B0BD485383" Comment="Резерв" />
+        <Field Name="DI_5_16" Type="BOOL" UUID="DBE891664B2E3CC1CD81B3852DD229DC" Comment="Резерв" />
+        <Field Name="DI_6_1" Type="BOOL" UUID="539B3A70402931691ECA5AAAB8951A7D" Comment="Резерв" />
+        <Field Name="DI_6_2" Type="BOOL" UUID="C5319015412C6830C56A628D34D0343B" Comment="Резерв" />
+        <Field Name="DI_6_3" Type="BOOL" UUID="F7F2E96047ADC7A69A07CB92115BDACB" Comment="Резерв" />
+        <Field Name="DI_6_4" Type="BOOL" UUID="A7D7CCFB4E393DE3D28CB0A611AEBEAA" Comment="Резерв" />
+        <Field Name="DI_6_5" Type="BOOL" UUID="6BAB2CFD4953992B0A7BFDA492CD4195" Comment="Резерв" />
+        <Field Name="DI_6_6" Type="BOOL" UUID="D9C0849442DFEF9BDF163F88D05A52D4" Comment="Резерв" />
+        <Field Name="DI_6_7" Type="BOOL" UUID="4EE859164F6D9A2C2FE3DDBE4BEE98B8" Comment="Резерв" />
+        <Field Name="DI_6_8" Type="BOOL" UUID="7552FDAA4917387291A066BED051F726" Comment="Резерв" />
+        <Field Name="DI_6_9" Type="BOOL" UUID="324698F747AAF91F9C7357B2A38498E2" Comment="Резерв" />
+        <Field Name="DI_6_10" Type="BOOL" UUID="18212DE74356671920A3DB865A78B76C" Comment="Резерв" />
+        <Field Name="DI_6_11" Type="BOOL" UUID="F16453564AB1016B8BEF0FB5A234A6D7" Comment="Резерв" />
+        <Field Name="DI_6_12" Type="BOOL" UUID="5EE5E24C47E230E8403D4DA0B82077C2" Comment="Резерв" />
+        <Field Name="DI_6_13" Type="BOOL" UUID="E32F0DB149A8DA01ADEAAAB8DCC6B94D" Comment="Резерв" />
+        <Field Name="DI_6_14" Type="BOOL" UUID="786D893543ABDDD62128398E5FFD9DA1" Comment="Резерв" />
+        <Field Name="DI_6_15" Type="BOOL" UUID="B3C57BA44A347AC3C3D4B4ACC9C63B16" Comment="Резерв" />
+        <Field Name="DI_6_16" Type="BOOL" UUID="472127584E88609D1B387EB6F4AADE73" Comment="Контроль 24 В ТС" />
+        <Field Name="DI_7_1" Type="BOOL" UUID="9416B24F4D00DF8197A72186EEB4B019" Comment="РУ-0,4кВ ЭССН. Ввод №1: наличие напряжения" />
+        <Field Name="DI_7_2" Type="BOOL" UUID="A3F53F1F47D6FC2BDA3987AF4EE0165F" Comment="РУ-0,4кВ ЭССН. Ввод №2: наличие напряжения" />
+        <Field Name="DI_7_3" Type="BOOL" UUID="DCAB722A4C5F11722D27569377F28400" Comment="РУ-0,4кВ ЭССН. Сборные шины: наличие напряжения" />
+        <Field Name="DI_7_4" Type="BOOL" UUID="86DAD5F94B62088E03CF2991DEA72309" Comment="Технологическая авария АГРС" />
+        <Field Name="DI_7_5" Type="BOOL" UUID="20BA4D5E4EA69E9D7ABE218195616F36" Comment="Дверь АГРС открыта" />
+        <Field Name="DI_7_6" Type="BOOL" UUID="C510CD8E40D989C69A1800A037F9AF89" Comment="Ввод 1 (ЛЭП №3):  отсутствие напряжения" />
+        <Field Name="DI_7_7" Type="BOOL" UUID="C96B725D4D16B64F0124D3AA3DE42403" Comment="Ввод 1 (ЛЭП №3):  ВМП-10 включен" />
+        <Field Name="DI_7_8" Type="BOOL" UUID="F739DC3648FA89413CC5AEB33FFFDCD1" Comment="Ввод 1 (ЛЭП №3):  ВМП-10 отключен" />
+        <Field Name="DI_7_9" Type="BOOL" UUID="861B37CA40EEDCEB38E278B18217F337" Comment="Трансформатор №2 ТКУ: ВМП-10 включен" />
+        <Field Name="DI_7_10" Type="BOOL" UUID="40DAC0F24BFD9A239C7D14AE254D9894" Comment="Трансформатор №2 ТКУ: ВМП-10 отключен" />
+        <Field Name="DI_7_11" Type="BOOL" UUID="71356E354B345C88C3A799B7F4482FC5" Comment="ЛЭП –ЭХЗ «Север»:  ВМП-10 включен" />
+        <Field Name="DI_7_12" Type="BOOL" UUID="55706C2644257F1F4C331F853D1D477A" Comment="ЛЭП –ЭХЗ «Север»:  ВМП-10 отключен" />
+        <Field Name="DI_7_13" Type="BOOL" UUID="0854E16F4DDC88AF7FC37989509E302A" Comment="Ввод 2 (ЛЭП №17):  отсутствие напряжения" />
+        <Field Name="DI_7_14" Type="BOOL" UUID="93EC08A34FF48D0D95C590986F1BE8EE" Comment="Ввод 2 (ЛЭП №17):  ВМП-10 включен" />
+        <Field Name="DI_7_15" Type="BOOL" UUID="F93FB70946B41E99197923A2A3067957" Comment="Ввод 2 (ЛЭП №17):  ВМП-10 отключен" />
+        <Field Name="DI_7_16" Type="BOOL" UUID="D10A9C4E456DF55E568118905203257C" Comment="Трансформатор №1 ТКУ: ВМП-10 включен" />
+        <Field Name="DI_8_1" Type="BOOL" UUID="8F49E69B4C2980B3DE2A14A2CAAF5AB7" Comment="Трансформатор №1 ТКУ: ВМП-10 отключен" />
+        <Field Name="DI_8_2" Type="BOOL" UUID="2CFB5EAA4DD3452B26B3BDBDF0046B50" Comment="ЛЭП –ЭХЗ «Юг»:  ВМП-10 включен" />
+        <Field Name="DI_8_3" Type="BOOL" UUID="519803D8442DAD83B39DD6AF88D61FA8" Comment="ЛЭП –ЭХЗ «Юг»:  ВМП-10 отключен" />
+        <Field Name="DI_8_4" Type="BOOL" UUID="F5C085DB4D6155E461F1EB9561A97937" Comment="МГ-№1: ВМП-10 включен" />
+        <Field Name="DI_8_5" Type="BOOL" UUID="E38D4C914A9D1DC60A3710A7E396FD90" Comment="МГ-№1: ВМП-10 отключен" />
+        <Field Name="DI_8_6" Type="BOOL" UUID="30117D7D479FC5F83B43E1B4F9F1BB4D" Comment="МГ-№2: ВМП-10 включен" />
+        <Field Name="DI_8_7" Type="BOOL" UUID="9EDA2EFA4E78D2F3A64839852F103677" Comment="МГ-№2: ВМП-10 отключен" />
+        <Field Name="DI_8_8" Type="BOOL" UUID="19C41A8D4B229737CB981097B51F0EBD" Comment="Секционный выключатель 10кВ: ВМП-10 включен" />
+        <Field Name="DI_8_9" Type="BOOL" UUID="353975854BDF7F362CDBD498E3C643B7" Comment="Секционный выключатель 10кВ: ВМП-10 отключен" />
+        <Field Name="DI_8_10" Type="BOOL" UUID="9EE0D67A4BE6AD713CB742B41B0BA104" Comment="Резерв" />
+        <Field Name="DI_8_11" Type="BOOL" UUID="9D7551CE409B9B051FCCB4B25E480CEC" Comment="Резерв" />
+        <Field Name="DI_8_12" Type="BOOL" UUID="F7589E9F45583C46673D999243126720" Comment="Резерв" />
+        <Field Name="DI_8_13" Type="BOOL" UUID="F28E51454E0951A63BAB648DBAC24565" Comment="Резерв" />
+        <Field Name="DI_8_14" Type="BOOL" UUID="02C9493C4962BAB423EAC790C3CF4A35" Comment="Резерв" />
+        <Field Name="DI_8_15" Type="BOOL" UUID="8025CD2644418186F6CECE9425FD5171" Comment="Резерв" />
+        <Field Name="DI_8_16" Type="BOOL" UUID="F6257C5744E2646778BD6691866FA377" Comment="Контроль 24 В ТС" />
+        <Field Name="DI_9_1" Type="BOOL" UUID="3A291E9C485399E642FCFDBF9FA30537" Comment="Контроль основного питания ~220 В" />
+        <Field Name="DI_9_2" Type="BOOL" UUID="6FCF870145C4A12856A86D81915981AF" Comment="Контроль резервного питания 220 В пост." />
+        <Field Name="DI_9_3" Type="BOOL" UUID="8F699BB54D5D66E901A0E2927537C07E" Comment="Автоматы питания включены" />
+        <Field Name="DI_9_4" Type="BOOL" UUID="12ED9881495EEA46C030DDB4CB18D7DF" Comment="Двери ШКУ-17 открыты" />
+        <Field Name="DI_9_5" Type="BOOL" UUID="155DA3824230471BCA4E5CB8346E3E9E" Comment="Контроль исправности разрядников" />
+        <Field Name="DI_9_6" Type="BOOL" UUID="13ED8CE64D702EFA8A4C1E8B49E6BCF9" Comment="Исправность осн. ИП =24 В внутр. цепей" />
+        <Field Name="DI_9_7" Type="BOOL" UUID="D09CA4BC4EA41EBDD82B4389979DCFF1" Comment="Исправность рез. ИП =24 В внутр. цепей" />
+        <Field Name="DI_9_8" Type="BOOL" UUID="DEFD62994B65520F0F5A48BCCDA693B6" Comment="Исправность осн. ИП =24 В AI" />
+        <Field Name="DI_9_9" Type="BOOL" UUID="A23E4DE4470EBB844CA893BC0AE9EB7E" Comment="Исправность рез. ИП =24 В AI" />
+        <Field Name="DI_9_10" Type="BOOL" UUID="F927CB34499BCB0F35955EAE66CE7315" Comment="Исправность осн. ИП =24 В DI" />
+        <Field Name="DI_9_11" Type="BOOL" UUID="A61E65B040FF3219ADB3B1861C33A023" Comment="Исправность рез. ИП =24 В DI" />
+        <Field Name="DI_9_12" Type="BOOL" UUID="55C1423A4D3FA3EC71E4D7B81620F268" Comment="Исправность осн. ИП =24 В DO" />
+        <Field Name="DI_9_13" Type="BOOL" UUID="09FE9D314BD07A7E36612DA5CAC6FFBB" Comment="Исправность рез. ИП =24 В DO" />
+        <Field Name="DI_9_14" Type="BOOL" UUID="EF7161BF4919D4AC7040C6BA1EC38F11" Comment="Исправность осн. ИП =24 В БЭАО" />
+        <Field Name="DI_9_15" Type="BOOL" UUID="CBAE47C64389A7FA6480F385E21DC41B" Comment="Исправность рез. ИП =24 В БЭАО" />
+        <Field Name="DI_9_16" Type="BOOL" UUID="AD6A9E034F8BA2B1A2118C84B2963494" Comment="Резерв" />
+        <Field Name="DI_10_1" Type="BOOL" UUID="4247F194442200C7FB278BAF5B28E2AD" Comment="ЭАО КЦ с ПУ" />
+        <Field Name="DI_10_2" Type="BOOL" UUID="059391554578D5D29886119E4BD2255E" Comment="ЭАО КЦ с ПУ.КЦД" />
+        <Field Name="DI_10_3" Type="BOOL" UUID="3B16754A47E4783693F971865A8C3CED" Comment="АО КЦ бс с ПУ" />
+        <Field Name="DI_10_4" Type="BOOL" UUID="8573D4BE4115BBAA5B5BC8ADE4A7450F" Comment="АО КЦ бс с ПУ.КЦД" />
+        <Field Name="DI_10_5" Type="BOOL" UUID="663A39F840D3E82FA796098557F49B69" Comment="АО КЦ сс с ПУ" />
+        <Field Name="DI_10_6" Type="BOOL" UUID="633E75264FEFE1CD4721AF98C717BAB8" Comment="АО КЦ сс с ПУ.КЦД" />
+        <Field Name="DI_10_7" Type="BOOL" UUID="69040EAF4C05A32748B672B861ABCE87" Comment="ЭАО КЦ с ПЭАО" />
+        <Field Name="DI_10_8" Type="BOOL" UUID="C6FBF9C84217ED83062BEB948B519139" Comment="ЭАО КЦ с ПЭАО.КЦД" />
+        <Field Name="DI_10_9" Type="BOOL" UUID="1F108BB644A2318B7CF2D4A8DC760B6C" Comment="Контроль питания кранов" />
+        <Field Name="DI_10_10" Type="BOOL" UUID="61CCE1B54770B0EFBB2FA180FF32EC75" Comment="Готовность БЭАО" />
+        <Field Name="DI_10_11" Type="BOOL" UUID="E8231D0941C3EA06C339DD93D9A7C764" Comment="Готовность ПУ" />
+        <Field Name="DI_10_12" Type="BOOL" UUID="4F63009D447DC55B26D01F8759E2ABF0" Comment="Съем звука (ПУ)" />
+        <Field Name="DI_10_13" Type="BOOL" UUID="037E113D4C526C451892F3AB9AD30261" Comment="РУ кранами" />
+        <Field Name="DI_10_14" Type="BOOL" UUID="C826B5054B7C19F2EFAE37B048491CD0" Comment="Резерв" />
+        <Field Name="DI_10_15" Type="BOOL" UUID="C84A2DAA4B374BA0D30449A9FA5627E8" Comment="Резерв" />
+        <Field Name="DI_10_16" Type="BOOL" UUID="91384FEA48ADA68EB72939ACBFF6F3B8" Comment="Резерв" />
+    </Fields>
+</Type>

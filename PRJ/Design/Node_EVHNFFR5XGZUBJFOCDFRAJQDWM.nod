@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Node v. 1.3 >
+<Node Name="PLC_A3" Comment="" Disabled="FALSE" Address="172.16.200.178" TimeSourcePriority="3" TimeResolution="2" NetworkTimeout="2000" PingInterval="300" RetryTimeout="80" AggregationInterval="10" LocalTimeout="2000" LocalPingInterval="300" LocalRetryTimeout="50" LocalAggregationInterval="4" UseSharedMem="FALSE" EventQueue="2000" StoreEventQueue="FALSE" StartState="Default" UUID="39ECED70494A94733CE56B864AD5A809">
+    <InterfaceList>
+        <SubApp Name="AppDRV_A3" Type="76C1F3794130CF678935C49EA74C1FCB" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="650E9DA441DFE152CA8AC29698E89FFC" />
+        <SubApp Name="AppDRV_A4" Type="D5DEBDC64624A36A9365998FE01A08A7" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="650E9DA441DFE152CA8AC29698E89FFC" />
+        <SubApp Name="AppMain_3" Type="2E4145A245FE272ED129E28C3789A649" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="43B1EACC4B5D2F0614A35DA86B99CCAE" />
+        <SubApp Name="AppAS36" Type="D79E7BF540479A9DAF7FCA840EE6B024" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="511FDFB74C9E771821EEB79C4119625C" />
+    </InterfaceList>
+</Node>

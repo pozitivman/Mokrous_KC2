@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="SHKU17">
+    <Items>
+        <Item Name="Type_7XEECYZD4ODUZNIAXZTS2REQ2E.type" />
+        <Item Name="Type_B5O42SNWS5HUDGOWWYXLAOSPQE.type" />
+        <Item Name="Type_HHYHODLP3YCUDN3NGH6IKHNPDU.type" />
+        <Item Name="Type_I372XWYGWQZEDNMVZTY6OQPDIA.type" />
+        <Item Name="Type_J7NQIG7SMI7EFGWKO6ZWN7VE3I.type" />
+        <Item Name="Type_NMDLMFO2GQJURELPNATGWFUNAI.type" />
+        <Item Name="Type_OOE4B45TF3ZEXAGX6V3VVIGSFU.type" />
+        <Item Name="Type_PY7QRN6M7GDEDHV2FA47KK26BA.type" />
+        <Item Name="Type_SLUSKXTFSJJUNDUULREX4HUILM.type" />
+        <Item Name="Type_SU4SHUKS2JEUTOTKMNWTLJVT2E.type" />
+        <Item Name="Type_VOIXRNYF7S5UJM7YSEF6FSGO6E.type" />
+        <Item Name="Type_WWX5FDG36GIEDKIFU75JSBL4SE.type" />
+        <Item Name="Type_Z32KYCH7RKZE5HQYOHLSEDT53U.type" />
+    </Items>
+</Folder>

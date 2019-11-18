@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="AI_PLC" Kind="Struct" UUID="93D73BBC489EFF6DE350C9980CDE6EBB">
+    <Fields>
+        <Field Name="PV" Type="REAL" UUID="F331BE784DA6A2AF0202BDB53F1C2462" Comment="Текущее значение" />
+        <Field Name="flt" Type="BOOL" UUID="DF4966B9447DB12C4E7206BA38F37562" Comment="Отказ измерения" />
+        <Field Name="obriv" Type="BOOL" UUID="63061C114692C886E122A5BFF2DBCA80" Comment="Обрыв канала измерения" />
+        <Field Name="kz" Type="BOOL" UUID="BAC28B0A4AFBB205744B72900FE244DE" Comment="КЗ канала измерения" />
+    </Fields>
+</Type>

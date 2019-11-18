@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_DO_A5_hmi" Kind="Struct" UUID="D99542974EEA16D9B49143BD3837731A">
+    <Fields>
+        <Field Name="Ind_AOB" Type="BOOL" UUID="A3C44CF5414ADCA8A6DF3DA2D0695FF0" Comment="Индикация АО КЦ бс" />
+        <Field Name="Ind_AOS" Type="BOOL" UUID="44E7520A43D64F385872898B215D0FAF" Comment="Индикация АО КЦ сс" />
+        <Field Name="Sound_warn" Type="BOOL" UUID="4A588CC642BBC55E998D2EAF0EB758B2" Comment="Предупредительный звуковой сигнал" />
+        <Field Name="Sound_ala" Type="BOOL" UUID="172EF7FE4E52EBE77DFD179730863430" Comment="Аварийный звуковой сигнал" />
+        <Field Name="PLC_flt" Type="BOOL" UUID="8101DE51482012477154E4A4722AE94A" Comment="Неисправность контроллера" />
+        <Field Name="nc_01" Type="BOOL" UUID="91343A2042CDBCDD8C586793947A3B72" Comment="Не подключен" />
+        <Field Name="nc_02" Type="BOOL" UUID="2259834A476ACA121D7C29B14C40DEE8" Comment="Не подключен" />
+        <Field Name="nc_03" Type="BOOL" UUID="067691284B8DCDCA153AFA9131902AF6" Comment="Не подключен" />
+        <Field Name="nc_04" Type="BOOL" UUID="89AFF96143AA4A0E5183F49686BCA52F" Comment="Не подключен" />
+        <Field Name="nc_05" Type="BOOL" UUID="79C677594589303E033173AC0A5E6345" Comment="Не подключен" />
+        <Field Name="nc_06" Type="BOOL" UUID="0E64442C4F8142C841426F9DA2D09503" Comment="Не подключен" />
+        <Field Name="nc_07" Type="BOOL" UUID="1DE5D588469E7C76BC2F8C96E6DBAAA4" Comment="Не подключен" />
+        <Field Name="nc_08" Type="BOOL" UUID="6EAAD10946B62C568AA224AB0754BCBE" Comment="Не подключен" />
+        <Field Name="nc_09" Type="BOOL" UUID="5F23C58D4D16C09531E894B1712D97FD" Comment="Не подключен" />
+        <Field Name="nc_10" Type="BOOL" UUID="FC5107C0478D4765D9D027A89A623074" Comment="Не подключен" />
+        <Field Name="nc_11" Type="BOOL" UUID="6FFF072A478AD2E146548BA6B44765D2" Comment="Не подключен" />
+        <Field Name="dummy" Type="BOOL" UUID="371420BF472F43FAEB24CB93307D0A5F" Comment="Заглушка" />
+    </Fields>
+</Type>

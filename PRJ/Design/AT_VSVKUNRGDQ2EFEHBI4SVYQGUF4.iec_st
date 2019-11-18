@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="D79E7BF540479A9DAF7FCA840EE6B024" Name="AS36" Period="500" PutDataAtEndOfCycle="false">
+    <Variables>
+        <Variable UUID="FCB210B54F2EDF4AD34CE69078123CE5" Name="i" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+        <Variable UUID="50B644C34DEABE9C229A94BD4C51DE0D" Name="Eout_valid" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+        <Variable UUID="156B808344265372E009F09FF32617D9" Name="EoutEin_valid" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+        <Variable UUID="6FD0D43F4D00E15BB23BB6ADADC56BD4" Name="AS_conf" Type="AS_conf_sel1" TypeUUID="AF7D48FF49827A52FBA0278BF2AF0410" Usage="internal" />
+        <Variable UUID="F5FC34094C3FFDDC642D8797E67169FE" Name="sig_sel_21019" Type="c_aSigSel_1_exe" TypeUUID="CA26F9964BAD98A9821011904E2FAAFB" Usage="internal" />
+        <Variable UUID="78221ACD4D8F128E6414D99E4EF5E7EB" Name="as_test_reg" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Size="20" Array="TRUE" Usage="internal" />
+        <Variable UUID="7188D4844592AFA11514FAB5A078CCAA" Name="AS_manual_ramp" Type="ramp_1" TypeUUID="64EAB45A488430C0D267B9B569879ADA" Usage="internal" />
+        <Variable UUID="56650AC44F9191F54D07FF8809F9ABFD" Name="tmpREALtime" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="9B76BA844BC4C2060B446E8731F88ABC" Name="tmpREALtime_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="69BD885248707B673E8E4D84C3BA226E" Name="tmp" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[// определение времени цикла
+tmpREALtime := CLOCK();
+TSCAN := LREAL_TO_REAL(tmpREALtime - tmpREALtime_prev);
+tmpREALtime_prev := tmpREALtime;
+
+// Значение запаса по помпажу выбирается как минимальное от всех агрегатов
+AS36_str.Shop_YR3 := 0.0;
+AS36_str.Shop_Yr3_valid := false;
+ 
+for i := 1 to 3 do
+	if ((gpa[i].S > 0.0 and gpa[i].run = true) and (AS36_str.Shop_YR3 = 0.0 or AS36_str.Shop_YR3 > gpa[i].S)) then
+		AS36_str.Shop_YR3 := gpa[i].S;
+		AS36_str.Shop_Yr3_valid := TRUE;
+	end_if;
+end_for;
+Eout_valid := (shop.Eout > 0.0);
+EoutEin_valid := (shop.EoutEin > 0.0);
+// конфигурация пид-контуров и селектор выхода
+AS_conf(
+	on_1 :=  AS36_str.Shop_Yr3_valid,
+	on_2 := Eout_valid,
+	on_3 := EoutEin_valid 
+	);
+	
+// расчет пид-контуров	
+sig_sel_21019(as_MStruct, as_test_reg);	
+
+// логика ручного или автоматического регулирования
+if not krAPK.DA then	
+	sig_sel_21019(as_MStruct, as_test_reg);
+	AS_manual_ramp(enable1 := true, ramp_rate := AS36_str.SP_manual_rate, y_target := as_MStruct.CV,  y_current := AS36_str.AS_CV_out);
+	AS36_str.AS_CV_out := AS_manual_ramp.ramp;
+	AS36_str.CV_Manual := AS_manual_ramp.ramp;
+ else
+	as_MStruct.PplusD_selected := real#0.0;
+	as_MStruct.dI_selected := real#0.0;
+	as_MStruct.CV := AS36_str.AS_CV_out;
+	AS_manual_ramp(enable1 := true, ramp_rate := AS36_str.SP_manual_rate, y_target := AS36_str.CV_Manual,  y_current := AS36_str.AS_CV_out);
+	AS36_str.AS_CV_out := AS_manual_ramp.ramp;
+end_if;
+
+//                                      
+if (AS36_str.BTN_Unload) then
+	krAPK.DA := true;
+	krAPK.SP_manual := 100.0;
+	AS36_str.CV_Manual := 100.0;
+elsif (AS36_str.BTN_Load) then
+	krAPK.DA := true;
+	krAPK.SP_manual := 0.0;
+	AS36_str.CV_Manual := 0.0;
+end_if;
+
+// отработка дискретных датчиков ограничений
+if AS36_str.Discr_PS and not tmp then   // эту переменную надо самостоятельно сформировать по всем ограничеиям дискретным, когда требуется открыть 36 кран
+	AS36_str.CV_Manual := 100.0;
+	krAPK.DA := BOOL#1;
+end_if;
+tmp := AS36_str.Discr_PS;
+
+AS36_str.BTN_Unload := false;
+AS36_str.BTN_Load := FALSE;
+AS36_str.Discr_PS := false;]]></ST>
+    <DataTypes />
+    <FBLibrary>
+        <FunctionBlock UUID="AF7D48FF49827A52FBA0278BF2AF0410" Name="AS_conf_sel1">
+            <Variables>
+                <Variable UUID="96BA4C93464281E151483DB98D54D9BB" Name="d_pd" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+                <Variable UUID="ED06E2CB41FB85D38FAA5CBE79F9B9BF" Name="PD_prev" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+                <Variable UUID="2ED1BB6941E8C80256AC868491C22539" Name="on_1" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                <Variable UUID="2A14FD334D21DE6D5BF99B96ABE06854" Name="on_2" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                <Variable UUID="0A6A9BD24F4D9D9609B959954E63F3EF" Name="on_3" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+            </Variables>
+            <ST><![CDATA[if (not AS_init) then
+	AS_init := TRUE;
+	as_MStruct.pid_struct[1].loop_type := 0;
+	as_MStruct.pid_struct[1].loop_num := 1;
+	as_MStruct.pid_struct[1].loop_enable := true;
+	as_MStruct.pid_struct[1].auto_man := true;
+	as_MStruct.pid_struct[1].loop_direct := true;
+	as_MStruct.pid_struct[1].KP := 2.0;
+	as_MStruct.pid_struct[1].KI := 0.05;
+	as_MStruct.pid_struct[1].KD := 0.0;
+	as_MStruct.pid_struct[1].DB := 0.5;
+	
+	//'Контур ограничения давления газа на выходе нагнетателя (ограничение)
+	as_MStruct.pid_struct[2].loop_type := 1;
+	as_MStruct.pid_struct[2].loop_num := 2;
+	as_MStruct.pid_struct[2].loop_enable := true;
+	as_MStruct.pid_struct[2].auto_man := true;
+	as_MStruct.pid_struct[2].loop_direct := false;
+	as_MStruct.pid_struct[2].KP := 2.0;
+	as_MStruct.pid_struct[2].KI := 0.05;
+	as_MStruct.pid_struct[2].KD := 0.0;
+	as_MStruct.pid_struct[1].DB := 0.5;
+	
+	//'Контур ограничения степени сжатия нагнетателя (ограничение)
+	as_MStruct.pid_struct[3].loop_type := 1;
+	as_MStruct.pid_struct[3].loop_num := 3;
+	as_MStruct.pid_struct[3].loop_enable := true;
+	as_MStruct.pid_struct[3].auto_man := true;
+	as_MStruct.pid_struct[3].loop_direct := false;
+	as_MStruct.pid_struct[3].KP := 2.0;
+	as_MStruct.pid_struct[3].KI := 0.05;
+	as_MStruct.pid_struct[3].KD := 0.0;
+	as_MStruct.pid_struct[3].DB := 0.5;
+	
+	as_MStruct.main_loop := 1;
+	as_MStruct.auto_man := true;
+	as_MStruct.N_loops := 3;
+
+	CONST_T := -0.3;  //                                     	
+	
+	AS36_str.SP_Pout := 7.0;
+	AS36_str.SP_PoutPin := 2.0;
+	AS36_str.SP_manual_rate := 1.0;
+	AS36_str.SP_S := 5.0;
+
+end_if;
+
+/////	ПРИВЯЗКИ РЕГУЛЯТОРА
+	as_MStruct.pid_struct[1].loop_valid := on_1;
+	as_MStruct.pid_struct[2].loop_valid := on_2;
+	as_MStruct.pid_struct[3].loop_valid := on_3; 
+// для каждого агрегата привязываем:
+
+gpa[1].S	:= Link_GPA7.S;	// запас по помпажу
+gpa[1].run	:= Link_GPA7.run;	//	агрегат в магистрали
+
+gpa[2].S	:= Link_GPA8.S;	// запас по помпажу
+gpa[2].run	:= Link_GPA8.run;	//	агрегат в магистрали
+
+gpa[3].S	:= Link_GPA9.S;	// запас по помпажу
+gpa[3].run	:= Link_GPA9.run;	//	агрегат в магистрали
+
+
+//  -----//----
+
+// сюда привязываем давление на выходе цеха
+//shop.Eout := CTU1_AS36.P_g_outKC1_PV; (*СЕЙЧАС В PERF*)
+// сюда привязваем степень сжатия через цех
+//shop.EoutEin := CTU1_AS36.P_g_outKC1_PV/CTU1_AS36.P_g_inKC1_PV; (*СЕЙЧАС В PERF*)
+
+// Задание на КХР со скады
+AS36_str.CV_Manual := krAPK.SP_manual;
+// Сюда привязываем команду "Разгрузка 36 крана"
+AS36_str.BTN_Unload := krAPK.BTN_Unload;
+krAPK.BTN_Unload := BOOL#0;
+// Сюда привязываем команду "Загрузка 36 крана"
+AS36_str.BTN_Load := krAPK.BTN_Load;
+krAPK.BTN_Load := BOOL#0;
+// Сюда привязываем обобщенный сигнал аварий и предупреждений по которому Кран 36 должен открываться
+AS36_str.Discr_PS := AOB_to_DO OR AOS_to_DO OR KOL_KXR_ON;
+
+// отсюда забираем задание на 36 Кран
+krAPK.SP_algoritm := as_MStruct.CV;
+SHKU17_A1_AO_HMI.APK3_pos := AS36_str.AS_CV_out;
+
+as_MStruct.pid_struct[1].act_SP := AS36_str.SP_S;
+as_MStruct.pid_struct[1].PV := AS36_str.Shop_YR3;
+as_MStruct.pid_struct[1].delt_t := TSCAN;
+
+as_MStruct.pid_struct[2].act_SP := AS36_str.SP_Pout;
+as_MStruct.pid_struct[2].PV := shop.Eout;
+as_MStruct.pid_struct[2].delt_t := TSCAN;
+
+as_MStruct.pid_struct[3].act_SP := AS36_str.SP_PoutPin;
+as_MStruct.pid_struct[3].PV := shop.EoutEin;
+as_MStruct.pid_struct[3].delt_t := TSCAN;
+
+d_pd := as_MStruct.PplusD_selected - PD_prev;
+
+if as_MStruct.dI_selected < CONST_T *TSCAN then as_MStruct.dI_selected := CONST_T*TSCAN; end_if;
+if d_pd +  as_MStruct.dI_selected < CONST_T*TSCAN then  
+	d_pd := CONST_T*TSCAN - as_MStruct.dI_selected; 
+end_if;
+
+PD_prev := PD_prev + d_pd;
+
+as_MStruct.CV := as_MStruct.CV + d_pd + as_MStruct.dI_selected;
+
+if as_MStruct.CV < as_MStruct.low_clamp then as_MStruct.CV := as_MStruct.low_clamp; end_if;
+if as_MStruct.CV > 100.0 then as_MStruct.CV := 100.0; end_if;
+
+//CONST_T := -0.5;]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="64EAB45A488430C0D267B9B569879ADA" Name="ramp_1">
+            <Variables>
+                <Variable UUID="AACDC3C64A478E14C8B5BBB34A316760" Name="enable1" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                <Variable UUID="3AC40E3B44BDEBEDAFC502A1F33D91F8" Name="ramp_rate" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="inout" />
+                <Variable UUID="14DBA6B74A9A6E356B95FAA4EAAF41F7" Name="y_target" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="inout" />
+                <Variable UUID="E9C9FB5540879451911F38B859AA83B3" Name="y_current" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="inout" />
+                <Variable UUID="47D106094AD59E7E19C08D9B86F1D31B" Name="ramp" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="output" />
+                <Variable UUID="AD8E2A764A870B6A9C3C47BF5DC3DE79" Name="dd" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+                <Variable UUID="BD551FF148FBAA0420F3119E40A629F9" Name="dy" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+                <Variable UUID="AEBE332B42F064BDDD0D2F9DFC678BE4" Name="dd_1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+                <Variable UUID="D087801B4FCD68415D9799BB105DF264" Name="ramp_rate_1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[IF enable1 THEN
+
+ IF (ramp_rate = 0.0) THEN
+                      ramp := y_target;
+                      RETURN;
+ END_IF; 
+
+      dd := y_target - y_current ;
+      ramp_rate_1 := ABS(ramp_rate);
+      dy := ramp_rate_1 * TSCAN ;       
+
+      dd_1:= ABS(dd);
+      
+      IF  dd_1 <= dy THEN
+         ramp := y_target ;
+         RETURN; 
+      END_IF;   
+        
+  (*--------------------------------------------------------*)  
+      IF dd > 0.0 THEN  ramp :=  y_current + dy ;
+                  ELSE  ramp :=  y_current - dy ;
+      END_IF ;          
+    
+ ELSE      
+         ramp := y_current ;
+ END_IF; 
+]]></ST>
+        </FunctionBlock>
+    </FBLibrary>
+</Program>

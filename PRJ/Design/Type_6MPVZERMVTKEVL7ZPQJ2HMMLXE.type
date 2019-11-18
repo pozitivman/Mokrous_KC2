@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SHKU17_AO_A2_raw" Kind="Struct" UUID="7E6064DB4867FED92887F9A178D1C1D1">
+    <Fields>
+        <Field Name="AO_8_1" Type="REAL" UUID="45799F2349821ABFAB691A9285090646" Comment="Управление АПК3" />
+        <Field Name="AO_8_2" Type="REAL" UUID="1935E2274E8BDC702A88D199AC8027FB" Comment="Резерв" />
+        <Field Name="AO_8_3" Type="REAL" UUID="3DA549C24F88CEFDE315718D86FC8281" Comment="Резерв" />
+        <Field Name="AO_8_4" Type="REAL" UUID="EC78EC8C4645A43AF1A3A1A1E256B49B" Comment="Резерв" />
+    </Fields>
+</Type>

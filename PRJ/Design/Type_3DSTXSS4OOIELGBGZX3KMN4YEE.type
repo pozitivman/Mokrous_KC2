@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TPRU" Kind="Struct" UUID="A494DA43412E0C9A1D1811BB0AD410F3">
+    <Fields>
+        <Field Name="Tnv" Type="REAL" UUID="39DEE0DF4F9F03E3B2B95EA2AC77B4E3" Comment="Температура наружного воздуха" />
+        <Field Name="Tgr" Type="REAL" UUID="5E8BCE9F402ABDC09F7F67A5B8D51F21" Comment="Температура грунта" />
+        <Field Name="Tg1kr7B" Type="REAL" UUID="23EC58894168026209F5EF9DD8EAEB99" Comment="Температура газа до крана 7Б" />
+        <Field Name="Tg2kr8B" Type="REAL" UUID="7F54EFA042265EB8584D66B95F57AA9A" Comment="Температура газа после крана 8Б" />
+        <Field Name="Tg1kr8Bbis" Type="REAL" UUID="183DE0BF4E863362ABB49FB0BD1580BA" Comment="Температура газа до крана 8Ббис" />
+        <Field Name="Tg2kr8Bbis" Type="REAL" UUID="F268D9FA4113C053221A79AC6A4E8AC9" Comment="Температура газа после крана 8Ббис" />
+        <Field Name="Pg2kr8Bbis" Type="REAL" UUID="F8FA2A904176BD37591FD083F11D1376" Comment="Давление газа после крана 8Ббис" />
+        <Field Name="Pg1kr7B" Type="REAL" UUID="DDBCAAE948EF263443127FB7CF8995A3" Comment="Давление газа до крана 7Б" />
+        <Field Name="rez_01" Type="REAL" UUID="8BDE0EBE485B361815B4FBA2C5D79AB9" Comment="Резерв" />
+        <Field Name="Patm" Type="REAL" UUID="8FA233CE428CAA87B400369BF8E59D5F" Comment="Давление атмосферного воздуха" />
+        <Field Name="PozAPK3" Type="REAL" UUID="C9D762084942E7A9FAF3D9A0E3F67A06" Comment="Положение АПК №3" />
+        <Field Name="rez_02" Type="REAL" UUID="3EE0428A42833160D87E929BB113A384" Comment="Резерв" />
+        <Field Name="rez_03" Type="REAL" UUID="5DB0DAE749E7403AC10517976CB97C3D" Comment="Резерв" />
+        <Field Name="rez_04" Type="REAL" UUID="9DCA568740BC068DAA5C35BB1515D7C0" Comment="Резерв" />
+        <Field Name="rez_05" Type="REAL" UUID="9E3D921E4BCAEEF479F2BDBE28A656BF" Comment="Резерв" />
+        <Field Name="Ctrl24VTI1" Type="REAL" UUID="BE94BD0247905679EE0E8D923E85406F" Comment="Контроль 24 В ТИ" />
+        <Field Name="Tg1PU" Type="REAL" UUID="6F71B8AE4F922A5F0B887AAA60DE1E15" Comment="Температура газа  до  ПУ" />
+        <Field Name="Tg2PU" Type="REAL" UUID="FF86C7464A4C25297C90D599807A4047" Comment="Температура газа  после ПУ" />
+        <Field Name="rez_06" Type="REAL" UUID="B8B85BED453B6CBD5AE6ACB092508408" Comment="Резерв" />
+        <Field Name="Pg1PU" Type="REAL" UUID="93B0B735459F8F9C1DED4CA89060D6E7" Comment="Давление газа  до  ПУ" />
+        <Field Name="Pg2PU" Type="REAL" UUID="4BF7ABCA4BD61F2B8CC3CCBE26759551" Comment="Давление газа  после ПУ" />
+        <Field Name="rez_07" Type="REAL" UUID="F45CD60A4C073EAE20CD06B163218936" Comment="Резерв" />
+        <Field Name="Tg1gr_2" Type="REAL" UUID="2BFEC01C40EA4F3D2D2277AE908D2F27" Comment="Температура газа на входе  группы 2" />
+        <Field Name="Tg2gr_2" Type="REAL" UUID="6F8CD73940B4FF7F058131AEE4D9F22D" Comment="Температура газа на выходе  группы 2" />
+        <Field Name="Pg2plum" Type="REAL" UUID="0BFAB8CC469F5F25B1A7CD82BF2A009B" Comment="Давление газа на выходном шлейфе" />
+        <Field Name="rez_08" Type="REAL" UUID="F466DBA847D9383C4B43A88ABC5C231D" Comment="Резерв" />
+        <Field Name="Pcompr_v" Type="REAL" UUID="97A277D94050CD5B092D92B4D17BD5C3" Comment="Давление сжатого воздуха" />
+        <Field Name="Ttg" Type="REAL" UUID="6C0C151841E8EA63EEC9FCAA9BE4B6E7" Comment="Температура топливного газа" />
+        <Field Name="Tpg" Type="REAL" UUID="6116786C4833F8F0535F24AC9F5BA25F" Comment="Температура пускового газа" />
+        <Field Name="Ptg" Type="REAL" UUID="873222E44C3391280BEC2EA4296D2005" Comment="Давление топливного  газа" />
+        <Field Name="Ppg" Type="REAL" UUID="BA45D3D34D5E07C0DD9C1EA1093E6562" Comment="Давление пускового газа" />
+        <Field Name="Ctrl24VTI2" Type="REAL" UUID="DF8A6FFE423F3AE7C0758FAC10CEF618" Comment="Контроль 24 В ТИ" />
+        <Field Name="Lpe1" Type="REAL" UUID="15E9405D4FBB9EE5A2218ABA1DDC4739" Comment="Уровень в пожарной емкости №1" />
+        <Field Name="Lpe2" Type="REAL" UUID="E66589BE4D6B910923BBB7BE69D64EEE" Comment="Уровень в пожарной емкости №2" />
+        <Field Name="Lpe3" Type="REAL" UUID="2A47BDF645F4C4C758E2FD98A7A20A52" Comment="Уровень в пожарной емкости №3" />
+        <Field Name="Lpe7" Type="REAL" UUID="BDAC57EF4B481868C427BAB7C0149CB6" Comment="Уровень в пожарной емкости №7" />
+        <Field Name="Lpe8" Type="REAL" UUID="44B62F2847AAF7C3D4D312ABAC2E330F" Comment="Уровень в пожарной емкости №8" />
+        <Field Name="Tozh" Type="REAL" UUID="EEE9BFC44BCD67845E2C12904E717EC6" Comment="Температура охлаждающей жидкости" />
+        <Field Name="rez_09" Type="REAL" UUID="E833330D45DF7EF3AFB4D68F9846595D" Comment="Резерв" />
+        <Field Name="rez_10" Type="REAL" UUID="AF2984F74FC395A7D1FFDCB09A8CE21F" Comment="Резерв" />
+        <Field Name="rez_11" Type="REAL" UUID="7874044040EF932945700785BC3BEB90" Comment="Резерв" />
+        <Field Name="rez_12" Type="REAL" UUID="81FC262841059559D19EDC8975A8C9B2" Comment="Резерв" />
+        <Field Name="rez_13" Type="REAL" UUID="741B2D9E42C34CE452500B86141D0459" Comment="Резерв" />
+        <Field Name="rez_14" Type="REAL" UUID="03E5D8FB473734F3592B64BE622881C0" Comment="Резерв" />
+        <Field Name="rez_15" Type="REAL" UUID="B8FA5F69455A3574803747851A740DC9" Comment="Резерв" />
+        <Field Name="rez_16" Type="REAL" UUID="EC3D097E4A5B651F8F81FABB7EB08E9A" Comment="Резерв" />
+        <Field Name="rez_17" Type="REAL" UUID="7C90C77F4E7BF4DFCC9DCEB1E552B4F5" Comment="Резерв" />
+        <Field Name="Ctrl24VTI3" Type="REAL" UUID="941E3A8A4B0CED5B3A5A73868636B734" Comment="Контроль 24 В ТИ" />
+        <Field Name="rez_18" Type="REAL" UUID="ABA3899840D12E02761B9D8E1E18D97A" Comment="Резерв" />
+        <Field Name="rez_19" Type="REAL" UUID="7192438F4272A89B7679C2BAEA012F85" Comment="Резерв" />
+        <Field Name="Uosn_p_SHKU17" Type="REAL" UUID="375878BA4F791FAABDAC67907AD648C3" Comment="Напряжение основного питания ШКУ-17" />
+        <Field Name="Urez_p_SHKU17" Type="REAL" UUID="8503754740070612BC25979ED4BBF0E7" Comment="Напряжение резервного питания ШКУ-17" />
+        <Field Name="Tnv_flt" Type="BOOL" UUID="D63BEE77427F793DFE4EE790D050D42E" Comment="Температура наружного воздуха" />
+        <Field Name="Tgr_flt" Type="BOOL" UUID="B253EE244E06E813CF56F68929B76987" Comment="Температура грунта" />
+        <Field Name="Tg1kr7B_flt" Type="BOOL" UUID="64D4E3F042C9963DE5276BB1267CD193" Comment="Температура газа до крана 7Б" />
+        <Field Name="Tg2kr8B_flt" Type="BOOL" UUID="0D9072EF4FA860C7C0F4928F71A765C9" Comment="Температура газа после крана 8Б" />
+        <Field Name="Tg1kr8Bbis_flt" Type="BOOL" UUID="98F2AF5C42C4840435F51FAE73A39F6E" Comment="Температура газа до крана 8Ббис" />
+        <Field Name="Tg2kr8Bbis_flt" Type="BOOL" UUID="49A0BDB54456EAA1000CFFB35AB3A1F3" Comment="Температура газа после крана 8Ббис" />
+        <Field Name="Pg2kr8Bbis_flt" Type="BOOL" UUID="BB78D00942D19726873F0BB62134E038" Comment="Давление газа после крана 8Ббис" />
+        <Field Name="Pg1kr7B_flt" Type="BOOL" UUID="B595473749868A495309959DE82FBC61" Comment="Давление газа до крана 7Б" />
+        <Field Name="rez_01_flt" Type="BOOL" UUID="CF3AFF66431FF38CFE3D5991FE82E9C0" Comment="Резерв" />
+        <Field Name="Patm_flt" Type="BOOL" UUID="AE367DA44198AFBAF91D55B4F4037C91" Comment="Давление атмосферного воздуха" />
+        <Field Name="PozAPK3_flt" Type="BOOL" UUID="219B6B784E7634971B584EB88B357CC0" Comment="Положение АПК №3" />
+        <Field Name="rez_02_flt" Type="BOOL" UUID="D1D67F974E06E6047BF9EA9D36714D8D" Comment="Резерв" />
+        <Field Name="rez_03_flt" Type="BOOL" UUID="5DBA2A014D52C248767C598DA3F4A2D5" Comment="Резерв" />
+        <Field Name="rez_04_flt" Type="BOOL" UUID="48155FDE4DEC8E56DF4AF6933CAC3BA5" Comment="Резерв" />
+        <Field Name="rez_05_flt" Type="BOOL" UUID="021964014BF284B371C0FE89153C1BEA" Comment="Резерв" />
+        <Field Name="Ctrl24VTI1_flt" Type="BOOL" UUID="4A0EC5FC45A1ABA10B56E6B7A4D63A1E" Comment="Контроль 24 В ТИ" />
+        <Field Name="Tg1PU_flt" Type="BOOL" UUID="0A97327240836DE52D5741A6DB63ECD1" Comment="Температура газа  до  ПУ" />
+        <Field Name="Tg2PU_flt" Type="BOOL" UUID="0C633D8B4232104D7010A78CC3A027B0" Comment="Температура газа  после ПУ" />
+        <Field Name="rez_06_flt" Type="BOOL" UUID="3302300B4701A61088987F8D99F4FE70" Comment="Резерв" />
+        <Field Name="Pg1PU_flt" Type="BOOL" UUID="F3D87B87493E51958CCE40B076FFF729" Comment="Давление газа  до  ПУ" />
+        <Field Name="Pg2PU_flt" Type="BOOL" UUID="85CBF611439622D4B411E2BE493CC771" Comment="Давление газа  после ПУ" />
+        <Field Name="rez_07_flt" Type="BOOL" UUID="2BB0B33340CD2477909CE1A82CF8695A" Comment="Резерв" />
+        <Field Name="Tg1gr_2_flt" Type="BOOL" UUID="611F925D4E60A089360805A0C0576D18" Comment="Температура газа на входе  группы 2" />
+        <Field Name="Tg2gr_2_flt" Type="BOOL" UUID="1E7EE1BE4FA77CBCF7EF1BB6B0DC5EF2" Comment="Температура газа на выходе  группы 2" />
+        <Field Name="Pg2plum_flt" Type="BOOL" UUID="EB328CC447BC39F8266B3383A810AB7F" Comment="Давление газа на выходном шлейфе" />
+        <Field Name="rez_08_flt" Type="BOOL" UUID="9276181C40A7803CB72698B7C6862159" Comment="Резерв" />
+        <Field Name="Pcompr_v_flt" Type="BOOL" UUID="EE6217D94EE5667324F990A36B00EF17" Comment="Давление сжатого воздуха" />
+        <Field Name="Ttg_flt" Type="BOOL" UUID="78394A0046C63F3F9BDA3692FCEA8CB7" Comment="Температура топливного газа" />
+        <Field Name="Tpg_flt" Type="BOOL" UUID="BD359D7A4856A860DCA3A9A32B842F85" Comment="Температура пускового газа" />
+        <Field Name="Ptg_flt" Type="BOOL" UUID="8CFD44314D4D36BE2A13E1AE643D6741" Comment="Давление топливного  газа" />
+        <Field Name="Ppg_flt" Type="BOOL" UUID="BF1DCCE74EB9799A6B6CF28339A1F93E" Comment="Давление пускового газа" />
+        <Field Name="Ctrl24VTI2_flt" Type="BOOL" UUID="6542C99F41A2477262EF2A89BF9DDB55" Comment="Контроль 24 В ТИ" />
+        <Field Name="Lpe1_flt" Type="BOOL" UUID="B15045C548C614B8DDF42F9541030349" Comment="Уровень в пожарной емкости №1" />
+        <Field Name="Lpe2_flt" Type="BOOL" UUID="C2A32169433EC131052CA59680BA9C26" Comment="Уровень в пожарной емкости №2" />
+        <Field Name="Lpe3_flt" Type="BOOL" UUID="42B23E324011CEBDC67CE885A86CA2F5" Comment="Уровень в пожарной емкости №3" />
+        <Field Name="Lpe7_flt" Type="BOOL" UUID="AD6FDDF246807E973B242CA2E9C402ED" Comment="Уровень в пожарной емкости №7" />
+        <Field Name="Lpe8_flt" Type="BOOL" UUID="3BEC544C42BC086FEF6737A7A1180473" Comment="Уровень в пожарной емкости №8" />
+        <Field Name="Tozh_flt" Type="BOOL" UUID="D86A337B44A163D68AA60EB6F158667F" Comment="Температура охлаждающей жидкости" />
+        <Field Name="rez_09_flt" Type="BOOL" UUID="D3D4A4D34FFCE9FE7E1CFD8D35C8DCD3" Comment="Резерв" />
+        <Field Name="rez_10_flt" Type="BOOL" UUID="C6F0A8A946FA2319CFB3AABDE177A77C" Comment="Резерв" />
+        <Field Name="rez_11_flt" Type="BOOL" UUID="EFC9F4C4466861CBB6E216A4DB6C56DE" Comment="Резерв" />
+        <Field Name="rez_12_flt" Type="BOOL" UUID="D7D5316B4625A570B693ECB340C3AAC3" Comment="Резерв" />
+        <Field Name="rez_13_flt" Type="BOOL" UUID="2EEF3AA64C27A8554F51C99C3F5D4392" Comment="Резерв" />
+        <Field Name="rez_14_flt" Type="BOOL" UUID="38F9A22B4B9E196B1648E6BE4A58AE37" Comment="Резерв" />
+        <Field Name="rez_15_flt" Type="BOOL" UUID="32F9E5F249D78CA44C8162A56A249B16" Comment="Резерв" />
+        <Field Name="rez_16_flt" Type="BOOL" UUID="CCF06D444D483A944BE6F387ADC4B2FA" Comment="Резерв" />
+        <Field Name="rez_17_flt" Type="BOOL" UUID="A37E51D54D4E521A9BEB4294AC1F1978" Comment="Резерв" />
+        <Field Name="Ctrl24VTI3_flt" Type="BOOL" UUID="0B7926924442B89A0814679E3B46E447" Comment="Контроль 24 В ТИ" />
+        <Field Name="rez_18_flt" Type="BOOL" UUID="CE1A22A24667598FBAD653AB11EC7DD0" Comment="Резерв" />
+        <Field Name="rez_19_flt" Type="BOOL" UUID="E1152FFF471E0AF79F8E97B358CCF019" Comment="Резерв" />
+        <Field Name="Uosn_p_SHKU17_flt" Type="BOOL" UUID="EB4A2C784E518AE19DD1E0AFB2339CD1" Comment="Напряжение основного питания ШКУ-17" />
+        <Field Name="Urez_p_SHKU17_flt" Type="BOOL" UUID="4A2AF67342560AF8BE8A7D84EAE7F04D" Comment="Напряжение резервного питания ШКУ-17" />
+        <Field Name="Heat_APK_state" Type="WORD" UUID="2ABEDFF04AADB40D34F2789AB7B4347B" Comment="Состояние" />
+        <Field Name="P3_30_state" Type="WORD" UUID="BCC16B3042BBDC8E701D64A1D13529D0" Comment="Состояние" />
+        <Field Name="PL_KC2_state" Type="WORD" UUID="23BFB633400D617BE3C259AF04D7D4CD" Comment="Состояние" />
+        <Field Name="KR30B_state" Type="WORD" UUID="DA47016D47BEB3B711667385CF2DDEDB" Comment="Состояние" />
+        <Field Name="KR30Bbis_state" Type="WORD" UUID="48FCA1B041C8F67C7CD72A80065FACD4" Comment="Состояние" />
+        <Field Name="KR7B_state" Type="WORD" UUID="BC0230B848DA0DA873680C862645E127" Comment="Состояние" />
+        <Field Name="KR7zak_state" Type="WORD" UUID="5C78C37049EF877D47AF72911BF96085" Comment="Состояние" />
+        <Field Name="KR8B_state" Type="WORD" UUID="F02EE8F84FC4F055AACAA9ABA65A1B53" Comment="Состояние" />
+        <Field Name="KR8Bbis_state" Type="WORD" UUID="29267A7B42FFCD438DFF888D2FC870B5" Comment="Состояние" />
+        <Field Name="KR17B_state" Type="WORD" UUID="4583C3A749127D724E03C3A523C94166" Comment="Состояние" />
+        <Field Name="KR18B_state" Type="WORD" UUID="3E682DF44583C96CF131A5801267AECD" Comment="Состояние" />
+        <Field Name="KR6B_state" Type="WORD" UUID="C33A989C425E17F22C22EC8E98FB3D91" Comment="Состояние" />
+        <Field Name="KR6BR_state" Type="WORD" UUID="6D3D183743EF639844B8688B2AE8ADD5" Comment="Состояние" />
+        <Field Name="KRA_state" Type="WORD" UUID="10C55F4C479B72A6D4C65499371B1DEA" Comment="Состояние" />
+        <Field Name="KRC_state" Type="WORD" UUID="2400CF21400F87D739046089C2D02A91" Comment="Состояние" />
+        <Field Name="KR6_9_state" Type="WORD" UUID="297F7CBF41EB60478374449DB11DB42A" Comment="Состояние" />
+        <Field Name="Heat_APK_RA" Type="BOOL" UUID="5C2686084CC82D5DD91D36BC035F0795" Comment="Дистанция/Автомат" />
+        <Field Name="P3_30_RA" Type="BOOL" UUID="DBFBE4BC49073B48E59750AC029AEB74" Comment="Дистанция/Автомат" />
+        <Field Name="PL_KC2_RA" Type="BOOL" UUID="21D03A114E5534BA4A352AAB8F99CA11" Comment="Дистанция/Автомат" />
+        <Field Name="KR30B_RA" Type="BOOL" UUID="9897F9C0439F6B2FAF9656992B0E9655" Comment="Дистанция/Автомат" />
+        <Field Name="KR30Bbis_RA" Type="BOOL" UUID="BB472E1148A1BA8CD18ADB97D26D14C8" Comment="Дистанция/Автомат" />
+        <Field Name="KR7B_RA" Type="BOOL" UUID="F0B56D704B88186950949E8BEE2A1ACF" Comment="Дистанция/Автомат" />
+        <Field Name="KR7zak_RA" Type="BOOL" UUID="12F151134AB9D905F9FBF8AA716FA618" Comment="Дистанция/Автомат" />
+        <Field Name="KR8B_RA" Type="BOOL" UUID="1BB36B5B42741A21756F1F8E60938386" Comment="Дистанция/Автомат" />
+        <Field Name="KR8Bbis_RA" Type="BOOL" UUID="06A0F8BB455B7CB8BA6E4D94339D3D49" Comment="Дистанция/Автомат" />
+        <Field Name="KR17B_RA" Type="BOOL" UUID="2C31B35E4EDDBCA343AF9C8C125D63B1" Comment="Дистанция/Автомат" />
+        <Field Name="KR18B_RA" Type="BOOL" UUID="500CA5D24DF2F82F05964F83CD267CFC" Comment="Дистанция/Автомат" />
+        <Field Name="KR6B_RA" Type="BOOL" UUID="579CBA584A87B4AD2D5D9787C23A1774" Comment="Дистанция/Автомат" />
+        <Field Name="KR6BR_RA" Type="BOOL" UUID="56DB307A46BD44E886823182D8436B0D" Comment="Дистанция/Автомат" />
+        <Field Name="KRA_RA" Type="BOOL" UUID="57A145FB4460F18E12EE52A1480A4609" Comment="Дистанция/Автомат" />
+        <Field Name="KRC_RA" Type="BOOL" UUID="6097F1254A345FAA19B005800057C642" Comment="Дистанция/Автомат" />
+        <Field Name="KR6_9_RA" Type="BOOL" UUID="1E237DB04EBA2B70654CCCA73572E48B" Comment="Дистанция/Автомат" />
+        <Field Name="Heat_APK_flt_all" Type="BOOL" UUID="0F56562944CDB4BA5212CC9FBB6DFD15" Comment="Ошибка ИМ" />
+        <Field Name="P3_30_flt_all" Type="BOOL" UUID="4446EB914ABD127A95DC468A5DFE1761" Comment="Ошибка ИМ" />
+        <Field Name="PL_KC2_flt_all" Type="BOOL" UUID="11B8353340DBBD18EDE598A471CF1FC5" Comment="Ошибка ИМ" />
+        <Field Name="KR30B_flt_all" Type="BOOL" UUID="6C17EF1B4AF5435479238B83C29F22EA" Comment="Ошибка ИМ" />
+        <Field Name="KR30Bbis_flt_all" Type="BOOL" UUID="B946645243275E37B23F15BAFD702967" Comment="Ошибка ИМ" />
+        <Field Name="KR7B_flt_all" Type="BOOL" UUID="EF1896664A1FDFCF2C1803B94B002B05" Comment="Ошибка ИМ" />
+        <Field Name="KR7zak_flt_all" Type="BOOL" UUID="02603DA7469104FA6EF588B8A3D67F2C" Comment="Ошибка ИМ" />
+        <Field Name="KR8B_flt_all" Type="BOOL" UUID="2CAA6B0643DB63D67C074D8B83E00981" Comment="Ошибка ИМ" />
+        <Field Name="KR8Bbis_flt_all" Type="BOOL" UUID="5474C02B4D12633BB51FED9BE0F49E86" Comment="Ошибка ИМ" />
+        <Field Name="KR17B_flt_all" Type="BOOL" UUID="904B2834424D24C47912DD8C4B005476" Comment="Ошибка ИМ" />
+        <Field Name="KR18B_flt_all" Type="BOOL" UUID="EB68F184495AA4A2872357BB13BD8C2C" Comment="Ошибка ИМ" />
+        <Field Name="KR6B_flt_all" Type="BOOL" UUID="B1CA067A42AFA9669526D38B5295C914" Comment="Ошибка ИМ" />
+        <Field Name="KR6BR_flt_all" Type="BOOL" UUID="B4FC6B234E1D10A06DEDC4B0FE443B2F" Comment="Ошибка ИМ" />
+        <Field Name="KRA_flt_all" Type="BOOL" UUID="7D6722A64234373B8F34AB919E4E5BA4" Comment="Ошибка ИМ" />
+        <Field Name="KRC_flt_all" Type="BOOL" UUID="8D117D404B003DD4D8A676B8806C761B" Comment="Ошибка ИМ" />
+        <Field Name="KR6_9_flt_all" Type="BOOL" UUID="7DEA67C84D7D12649AE1B696ED5DCD72" Comment="Ошибка ИМ" />
+        <Field Name="Check_link_bit" Type="BOOL" UUID="53AD069341213B41BDB13AA923FABA6E" Comment="Бит проверки связи с контроллером" />
+        <Field Name="Btn_AOS" Type="BOOL" UUID="8DBE0D614FD2098AF388BB856913EC08" Comment="Кнопка АОС на ПРУ" />
+        <Field Name="Btn_AOB" Type="BOOL" UUID="4B5B6D8C4BB16E765929CCB18D49C8B3" Comment="Кнопка АОB на ПРУ" />
+        <Field Name="Btn_NO" Type="BOOL" UUID="461C84F949C30F13264DA89406899065" Comment="Кнопка НО на ПРУ" />
+    </Fields>
+</Type>

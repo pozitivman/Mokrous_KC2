@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="State_Teh" Kind="Struct" UUID="B1066836420771C14FD1EB91C198C6BF">
+    <Fields>
+        <Field Name="IN_cut" Type="BOOL" UUID="37063D2749C9C7ADF7897B8D6200613A" Comment="Вход газа КЦ-1: Отсечка" />
+        <Field Name="IN_work" Type="BOOL" UUID="8EF3A1A54928796E93D452BDB8437561" Comment="Вход газа КЦ-1: В работе" />
+        <Field Name="OUT_cut" Type="BOOL" UUID="3330D97549CF50059719CE9CD6411F18" Comment="Выход газа КЦ-1: Отсечка" />
+        <Field Name="OUT_work" Type="BOOL" UUID="2765D76C4B37ACFEF56AD9AA05770B64" Comment="Выход газа КЦ-1: В работе" />
+        <Field Name="UZPKS_cut" Type="BOOL" UUID="D80D7EBF405ECECD030D97B430EC4E11" Comment="КЦ-1: УЗПКС отсечка" />
+        <Field Name="UZPKS_work" Type="BOOL" UUID="331B6FC64BB7F0F07CED65B4DD562E06" Comment="КЦ-1: УЗПКС в работе" />
+        <Field Name="IN_blowoff" Type="BOOL" UUID="41B30F2F4DBDB6AF0B36E789C71046C3" Comment="КЦ-1: Стравливание входа КЦ-1" />
+        <Field Name="OUT_blowoff" Type="BOOL" UUID="11C7D47643C73CF7E164E4AD9AF43DC9" Comment="КЦ-1: Стравливание выхода КЦ-1" />
+        <Field Name="Sec_ON" Type="BOOL" UUID="5463864F469CF2628D892CA1B7E322FE" Comment="Секущий кран КЦ-1 открыт" />
+        <Field Name="Sec_OFF" Type="BOOL" UUID="333327804161716BE1D0FCBF8A46E69C" Comment="Секущий кран КЦ-1 закрыт" />
+        <Field Name="IO_DKU_work" Type="BOOL" UUID="13711BEE41FEB1302F3C80BAFC610DF7" Comment="Вход/выход газа на ДКУ в работе" />
+        <Field Name="IO_DKU_cut" Type="BOOL" UUID="2F27F57F47E38CC1AF2B91839AFCDCF0" Comment="Вход/выход газа на ДКУ отсечка" />
+        <Field Name="KXR_ON" Type="BOOL" UUID="72FAD0EC40BB0A9072D244BC1CCBA49D" Comment="Линия КХР открыта" />
+        <Field Name="KXR_OFF" Type="BOOL" UUID="F82A91634EE762A3A2F46BB953A3D5BB" Comment="Линия КХР закрыта" />
+        <Field Name="GPAs_stop" Type="BOOL" UUID="006AC1BE41AAEE02C0BD84B57268129C" Comment="ГПА остановлены" />
+        <Field Name="GPA_K" Type="BOOL" UUID="8C8E08B34C9039D0753F66A97314BE10" Comment="ГПА Кольцо" />
+        <Field Name="Gas_in" Type="BOOL" UUID="5B653BEF401C991EB851FF8F641065A9" Comment="Наличие газа в контуре КЦ-1" />
+        <Field Name="Gas_out" Type="BOOL" UUID="BAA7AE3C46B3C75808BCE4AAF4E2A9B7" Comment="Отсутствие газа в контуре КЦ-1" />
+        <Field Name="P_in_min" Type="BOOL" UUID="068E0FB54BCD48EBBFDAD892058E7C4F" Comment="Минимальное давление газа на входе КЦ-1" />
+        <Field Name="P_in_min_AS" Type="BOOL" UUID="5393471547D0D82BF1DA5AB5AA3EA262" Comment="Минимальное аварийное давление газа на входе КЦ-1" />
+        <Field Name="P_out_max" Type="BOOL" UUID="CF59369241690B2B0E2075AE23B74E09" Comment="Максимальное давление газа на выходе КЦ-1" />
+        <Field Name="P_out_max_AS" Type="BOOL" UUID="132BD1434C39562FD142D1B1292CDF40" Comment="Максимальное аварийное давление газа на выходе КЦ-1" />
+        <Field Name="dV_Pin_max_AS" Type="BOOL" UUID="41A30FC548B1D65BC26FB1A062D40ACB" Comment="Аварийная скорость падения давления на входе КЦ-1" />
+        <Field Name="dV_Pout_max_AS" Type="BOOL" UUID="54CDB1B0406290DA85B4DA8E79AEB941" Comment="Аварийная скорость падения давления на выходе КЦ-1" />
+        <Field Name="T_out_max_AS" Type="BOOL" UUID="0E31D03D406D6153E5A0C7AEA091BF87" Comment="Аварийная температура газа на выходе КЦ-1" />
+        <Field Name="Fire_GPAs" Type="BOOL" UUID="B30FED274095C02543D5F7BE17DCFB9D" Comment="Пожар на 2-х и более ГПА" />
+        <Field Name="Zagaz_GPAs" Type="BOOL" UUID="62CA888F47CA9B0F94C80BAD8AFF0512" Comment="Загазованность 2-й порог на 2-х и более ГПА" />
+        <Field Name="Fire_AGRS" Type="BOOL" UUID="4763F3C04FA40D7FA6CE1F881A128277" Comment="Пожар в АГРС" />
+        <Field Name="Zagaz_AGRS" Type="BOOL" UUID="DE3FC2654B77F6ED3B5D7281C01FA8E1" Comment="Загазованность 2-й порог в АГРС" />
+        <Field Name="Fire_DKU" Type="BOOL" UUID="E50699EF4F5B6D6E4BBF5CA67CAE9453" Comment="Пожар ДКУ" />
+        <Field Name="Zagaz_DKU" Type="BOOL" UUID="EB196DCD41189ACD07E985888BE9539F" Comment="Загазованность 2-й порог ДКУ" />
+        <Field Name="KR7_selfoff" Type="BOOL" UUID="0625227B4ED6561B8E697DB8DA6314D2" Comment="Несанкционированное закрытие крана №7" />
+        <Field Name="KR7a_selfoff" Type="BOOL" UUID="FA6593934B8E9AC3EA53A38ED6F6036C" Comment="Несанкционированное закрытие крана №7а" />
+        <Field Name="KR8_selfoff" Type="BOOL" UUID="2AA307BA437EC56E951A9E905DD8ADD5" Comment="Несанкционированное закрытие крана №8" />
+        <Field Name="KR17_selfon" Type="BOOL" UUID="67816BF64326274D4A35A9B6C90F7D28" Comment="Несанкционированное открытие крана №17" />
+        <Field Name="KR18_selfon" Type="BOOL" UUID="7314745B4C29622BC927C9AFCF3102E1" Comment="Несанкционированное открытие крана №18" />
+        <Field Name="KXR_selfon" Type="BOOL" UUID="77F2E2A54DBCD276168D8BA9A9E91B24" Comment="Несанкционированное открытие линии КХР" />
+        <Field Name="KXR_selfoff" Type="BOOL" UUID="9911A59743571E562DDED1951F685709" Comment="Несанкционированное закрытие линии КХР при работе на Кольцо" />
+        <Field Name="MG_cut" Type="BOOL" UUID="54738DD64A1FA5E87902519ABEBE2DB7" Comment="Перекрыт МГ" />
+    </Fields>
+</Type>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="AI_Dbg" Kind="Struct" UUID="EF914658497BE5184FB6DAAEAA080E19">
+    <Fields>
+        <Field Name="rev" Type="DWORD" UUID="822FEFA14B48E2A770D14CBD34A10B69" Comment="дата разработки ревизии блока (число, месяц, год)" />
+        <Field Name="vData" Type="LREAL" UUID="71C2F45A4D402F4D0FF69FA766FDF8F5" Comment="EU -&gt; 0..1" />
+        <Field Name="PrevSpan" Type="LREAL" UUID="60F61306485F85381318F39EBF53829C" Comment="pAI.Config.Span на предыдущем цикле" />
+        <Field Name="PrevOffset" Type="LREAL" UUID="A2907BDE48E1318096C5CFB3C5C09B42" Comment="pAI.Config.Offset на предыдущем цикле" />
+        <Field Name="Gain_user" Type="LREAL" UUID="181ADBB442E788AF2FB4B78D1C5E65F7" Comment="gain_user для вычисления PV_user" />
+        <Field Name="Bias_user" Type="LREAL" UUID="1C52F9D24DD2BEFA1A95C7B858900E6B" Comment="bias_user для вычисления PV_user" />
+        <Field Name="Reset_time_delay" Type="LREAL" UUID="432CB21E49AD1501D72CE0980A7DE140" Comment="время, оставшееся до восстановления канала после ухода отказа" />
+        <Field Name="valueReal" Type="LREAL" UUID="D6A533284EAC0A7242D2839B0F19FB77" ArraySize="4" Comment="буфер для Status.Input_sensor_eu, используется для ROC" />
+        <Field Name="valueFilt" Type="LREAL" UUID="CAB98A81424C8807ADF4EEBDB9383DF3" ArraySize="13" Comment="буфер для фильтр значений отображенных на 0..1, 12=Status.pid" />
+        <Field Name="remaining_repain_time" Type="LREAL" UUID="3582F6594775E1865F09C0873064E1D8" Comment="тоже, что Status.remaining_repair_time, но = Config.repair_time при норм работе" />
+        <Field Name="Manual_Rate" Type="LREAL" UUID="0D0C16C242AD7F128F75269F9CA5A24F" />
+        <Field Name="Manual_Target" Type="LREAL" UUID="61623D914440D27D1EF888B1287A72AF" />
+        <Field Name="PrevTypePolynom" Type="INT" UUID="A505C15042B28798A999A9BECB71D669" Comment="pAI.Config.TypePolynom на предыдущем цикле" />
+        <Field Name="Eu_sensor" Type="INT" UUID="31868FF34C857A6C116855992391F194" Comment="pAI.Config.Eu_sensor на предыдущем цикле" />
+        <Field Name="Eu_PV" Type="INT" UUID="85DAFB944821BD7AFB02DEB8E75292D5" Comment="pAI.Config.EU_PV на предыдущем цикле" />
+        <Field Name="Eu_user" Type="INT" UUID="724505764CC94736CC58F99A3FBF7604" Comment="pAI.Config.EU_user на предыдущем цикле" />
+        <Field Name="ROC_Enable" Type="BYTE" UUID="4B84FCA94175AD0A050DCB99EE1DB029" Comment="pAI.Config.ROC_Enable на предыдущем цикле" />
+        <Field Name="PrevManual" Type="BYTE" UUID="E07EC107421E6F67D91AAB98ADFA3AEE" Comment="значение Manual на предыдущем цикле" />
+        <Field Name="Manual" Type="BYTE" UUID="DF257C1B462BDED976767283D26EFBAD" Comment="временная переменная для Config.Manual_Auto" />
+        <Field Name="fault_code_0" Type="BYTE" UUID="1BE9B69C4235DB8F7EA3D8B1C3161674" Comment="fault_code[0] на предыдущем цикле" />
+        <Field Name="derivative_Enable" Type="BYTE" UUID="331BCB524DCDAB04DD3E44B698A9DDCC" Comment="Config.derivative_Enable на предыдущем цикле" />
+        <Field Name="Dummy" Type="BYTE" UUID="ECA59B6947B07BFF5AEEBE8C8F3C8C39" ArraySize="3" Comment="резерв" />
+    </Fields>
+</Type>

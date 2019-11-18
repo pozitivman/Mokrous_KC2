@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_BTN" Kind="Struct" UUID="3ABCD8324DFB751E8CAE308269A30199">
+    <Fields>
+        <Field Name="IMIT" Type="BOOL" UUID="34283FCA44BD1B00679449941C3FBA33" Comment="Имитация" />
+        <Field Name="Deblock" Type="BOOL" UUID="380527AB42EE939AE2D4238FEF6FDC21" Comment="Деблокировка" />
+        <Field Name="Kvitir" Type="BOOL" UUID="41F4DA974CB79F905FD194BC2000AFD2" Comment="Квитирование" />
+        <Field Name="AOS" Type="BOOL" UUID="8EEE65984F0627373AC3F38FB969325E" Comment="АОсс" />
+        <Field Name="AOB" Type="BOOL" UUID="5D0FEEC341BB9F97BC99D88717B9E433" Comment="АОбс" />
+        <Field Name="KOL" Type="BOOL" UUID="7E8591A44B3E18B8701CA6A97A8EB279" Comment="Кольцо" />
+        <Field Name="NO" Type="BOOL" UUID="FF54D42C40CCDFD114FFE3A666B6C254" Comment="НО" />
+        <Field Name="MG_cut" Type="BOOL" UUID="953278424C39D0CE7288839511CB5C69" Comment="Перекрытие МГ" />
+        <Field Name="Update_data_calc" Type="BOOL" UUID="0BC2007B4EDAD6614FE5C79948E09F8F" Comment="Произвести обновление состава газа и расчёт молярной массы" />
+        <Field Name="AOB_MG_cut_accept" Type="BOOL" UUID="5EFB754645F80D6714970AA2DA49E07E" Comment="Перекрытие МГ. Подтверждение от оператора при АОБ" />
+        <Field Name="AOB_MG_cut_not_accept" Type="BOOL" UUID="43512AEE423902EFC89F9099EE756BF7" Comment="Перекрытие МГ. Отмена от оператора при АОБ" />
+        <Field Name="AOS_MG_cut_accept" Type="BOOL" UUID="3A5021BB47B9D6DC06E223ADCE8EF617" Comment="Перекрытие МГ. Подтверждение от оператора при АОС" />
+        <Field Name="AOS_MG_cut_not_accept" Type="BOOL" UUID="8535693C4423E83A46059F9EE899D6D3" Comment="Перекрытие МГ. Отмена от оператора при АОС" />
+        <Field Name="SODU_AOss_KC_next_accept" Type="BOOL" UUID="09A7D5D149357B11D4A217A645E2ED2D" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Подтверждение от оператора при &quot;АО СС КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_AOss_KC_next_not_accept" Type="BOOL" UUID="55CDC2BF4D9DF6F6796E508F3B12B68F" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Отмена от оператора при &quot;АО СС КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_AOss_KC_prev_accept" Type="BOOL" UUID="54538F0E45058BF2F1F131BFC1BBFF98" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Подтверждение от оператора при &quot;АО СС КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_AOss_KC_prev_not_accept" Type="BOOL" UUID="FAAE122548745925BD381AB369677610" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Отмена от оператора при &quot;АО СС КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_AObs_KC_next_accept" Type="BOOL" UUID="348B55864930850DF0EE18855391AEBE" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Подтверждение от оператора при &quot;АО БС КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_AObs_KC_next_not_accept" Type="BOOL" UUID="894AFBB347F5E47BF66D169EC3210035" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Отмена от оператора при &quot;АО БС КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_AObs_KC_prev_accept" Type="BOOL" UUID="A18DF4574E5B27694F6579847EF821A2" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Подтверждение от оператора при &quot;АО БС КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_AObs_KC_prev_not_accept" Type="BOOL" UUID="461AF3954E5A5B34AC3F8FB8A27B22BC" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Отмена от оператора при &quot;АО БС КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_EAO_KC_next_accept" Type="BOOL" UUID="FE4F7AB74A980949AFAF009C246B21E8" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Подтверждение от оператора при &quot;ЭО КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_EAO_KC_next_not_accept" Type="BOOL" UUID="C1558C5446BB909CD2FE61B43A9C015E" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Отмена от оператора при &quot;ЭО КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_EAO_KC_prev_accept" Type="BOOL" UUID="4E813DA14193F5D10F7F2795D7C1C01B" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Подтверждение от оператора при &quot;ЭО КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_EAO_KC_prev_not_accept" Type="BOOL" UUID="387CAF7D49B14E1896C3B391FDAAC3AE" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Отмена от оператора при &quot;ЭО КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_NO_KC_next_accept" Type="BOOL" UUID="B0D0B8BC4E625B1CA6A1D88E11790A12" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Подтверждение от оператора при &quot;НО КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_NO_KC_next_not_accept" Type="BOOL" UUID="C80B432941456BB1145DC0B99CE2C071" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Отмена от оператора при &quot;НО КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_NO_KC_prev_accept" Type="BOOL" UUID="B162704A47D6B75D760E899324E062AE" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Подтверждение от оператора при &quot;НО КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_NO_KC_prev_not_accept" Type="BOOL" UUID="975AE9034CF76260566B4BAEA6CF686B" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Отмена от оператора при &quot;НО КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_KOL_KC_next_accept" Type="BOOL" UUID="07512937465A1D681E004894407CE32E" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Подтверждение от оператора при &quot;КОЛЬЦО КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_KOL_KC_next_not_accept" Type="BOOL" UUID="1C4B567F4F7101F16D6A2D82F15EA0EA" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Отмена от оператора при &quot;КОЛЬЦО КЦ1 последующей станции МГ&quot;" />
+        <Field Name="SODU_KOL_KC_prev_accept" Type="BOOL" UUID="27ECE4F746F830BCCE7C1FB2EE0E497E" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Подтверждение от оператора при &quot;КОЛЬЦО КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_KOL_KC_prev_not_accept" Type="BOOL" UUID="F590FDC640CB768C107A8B896CD7EF4E" Comment="Режим &quot;Кольцо ГПА КЦ-1&quot;. Отмена от оператора при &quot;КОЛЬЦО КЦ1 предыдущей станции МГ&quot;" />
+        <Field Name="SODU_AOss_accept" Type="BOOL" UUID="C68351854FA365FFFBAB62A5DC23B043" Comment="Режим &quot;АОС&quot;. Подтверждение от оператора при &quot;АО КЦ-1 СС&quot; с уровня СОДУ" />
+        <Field Name="SODU_AOss_not_accept" Type="BOOL" UUID="576489BD443E7933DDCFB094E433B828" Comment="Режим &quot;АОС&quot;. Отмена от оператора при &quot;АО КЦ-1 СС&quot; с уровня СОДУ" />
+        <Field Name="SODU_AObs_accept" Type="BOOL" UUID="3F0FD8D24E4A62EA2174048BBA23B7DA" Comment="Режим &quot;АОБ&quot;. Подтверждение от оператора при &quot;АО КЦ-1 БС&quot; с уровня СОДУ" />
+        <Field Name="SODU_AObs_not_accept" Type="BOOL" UUID="6A0ACAF14FD324E646857694B0A8E47F" Comment="Режим &quot;АОБ&quot;. Отмена от оператора при &quot;АО КЦ-1 БС&quot; с уровня СОДУ" />
+        <Field Name="SODU_KOL_accept" Type="BOOL" UUID="89B6BAC8410E4C1D84736C95E889E2EA" Comment="Режим &quot;Кольцо&quot;. Подтверждение от оператора при &quot;КОЛЬЦО КЦ-1 БС&quot; с уровня СОДУ" />
+        <Field Name="SODU_KOL_not_accept" Type="BOOL" UUID="94CAE3A9437D05F356581B9D3C230268" Comment="Режим &quot;Кольцо&quot;. Отмена от оператора при &quot;КОЛЬЦО КЦ-1 БС&quot; с уровня СОДУ" />
+        <Field Name="Fire_DKU_accept" Type="BOOL" UUID="5EBE7F244F2C53EBAABA8A9C607BFA7B" Comment="Режим &quot;АО ДКУ&quot;. Подтвержение от оператора при &quot;Пожар в ДКУ&quot;" />
+        <Field Name="Fire_DKU_not_accept" Type="BOOL" UUID="DC5D776F4969ED2EF61E1883A4943D36" Comment="Режим &quot;АО ДКУ&quot;. Отмена от оператора при &quot;Пожар в ДКУ&quot;" />
+        <Field Name="Zagaz_2_DKU_accept" Type="BOOL" UUID="C2C6CC90428A3E97C0BD13BE602A7B2E" Comment="Режим &quot;АО ДКУ&quot;. Подтвержение от оператора при &quot;Загазованность 2-й порог в ДКУ&quot;" />
+        <Field Name="Zagaz_2_DKU_not_accept" Type="BOOL" UUID="E2CD81AF417D0405B737B5B41922C7ED" Comment="Режим &quot;АО ДКУ&quot;. Отмена от оператора при &quot;Загазованность 2-й порог в ДКУ&quot;" />
+        <Field Name="GAP_in_accept" Type="BOOL" UUID="B4D64A9A40A718C76EF633BAF705655A" Comment="Режим &quot;АОБ&quot;. Подтверждение от оператора при &quot;Разрыв входного коллектора компрессорного цеха&quot;" />
+        <Field Name="GAP_in_not_accept" Type="BOOL" UUID="EB3EC8C144AA8F4C0F387CBB1955123E" Comment="Режим &quot;АОБ&quot;. Отмена от оператора при &quot;Разрыв входного коллектора компрессорного цеха&quot;" />
+        <Field Name="GAP_out_accept" Type="BOOL" UUID="5B6ACA28465E5DC9056E368F711534CB" Comment="Режим &quot;АОБ&quot;. Подтверждение от оператора при &quot;Разрыв выходного коллектора компрессорного цеха&quot;" />
+        <Field Name="GAP_out_not_accept" Type="BOOL" UUID="4DB9004A42EA26B3577A05BA8553D6AC" Comment="Режим &quot;АОБ&quot;. Отмена от оператора при &quot;Разрыв выходного коллектора компрессорного цеха&quot;" />
+        <Field Name="T_g_outKC_HH_accept" Type="BOOL" UUID="A4487B2247EE9474F0EF6AADB1EC246C" Comment="Режим &quot;АОБ&quot;. Подтверждение от оператора при &quot;Аварийная температура газа на выходе КЦ-1&quot;" />
+        <Field Name="T_g_outKC_HH_not_accept" Type="BOOL" UUID="F8F3382B444DC929061B9BA8A29C55B8" Comment="Режим &quot;АОБ&quot;. Отмена от оператора при &quot;Аварийная температура газа на выходе КЦ-1&quot;" />
+    </Fields>
+</Type>

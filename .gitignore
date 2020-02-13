@@ -22,3 +22,9 @@ PATH/
 
 # ignore all files in the PRU/ directory
 PRU/
+
+# ignore all files in the Debug/ directory
+Debug/
+
+# ignore all files in the OLD/ directory
+OLD/

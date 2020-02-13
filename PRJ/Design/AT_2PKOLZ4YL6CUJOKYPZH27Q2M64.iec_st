@@ -209,12 +209,15 @@ CASE drumAOB.step OF
 	IF drumAOB.TMR2 <= LREAL#0 THEN
 		drumAOB.step := INT#2;
 	END_IF;
+
 1:	drumAOB.done_ok := BOOL#1;
 	drumAOB.step_prev := drumAOB.step;
 	drumAOB.step := INT#3;
+
 2:	drumAOB.done_flt := BOOL#1;
 	drumAOB.step_prev := drumAOB.step;
 	drumAOB.step := INT#3;
+
 3:	IF drumAOB.step_prev <> INT#3 THEN
 //		Need_accept.AOB_MG_cut := BOOL#1;
 		AOB_to_DO := BOOL#0;
@@ -1888,7 +1891,7 @@ IF MD.NO THEN
 	END_IF;
 END_IF;
 
-// КЦ-1 Кольцо
+// КЦ-2 Кольцо
 MD.KOL_KC2 := NOT (MD.EAO_KC2 OR MD.EAO_KS OR MD.AOS OR MD.AOB OR MD.NO) AND (NSDw OR drumKOL.run);
 IF MD.KOL_KC2 THEN
 	temp_mode_string := 'КЦ-2 Кольцо';

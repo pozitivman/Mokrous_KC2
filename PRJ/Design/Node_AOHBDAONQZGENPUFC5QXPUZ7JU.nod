@@ -4,7 +4,7 @@
     <InterfaceList>
         <SubApp Name="AppMain_1" Type="CF4AA41E4AE482DEB91282A2F037FF9E" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="43B1EACC4B5D2F0614A35DA86B99CCAE" />
         <SubApp Name="AppMain_5" Type="3FDD16D8404540D165706D88B11791DC" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="43B1EACC4B5D2F0614A35DA86B99CCAE" />
-        <SubApp Name="AppMain_3" Type="2E4145A245FE272ED129E28C3789A649" Disabled="TRUE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="43B1EACC4B5D2F0614A35DA86B99CCAE" />
+        <SubApp Name="AppMain_3" Type="2E4145A245FE272ED129E28C3789A649" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="43B1EACC4B5D2F0614A35DA86B99CCAE" />
         <SubApp Name="AppSrvMain" Type="786DBB07480B8E40C286EDBFF0DB8E7A" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="09958B4F409EE6FF4A0962BC5271EE1C" />
         <SubApp Name="AppAS36" Type="D79E7BF540479A9DAF7FCA840EE6B024" Disabled="TRUE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="511FDFB74C9E771821EEB79C4119625C" />
         <SubApp Name="AppEregistrator" Type="BFE42B784439DB59947C89B7D7175913" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="81D5881F47246E4CC1ADEEBABF917B47" />

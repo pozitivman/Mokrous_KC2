@@ -326,5 +326,48 @@
         <Field Name="ARM_btn_AOB" Type="BOOL" UUID="21774DF34910C10B5305AAAEF2276DA4" Comment="Нажата кнопка АОБ на мнемосхеме" />
         <Field Name="ARM_btn_NO" Type="BOOL" UUID="1FD3DF3B4F6A00792FC2309374666FCB" Comment="Нажата кнопка НО на мнемосхеме" />
         <Field Name="ARM_btn_KOL" Type="BOOL" UUID="936FB4864F5FB3B7173F40A47831F023" Comment="Нажата кнопка Кольцо на мнемосхеме" />
+        <Field Name="Tg_hi2KC" Type="BOOL" UUID="B53531B0499587B89EB836A480227DAD" Comment="Высокая температура газа на выходе КЦ" />
+        <Field Name="Tg_ala_hi2KC" Type="BOOL" UUID="C44F564B4E0EBA1FB666EDBA81F59A96" Comment="Аварийно высокая температура газа на выходе КЦ" />
+        <Field Name="Tg_ala_hi2KC_delay" Type="BOOL" UUID="259CE6C54C09F90B84CF3A951EC4E4F7" Comment="Аварийно высокая температура газа на выходе КЦ с задержкой" />
+        <Field Name="AOB_ASUTP_CMD" Type="BOOL" UUID="D686F10E4E1F5532BC74CBAB242ABB6D" Comment="Команда АОБ от АСУТП" />
+        <Field Name="Pg_hi2KC" Type="BOOL" UUID="0D10ADAF4557CC59AF454980D94A22C5" Comment="Высокое давление газа на выходе КЦ" />
+        <Field Name="Pg_ala_hi2KC" Type="BOOL" UUID="106069C3472F1C62694CA7B780C2F711" Comment="Аварийно высокое давление газа на выходе КЦ" />
+        <Field Name="Pg_ala_hi2KC_delay" Type="BOOL" UUID="2D6690154F4E4718F8FF16A8AC57384F" Comment="Аварийно высокое давление газа на выходе КЦ с задержкой" />
+        <Field Name="OPG_KR_ON" Type="BOOL" UUID="76F7B3D4493ACB4CB2FDC0A82EA1AE16" Comment="Команда на открытие кранов 6 6а 6ар 6р от АСУТП" />
+        <Field Name="PPU_FIRE" Type="BOOL" UUID="15FD360E423C906EF82DF38E74D1441D" Comment="Проверка предпусковых условий: Пожар" />
+        <Field Name="PPU_ZAG" Type="BOOL" UUID="9B07644D43662D97124B0792527CEA8E" Comment="Проверка предпусковых условий: Загазованность 20%" />
+        <Field Name="PPU_RDY_TO_START" Type="BOOL" UUID="EFF5F9704A5C7DD92F9EE08D258447A6" Comment="Проверка предпусковых условий: Готовность к пуску" />
+        <Field Name="SAU_UP_flt" Type="BOOL" UUID="27A119B549FF830BA22FA59BC2985CF4" Comment="Отказ САУ УП" />
+        <Field Name="SAU_KC_flt" Type="BOOL" UUID="9F18DBDE464A1E459FC0F4A0A0E4E947" Comment="Отказ САУ КЦ" />
+        <Field Name="dP1KR30B_hi" Type="BOOL" UUID="C20209B64F141F5BA268E9A3A96096ED" Comment="Высокий перепад давления на кр30б" />
+        <Field Name="dP1KR30Bbis_hi" Type="BOOL" UUID="FA666EB54E56C43A23F2ED84813FB88E" Comment="Высокий перепад давления на кр30б&apos;" />
+        <Field Name="MD_KC_AOB" Type="BOOL" UUID="CED0F7384C7DAC16563984B796C2FA53" Comment="Выполняется АО без стравливания" />
+        <Field Name="MD_KC_AOS" Type="BOOL" UUID="15043AEB437B810E4C054BA16A66555F" Comment="Выполняется АО со стравливанием" />
+        <Field Name="MD_KC_NO" Type="BOOL" UUID="812570A24012054505B420963DAC0F02" Comment="Выполняется НО без стравливания" />
+        <Field Name="AOB_DONE" Type="BOOL" UUID="3845344246F7162E2AF4F8AAA1490EE0" Comment="АОбс завершен корректно" />
+        <Field Name="AOB_DONE_INCORRECT" Type="BOOL" UUID="999E13774B2D89B87D44BC9B843FBD76" Comment="АОбс завершен некорректно" />
+        <Field Name="AOS_DONE" Type="BOOL" UUID="39ADB8A24E70CB923E6911A7BEEF930B" Comment="АОсс завершен корректно" />
+        <Field Name="AOS_DONE_INCORRECT" Type="BOOL" UUID="3898885F4C847BF1D26CA7AB25893E2A" Comment="АОсс завершен некорректно" />
+        <Field Name="NO_DONE" Type="BOOL" UUID="01BFB6354AC827489393BDAE68DFB4E2" Comment="НО завершен корректно" />
+        <Field Name="NO_DONE_INCORRECT" Type="BOOL" UUID="9E8CB581401E606DEEA05AB3B8F1CB56" Comment="НО завершен некорректно" />
+        <Field Name="GR1_KOL" Type="BOOL" UUID="28DBDC7F4B4B1F359BF40FB7FC936D7C" Comment="Группа 1 Кольцо" />
+        <Field Name="GR2_KOL" Type="BOOL" UUID="5039ADA049F1D0636A1F85AEEE9E0332" Comment="ГРуппа 2 Кольцо" />
+        <Field Name="GR1_MAG" Type="BOOL" UUID="38C06CEC4FCD455B24BC18B0AEF607E6" Comment="Группа 1 Магистраль" />
+        <Field Name="GR2_MAG" Type="BOOL" UUID="A354295744525E3B47530DB3988FF28A" Comment="Группа 2 Магистраль" />
+        <Field Name="KC_EAO" Type="BOOL" UUID="D84FC4B6405ED87770B06EB256D10D5C" Comment="Выполняется ЭАО" />
+        <Field Name="AOB_kr30B_open" Type="BOOL" UUID="A826B9EC4BA442D598CC949E5A391663" Comment="Запрос на открытие крана 30б при АОБ" />
+        <Field Name="AOB_kr30Bbis_open" Type="BOOL" UUID="7D2D52D9474C79C6D71E42BA4395A273" Comment="Запрос на открытие крана 30б&apos; при АОБ" />
+        <Field Name="AOS_kr30B_open" Type="BOOL" UUID="11E16D08483F36659E1B5BA19646A72A" Comment="Запрос на открытие крана 30б при АОС" />
+        <Field Name="AOS_kr30Bbis_open" Type="BOOL" UUID="52EA0F0348E79BD51DDF9CBA0CBFF701" Comment="Запрос на открытие крана 30б&apos; при АОС" />
+        <Field Name="AOB_kr30B_open_accept" Type="BOOL" UUID="F471DFA246EB1AE7CA48D0A564113CDD" Comment="AOB_kr30B_open_accept" />
+        <Field Name="AOB_kr30B_open_not_accept" Type="BOOL" UUID="4C58706047906CDB7E9B9CAC3B42AC4C" Comment="AOB_kr30B_open_not_accept" />
+        <Field Name="AOB_kr30Bbis_open_accept" Type="BOOL" UUID="9D42B1DB40DC07701C32CB9A2FD5CECD" Comment="AOB_kr30Bbis_open_accept" />
+        <Field Name="AOB_kr30Bbis_open_not_accept" Type="BOOL" UUID="30C54B72412FF322444D009FD061170D" Comment="AOB_kr30Bbis_open_not_accept" />
+        <Field Name="AOS_kr30B_open_accept" Type="BOOL" UUID="76CF3C28498797CB1FB48D85D7990472" Comment="AOS_kr30B_open_accept" />
+        <Field Name="AOS_kr30B_open_not_accept" Type="BOOL" UUID="C1F7CAE942C5232CD5CC17862C7AA1F6" Comment="AOS_kr30B_open_not_accept" />
+        <Field Name="AOS_kr30Bbis_open_accept" Type="BOOL" UUID="7F2CAFAA48BB2F36E9EA56903BCED576" Comment="AOS_kr30Bbis_open_accept" />
+        <Field Name="AOS_kr30Bbis_open_not_accept" Type="BOOL" UUID="BEEFB0F44617DEB325D5F091CE804E9D" Comment="AOS_kr30Bbis_open_not_accept" />
+        <Field Name="AO_In_Group1" Type="BOOL" UUID="5A452B8A41EBBD9E474CEC895E9C2F5A" Comment="АО в группе 1" />
+        <Field Name="AO_In_Group2" Type="BOOL" UUID="137DF5094CE7F151967BA3B12B719003" Comment="АО в группе 2" />
     </Fields>
 </Type>

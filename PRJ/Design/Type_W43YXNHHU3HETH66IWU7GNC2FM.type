@@ -6,9 +6,9 @@
         <Field Name="run" Type="BOOL" UUID="75D76A8A407BAEBABB1B2D9791ABF322" Comment="Признак &quot;работа&quot;" />
         <Field Name="step" Type="INT" UUID="E7EE04834AEF7F236BB6C18ADF203CA8" Comment="Текущий шаг" />
         <Field Name="step_prev" Type="INT" UUID="312A1E364B2D6DA4E75B4AB6AF348121" Comment="Шаг на предыдущим цикле ПЛК" />
-        <Field Name="TMR1" Type="LREAL" UUID="005447B2469B752FB13018A159A7D978" Comment="Таймер И" />
-        <Field Name="TMR2" Type="LREAL" UUID="A0E3FA5049678B4D805B018AC32426BA" Comment="Таймер ИЛИ" />
-        <Field Name="TMR3" Type="LREAL" UUID="5D33620D48AE0B783449118F741B6D8E" Comment="Таймер общий алгоритма" />
+        <Field Name="TMR_AND" Type="LREAL" UUID="005447B2469B752FB13018A159A7D978" Comment="Таймер И" />
+        <Field Name="TMR_OR" Type="LREAL" UUID="A0E3FA5049678B4D805B018AC32426BA" Comment="Таймер ИЛИ" />
+        <Field Name="TMR_COM" Type="LREAL" UUID="5D33620D48AE0B783449118F741B6D8E" Comment="Таймер общий алгоритма" />
         <Field Name="done_ok" Type="BOOL" UUID="7DE8E0F64DC33CCE81BA7E934A9D6E1A" Comment="Завершён корректно" />
         <Field Name="done_flt" Type="BOOL" UUID="561260F64DC7FA62182A4192C65A8365" Comment="Завершён некорректно" />
     </Fields>

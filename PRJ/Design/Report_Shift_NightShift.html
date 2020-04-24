@@ -1,0 +1,616 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta charset="utf-8"  name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Arial Narrow'; font-size:12pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MS Shell Dlg 2'; font-weight:600;">                                                                                                              Сменная ведомость КС Мокроус КЦ-2</span> <span style=" font-family:'MS Shell Dlg 2'; font-weight:600;">от </span><span style=" font-family:'MS Shell Dlg 2'; font-weight:600; text-decoration: ;  "><!--RPT DT:TODAY"%d.%m.%Y г" --></span><span style=" font-family:'MS Shell Dlg 2'; font-weight:600;"> </span></p>
+<p align="center" style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;"><br /></p>
+<p align="center" style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;"><br /></p>
+<table border="1" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;" width="100%" cellspacing="1" cellpadding="1" bgcolor="#ffffff">
+<tr>
+<td width="10%" style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">Время, чч:мм:сс</span></p></td>
+<td width="10%" style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">Температура газа во входном коллекторе КЦ2 (сторона ГПА7)</span></p></td>
+<td width="10%" style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">Температура газа во входном коллекторе КЦ2 (сторона ГПА9)</span></p></td>
+<td width="10%" style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">Температура газа в выходном коллекторе КЦ2 (сторона ГПА7)</span></p></td>
+<td width="10%" style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">Температура газа в выходном коллекторе КЦ2 (сторона ГПА9)</span></p></td>
+<td width="10%" style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">Давление газа во входном коллекторе КЦ2 (сторона ГПА7)</span></p></td>
+<td width="10%" style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">Давление газа во входном коллекторе КЦ2 (сторона ГПА9)</span></p></td>
+<td width="10%" style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">Давление газа в выходном коллекторе КЦ2 (сторона ГПА7)</span></p></td>
+<td width="10%" style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">Давление газа в выходном коллекторе КЦ2 (сторона ГПА9)</span></p></td>
+<td width="10%" style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">Давление газа на входе в КЦ</span></p></td></tr>
+<tr>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">22:00:00</span></p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+-2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+-2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+-2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+-2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+-2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+-2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+-2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+-2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+-2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td></tr>
+<tr>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">0:00:00</span></p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+0*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+0*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+0*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+0*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+0*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+0*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+0*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+0*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+0*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td></tr>
+<tr>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">2:00:00</span></p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td></tr>
+<tr>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">4:00:00</span></p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+4*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+4*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+4*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+4*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+4*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+4*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+4*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+4*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+4*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td></tr>
+<tr>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">6:00:00</span></p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+6*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+6*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+6*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+6*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+6*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+6*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+6*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+6*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+6*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td></tr>
+<tr>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">8:00:00</span></p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+8*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+8*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end;  --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+8*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+8*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.1f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+8*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+8*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+8*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+8*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+8*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td></tr></table>
+<p align="center" style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p align="center" style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;"><br /></p>
+<table border="1" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;" width="100%" cellspacing="1" cellpadding="1" bgcolor="#ffffff">
+<tr>
+<td width="10%" style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">Время, чч:мм:сс</span></p></td>
+<td width="10%" style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">Давление газа на выходе из КЦ</span></p></td></tr>
+<tr>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">22:00:00</span></p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+-2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end;  --></span> </p></td></tr>
+<tr>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">0:00:00</span></p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+0*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td></tr>
+<tr>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">2:00:00</span></p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+2*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td></tr>
+<tr>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">4:00:00</span></p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+4*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end;  --></span> </p></td></tr>
+<tr>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">6:00:00</span></p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+6*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end; --></span> </p></td></tr>
+<tr>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:10pt; font-weight:600;">8:00:00</span></p></td>
+<td style=" vertical-align:middle;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: ;  "><!--lua do 
+	local arc = Core(os.today()+os.tz()+8*3600).dummy;
+	if arc.res==0 then
+		print(string.format(&quot;%.2f&quot;, arc.val));
+	else 
+		print('-');
+	end;
+end;  --></span> </p></td></tr></table>
+<p align="center" style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p align="center" style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;"><br /></p>
+<p align="center" style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;"><br /></p></body></html>

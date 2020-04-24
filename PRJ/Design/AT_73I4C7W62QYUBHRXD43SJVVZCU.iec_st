@@ -56,7 +56,7 @@ APS_fb();
 AO_fb();
 
 // Данные для архива
-//Arch_fb();
+Arch_fb();
 
 // Данные для ПРУ
 //PRU_fb();
@@ -345,13 +345,13 @@ APL(INT#133, SHKU17_A1_DI_HMI.rez_06, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_a
 APL(INT#134, SHKU17_A1_DI_HMI.rez_07, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_07);   // Резерв
 APL(INT#135, SHKU17_A1_DI_HMI.Ctrl24_TC_1, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ctrl24_TC_1);   // Контроль 24 В ТС №1
 
-APL(INT#136, SHKU17_AI_PLC.Pg2plum.PV >= Global_Ust.Pg2KC_H_PS and SHKU17_AI_PLC.Pg2plum.PV < Global_Ust.Pg2KC_H_AS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg2plum_over_PS);   // Предупреждение - Давление газа на выходном шлейфе >= 5,5 МПа
-APL(INT#137, SHKU17_AI_PLC.Pg2plum.PV >= Global_Ust.Pg2KC_H_AS, BOOL#1, BOOL#0, LREAL#1, INT#7, APS_TASK_alg, SHKU17_A1_APS.Pg2plum_over_AS);   // Авария - Давление газа на выходном шлейфе >= 5,65 МПа
-APL(INT#138, SHKU17_AI_PLC.Tozh.PV >= Global_Ust.Tozh_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tozh_H_PS);   // Температура охлаждающей жидкости - высокая
-APL(INT#139, SHKU17_AI_PLC.Ttg.PV <= Global_Ust.Ttg_L_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ttg_L_PS);   // Температура топливного газа низкая
-APL(INT#140, SHKU17_AI_PLC.Ttg.PV >= Global_Ust.Ttg_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ttg_H_PS);   // Температура топливного газа высокая
-APL(INT#141, SHKU17_AI_PLC.Ptg.PV <= Global_Ust.Ptg_L_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ptg_L_PS);   // Давление топливного  газа низкое
-APL(INT#142, SHKU17_AI_PLC.Ptg.PV >= Global_Ust.Ptg_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ptg_H_PS);   // Давление топливного  газа высокое
+//APL(INT#136, SHKU17_AI_PLC.Pg2plum.PV >= Global_Ust.Pg2KC_H_PS and SHKU17_AI_PLC.Pg2plum.PV < Global_Ust.Pg2KC_H_AS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg2plum_over_PS);   // Предупреждение - Давление газа на выходном шлейфе >= 5,5 МПа
+//APL(INT#137, SHKU17_AI_PLC.Pg2plum.PV >= Global_Ust.Pg2KC_H_AS, BOOL#1, BOOL#0, LREAL#1, INT#7, APS_TASK_alg, SHKU17_A1_APS.Pg2plum_over_AS);   // Авария - Давление газа на выходном шлейфе >= 5,65 МПа
+//APL(INT#138, SHKU17_AI_PLC.Tozh.PV >= Global_Ust.Tozh_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tozh_H_PS);   // Температура охлаждающей жидкости - высокая
+//APL(INT#139, SHKU17_AI_PLC.Ttg.PV <= Global_Ust.Ttg_L_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ttg_L_PS);   // Температура топливного газа низкая
+//APL(INT#140, SHKU17_AI_PLC.Ttg.PV >= Global_Ust.Ttg_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ttg_H_PS);   // Температура топливного газа высокая
+//APL(INT#141, SHKU17_AI_PLC.Ptg.PV <= Global_Ust.Ptg_L_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ptg_L_PS);   // Давление топливного  газа низкое
+//APL(INT#142, SHKU17_AI_PLC.Ptg.PV >= Global_Ust.Ptg_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ptg_H_PS);   // Давление топливного  газа высокое
 
 APL(INT#143, PRU_Link > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.PRU_Link_flt); //Ошибка связи с ПРУ
 APL(INT#144, Global_PRU.Btn_AOS, BOOL#1, BOOL#0, LREAL#0, INT#6, APS_TASK_alg, SHKU17_A1_APS.PRU_btn_AOS);	//Кнопка АОС с ПРУ
@@ -1358,52 +1358,68 @@ cycleTime_DI_sys := clock_DI_cur - clock_DI_prev;]]></ST>
         </Folder>
         <FunctionBlock UUID="FC3659584F7E9A1B032F2EB588B15E81" Name="Archive">
             <Variables />
-            <ST><![CDATA[(*
-Archive_CTU1.dP_BFS1    := CTU1_AI_PLC.dP_BFS1.PV;
-Archive_CTU1.dP_BFS2    := CTU1_AI_PLC.dP_BFS2.PV;
-Archive_CTU1.dP_BFS3    := CTU1_AI_PLC.dP_BFS3.PV;
-Archive_CTU1.dP_BFS4    := CTU1_AI_PLC.dP_BFS4.PV;
-Archive_CTU1.dP_BFS5    := CTU1_AI_PLC.dP_BFS5.PV;
-Archive_CTU1.dP_BFS6    := CTU1_AI_PLC.dP_BFS6.PV;
-Archive_CTU1.dP_BFS     := CTU1_AI_PLC.dP_BFS.PV;
-Archive_CTU1.T_E3       := CTU1_AI_PLC.T_E3.PV;
-Archive_CTU1.P_E3       := CTU1_AI_PLC.P_E3.PV;
-Archive_CTU1.L_E3       := CTU1_AI_PLC.L_E3.PV;
-Archive_CTU1.T_E2       := CTU1_AI_PLC.T_E2.PV;
-Archive_CTU1.P_g_inKC1  := CTU1_AI_PLC.P_g_inKC1.PV;
-Archive_CTU1.P_g_outKC1 := CTU1_AI_PLC.P_g_outKC1.PV;
-Archive_CTU1.T_air      := CTU1_AI_PLC.T_air.PV;
-Archive_CTU1.T_ground   := CTU1_AI_PLC.T_ground.PV;
-Archive_CTU1.P_air      := CTU1_AI_PLC.P_air.PV;
-Archive_CTU1.T_air_BB   := CTU1_AI_PLC.T_air_BB.PV;
-Archive_CTU1.Reserve_01 := CTU1_AI_PLC.Reserve_01.PV;
-Archive_CTU1.Reserve_02 := CTU1_AI_PLC.Reserve_02.PV;
-Archive_CTU1.Reserve_03 := CTU1_AI_PLC.Reserve_03.PV;
-Archive_CTU1.Reserve_04 := CTU1_AI_PLC.Reserve_04.PV;
-Archive_CTU1.Reserve_05 := CTU1_AI_PLC.Reserve_05.PV;
-Archive_CTU1.Reserve_06 := CTU1_AI_PLC.Reserve_06.PV;
-Archive_CTU1.Reserve_07 := CTU1_AI_PLC.Reserve_07.PV;
-Archive_CTU1.Reserve_08 := CTU1_AI_PLC.Reserve_08.PV;
-Archive_CTU1.Reserve_09 := CTU1_AI_PLC.Reserve_09.PV;
-Archive_CTU1.Reserve_10 := CTU1_AI_PLC.Reserve_10.PV;
-Archive_CTU1.Reserve_11 := CTU1_AI_PLC.Reserve_11.PV;
-Archive_CTU1.Reserve_12 := CTU1_AI_PLC.Reserve_12.PV;
-Archive_CTU1.L_min_E2   := CTU1_AI_PLC.L_min_E2.PV;
-Archive_CTU1.L_max_E2   := CTU1_AI_PLC.L_max_E2.PV;
-Archive_CTU1.L_min_E3   := CTU1_AI_PLC.L_min_E3.PV;
-Archive_CTU1.L_max_E3   := CTU1_AI_PLC.L_max_E3.PV;
-Archive_CTU1.dP_KR7     := CTU1_AI_PLC.dP_KR7.PV;
-Archive_CTU1.dP_KR7a    := CTU1_AI_PLC.dP_KR7a.PV;
-Archive_CTU1.dP_KR8     := CTU1_AI_PLC.dP_KR8.PV;
-Archive_CTU1.dP_KRG_20_5:= CTU1_AI_PLC.dP_KRG_20_5.PV;
-Archive_CTU1.Reserve_13 := CTU1_AI_PLC.Reserve_13.PV;
-Archive_CTU1.Reserve_14 := CTU1_AI_PLC.Reserve_14.PV;
-Archive_CTU1.Reserve_15 := CTU1_AI_PLC.Reserve_15.PV;
-Archive_CTU1.U_main     := CTU1_AI_PLC.U_main.PV;
-Archive_CTU1.U_backup   := CTU1_AI_PLC.U_backup.PV;
-Archive_CTU1.Reserve_16 := CTU1_AI_PLC.Reserve_16.PV;
-Archive_CTU1.Reserve_17 := CTU1_AI_PLC.Reserve_17.PV;
-*)]]></ST>
+            <ST><![CDATA[Global_PLC_A1_arch.Tnv:=SHKU17_AI_HMI.Tnv.PV; //Температура наружного воздуха
+Global_PLC_A1_arch.Tgr:=SHKU17_AI_HMI.Tgr.PV; //Температура грунта
+Global_PLC_A1_arch.Tg1kr7B:=SHKU17_AI_HMI.Tg1kr7B.PV; //Температура газа до крана 7Б
+Global_PLC_A1_arch.Tg2kr8B:=SHKU17_AI_HMI.Tg2kr8B.PV; //Температура газа после крана 8Б
+Global_PLC_A1_arch.Tg1kr8Bbis:=SHKU17_AI_HMI.Tg1kr8Bbis.PV; //Температура газа до крана 8Ббис
+Global_PLC_A1_arch.Tg2kr8Bbis:=SHKU17_AI_HMI.Tg2kr8Bbis.PV; //Температура газа после крана 8Ббис
+Global_PLC_A1_arch.Pg2kr8Bbis:=SHKU17_AI_HMI.Pg2kr8Bbis.PV; //Давление газа после крана 8Ббис
+Global_PLC_A1_arch.Pg1kr7B:=SHKU17_AI_HMI.Pg1kr7B.PV; //Давление газа до крана 7Б
+Global_PLC_A1_arch.Patm:=SHKU17_AI_HMI.Patm.PV; //Давление атмосферного воздуха
+Global_PLC_A1_arch.PozAPK3:=SHKU17_AI_HMI.PozAPK3.PV; //Положение АПК №3
+Global_PLC_A1_arch.Ctrl24VTI1:=SHKU17_AI_HMI.Ctrl24VTI1.PV; //Контроль 24 В ТИ
+Global_PLC_A1_arch.Tg1PU:=SHKU17_AI_HMI.Tg1PU.PV; //Температура газа  до  ПУ
+Global_PLC_A1_arch.Tg2PU:=SHKU17_AI_HMI.Tg2PU.PV; //Температура газа  после ПУ
+Global_PLC_A1_arch.Pg1PU:=SHKU17_AI_HMI.Pg1PU.PV; //Давление газа  до  ПУ
+Global_PLC_A1_arch.Pg2PU:=SHKU17_AI_HMI.Pg2PU.PV; //Давление газа  после ПУ
+Global_PLC_A1_arch.Tg1gr_2:=SHKU17_AI_HMI.Tg1gr_2.PV; //Температура газа на входе  группы 2
+Global_PLC_A1_arch.Tg2gr_2:=SHKU17_AI_HMI.Tg2gr_2.PV; //Температура газа на выходе  группы 2
+Global_PLC_A1_arch.Pg2plum:=SHKU17_AI_HMI.Pg2plum.PV; //Давление газа на выходном шлейфе
+Global_PLC_A1_arch.Pcompr_v:=SHKU17_AI_HMI.Pcompr_v.PV; //Давление сжатого воздуха
+Global_PLC_A1_arch.Ttg:=SHKU17_AI_HMI.Ttg.PV; //Температура топливного газа
+Global_PLC_A1_arch.Tpg:=SHKU17_AI_HMI.Tpg.PV; //Температура пускового газа
+Global_PLC_A1_arch.Ptg:=SHKU17_AI_HMI.Ptg.PV; //Давление топливного  газа
+Global_PLC_A1_arch.Ppg:=SHKU17_AI_HMI.Ppg.PV; //Давление пускового газа
+Global_PLC_A1_arch.Ctrl24VTI2:=SHKU17_AI_HMI.Ctrl24VTI2.PV; //Контроль 24 В ТИ
+Global_PLC_A1_arch.Lpe1:=SHKU17_AI_HMI.Lpe1.PV; //Уровень в пожарной емкости №1
+Global_PLC_A1_arch.Lpe2:=SHKU17_AI_HMI.Lpe2.PV; //Уровень в пожарной емкости №2
+Global_PLC_A1_arch.Lpe3:=SHKU17_AI_HMI.Lpe3.PV; //Уровень в пожарной емкости №3
+Global_PLC_A1_arch.Lpe7:=SHKU17_AI_HMI.Lpe7.PV; //Уровень в пожарной емкости №7
+Global_PLC_A1_arch.Lpe8:=SHKU17_AI_HMI.Lpe8.PV; //Уровень в пожарной емкости №8
+Global_PLC_A1_arch.Tozh:=SHKU17_AI_HMI.Tozh.PV; //Температура охлаждающей жидкости
+Global_PLC_A1_arch.Ctrl24VTI3:=SHKU17_AI_HMI.Ctrl24VTI3.PV; //Контроль 24 В ТИ
+Global_PLC_A1_arch.Uosn_p_SHKU17:=SHKU17_AI_HMI.Uosn_p_SHKU17.PV; //Напряжение основного питания ШКУ-17
+Global_PLC_A1_arch.Urez_p_SHKU17:=SHKU17_AI_HMI.Urez_p_SHKU17.PV; //Напряжение резервного питания ШКУ-17
+
+Global_PLC_A1_arch.APK3_pos:=SHKU17_A1_AO_HMI.APK3_pos; //Управление АПК3
+
+Global_PLC_A1_arch.Ala_ispr_Ppr:=SHKU17_A1_DI_HMI.Ala_ispr_Ppr; //Сигнализация исправности питания преобразователей
+Global_PLC_A1_arch.Pg2_plum:=SHKU17_A1_DI_HMI.Pg2_plum; //Давление газа на выходном шлейфе
+Global_PLC_A1_arch.No_U_AVVgr_3:=SHKU17_A1_DI_HMI.No_U_AVVgr_3; //Отсутствие напряжения в схеме аварийно-вытяжных вентиляторов группы 3
+Global_PLC_A1_arch.no_U_PV5:=SHKU17_A1_DI_HMI.no_U_PV5; //Отсутствие напряжения в схеме приточного вентилятора №5
+Global_PLC_A1_arch.no_U_PV6:=SHKU17_A1_DI_HMI.no_U_PV6; //Отсутствие напряжения в схеме приточного вентилятора №6
+Global_PLC_A1_arch.Inc1_ON:=SHKU17_A1_DI_HMI.Inc1_ON; //Ввод №1 включен
+Global_PLC_A1_arch.Inc1_OFF:=SHKU17_A1_DI_HMI.Inc1_OFF; //Ввод №1 отлючен
+Global_PLC_A1_arch.Inc2_ON:=SHKU17_A1_DI_HMI.Inc2_ON; //Ввод №2 включен
+Global_PLC_A1_arch.Inc2_OFF:=SHKU17_A1_DI_HMI.Inc2_OFF; //Ввод №2 отлючен
+Global_PLC_A1_arch.SS_ON:=SHKU17_A1_DI_HMI.SS_ON; //Секционный выключатель включен
+Global_PLC_A1_arch.SS_OFF:=SHKU17_A1_DI_HMI.SS_OFF; //Секционный выключатель отлючен
+Global_PLC_A1_arch.APK_ON:=SHKU17_A1_DI_HMI.APK_ON; //АПК открыт
+Global_PLC_A1_arch.APK_OFF:=SHKU17_A1_DI_HMI.APK_OFF; //АПК закрыт
+Global_PLC_A1_arch.APK_Heat_ON:=SHKU17_A1_DI_HMI.APK_Heat_ON; //АПК обогрев включен
+Global_PLC_A1_arch.N11GD100_1_WORK:=SHKU17_A1_DI_HMI.N11GD100_1_WORK; //11ГД-100 №1 в работе
+Global_PLC_A1_arch.N11GD100_1_FLT:=SHKU17_A1_DI_HMI.N11GD100_1_FLT; //Авария 11ГД-100 №1
+Global_PLC_A1_arch.N11GD100_2_WORK:=SHKU17_A1_DI_HMI.N11GD100_2_WORK; //11ГД-100 №2 в работе
+Global_PLC_A1_arch.N11GD100_2_FLT:=SHKU17_A1_DI_HMI.N11GD100_2_FLT; //Авария 11ГД-100 №2
+Global_PLC_A1_arch.AC804_FLT:=SHKU17_A1_DI_HMI.AC804_FLT; //АС-804 неисправна
+Global_PLC_A1_arch.AC804_WORK:=SHKU17_A1_DI_HMI.AC804_WORK; //АС-804 в работе
+Global_PLC_A1_arch.AC804_REZ:=SHKU17_A1_DI_HMI.AC804_REZ; //АС-804 в резерве
+Global_PLC_A1_arch.TG2_FLT:=SHKU17_A1_DI_HMI.TG2_FLT; //Авария теплогенератора №2
+Global_PLC_A1_arch.P3_30_ON:=SHKU17_A1_DI_HMI.P3_30_ON; //Насос РЗ-30 ГСМ включен
+Global_PLC_A1_arch.P3_30_KVR_AUTO:=SHKU17_A1_DI_HMI.P3_30_KVR_AUTO; //КВР насоса РЗ-30 ГСМ в положении автомат
+Global_PLC_A1_arch.Ctrl24_TC_1:=SHKU17_A1_DI_HMI.Ctrl24_TC_1; //Контроль 24 В ТС
+]]></ST>
         </FunctionBlock>
         <FunctionBlock UUID="C8FD4D8B4E6B016D906A7BB168892D92" Name="block_ALG">
             <Variables>

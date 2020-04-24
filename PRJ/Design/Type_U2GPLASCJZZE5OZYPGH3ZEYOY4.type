@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="PLC_A1_Arch" Kind="Struct" UUID="D4C3241A48145D7692EBDF89EFEA33AA">
+    <Fields>
+        <Field Name="Tnv" Type="REAL" UUID="2EDF7DE9461FED9E044147ABD60E23D6" Comment="Температура наружного воздуха" />
+        <Field Name="Tgr" Type="REAL" UUID="BFF4B15140493EDC719F0A9137A165B1" Comment="Температура грунта" />
+        <Field Name="Tg1kr7B" Type="REAL" UUID="498C261F40BE3DB5294A1896C954CAAD" Comment="Температура газа до крана 7Б" />
+        <Field Name="Tg2kr8B" Type="REAL" UUID="6ACD1F064C8DEB4C4880C888C824673E" Comment="Температура газа после крана 8Б" />
+        <Field Name="Tg1kr8Bbis" Type="REAL" UUID="B61A2C2B4BF5FAAD244BE78CD3F39305" Comment="Температура газа до крана 8Ббис" />
+        <Field Name="Tg2kr8Bbis" Type="REAL" UUID="380DC39442538B8A3A859A945E180B54" Comment="Температура газа после крана 8Ббис" />
+        <Field Name="Pg2kr8Bbis" Type="REAL" UUID="60AF76944892B0D9D7B3D086E8636B1E" Comment="Давление газа после крана 8Ббис" />
+        <Field Name="Pg1kr7B" Type="REAL" UUID="7BF35504476C306831335EBAF0368191" Comment="Давление газа до крана 7Б" />
+        <Field Name="Patm" Type="REAL" UUID="BEED0D6D4F0F95EFFD2F6DAAB970FB47" Comment="Давление атмосферного воздуха" />
+        <Field Name="PozAPK3" Type="REAL" UUID="315E0A4B44454D74AEBD5D8D81F76FF5" Comment="Положение АПК №3" />
+        <Field Name="Ctrl24VTI1" Type="REAL" UUID="65B3F2AE40FEA0B4B831DDB3A3E8FDD8" Comment="Контроль 24 В ТИ" />
+        <Field Name="Tg1PU" Type="REAL" UUID="A54EC60C4662EA2BF8C90C8BEBAD0F4B" Comment="Температура газа  до  ПУ" />
+        <Field Name="Tg2PU" Type="REAL" UUID="D4304A4A4F2885B2120949A4FF597E68" Comment="Температура газа  после ПУ" />
+        <Field Name="Pg1PU" Type="REAL" UUID="C0297FE54ECDBBBA5D5B64B53779EEC2" Comment="Давление газа  до  ПУ" />
+        <Field Name="Pg2PU" Type="REAL" UUID="C5B636354FCE64CE72E5A9BD8DC0C7E5" Comment="Давление газа  после ПУ" />
+        <Field Name="Tg1gr_2" Type="REAL" UUID="4489E1B84898D5C8D03614947147ACD3" Comment="Температура газа на входе  группы 2" />
+        <Field Name="Tg2gr_2" Type="REAL" UUID="8093CB6E42988EF12938CFB6B27EA8B7" Comment="Температура газа на выходе  группы 2" />
+        <Field Name="Pg2plum" Type="REAL" UUID="5502EC0948794103325F47815BCC9EC2" Comment="Давление газа на выходном шлейфе" />
+        <Field Name="Pcompr_v" Type="REAL" UUID="7A9180C44A22FF4273D6ED9732576A4E" Comment="Давление сжатого воздуха" />
+        <Field Name="Ttg" Type="REAL" UUID="EEB3551940E323F6D21939BD4C2EF308" Comment="Температура топливного газа" />
+        <Field Name="Tpg" Type="REAL" UUID="E07CB27F408323CB41FC998A9A7D95B5" Comment="Температура пускового газа" />
+        <Field Name="Ptg" Type="REAL" UUID="6169AB6B45A8EAC1B3FCFAAABF18B5F2" Comment="Давление топливного  газа" />
+        <Field Name="Ppg" Type="REAL" UUID="0742AD724BA51706007122B12D59174A" Comment="Давление пускового газа" />
+        <Field Name="Ctrl24VTI2" Type="REAL" UUID="FF8375C145B658CFA35BAEAE31331C86" Comment="Контроль 24 В ТИ" />
+        <Field Name="Lpe1" Type="REAL" UUID="CDC6EB67436CC2502F5DEE9C929F3875" Comment="Уровень в пожарной емкости №1" />
+        <Field Name="Lpe2" Type="REAL" UUID="0DD846BC49B0E7A2D2EBEDA10FC24273" Comment="Уровень в пожарной емкости №2" />
+        <Field Name="Lpe3" Type="REAL" UUID="DB75DEB54A9FFD27E9437B9B520177F5" Comment="Уровень в пожарной емкости №3" />
+        <Field Name="Lpe7" Type="REAL" UUID="41A097284A099807F03C23BDF1558CC5" Comment="Уровень в пожарной емкости №7" />
+        <Field Name="Lpe8" Type="REAL" UUID="E7069BFA481E7BD5333E458F42E89A90" Comment="Уровень в пожарной емкости №8" />
+        <Field Name="Tozh" Type="REAL" UUID="898DE36649438B729FEED1AFCB523261" Comment="Температура охлаждающей жидкости" />
+        <Field Name="Ctrl24VTI3" Type="REAL" UUID="37AFB954407E8CF404C488B515467E99" Comment="Контроль 24 В ТИ" />
+        <Field Name="Uosn_p_SHKU17" Type="REAL" UUID="1520B66E47799605681BE594BA8D3E00" Comment="Напряжение основного питания ШКУ-17" />
+        <Field Name="Urez_p_SHKU17" Type="REAL" UUID="A8453A2442473AE40D2A22AA1EC35F7F" Comment="Напряжение резервного питания ШКУ-17" />
+        <Field Name="___1___" Type="BOOL" UUID="BB668BD04E0CBB09F97E72A899BECB90" />
+        <Field Name="APK3_pos" Type="REAL" UUID="09CD0C754F40CA51E1331CBAFDB37A7F" Comment="Управление АПК3" />
+        <Field Name="___2___" Type="BOOL" UUID="0001398E49478E1C33D961975C4DC7E4" />
+        <Field Name="Ala_ispr_Ppr" Type="BOOL" UUID="F0BA98B04E3096DDDF89A8855CC684FA" Comment="Сигнализация исправности питания преобразователей" />
+        <Field Name="Pg2_plum" Type="BOOL" UUID="8860F6F740DC543A2840D38DA9CFF656" Comment="Давление газа на выходном шлейфе" />
+        <Field Name="No_U_AVVgr_3" Type="BOOL" UUID="BD7302204E75664EF5ABCA9272D3458C" Comment="Отсутствие напряжения в схеме аварийно-вытяжных вентиляторов группы 3" />
+        <Field Name="no_U_PV5" Type="BOOL" UUID="756911984F8E71395865459326735E5D" Comment="Отсутствие напряжения в схеме приточного вентилятора №5" />
+        <Field Name="no_U_PV6" Type="BOOL" UUID="0F5ED4EA45BAD451DA0FF1826C13C6E7" Comment="Отсутствие напряжения в схеме приточного вентилятора №6" />
+        <Field Name="Inc1_ON" Type="BOOL" UUID="D60119034CF891093C6D50AE17B8DFC5" Comment="Ввод №1 включен" />
+        <Field Name="Inc1_OFF" Type="BOOL" UUID="1557F10A42609B00C6DABB8FDB8C95DA" Comment="Ввод №1 отлючен" />
+        <Field Name="Inc2_ON" Type="BOOL" UUID="5389FFBD45A1F9C1E173058884D22F42" Comment="Ввод №2 включен" />
+        <Field Name="Inc2_OFF" Type="BOOL" UUID="CFBEB58A4AC48647D59612AFE60348A9" Comment="Ввод №2 отлючен" />
+        <Field Name="SS_ON" Type="BOOL" UUID="D553216742AB2C492A552F99EBDE455E" Comment="Секционный выключатель включен" />
+        <Field Name="SS_OFF" Type="BOOL" UUID="72386A2F4718E66BE1FBDB89A3429081" Comment="Секционный выключатель отлючен" />
+        <Field Name="APK_ON" Type="BOOL" UUID="4930623C438CE4F331E90D8C0E07EF9D" Comment="АПК открыт" />
+        <Field Name="APK_OFF" Type="BOOL" UUID="BD3EF2414FB6FAFD81CFD4A23F847100" Comment="АПК закрыт" />
+        <Field Name="APK_Heat_ON" Type="BOOL" UUID="4FFA9D034D584358980DF28E1C06F340" Comment="АПК обогрев включен" />
+        <Field Name="N11GD100_1_WORK" Type="BOOL" UUID="466F9CCD4F5CDF7E7D08F3B78F56C8E1" Comment="11ГД-100 №1 в работе" />
+        <Field Name="N11GD100_1_FLT" Type="BOOL" UUID="BC7E75CA4D2211DBB401689A2970694C" Comment="Авария 11ГД-100 №1" />
+        <Field Name="N11GD100_2_WORK" Type="BOOL" UUID="0F63799741909DA599B63AB2631C058A" Comment="11ГД-100 №2 в работе" />
+        <Field Name="N11GD100_2_FLT" Type="BOOL" UUID="7212CDEA4D7F80FC2D2098B0127314AE" Comment="Авария 11ГД-100 №2" />
+        <Field Name="AC804_FLT" Type="BOOL" UUID="216694054B3E662F5B4620A5F81DD97D" Comment="АС-804 неисправна" />
+        <Field Name="AC804_WORK" Type="BOOL" UUID="5FEED0864309759D2839DC880E6B11FD" Comment="АС-804 в работе" />
+        <Field Name="AC804_REZ" Type="BOOL" UUID="7ABAB577488B95D6E601E2A14ED03481" Comment="АС-804 в резерве" />
+        <Field Name="TG2_FLT" Type="BOOL" UUID="A682533548473945B29FBA95CBA59787" Comment="Авария теплогенератора №2" />
+        <Field Name="P3_30_ON" Type="BOOL" UUID="3F1482EC49109826565549886C17F729" Comment="Насос РЗ-30 ГСМ включен" />
+        <Field Name="P3_30_KVR_AUTO" Type="BOOL" UUID="AE995CDB4D6832ADA4AF9A9550C916E7" Comment="КВР насоса РЗ-30 ГСМ в положении автомат" />
+        <Field Name="Ctrl24_TC_1" Type="BOOL" UUID="E86C561C46220A4EFADACDBFCCE4F793" Comment="Контроль 24 В ТС" />
+    </Fields>
+</Type>

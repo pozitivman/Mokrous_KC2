@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="Link" Kind="Struct" UUID="B1A462444BF27429F17C1698EB172F22">
+    <Fields>
+        <Field Name="Server1_N" Type="BOOL" UUID="DC84C5714BAA1029AD5A3888B9309ED5" />
+        <Field Name="Server2_N" Type="BOOL" UUID="4533888C4F57F41583BEECA327168144" />
+    </Fields>
+</Type>

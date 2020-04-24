@@ -97,7 +97,7 @@ AS36_str.Discr_PS := false;]]></ST>
 	as_MStruct.pid_struct[1].KD := 0.0;
 	as_MStruct.pid_struct[1].DB := 0.5;
 	
-	//'Контур ограничения давления газа на выходе нагнетателя (ограничение)
+	//Контур ограничения давления газа на выходе нагнетателя (ограничение)
 	as_MStruct.pid_struct[2].loop_type := 1;
 	as_MStruct.pid_struct[2].loop_num := 2;
 	as_MStruct.pid_struct[2].loop_enable := true;
@@ -108,7 +108,7 @@ AS36_str.Discr_PS := false;]]></ST>
 	as_MStruct.pid_struct[2].KD := 0.0;
 	as_MStruct.pid_struct[1].DB := 0.5;
 	
-	//'Контур ограничения степени сжатия нагнетателя (ограничение)
+	//Контур ограничения степени сжатия нагнетателя (ограничение)
 	as_MStruct.pid_struct[3].loop_type := 1;
 	as_MStruct.pid_struct[3].loop_num := 3;
 	as_MStruct.pid_struct[3].loop_enable := true;
@@ -157,14 +157,17 @@ gpa[3].run	:= Link_GPA9.run;	//	агрегат в магистрали
 
 // Задание на КХР со скады
 AS36_str.CV_Manual := krAPK.SP_manual;
+
 // Сюда привязываем команду "Разгрузка 36 крана"
 AS36_str.BTN_Unload := krAPK.BTN_Unload;
 krAPK.BTN_Unload := BOOL#0;
+
 // Сюда привязываем команду "Загрузка 36 крана"
 AS36_str.BTN_Load := krAPK.BTN_Load;
 krAPK.BTN_Load := BOOL#0;
+
 // Сюда привязываем обобщенный сигнал аварий и предупреждений по которому Кран 36 должен открываться
-AS36_str.Discr_PS := AOB_to_DO OR AOS_to_DO OR KOL_KXR_ON;
+//AS36_str.Discr_PS := AOB_to_DO OR AOS_to_DO OR KOL_KXR_ON;
 
 // отсюда забираем задание на 36 Кран
 krAPK.SP_algoritm := as_MStruct.CV;

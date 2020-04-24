@@ -12,7 +12,8 @@
         <Signal Name="@RESERVED" UUID="102B810649FEE074B6DC0A9945B92748" Type="BOOL" />
         <Signal Name="@RESERVE" UUID="CDE5C2514501A8052E7DA9AF41701589" Type="BOOL" />
         <Signal Name="@LICENSE" UUID="B604D1A849DB8D37FAE43BA7D8A1D9E8" Type="STRING" Usage="output" />
-        <Signal Name="@NODE_RUN" UUID="11CFC95F39784D0797BFCEAB0F98BF6A" Type="BOOL" />
-        <Signal Name="Global_PRU" UUID="D627C63A4ADDB955724056A1D5665279" Type="A494DA43412E0C9A1D1811BB0AD410F3" Usage="" Global="TRUE" Comment="Данные для ПРУ с ПЛК А1" />
+        <Signal Name="Global_PLC_A1_arch" UUID="1FB9B6B34442DDB2DD98A5B1EE3A3088" Type="D4C3241A48145D7692EBDF89EFEA33AA" Usage="" Global="TRUE" Comment="Передача данных из ПЛК А1 в архив" />
+        <Signal Name="Global_PLC_A3_arch" UUID="89E073734B4E8ACD9BFECFAE4A825E30" Type="B34CC93E440887710D257B8C5C502CCF" Usage="" Global="TRUE" Comment="Передача данных из ПЛК А3 в архив" />
+        <Signal Name="Global_PLC_A5_arch" UUID="75A7FA0E4AC3B1A1FE4D019B83C6348B" Type="0A1BDB684A638EFBDD2EAEB9BB5D3872" Usage="" Global="TRUE" Comment="Передача данных из ПЛК А5 в архив" />
     </InterfaceList>
 </SubAppType>

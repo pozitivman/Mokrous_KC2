@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TUstProtect" Kind="Struct" Comment="Уставки по защитам" UUID="1D15729C4A82C82FC6620FA28E510DD8">
+    <Fields>
+        <Field Name="Tg2kr8B_lo" Type="REAL" UUID="DF7FC6B643F69B7B5530D281F20E14B3" Comment="Нижняя предупредительная граница уставки по температуре газа за краном 8б" />
+        <Field Name="Tg2kr8B_hi" Type="REAL" UUID="BEFA0E7748E06AEF1002AB947A27EC51" Comment="Верхняя предупредительная граница уставки по температуре газа за краном 8б" />
+        <Field Name="Tg1kr8Bbis_lo" Type="REAL" UUID="C75034B743E2F28F3D1988B6572F8D36" Comment="Нижняя предупредительная граница уставки по температуре газа до крана 8б&apos;" />
+        <Field Name="Tg1kr8Bbis_hi" Type="REAL" UUID="AB5C66FB40F8E69104876E8BD0EDB795" Comment="Верхняя предупредительная граница уставки по температуре газа до крана 8б&apos;" />
+        <Field Name="Tg2plum_lo" Type="REAL" UUID="4C5265C24ED9105CBA5C1BB8E05E5B7C" Comment="Нижняя предупредительная граница уставки по температуре газа в выходном шлейфе" />
+        <Field Name="Tg2plum_hi" Type="REAL" UUID="916E5B894540F81776FF15897D8EB251" Comment="Верхняя предупредительная граница уставки по температуре газа в выходном шлейфе" />
+        <Field Name="Tg2gr2_lo" Type="REAL" UUID="9B5C64F744E491BB065532AF8F527C95" Comment="Нижняя предупредительная граница уставки по температуре газа на выходе группы 2" />
+        <Field Name="Tg2gr2_hi" Type="REAL" UUID="CF155CA1447EC76375AD5C9B6D3B6D43" Comment="Верхняя предупредительная граница уставки по температуре газа на выходе группы 2" />
+        <Field Name="Tg2kr8Bbis_lo" Type="REAL" UUID="D866505C41DC34DC5FBE9C997C02A2EF" Comment="Нижняя предупредительная граница уставки по температуре газа за краном 8б&apos;" />
+        <Field Name="Tg2kr8Bbis_hi" Type="REAL" UUID="F88C198B41DDBF47C277AA8A1B7EEF61" Comment="Верхняя предупредительная граница уставки по температуре газа за краном 8б&apos;" />
+        <Field Name="Pg2plum_lo" Type="REAL" UUID="C1AE126D498581146F3EC58B76C8165E" Comment="Нижняя предупредительная граница уставки по давлению газа в выходном шлейфе" />
+        <Field Name="Pg2plum_hi" Type="REAL" UUID="621CF85E4F273D11353D9893363E5C86" Comment="Верхняя предупредительная граница уставки по давлению газа в выходном шлейфе" />
+        <Field Name="Pg1kr8Bbis_lo" Type="REAL" UUID="028B8B4F423D9CB7F61CCA8EAAF41D88" Comment="Нижняя предупредительная граница уставки по давлению газа до крана 8б&apos;" />
+        <Field Name="Pg1kr8Bbis_hi" Type="REAL" UUID="5BED7D31479A4FCE4B607C9149BFB270" Comment="Верхняя предупредительная граница уставки по давлению газа до крана 8б&apos;" />
+    </Fields>
+</Type>

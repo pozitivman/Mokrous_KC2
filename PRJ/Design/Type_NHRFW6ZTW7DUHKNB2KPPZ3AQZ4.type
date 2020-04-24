@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TParams" Kind="Struct" UUID="1A8BFD724F51539282B12EA0FAD774CA">
+    <Fields>
+        <Field Name="dP1KR30B_hi" Type="BOOL" UUID="8CB1E4CC421DE9F340D159BE284CA2BC" Comment="Высокий перепад давления на кр30б" />
+        <Field Name="dP1KR30Bbis_hi" Type="BOOL" UUID="B635AAE741A44E63FC6E338515423B79" Comment="Высокий перепад давления на кр30б&apos;" />
+        <Field Name="Tg_hi2KC" Type="BOOL" UUID="1124A6EA41AA1076EB7ECD91C48961C2" Comment="Высокая температура газа на выходе КЦ" />
+        <Field Name="Tg_ala_hi2KC" Type="BOOL" UUID="425551E14C868462E42073B70F57A176" Comment="Аварийно высокая температура газа на выходе КЦ" />
+        <Field Name="Tg_ala_hi2KC_delay" Type="BOOL" UUID="23F3BFF846B00A4F8786ED85D06B5E69" Comment="Аварийно высокая температура газа на выходе КЦ с задержкой" />
+        <Field Name="Pg_hi2KC" Type="BOOL" UUID="ABC5312645DA585229B954A3F849D053" Comment="Высокое давление газа на выходе КЦ" />
+        <Field Name="Pg_ala_hi2KC" Type="BOOL" UUID="3C8A194947D8CA5FF68DA8A187DA9166" Comment="Аварийно высокое давление газа на выходе КЦ" />
+        <Field Name="Pg_ala_hi2KC_delay" Type="BOOL" UUID="610D7CCF417CEAC31CF68297A499F39A" Comment="Аварийно высокое давление газа на выходе КЦ с задержкой" />
+        <Field Name="OPG_KR6x_ON" Type="BOOL" UUID="B90A19134E7F325ADD0D83AFD5040760" Comment="Команда на открытие кранов 6б 6бр от АСУТП" />
+        <Field Name="AOB_ASUTP_CMD" Type="BOOL" UUID="7B9FAC9B4140C77DAE52D9B601C77B00" Comment="Команда АОБ от АСУТП" />
+    </Fields>
+</Type>

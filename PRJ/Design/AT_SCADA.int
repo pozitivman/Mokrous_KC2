@@ -37,12 +37,13 @@
         <Signal Name="No_Valid_CRC_Users" UUID="8F1C493146AFC84593F20294704AB7D0" Type="BOOL" Usage="" Comment="Ошибка подсчета CRC Users" />
         <Signal Name="No_Valid_CRC_PRJ" UUID="EDE2D6ED40E1CAA0EDC583AE7EF6AC5C" Type="BOOL" Usage="" Comment="Ошибка подсчета CRC Project.prj" />
         <Signal Name="PRU_Link" UUID="022A1F1F435BA098825A72A5BDD2DB82" Type="WORD" Usage="" Global="TRUE" />
+        <Signal Name="Global_gr" UUID="5A3B17E6492779BD13EBCEAA3CE4A3EC" Type="AC8339B94AE497B01F57F7AED31BD15A" Usage="" Global="TRUE" Comment="Переменные алгоритма группирования ГПА" />
         <Signal Name="Global_BTN" UUID="A84CA5C0430DB609139481B146CA8668" Type="3ABCD8324DFB751E8CAE308269A30199" Usage="" Global="TRUE" Comment="Scada. Кнопки" />
         <Signal Name="Global_TV" UUID="E37F54CF480B9AA86FBE08BEE0576DC8" Type="26B66B4D4EE8F7BAC7367CAE287EFD5F" Usage="" Global="TRUE" Comment="Scada. Данные для телевизора" />
         <Signal Name="Global_PRU" UUID="D627C63A4ADDB955724056A1D5665279" Type="A494DA43412E0C9A1D1811BB0AD410F3" Usage="" Global="TRUE" Comment="Данные для ПРУ с ПЛК А1" />
         <Signal Name="MD_Teh" UUID="0B617A85450621C50010FD98511DD573" Type="B1066836420771C14FD1EB91C198C6BF" Usage="" Global="TRUE" Comment="Scada. Состояние технологического оборудования КЦ-1" />
-        <Signal Name="MD" UUID="F4CF3A0944A2991310A498BED28C8649" Type="1DF4539A4B2B6C683F0E61880D3B02D3" Usage="" Global="TRUE" Comment="Режим работы КЦ" />
-        <Signal Name="Need_accept" UUID="DE3AC025443566893D57548FC3ABA03D" Type="2E4A332540A1301050E82DA7343EBAF9" Usage="" Global="TRUE" Comment="Нужно подтверждение от оператора" />
+        <Signal Name="MD" UUID="F4CF3A0944A2991310A498BED28C8649" Type="26D9A9F246C72153DDCE3B89A90CB414" Usage="" Global="TRUE" Comment="Режим работы КЦ" />
+        <Signal Name="Need_accept" UUID="DE3AC025443566893D57548FC3ABA03D" Type="2E4A332540A1301050E82DA7343EBAF9" Usage="" Global="TRUE" Comment="Подтверждение от оператора следующего действия или разрешение на управление в ДУ" />
         <Signal Name="Global_Ust" UUID="E24358B549B23798D26976A4B39AC579" Type="EA2FF984430F497B5477979FED08C455" InitialValue="(717157704459BC7ACCCAE7B8A563E48B:=5.5,FD06ADB84A764A01D164E6ADD306B85E:=5.65000009536743,C077A4D54E20F1B2B3423F94547DD29D:=85,12E2DC3E4C600923527E56B92A6D8267:=30,0D0C90994D8DE8BC112A8DBF3C6419B2:=1.20000004768372,BE4EA7594C6D9BF803138EBE6D3C5D0F:=1.70000004768372)" Usage="" Global="TRUE" Storage="persistent" Comment="Scada. Уставки" />
         <Signal Name="local_SP" UUID="49468B68438ACA2971511CB0C5FCB4CB" Type="REAL" Usage="" Global="TRUE" />
         <Signal Name="SHKU17_AI_HMI" UUID="42A1498A4F5B44FC6886F28D137AC4B7" Type="1CD269284420A42ABADE98957ED48892" Usage="" Global="TRUE" Comment="ШКУ-17. AI. Данные для HMI" />

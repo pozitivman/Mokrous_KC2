@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TAllow_DA" Kind="Struct" UUID="2289B8F64A7BF46E47AC4C8B345B4D2B">
+    <Fields>
+        <Field Name="kr7" Type="BOOL" UUID="0F457E054036C5CF13FB1BA1ADB6D35E" Comment="Разрешение ДУ кран 7" />
+        <Field Name="kr8" Type="BOOL" UUID="CD33601C4F60B7049BA06C9DE7AE65B0" Comment="Разрешение ДУ кран 8" />
+        <Field Name="kr8s" Type="BOOL" UUID="2F49050E4B7E7097B443249C8C3ECF25" Comment="Разрешение ДУ кран 8&apos;" />
+        <Field Name="kr8A" Type="BOOL" UUID="C22628034BE016C7267D8CB30C2AFEF6" Comment="Разрешение ДУ кран 8А" />
+        <Field Name="kr8As" Type="BOOL" UUID="B71F5D5D41CA89DE9FB9669AF9CED24B" Comment="Разрешение ДУ кран 8А&apos;" />
+        <Field Name="kr30" Type="BOOL" UUID="26EAAE50490EF28FB65078860867C9B5" Comment="Разрешение ДУ кран 30" />
+        <Field Name="kr30V" Type="BOOL" UUID="C47EAC464A96549EB99EF795E6EF24E1" Comment="Разрешение ДУ кран 30в" />
+        <Field Name="kr17" Type="BOOL" UUID="624FD9D949768ECC6A63EC9DFC5ACE34" Comment="Разрешение ДУ кран 17" />
+        <Field Name="kr18" Type="BOOL" UUID="81BED9B84F135A3D8192AB8BC9C51D5C" Comment="Разрешение ДУ кран 18" />
+        <Field Name="kr18A" Type="BOOL" UUID="E181305D4468283764BEB3BD86E8EE95" Comment="Разрешение ДУ кран 18" />
+        <Field Name="krUOK1" Type="BOOL" UUID="ADD39B8E40158E8B3B997B8854C84C12" Comment="Разрешение ДУ кран ЮОК-1 (1290-1)" />
+        <Field Name="krUOK2" Type="BOOL" UUID="5F18E42D4FA196DE3035AC921ADE9B1C" Comment="Разрешение ДУ кран ЮОК-2 (1290-2)" />
+        <Field Name="krUOK3" Type="BOOL" UUID="6648738D47D8FF9C7EA716B47A74DBC0" Comment="Разрешение ДУ кран ЮОК-3 (1290-3)" />
+        <Field Name="krSOK2" Type="BOOL" UUID="DAA7B3C5416217836F89409C2C982041" Comment="Разрешение ДУ кран СОК-2 (1292-1)" />
+        <Field Name="krL1" Type="BOOL" UUID="DB766FAE4DE571F57C46F6A3485D8CB1" Comment="Разрешение ДУ кран Л-1 (1292-2)" />
+        <Field Name="krSOK3" Type="BOOL" UUID="B41586FF4D6445CED4FD99ADC62C01FB" Comment="Разрешение ДУ кран СОК-3 (1292-3)" />
+    </Fields>
+</Type>

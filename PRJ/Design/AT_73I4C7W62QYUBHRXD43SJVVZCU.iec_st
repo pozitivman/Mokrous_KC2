@@ -345,13 +345,13 @@ APL(INT#133, SHKU17_A1_DI_HMI.rez_06, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_a
 APL(INT#134, SHKU17_A1_DI_HMI.rez_07, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.rez_07);   // Резерв
 APL(INT#135, SHKU17_A1_DI_HMI.Ctrl24_TC_1, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ctrl24_TC_1);   // Контроль 24 В ТС №1
 
-APL(INT#136, SHKU17_AI_PLC.Pg2plum.PV >= Global_Ust.Pg2KC_H_PS and SHKU17_AI_PLC.Pg2plum.PV < Global_Ust.Pg2KC_H_AS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg2plum_over_PS);   // Предупреждение - Давление газа на выходном шлейфе >= 5,5 МПа
-APL(INT#137, SHKU17_AI_PLC.Pg2plum.PV >= Global_Ust.Pg2KC_H_AS, BOOL#1, BOOL#0, LREAL#1, INT#7, APS_TASK_alg, SHKU17_A1_APS.Pg2plum_over_AS);   // Авария - Давление газа на выходном шлейфе >= 5,65 МПа
-APL(INT#138, SHKU17_AI_PLC.Tozh.PV >= Global_Ust.Tozh_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tozh_H_PS);   // Температура охлаждающей жидкости - высокая
-APL(INT#139, SHKU17_AI_PLC.Ttg.PV <= Global_Ust.Ttg_L_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ttg_L_PS);   // Температура топливного газа низкая
-APL(INT#140, SHKU17_AI_PLC.Ttg.PV >= Global_Ust.Ttg_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ttg_H_PS);   // Температура топливного газа высокая
-APL(INT#141, SHKU17_AI_PLC.Ptg.PV <= Global_Ust.Ptg_L_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ptg_L_PS);   // Давление топливного  газа низкое
-APL(INT#142, SHKU17_AI_PLC.Ptg.PV >= Global_Ust.Ptg_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ptg_H_PS);   // Давление топливного  газа высокое
+//APL(INT#136, SHKU17_AI_PLC.Pg2plum.PV >= Global_Ust.Pg2KC_H_PS and SHKU17_AI_PLC.Pg2plum.PV < Global_Ust.Pg2KC_H_AS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Pg2plum_over_PS);   // Предупреждение - Давление газа на выходном шлейфе >= 5,5 МПа
+//APL(INT#137, SHKU17_AI_PLC.Pg2plum.PV >= Global_Ust.Pg2KC_H_AS, BOOL#1, BOOL#0, LREAL#1, INT#7, APS_TASK_alg, SHKU17_A1_APS.Pg2plum_over_AS);   // Авария - Давление газа на выходном шлейфе >= 5,65 МПа
+//APL(INT#138, SHKU17_AI_PLC.Tozh.PV >= Global_Ust.Tozh_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Tozh_H_PS);   // Температура охлаждающей жидкости - высокая
+//APL(INT#139, SHKU17_AI_PLC.Ttg.PV <= Global_Ust.Ttg_L_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ttg_L_PS);   // Температура топливного газа низкая
+//APL(INT#140, SHKU17_AI_PLC.Ttg.PV >= Global_Ust.Ttg_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ttg_H_PS);   // Температура топливного газа высокая
+//APL(INT#141, SHKU17_AI_PLC.Ptg.PV <= Global_Ust.Ptg_L_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ptg_L_PS);   // Давление топливного  газа низкое
+//APL(INT#142, SHKU17_AI_PLC.Ptg.PV >= Global_Ust.Ptg_H_PS, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.Ptg_H_PS);   // Давление топливного  газа высокое
 
 APL(INT#143, PRU_Link > WORD#0, BOOL#1, BOOL#0, LREAL#1, INT#1, APS_TASK_alg, SHKU17_A1_APS.PRU_Link_flt); //Ошибка связи с ПРУ
 APL(INT#144, Global_PRU.Btn_AOS, BOOL#1, BOOL#0, LREAL#0, INT#6, APS_TASK_alg, SHKU17_A1_APS.PRU_btn_AOS);	//Кнопка АОС с ПРУ

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TGlobalState" Kind="Struct" UUID="26D9A9F246C72153DDCE3B89A90CB414">
+    <Fields>
+        <Field Name="PREV" Type="INT" UUID="51F7DAC248B161308FD568AFE0519D6D" Comment="Предыдущий режим" />
+        <Field Name="NO_ACTIV" Type="BOOL" UUID="B33618E44983198DD7BBA682112FB9D3" Comment="Нет активных режимов" />
+        <Field Name="STOPS" Type="BOOL" UUID="66AD2D62444C582726F049ACB7E7EE64" Comment="Режимы останова" />
+        <Field Name="AO_KC" Type="BOOL" UUID="0F240F304C1A769C07FE4AB5FC92CF99" Comment="Режимы АО КЦ" />
+        <Field Name="GPA_KOL" Type="BOOL" UUID="F287CA7E4EFFF9AAAE3BA0887E1C4D34" Comment="ГПА Кольцо" />
+        <Field Name="GPA_START" Type="BOOL" UUID="1CE49D394A2E71CCB2F5129361A690F6" Comment="ГПА Пуск" />
+        <Field Name="GPA_MAG" Type="BOOL" UUID="92B33EB44D9E798C12460182B0EB69A1" Comment="ГПА Магистраль" />
+        <Field Name="GPA_RDY" Type="BOOL" UUID="BD44C6214D89A6FEB8D0F290BDBB9FCD" Comment="ГПА Готов к пуску" />
+        <Field Name="NOT_MORE_PRTY" Type="BOOL" UUID="8A87B77644B48145EA3751B10A551FD6" Comment="Отсутствие более приоритетных режимов" />
+        <Field Name="KC_KOL" Type="BOOL" UUID="D8BED7E34392B19329793493F190E3D8" Comment="КЦ Кольцо" />
+        <Field Name="KC_START" Type="BOOL" UUID="C6FC99114C6B6DF5F9C102B94BA109FB" Comment="КЦ Пуск" />
+        <Field Name="KC_OFF" Type="BOOL" UUID="5330C7444C0B5CE0AC539BB14EF7CEA2" Comment="КЦ Отключен" />
+        <Field Name="KC_REP" Type="BOOL" UUID="CDA18D8C485DCDB4D1D2D99FE397D2A6" Comment="КЦ Ремонт" />
+        <Field Name="KC_REZ" Type="BOOL" UUID="18689EE042A9C0F827F55DB30452DF2E" Comment="КЦ Резерв" />
+        <Field Name="KC_REV" Type="BOOL" UUID="38AFC98242C5CF39E65FB6ACD30124E9" Comment="КЦ Режим Основной - 0/Реверсивный - 1" />
+        <Field Name="KC_MAG" Type="BOOL" UUID="CA8558824F12CFD6602278B0594166E1" Comment="КЦ Магистраль" />
+        <Field Name="KC_MAG_REV" Type="BOOL" UUID="E8537CA6445A8B92EB141C867A64F2BE" Comment="КЦ Магистраль Реверс" />
+        <Field Name="KC_NO" Type="BOOL" UUID="131969C44D204163082679960846448E" Comment="КЦ Нормальный останов" />
+        <Field Name="KC_AUTO" Type="BOOL" UUID="936773E94D9B6D0DAEC1C5B2D0FB730C" Comment="КЦ Ручной - 0/Автоматический - 1" />
+        <Field Name="KC_UNDEF" Type="BOOL" UUID="2309EAB94CBCD09B49F9829D82F95182" Comment="КЦ Неопределённый режим" />
+        <Field Name="EAO_KC" Type="BOOL" UUID="AD90216640C7F5116EA590A1D0889AA7" Comment="КЦ Экстренный останов" />
+        <Field Name="EAO_KS" Type="BOOL" UUID="AF2C3B174BED453FCA2EF9B3B01B259F" Comment="КС Экстренный останов" />
+        <Field Name="KC_AOS" Type="BOOL" UUID="6BBEDCBA441657211AC6BD8D3A39DDDC" Comment="КЦ Аварийный останов со стравливанием" />
+        <Field Name="KC_AOB" Type="BOOL" UUID="17CDAB3645C78ECE80F57AAF692CE1EE" Comment="КЦ Аварийный останов без стравливания" />
+        <Field Name="STOP_G" Type="BOOL" UUID="9941F3F34098451627EB2E898C989F01" Comment="КЦ остановлен (контур заполнен газом)" />
+        <Field Name="STOP" Type="BOOL" UUID="DC539B72434557BCF48788BAF86A5C6F" Comment="КЦ остановлен (контур без газа)" />
+        <Field Name="PPU_FIRE" Type="BOOL" UUID="5AD4FC674F804171F09411ACEB169869" Comment="Проверка предпусковых условий: Пожар" />
+        <Field Name="PPU_ZAG" Type="BOOL" UUID="3C3C13D74FF0CA5453F27E8A8C7FF02C" Comment="Проверка предпусковых условий: Загазованность 20%" />
+        <Field Name="PPU_RDY_TO_START" Type="BOOL" UUID="55A9B9E6476540DDF14CFEB39A9E3B87" Comment="Проверка предпусковых условий: Готовность к пуску" />
+        <Field Name="INT_KC_MAG" Type="BOOL" UUID="68F62E9D49079E925661D8A1DC20BDC6" Comment="Вспомогательный флаг: КЦ МАгистраль" />
+        <Field Name="INT_GR1_WORK" Type="BOOL" UUID="399B3FE749569ED96CEF6E931B3ACC1C" Comment="Вспомогательный флаг: Группа 1 в работе" />
+        <Field Name="INT_GR2_WORK" Type="BOOL" UUID="9FBF5DA0415D8ADFFA00B8B2D13F3240" Comment="Вспомогательный флаг: Группа 2 в работе" />
+        <Field Name="INT_MAG1" Type="BOOL" UUID="718285774BDD2B6D8E6484B0DA5B1FA7" Comment="Вспомогательный флаг: Магистраль 1" />
+        <Field Name="INT_MAG2" Type="BOOL" UUID="5D8C52084A679DAF85F8C891DDAB3EDF" Comment="Вспомогательный флаг: Магистраль 2" />
+    </Fields>
+</Type>

@@ -68,5 +68,7 @@
         <Field Name="Command_NOB" Type="BOOL" UUID="47EC35F34628CD2590082898C9D1E30E" Comment="Команда в ГПА. НОБ" />
         <Field Name="Command_NOS" Type="BOOL" UUID="CC7608F340C9CB7ACC8162B4B1A5EA83" Comment="Команда в ГПА. НОС" />
         <Field Name="Command_APK" Type="BOOL" UUID="A6979C8040707B1F0BB5748DE3377083" Comment="Команда в ГПА. АПК" />
+        <Field Name="Fire" Type="BOOL" UUID="04FE39A24DFA89DF624AEC8E7BDAA828" Comment="Пожар ГПА" />
+        <Field Name="Zag_20p" Type="BOOL" UUID="72E7AACE478A2542EE31538A5F308F02" Comment="Загазованность CH4 20%" />
     </Fields>
 </Type>

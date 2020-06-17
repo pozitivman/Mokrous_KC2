@@ -8,6 +8,7 @@
         <SubApp Name="AppSrvMain" Type="786DBB07480B8E40C286EDBFF0DB8E7A" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="09958B4F409EE6FF4A0962BC5271EE1C" />
         <SubApp Name="AppAS36" Type="D79E7BF540479A9DAF7FCA840EE6B024" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="511FDFB74C9E771821EEB79C4119625C" />
         <SubApp Name="AppEregistrator" Type="BFE42B784439DB59947C89B7D7175913" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="81D5881F47246E4CC1ADEEBABF917B47" />
+        <SubApp Name="AppEregistratot_IB" Type="2DD41B024E595FF7B27767B47E7724B9" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="81D5881F47246E4CC1ADEEBABF917B47" />
         <SubApp Name="AppElogger" Type="8A7EC74842A756A35F5B5D894359B4CD" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="42D2453A4BF7C658E57CF4BAC21CE59C" />
         <SubApp Name="AppDRV_PRU" Type="DE0A541C4739A852C6736EA59F732647" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="F36B35D040789AFC1B9A38B14AD9E686" />
         <SubApp Name="AppArchive" Type="5583A5154E338C4D51B753A97B2C98BA" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="06A1720B40B1D16D107B5C993A56F6F2" />

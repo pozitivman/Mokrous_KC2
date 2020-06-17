@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_IS" Kind="Struct" Comment="Структура по ИБ" UUID="5F8BE35044E475170D88C5AD88003473">
+    <Fields>
+        <Field Name="CRC" Type="UDINT" UUID="F601A6F44D77DDB70C6F4FA723DB2D25" ArraySize="5" Comment="Контрольные суммы" />
+        <Field Name="UserTime" Type="TIME" UUID="CF50DC014E524D10B37B4C81D0BE5D95" ArraySize="5" Comment="Время работы пользователей" />
+    </Fields>
+</Type>

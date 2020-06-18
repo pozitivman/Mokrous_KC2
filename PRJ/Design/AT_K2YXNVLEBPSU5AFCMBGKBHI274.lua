@@ -601,8 +601,8 @@ signals = {
 ['SHKU17_A3_APS.AOS_kr30B_open_not_accept']	=	{text =  'Отмена от оператора открытия окна управления краном 30б при АОС',		src = source_aps.e, class = event_aps.w},
 ['SHKU17_A3_APS.AOS_kr30Bbis_open_accept']	=	{text =  'Подтверждение оператором открытия окна управления краном 30б бис при АОС',		src = source_aps.e, class = event_aps.w},
 ['SHKU17_A3_APS.AOS_kr30Bbis_open_not_accept']	=	{text =  'Отмена от оператора открытия окна управления краном 30б бис при АОС',		src = source_aps.e, class = event_aps.w},
---вставить АПС АО в группе 1
---вставить АПС АО в группе 2
+['SHKU17_A3_APS.AO_In_Group1']	=	{text =  'АО в группе 1',		src = source_aps.e, class = event_aps.w},
+['SHKU17_A3_APS.AO_In_Group2']	=	{text =  'АО в группе 2',		src = source_aps.e, class = event_aps.w},
 ['SHKU17_A3_APS.Tg_hi2KC']	=	{text =  'Высокая температура газа на выходе КЦ',		src = source_aps.e, class = event_aps.w},
 ['SHKU17_A3_APS.Tg_ala_hi2KC']	=	{text =  'Аварийно высокая температура газа на выходе КЦ',		src = source_aps.e, class = event_aps.w},
 ['SHKU17_A3_APS.Tg_ala_hi2KC_delay']	=	{text =  'Аварийно высокая температура газа на выходе КЦ',		src = source_aps.e, class = event_aps.a},

@@ -39,7 +39,7 @@ DO_fb();
 //AO_fb();
 
 // Данные для архива
-//Arch_fb();
+Arch_fb();
 
 // Данные для ПРУ
 //PRU_fb();
@@ -241,52 +241,28 @@ SHKU17_A5_DO_raw.DO_5_16	:=	SHKU17_A5_DO_HMI.nc_11;]]></ST>
         </Folder>
         <FunctionBlock UUID="FC3659584F7E9A1B032F2EB588B15E81" Name="Archive">
             <Variables />
-            <ST><![CDATA[(*
-Archive_CTU1.dP_BFS1    := CTU1_AI_PLC.dP_BFS1.PV;
-Archive_CTU1.dP_BFS2    := CTU1_AI_PLC.dP_BFS2.PV;
-Archive_CTU1.dP_BFS3    := CTU1_AI_PLC.dP_BFS3.PV;
-Archive_CTU1.dP_BFS4    := CTU1_AI_PLC.dP_BFS4.PV;
-Archive_CTU1.dP_BFS5    := CTU1_AI_PLC.dP_BFS5.PV;
-Archive_CTU1.dP_BFS6    := CTU1_AI_PLC.dP_BFS6.PV;
-Archive_CTU1.dP_BFS     := CTU1_AI_PLC.dP_BFS.PV;
-Archive_CTU1.T_E3       := CTU1_AI_PLC.T_E3.PV;
-Archive_CTU1.P_E3       := CTU1_AI_PLC.P_E3.PV;
-Archive_CTU1.L_E3       := CTU1_AI_PLC.L_E3.PV;
-Archive_CTU1.T_E2       := CTU1_AI_PLC.T_E2.PV;
-Archive_CTU1.P_g_inKC1  := CTU1_AI_PLC.P_g_inKC1.PV;
-Archive_CTU1.P_g_outKC1 := CTU1_AI_PLC.P_g_outKC1.PV;
-Archive_CTU1.T_air      := CTU1_AI_PLC.T_air.PV;
-Archive_CTU1.T_ground   := CTU1_AI_PLC.T_ground.PV;
-Archive_CTU1.P_air      := CTU1_AI_PLC.P_air.PV;
-Archive_CTU1.T_air_BB   := CTU1_AI_PLC.T_air_BB.PV;
-Archive_CTU1.Reserve_01 := CTU1_AI_PLC.Reserve_01.PV;
-Archive_CTU1.Reserve_02 := CTU1_AI_PLC.Reserve_02.PV;
-Archive_CTU1.Reserve_03 := CTU1_AI_PLC.Reserve_03.PV;
-Archive_CTU1.Reserve_04 := CTU1_AI_PLC.Reserve_04.PV;
-Archive_CTU1.Reserve_05 := CTU1_AI_PLC.Reserve_05.PV;
-Archive_CTU1.Reserve_06 := CTU1_AI_PLC.Reserve_06.PV;
-Archive_CTU1.Reserve_07 := CTU1_AI_PLC.Reserve_07.PV;
-Archive_CTU1.Reserve_08 := CTU1_AI_PLC.Reserve_08.PV;
-Archive_CTU1.Reserve_09 := CTU1_AI_PLC.Reserve_09.PV;
-Archive_CTU1.Reserve_10 := CTU1_AI_PLC.Reserve_10.PV;
-Archive_CTU1.Reserve_11 := CTU1_AI_PLC.Reserve_11.PV;
-Archive_CTU1.Reserve_12 := CTU1_AI_PLC.Reserve_12.PV;
-Archive_CTU1.L_min_E2   := CTU1_AI_PLC.L_min_E2.PV;
-Archive_CTU1.L_max_E2   := CTU1_AI_PLC.L_max_E2.PV;
-Archive_CTU1.L_min_E3   := CTU1_AI_PLC.L_min_E3.PV;
-Archive_CTU1.L_max_E3   := CTU1_AI_PLC.L_max_E3.PV;
-Archive_CTU1.dP_KR7     := CTU1_AI_PLC.dP_KR7.PV;
-Archive_CTU1.dP_KR7a    := CTU1_AI_PLC.dP_KR7a.PV;
-Archive_CTU1.dP_KR8     := CTU1_AI_PLC.dP_KR8.PV;
-Archive_CTU1.dP_KRG_20_5:= CTU1_AI_PLC.dP_KRG_20_5.PV;
-Archive_CTU1.Reserve_13 := CTU1_AI_PLC.Reserve_13.PV;
-Archive_CTU1.Reserve_14 := CTU1_AI_PLC.Reserve_14.PV;
-Archive_CTU1.Reserve_15 := CTU1_AI_PLC.Reserve_15.PV;
-Archive_CTU1.U_main     := CTU1_AI_PLC.U_main.PV;
-Archive_CTU1.U_backup   := CTU1_AI_PLC.U_backup.PV;
-Archive_CTU1.Reserve_16 := CTU1_AI_PLC.Reserve_16.PV;
-Archive_CTU1.Reserve_17 := CTU1_AI_PLC.Reserve_17.PV;
-*)]]></ST>
+            <ST><![CDATA[Global_PLC_A5_arch.kr6BR_OFF:=SHKU17_A5_DI_HMI.kr6BR_OFF; //Кран 6БР Закрыт
+Global_PLC_A5_arch.kr6BR_ON:=SHKU17_A5_DI_HMI.kr6BR_ON; //Кран 6БР Открыт
+Global_PLC_A5_arch.kr6BR_IM:=SHKU17_A5_DI_HMI.kr6BR_IM; //Кран 6БР Контроль цепи ИМ
+Global_PLC_A5_arch.kr6BR_VK:=SHKU17_A5_DI_HMI.kr6BR_VK; //Кран 6БР Контроль цепи ВК
+Global_PLC_A5_arch.krA_OFF:=SHKU17_A5_DI_HMI.krA_OFF; //Кран А Закрыт
+Global_PLC_A5_arch.krA_ON:=SHKU17_A5_DI_HMI.krA_ON; //Кран А Открыт
+Global_PLC_A5_arch.krA_IM:=SHKU17_A5_DI_HMI.krA_IM; //Кран А Контроль цепи ИМ
+Global_PLC_A5_arch.krA_VK:=SHKU17_A5_DI_HMI.krA_VK; //Кран А Контроль цепи ВК
+Global_PLC_A5_arch.krC_OFF:=SHKU17_A5_DI_HMI.krC_OFF; //Кран С Закрыт
+Global_PLC_A5_arch.krC_ON:=SHKU17_A5_DI_HMI.krC_ON; //Кран С Открыт
+Global_PLC_A5_arch.krC_IM:=SHKU17_A5_DI_HMI.krC_IM; //Кран С Контроль цепи ИМ
+Global_PLC_A5_arch.krC_VK:=SHKU17_A5_DI_HMI.krC_VK; //Кран С Контроль цепи ВК
+Global_PLC_A5_arch.kr6_9_OFF:=SHKU17_A5_DI_HMI.kr6_9_OFF; //Кран 6-9 Закрыт
+Global_PLC_A5_arch.kr6_9_ON:=SHKU17_A5_DI_HMI.kr6_9_ON; //Кран 6-9 Открыт
+Global_PLC_A5_arch.kr6_9_IM:=SHKU17_A5_DI_HMI.kr6_9_IM; //Кран 6-9 Контроль цепи ИМ
+Global_PLC_A5_arch.kr6_9_VK:=SHKU17_A5_DI_HMI.kr6_9_VK; //Кран 6-9 Контроль цепи ВК
+
+Global_PLC_A5_arch.Ind_AOB:=SHKU17_A5_DO_HMI.Ind_AOB; //Индикация АО КЦ бс
+Global_PLC_A5_arch.Ind_AOS:=SHKU17_A5_DO_HMI.Ind_AOS; //Индикация АО КЦ сс
+Global_PLC_A5_arch.Sound_warn:=SHKU17_A5_DO_HMI.Sound_warn; //Предупредительный звуковой сигнал
+Global_PLC_A5_arch.Sound_ala:=SHKU17_A5_DO_HMI.Sound_ala; //Аварийный звуковой сигнал
+Global_PLC_A5_arch.PLC_flt:=SHKU17_A5_DO_HMI.PLC_flt; //Неисправность контроллера]]></ST>
         </FunctionBlock>
         <FunctionBlock UUID="C8FD4D8B4E6B016D906A7BB168892D92" Name="block_ALG">
             <Variables>

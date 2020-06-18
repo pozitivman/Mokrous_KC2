@@ -43,7 +43,7 @@ APS_fb();
 //AO_fb();
 
 // Данные для архива
-//Arch_fb();
+Arch_fb();
 
 // Данные для ПРУ
 PRU_fb();
@@ -1305,8 +1305,8 @@ APL(INT#348, Global_BTN.AOS_kr30B_open_accept, BOOL#1, BOOL#0, LREAL#0, INT#3, A
 APL(INT#349, Global_BTN.AOS_kr30B_open_not_accept, BOOL#1, BOOL#0, LREAL#0, INT#3, APS_TASK_alg, SHKU17_A3_APS.AOS_kr30B_open_not_accept);	//Отмена от оператора открытия окна управления краном 30б при АОС
 APL(INT#350, Global_BTN.AOS_kr30Bbis_open_accept, BOOL#1, BOOL#0, LREAL#0, INT#3, APS_TASK_alg, SHKU17_A3_APS.AOS_kr30Bbis_open_accept);	//Подтверждение оператором открытия окна управления краном 30б' при АОС
 APL(INT#351, Global_BTN.AOS_kr30Bbis_open_not_accept, BOOL#1, BOOL#0, LREAL#0, INT#3, APS_TASK_alg, SHKU17_A3_APS.AOS_kr30Bbis_open_not_accept);	//Отмена от оператора открытия окна управления краном 30б' при АОС
-//APL(INT#352, , BOOL#1, BOOL#0, LREAL#0, INT#3, APS_TASK_alg, SHKU17_A3_APS.AO_In_Group1);	//АО в группе 1
-//APL(INT#353, , BOOL#1, BOOL#0, LREAL#0, INT#3, APS_TASK_alg, SHKU17_A3_APS.AO_In_Group2);	//АО в группе 2
+APL(INT#352, SHKU17_A3_DI_HMI.GPA7_S1Gr, BOOL#1, BOOL#0, LREAL#0, INT#3, APS_TASK_alg, SHKU17_A3_APS.AO_In_Group1);	//АО в группе 1
+APL(INT#353, SHKU17_A3_DI_HMI.GPA8_S1Gr or SHKU17_A3_DI_HMI.GPA9_S1Gr, BOOL#1, BOOL#0, LREAL#0, INT#3, APS_TASK_alg, SHKU17_A3_APS.AO_In_Group2);	//АО в группе 2
 APL(INT#354, Global_params.Tg_hi2KC, BOOL#1, BOOL#0, LREAL#0, INT#3, APS_TASK_alg, SHKU17_A3_APS.Tg_hi2KC);	//Высокая температура газа на выходе КЦ
 APL(INT#355, Global_params.Tg_ala_hi2KC, BOOL#1, BOOL#0, LREAL#0, INT#3, APS_TASK_alg, SHKU17_A3_APS.Tg_ala_hi2KC);	//Аварийно высокая температура газа на выходе КЦ
 APL(INT#356, Global_params.Tg_ala_hi2KC_delay, BOOL#1, BOOL#0, LREAL#0, INT#3, APS_TASK_alg, SHKU17_A3_APS.Tg_ala_hi2KC_delay);	//Аварийно высокая температура газа на выходе КЦ с задержкой
@@ -2358,52 +2358,183 @@ Global_TV.LG_System_status_str := temp_status_string;
         </Folder>
         <FunctionBlock UUID="FC3659584F7E9A1B032F2EB588B15E81" Name="Archive">
             <Variables />
-            <ST><![CDATA[(*
-Archive_CTU1.dP_BFS1    := CTU1_AI_PLC.dP_BFS1.PV;
-Archive_CTU1.dP_BFS2    := CTU1_AI_PLC.dP_BFS2.PV;
-Archive_CTU1.dP_BFS3    := CTU1_AI_PLC.dP_BFS3.PV;
-Archive_CTU1.dP_BFS4    := CTU1_AI_PLC.dP_BFS4.PV;
-Archive_CTU1.dP_BFS5    := CTU1_AI_PLC.dP_BFS5.PV;
-Archive_CTU1.dP_BFS6    := CTU1_AI_PLC.dP_BFS6.PV;
-Archive_CTU1.dP_BFS     := CTU1_AI_PLC.dP_BFS.PV;
-Archive_CTU1.T_E3       := CTU1_AI_PLC.T_E3.PV;
-Archive_CTU1.P_E3       := CTU1_AI_PLC.P_E3.PV;
-Archive_CTU1.L_E3       := CTU1_AI_PLC.L_E3.PV;
-Archive_CTU1.T_E2       := CTU1_AI_PLC.T_E2.PV;
-Archive_CTU1.P_g_inKC1  := CTU1_AI_PLC.P_g_inKC1.PV;
-Archive_CTU1.P_g_outKC1 := CTU1_AI_PLC.P_g_outKC1.PV;
-Archive_CTU1.T_air      := CTU1_AI_PLC.T_air.PV;
-Archive_CTU1.T_ground   := CTU1_AI_PLC.T_ground.PV;
-Archive_CTU1.P_air      := CTU1_AI_PLC.P_air.PV;
-Archive_CTU1.T_air_BB   := CTU1_AI_PLC.T_air_BB.PV;
-Archive_CTU1.Reserve_01 := CTU1_AI_PLC.Reserve_01.PV;
-Archive_CTU1.Reserve_02 := CTU1_AI_PLC.Reserve_02.PV;
-Archive_CTU1.Reserve_03 := CTU1_AI_PLC.Reserve_03.PV;
-Archive_CTU1.Reserve_04 := CTU1_AI_PLC.Reserve_04.PV;
-Archive_CTU1.Reserve_05 := CTU1_AI_PLC.Reserve_05.PV;
-Archive_CTU1.Reserve_06 := CTU1_AI_PLC.Reserve_06.PV;
-Archive_CTU1.Reserve_07 := CTU1_AI_PLC.Reserve_07.PV;
-Archive_CTU1.Reserve_08 := CTU1_AI_PLC.Reserve_08.PV;
-Archive_CTU1.Reserve_09 := CTU1_AI_PLC.Reserve_09.PV;
-Archive_CTU1.Reserve_10 := CTU1_AI_PLC.Reserve_10.PV;
-Archive_CTU1.Reserve_11 := CTU1_AI_PLC.Reserve_11.PV;
-Archive_CTU1.Reserve_12 := CTU1_AI_PLC.Reserve_12.PV;
-Archive_CTU1.L_min_E2   := CTU1_AI_PLC.L_min_E2.PV;
-Archive_CTU1.L_max_E2   := CTU1_AI_PLC.L_max_E2.PV;
-Archive_CTU1.L_min_E3   := CTU1_AI_PLC.L_min_E3.PV;
-Archive_CTU1.L_max_E3   := CTU1_AI_PLC.L_max_E3.PV;
-Archive_CTU1.dP_KR7     := CTU1_AI_PLC.dP_KR7.PV;
-Archive_CTU1.dP_KR7a    := CTU1_AI_PLC.dP_KR7a.PV;
-Archive_CTU1.dP_KR8     := CTU1_AI_PLC.dP_KR8.PV;
-Archive_CTU1.dP_KRG_20_5:= CTU1_AI_PLC.dP_KRG_20_5.PV;
-Archive_CTU1.Reserve_13 := CTU1_AI_PLC.Reserve_13.PV;
-Archive_CTU1.Reserve_14 := CTU1_AI_PLC.Reserve_14.PV;
-Archive_CTU1.Reserve_15 := CTU1_AI_PLC.Reserve_15.PV;
-Archive_CTU1.U_main     := CTU1_AI_PLC.U_main.PV;
-Archive_CTU1.U_backup   := CTU1_AI_PLC.U_backup.PV;
-Archive_CTU1.Reserve_16 := CTU1_AI_PLC.Reserve_16.PV;
-Archive_CTU1.Reserve_17 := CTU1_AI_PLC.Reserve_17.PV;
-*)]]></ST>
+            <ST><![CDATA[Global_PLC_A3_arch.Fire1GN_KC2:=SHKU17_A3_DI_HMI.Fire1GN_KC2; //Пожар в ГН КЦ 2
+Global_PLC_A3_arch.Fire1mb_KC2:=SHKU17_A3_DI_HMI.Fire1mb_KC2; //Пожар в маслобаке КЦ 2
+Global_PLC_A3_arch.Fire1_AC804:=SHKU17_A3_DI_HMI.Fire1_AC804; //Пожар в АС-804
+Global_PLC_A3_arch.Fire1_ESSN:=SHKU17_A3_DI_HMI.Fire1_ESSN; //Пожар в ЭССН
+Global_PLC_A3_arch.Fire1_RU04:=SHKU17_A3_DI_HMI.Fire1_RU04; //Пожар РУ-0,4 кВ
+Global_PLC_A3_arch.Fire1_Kot:=SHKU17_A3_DI_HMI.Fire1_Kot; //Пожар в котельной
+Global_PLC_A3_arch.Zag1_GN_KC2_10p:=SHKU17_A3_DI_HMI.Zag1_GN_KC2_10p; //Загазованность в ГН КЦ 2 10%
+Global_PLC_A3_arch.Zag1_GN_KC2_20p:=SHKU17_A3_DI_HMI.Zag1_GN_KC2_20p; //Загазованность в ГН КЦ 2 20%
+Global_PLC_A3_arch.Zag1_PU_KC2_10p:=SHKU17_A3_DI_HMI.Zag1_PU_KC2_10p; //Загазованность в ПУ КЦ 2 10%
+Global_PLC_A3_arch.Zag1_PU_KC2_20p:=SHKU17_A3_DI_HMI.Zag1_PU_KC2_20p; //Загазованность в ПУ КЦ 2  20%
+Global_PLC_A3_arch.Zag1_MZ_ESSN_10p:=SHKU17_A3_DI_HMI.Zag1_MZ_ESSN_10p; //Загазованность в машзале ЭССН 10%
+Global_PLC_A3_arch.Zag1_MZ_ESSN_20p:=SHKU17_A3_DI_HMI.Zag1_MZ_ESSN_20p; //Загазованность в машзале ЭССН  20%
+Global_PLC_A3_arch.Zag_CH4_KOT_10p:=SHKU17_A3_DI_HMI.Zag_CH4_KOT_10p; //Загазованность СН4  в котельной  10%
+Global_PLC_A3_arch.Zag_CH4_KOT_20p:=SHKU17_A3_DI_HMI.Zag_CH4_KOT_20p; //Загазованность СН4  в котельной 20%
+Global_PLC_A3_arch.Zag_CO_KOT_20mg:=SHKU17_A3_DI_HMI.Zag_CO_KOT_20mg; //Загазованность СО в котельной 20мг/м3
+Global_PLC_A3_arch.Zag_CO_KOT_100mg:=SHKU17_A3_DI_HMI.Zag_CO_KOT_100mg; //Загазованность СО в котельной 100мг/м3
+Global_PLC_A3_arch.Neispr_SPO_KZ:=SHKU17_A3_DI_HMI.Neispr_SPO_KZ; //Неисправность системы ПО и КЗ
+Global_PLC_A3_arch.ComSh_AC804_inc1_Q1_ON:=SHKU17_A3_DI_HMI.ComSh_AC804_inc1_Q1_ON; //Щит связи АС-804. Ввод №1: контактор №1 включен
+Global_PLC_A3_arch.ComSh_AC804_inc1_Q1_OFF:=SHKU17_A3_DI_HMI.ComSh_AC804_inc1_Q1_OFF; //Щит связи АС-804. Ввод №1: контактор №1 отключен
+Global_PLC_A3_arch.ComSh_AC804_inc2_Q2_ON:=SHKU17_A3_DI_HMI.ComSh_AC804_inc2_Q2_ON; //Щит связи АС-804. Ввод №2: контактор №2 включен
+Global_PLC_A3_arch.ComSh_AC804_inc2_Q2_OFF:=SHKU17_A3_DI_HMI.ComSh_AC804_inc2_Q2_OFF; //Щит связи АС-804. Ввод №2: контактор №2 отключен
+Global_PLC_A3_arch.Call_KC2:=SHKU17_A3_DI_HMI.Call_KC2; //Вызов в цех №2
+Global_PLC_A3_arch.Ala_KOT:=SHKU17_A3_DI_HMI.Ala_KOT; //Авария в котельной
+Global_PLC_A3_arch.PL_KC2_ON:=SHKU17_A3_DI_HMI.PL_KC2_ON; //Периметральное освещение КЦ 2 включено
+Global_PLC_A3_arch.Ctrl24_TC_2:=SHKU17_A3_DI_HMI.Ctrl24_TC_2; //Контроль 24 В ТС
+Global_PLC_A3_arch.GPA7_AS_ON:=SHKU17_A3_DI_HMI.GPA7_AS_ON; //ГПА №7 Включить звуковую сигнализацию
+Global_PLC_A3_arch.GPA8_AS_ON:=SHKU17_A3_DI_HMI.GPA8_AS_ON; //ГПА №8 Включить звуковую сигнализацию
+Global_PLC_A3_arch.GPA9_AS_ON:=SHKU17_A3_DI_HMI.GPA9_AS_ON; //ГПА №9 Включить звуковую сигнализацию
+Global_PLC_A3_arch.GPA7_S1Gr:=SHKU17_A3_DI_HMI.GPA7_S1Gr; //ГПА №7 Останов в группе
+Global_PLC_A3_arch.GPA8_S1Gr:=SHKU17_A3_DI_HMI.GPA8_S1Gr; //ГПА №8 Останов в группе
+Global_PLC_A3_arch.GPA9_S1Gr:=SHKU17_A3_DI_HMI.GPA9_S1Gr; //ГПА №9 Останов в группе
+Global_PLC_A3_arch.Ctrl24_TC_3:=SHKU17_A3_DI_HMI.Ctrl24_TC_3; //Контроль 24 В ТС
+Global_PLC_A3_arch.RU04_ESSN_inc1_Upres:=SHKU17_A3_DI_HMI.RU04_ESSN_inc1_Upres; //РУ-0,4кВ ЭССН. Ввод №1: наличие напряжения
+Global_PLC_A3_arch.RU04_ESSN_inc2_Upres:=SHKU17_A3_DI_HMI.RU04_ESSN_inc2_Upres; //РУ-0,4кВ ЭССН. Ввод №2: наличие напряжения
+Global_PLC_A3_arch.RU04_ESSN_ASM_B_Upres:=SHKU17_A3_DI_HMI.RU04_ESSN_ASM_B_Upres; //РУ-0,4кВ ЭССН. Сборные шины: наличие напряжения
+Global_PLC_A3_arch.AGRS_Tech_FLT:=SHKU17_A3_DI_HMI.AGRS_Tech_FLT; //Технологическая авария АГРС
+Global_PLC_A3_arch.AGRS_Door_open:=SHKU17_A3_DI_HMI.AGRS_Door_open; //Дверь АГРС открыта
+Global_PLC_A3_arch.Inc1_LEP3_Ulost:=SHKU17_A3_DI_HMI.Inc1_LEP3_Ulost; //Ввод 1 (ЛЭП №3):  отсутствие напряжения
+Global_PLC_A3_arch.Inc1_LEP3_VMP10_ON:=SHKU17_A3_DI_HMI.Inc1_LEP3_VMP10_ON; //Ввод 1 (ЛЭП №3):  ВМП-10 включен
+Global_PLC_A3_arch.Inc1_LEP3_VMP10_OFF:=SHKU17_A3_DI_HMI.Inc1_LEP3_VMP10_OFF; //Ввод 1 (ЛЭП №3):  ВМП-10 отключен
+Global_PLC_A3_arch.TR2_TKU_VMP10_ON:=SHKU17_A3_DI_HMI.TR2_TKU_VMP10_ON; //Трансформатор №2 ТКУ: ВМП-10 включен
+Global_PLC_A3_arch.TR2_TKU_VMP10_OFF:=SHKU17_A3_DI_HMI.TR2_TKU_VMP10_OFF; //Трансформатор №2 ТКУ: ВМП-10 отключен
+Global_PLC_A3_arch.LEP_EXZ_Sev_VMP10_ON:=SHKU17_A3_DI_HMI.LEP_EXZ_Sev_VMP10_ON; //ЛЭП –ЭХЗ «Север»:  ВМП-10 включен
+Global_PLC_A3_arch.LEP_EXZ_Sev_VMP10_OFF:=SHKU17_A3_DI_HMI.LEP_EXZ_Sev_VMP10_OFF; //ЛЭП –ЭХЗ «Север»:  ВМП-10 отключен
+Global_PLC_A3_arch.Inc2_LEP17_Ulost:=SHKU17_A3_DI_HMI.Inc2_LEP17_Ulost; //Ввод 2 (ЛЭП №17):  отсутствие напряжения
+Global_PLC_A3_arch.Inc2_LEP17_VMP10_ON:=SHKU17_A3_DI_HMI.Inc2_LEP17_VMP10_ON; //Ввод 2 (ЛЭП №17):  ВМП-10 включен
+Global_PLC_A3_arch.Inc2_LEP17_VMP10_OFF:=SHKU17_A3_DI_HMI.Inc2_LEP17_VMP10_OFF; //Ввод 2 (ЛЭП №17):  ВМП-10 отключен
+Global_PLC_A3_arch.TR1_TKU_VMP10_ON:=SHKU17_A3_DI_HMI.TR1_TKU_VMP10_ON; //Трансформатор №1 ТКУ: ВМП-10 включен
+Global_PLC_A3_arch.TR1_TKU_VMP10_OFF:=SHKU17_A3_DI_HMI.TR1_TKU_VMP10_OFF; //Трансформатор №1 ТКУ: ВМП-10 отключен
+Global_PLC_A3_arch.LEP_EXZ_Ug_VMP10_ON:=SHKU17_A3_DI_HMI.LEP_EXZ_Ug_VMP10_ON; //ЛЭП –ЭХЗ «Юг»:  ВМП-10 включен
+Global_PLC_A3_arch.LEP_EXZ_Ug_VMP10_OFF:=SHKU17_A3_DI_HMI.LEP_EXZ_Ug_VMP10_OFF; //ЛЭП –ЭХЗ «Юг»:  ВМП-10 отключен
+Global_PLC_A3_arch.MG1_VMP10_ON:=SHKU17_A3_DI_HMI.MG1_VMP10_ON; //МГ-№1: ВМП-10 включен
+Global_PLC_A3_arch.MG1_VMP10_OFF:=SHKU17_A3_DI_HMI.MG1_VMP10_OFF; //МГ-№1: ВМП-10 отключен
+Global_PLC_A3_arch.MG2_VMP10_ON:=SHKU17_A3_DI_HMI.MG2_VMP10_ON; //МГ-№2: ВМП-10 включен
+Global_PLC_A3_arch.MG2_VMP10_OFF:=SHKU17_A3_DI_HMI.MG2_VMP10_OFF; //МГ-№2: ВМП-10 отключен
+Global_PLC_A3_arch.SS_10KV_VMP10_ON:=SHKU17_A3_DI_HMI.SS_10KV_VMP10_ON; //Секционный выключатель 10кВ: ВМП-10 включен
+Global_PLC_A3_arch.SS_10KV_VMP10_OFF:=SHKU17_A3_DI_HMI.SS_10KV_VMP10_OFF; //Секционный выключатель 10кВ: ВМП-10 отключен
+Global_PLC_A3_arch.Ctrl24_TC_4:=SHKU17_A3_DI_HMI.Ctrl24_TC_4; //Контроль 24 В ТС
+Global_PLC_A3_arch.Ctrl_OP_AC220:=SHKU17_A3_DI_HMI.Ctrl_OP_AC220; //Контроль основного питания ~220 В
+Global_PLC_A3_arch.Ctrl_RP_DC200:=SHKU17_A3_DI_HMI.Ctrl_RP_DC200; //Контроль резервного питания 220 В пост.
+Global_PLC_A3_arch.AP_ON:=SHKU17_A3_DI_HMI.AP_ON; //Автоматы питания включены
+Global_PLC_A3_arch.SHKU17_Doors_open:=SHKU17_A3_DI_HMI.SHKU17_Doors_open; //Двери ШКУ-17 открыты
+Global_PLC_A3_arch.Ctrl_Isp_Raz:=SHKU17_A3_DI_HMI.Ctrl_Isp_Raz; //Контроль исправности разрядников
+Global_PLC_A3_arch.Ispr_OIP24DC_IC:=SHKU17_A3_DI_HMI.Ispr_OIP24DC_IC; //Исправность осн. ИП =24 В внутр. цепей
+Global_PLC_A3_arch.Ispr_RIP24DC_IC:=SHKU17_A3_DI_HMI.Ispr_RIP24DC_IC; //Исправность рез. ИП =24 В внутр. цепей
+Global_PLC_A3_arch.Ispr_OIP24DC_AI:=SHKU17_A3_DI_HMI.Ispr_OIP24DC_AI; //Исправность осн. ИП =24 В AI
+Global_PLC_A3_arch.Ispr_RIP24DC_AI:=SHKU17_A3_DI_HMI.Ispr_RIP24DC_AI; //Исправность рез. ИП =24 В AI
+Global_PLC_A3_arch.Ispr_OIP24DC_DI:=SHKU17_A3_DI_HMI.Ispr_OIP24DC_DI; //Исправность осн. ИП =24 В DI
+Global_PLC_A3_arch.Ispr_RIP24DC_DI:=SHKU17_A3_DI_HMI.Ispr_RIP24DC_DI; //Исправность рез. ИП =24 В DI
+Global_PLC_A3_arch.Ispr_OIP24DC_DO:=SHKU17_A3_DI_HMI.Ispr_OIP24DC_DO; //Исправность осн. ИП =24 В DO
+Global_PLC_A3_arch.Ispr_RIP24DC_DO:=SHKU17_A3_DI_HMI.Ispr_RIP24DC_DO; //Исправность рез. ИП =24 В DO
+Global_PLC_A3_arch.Ispr_OIP24DC_BEAO:=SHKU17_A3_DI_HMI.Ispr_OIP24DC_BEAO; //Исправность осн. ИП =24 В БЭАО
+Global_PLC_A3_arch.Ispr_RIP24DC_BEAO:=SHKU17_A3_DI_HMI.Ispr_RIP24DC_BEAO; //Исправность рез. ИП =24 В БЭАО
+Global_PLC_A3_arch.EAO_KC_PU:=SHKU17_A3_DI_HMI.EAO_KC_PU; //ЭАО КЦ с ПУ
+Global_PLC_A3_arch.EAO_KC_PU_KCD:=SHKU17_A3_DI_HMI.EAO_KC_PU_KCD; //ЭАО КЦ с ПУ.КЦД
+Global_PLC_A3_arch.AOB_KC_PU:=SHKU17_A3_DI_HMI.AOB_KC_PU; //АО КЦ бс с ПУ
+Global_PLC_A3_arch.AOB_KC_PU_KCD:=SHKU17_A3_DI_HMI.AOB_KC_PU_KCD; //АО КЦ бс с ПУ.КЦД
+Global_PLC_A3_arch.AOS_KC_PU:=SHKU17_A3_DI_HMI.AOS_KC_PU; //АО КЦ сс с ПУ
+Global_PLC_A3_arch.AOS_KC_PU_KCD:=SHKU17_A3_DI_HMI.AOS_KC_PU_KCD; //АО КЦ сс с ПУ.КЦД
+Global_PLC_A3_arch.EAO_KC_PEAO:=SHKU17_A3_DI_HMI.EAO_KC_PEAO; //ЭАО КЦ с ПЭАО
+Global_PLC_A3_arch.EAO_KC_PEAO_KCD:=SHKU17_A3_DI_HMI.EAO_KC_PEAO_KCD; //ЭАО КЦ с ПЭАО.КЦД
+Global_PLC_A3_arch.Ctr_P_KR:=SHKU17_A3_DI_HMI.Ctr_P_KR; //Контроль питания кранов
+Global_PLC_A3_arch.BEAO_ready:=SHKU17_A3_DI_HMI.BEAO_ready; //Готовность БЭАО
+Global_PLC_A3_arch.PU_ready:=SHKU17_A3_DI_HMI.PU_ready; //Готовность ПУ
+Global_PLC_A3_arch.Ask_sound:=SHKU17_A3_DI_HMI.Ask_sound; //Съем звука (ПУ)
+Global_PLC_A3_arch.RU_KR:=SHKU17_A3_DI_HMI.RU_KR; //РУ кранами
+Global_PLC_A3_arch.Neispr_P_SHARM:=SHKU17_A3_DI_HMI.Neispr_P_SHARM; //Неиспр. питания шкафа АРМ
+Global_PLC_A3_arch.Pinv_SHARM_pres:=SHKU17_A3_DI_HMI.Pinv_SHARM_pres; //Наличие пит. ШАРМ от инв.
+Global_PLC_A3_arch.AP_SHARM_ON:=SHKU17_A3_DI_HMI.AP_SHARM_ON; //Автоматы пит. ШАРМ включены
+Global_PLC_A3_arch.Doors_SHARM_OPEN:=SHKU17_A3_DI_HMI.Doors_SHARM_OPEN; //Двери ШАРМ открыты
+Global_PLC_A3_arch.Neispr_P_US:=SHKU17_A3_DI_HMI.Neispr_P_US; //Неиспр. пит. устр. серверного
+Global_PLC_A3_arch.Ppres_Inv_US:=SHKU17_A3_DI_HMI.Ppres_Inv_US; //Наличие пит. УС от инв.
+Global_PLC_A3_arch.AP_US_ON:=SHKU17_A3_DI_HMI.AP_US_ON; //Автоматы пит. УС включены
+Global_PLC_A3_arch.Doors_US_OPEN:=SHKU17_A3_DI_HMI.Doors_US_OPEN; //Двери УС открыты
+Global_PLC_A3_arch.Neispr_OP_SHSO:=SHKU17_A3_DI_HMI.Neispr_OP_SHSO; //Неиспр. осн. пит. ШСО
+Global_PLC_A3_arch.Neispr_RP_SHSO:=SHKU17_A3_DI_HMI.Neispr_RP_SHSO; //Неиспр. рез. пит. ШСО
+Global_PLC_A3_arch.AP_SHSO_ON:=SHKU17_A3_DI_HMI.AP_SHSO_ON; //Автоматы пит. ШСО включены
+Global_PLC_A3_arch.Doors_SHSO_OPEN:=SHKU17_A3_DI_HMI.Doors_SHSO_OPEN; //Двери ШСО открыты
+Global_PLC_A3_arch.kr30B_OFF:=SHKU17_A3_DI_HMI.kr30B_OFF; //Кран 30Б Закрыт
+Global_PLC_A3_arch.kr30B_ON:=SHKU17_A3_DI_HMI.kr30B_ON; //Кран 30Б Открыт
+Global_PLC_A3_arch.kr30B_IM:=SHKU17_A3_DI_HMI.kr30B_IM; //Кран 30Б Контроль цепи ИМ
+Global_PLC_A3_arch.kr30B_VK:=SHKU17_A3_DI_HMI.kr30B_VK; //Кран 30Б Контроль цепи ВК
+Global_PLC_A3_arch.kr30Bbis_OFF:=SHKU17_A3_DI_HMI.kr30Bbis_OFF; //Кран 30Ббис Закрыт
+Global_PLC_A3_arch.kr30Bbis_ON:=SHKU17_A3_DI_HMI.kr30Bbis_ON; //Кран 30Ббис Открыт
+Global_PLC_A3_arch.kr30Bbis_IM:=SHKU17_A3_DI_HMI.kr30Bbis_IM; //Кран 30Ббис Контроль цепи ИМ
+Global_PLC_A3_arch.kr30Bbis_VK:=SHKU17_A3_DI_HMI.kr30Bbis_VK; //Кран 30Ббис Контроль цепи ВК
+Global_PLC_A3_arch.kr7B_OFF:=SHKU17_A3_DI_HMI.kr7B_OFF; //Кран 7Б Закрыт
+Global_PLC_A3_arch.kr7B_ON:=SHKU17_A3_DI_HMI.kr7B_ON; //Кран 7Б Открыт
+Global_PLC_A3_arch.kr7B_IM:=SHKU17_A3_DI_HMI.kr7B_IM; //Кран 7Б Контроль цепи ИМ
+Global_PLC_A3_arch.kr7B_VK:=SHKU17_A3_DI_HMI.kr7B_VK; //Кран 7Б Контроль цепи ВК
+Global_PLC_A3_arch.kr7Bzak_OFF:=SHKU17_A3_DI_HMI.kr7Bzak_OFF; //Кран 7Б зак Закрыт
+Global_PLC_A3_arch.kr7Bzak_ON:=SHKU17_A3_DI_HMI.kr7Bzak_ON; //Кран 7Б зак Открыт
+Global_PLC_A3_arch.kr7Bzak_IM:=SHKU17_A3_DI_HMI.kr7Bzak_IM; //Кран 7Б зак Контроль цепи ИМ
+Global_PLC_A3_arch.kr7Bzak_VK:=SHKU17_A3_DI_HMI.kr7Bzak_VK; //Кран 7Б зак Контроль цепи ВК
+Global_PLC_A3_arch.kr8B_OFF:=SHKU17_A3_DI_HMI.kr8B_OFF; //Кран 8Б Закрыт
+Global_PLC_A3_arch.kr8B_ON:=SHKU17_A3_DI_HMI.kr8B_ON; //Кран 8Б Открыт
+Global_PLC_A3_arch.kr8B_IM:=SHKU17_A3_DI_HMI.kr8B_IM; //Кран 8Б Контроль цепи ИМ
+Global_PLC_A3_arch.kr8B_VK:=SHKU17_A3_DI_HMI.kr8B_VK; //Кран 8Б Контроль цепи ВК
+Global_PLC_A3_arch.kr8Bbis_OFF:=SHKU17_A3_DI_HMI.kr8Bbis_OFF; //Кран 8Ббис Закрыт
+Global_PLC_A3_arch.kr8Bbis_ON:=SHKU17_A3_DI_HMI.kr8Bbis_ON; //Кран 8Ббис Открыт
+Global_PLC_A3_arch.kr8Bbis_IM:=SHKU17_A3_DI_HMI.kr8Bbis_IM; //Кран 8Ббис Контроль цепи ИМ
+Global_PLC_A3_arch.kr8Bbis_VK:=SHKU17_A3_DI_HMI.kr8Bbis_VK; //Кран 8Ббис Контроль цепи ВК
+Global_PLC_A3_arch.kr17B_OFF:=SHKU17_A3_DI_HMI.kr17B_OFF; //Кран 17Б Закрыт
+Global_PLC_A3_arch.kr17B_ON:=SHKU17_A3_DI_HMI.kr17B_ON; //Кран 17Б Открыт
+Global_PLC_A3_arch.kr17B_IM:=SHKU17_A3_DI_HMI.kr17B_IM; //Кран 17Б Контроль цепи ИМ
+Global_PLC_A3_arch.kr17B_VK:=SHKU17_A3_DI_HMI.kr17B_VK; //Кран 17Б Контроль цепи ВК
+Global_PLC_A3_arch.kr18B_OFF:=SHKU17_A3_DI_HMI.kr18B_OFF; //Кран 18Б Закрыт
+Global_PLC_A3_arch.kr18B_ON:=SHKU17_A3_DI_HMI.kr18B_ON; //Кран 18Б Открыт
+Global_PLC_A3_arch.kr18B_IM:=SHKU17_A3_DI_HMI.kr18B_IM; //Кран 18Б Контроль цепи ИМ
+Global_PLC_A3_arch.kr18B_VK:=SHKU17_A3_DI_HMI.kr18B_VK; //Кран 18Б Контроль цепи ВК
+Global_PLC_A3_arch.kr6B_OFF:=SHKU17_A3_DI_HMI.kr6B_OFF; //Кран 6Б Закрыт
+Global_PLC_A3_arch.kr6B_ON:=SHKU17_A3_DI_HMI.kr6B_ON; //Кран 6Б Открыт
+Global_PLC_A3_arch.kr6B_IM:=SHKU17_A3_DI_HMI.kr6B_IM; //Кран 6Б Контроль цепи ИМ
+Global_PLC_A3_arch.kr6B_VK:=SHKU17_A3_DI_HMI.kr6B_VK; //Кран 6Б Контроль цепи ВК
+
+Global_PLC_A3_arch.APK_heat_ON:=SHKU17_A3_DO_HMI.APK_heat_ON; //Обогрев АПК  включить
+Global_PLC_A3_arch.P3_30_ON:=SHKU17_A3_DO_HMI.P3_30_ON; //Насос РЗ-30 ГСМ включить
+Global_PLC_A3_arch.PL_KC2_ON:=SHKU17_A3_DO_HMI.PL_KC2_ON; //Периметральное освещение КЦ 2 включить
+Global_PLC_A3_arch.GPA7_FLT:=SHKU17_A3_DO_HMI.GPA7_FLT; //ГПА №7 Авария КЦ
+Global_PLC_A3_arch.GPA8_FLT:=SHKU17_A3_DO_HMI.GPA8_FLT; //ГПА №8 Авария КЦ
+Global_PLC_A3_arch.GPA9_FLT:=SHKU17_A3_DO_HMI.GPA9_FLT; //ГПА №9 Авария КЦ
+Global_PLC_A3_arch.GPA7_KC2_READY:=SHKU17_A3_DO_HMI.GPA7_KC2_READY; //ГПА №7 Цех готов к пуску
+Global_PLC_A3_arch.GPA7_AO_IN_GR:=SHKU17_A3_DO_HMI.GPA7_AO_IN_GR; //ГПА №7 АО в группе
+Global_PLC_A3_arch.GPA7_KR6_ON:=SHKU17_A3_DO_HMI.GPA7_KR6_ON; //ГПА №7 Кран 6 открыт
+Global_PLC_A3_arch.GPA8_KC2_READY:=SHKU17_A3_DO_HMI.GPA8_KC2_READY; //ГПА №8 Цех готов к пуску
+Global_PLC_A3_arch.GPA8_AO_IN_GR:=SHKU17_A3_DO_HMI.GPA8_AO_IN_GR; //ГПА №8 АО в группе
+Global_PLC_A3_arch.GPA8_KR6_ON:=SHKU17_A3_DO_HMI.GPA8_KR6_ON; //ГПА №8 Кран 6 открыт
+Global_PLC_A3_arch.GPA9_KC2_READY:=SHKU17_A3_DO_HMI.GPA9_KC2_READY; //ГПА №9 Цех готов к пуску
+Global_PLC_A3_arch.GPA9_AO_IN_GR:=SHKU17_A3_DO_HMI.GPA9_AO_IN_GR; //ГПА №9 АО в группе
+Global_PLC_A3_arch.GPA9_KR6_ON:=SHKU17_A3_DO_HMI.GPA9_KR6_ON; //ГПА №9 Кран 6 открыт
+Global_PLC_A3_arch.kr30B_OFF_1:=SHKU17_A3_DO_HMI.kr30B_OFF; //Кран 30Б закрыть
+Global_PLC_A3_arch.kr30B_ON_1:=SHKU17_A3_DO_HMI.kr30B_ON; //Кран 30Б открыть
+Global_PLC_A3_arch.kr30Bbis_OFF_1:=SHKU17_A3_DO_HMI.kr30Bbis_OFF; //Кран  30Б’ закрыть
+Global_PLC_A3_arch.kr30Bbis_ON_1:=SHKU17_A3_DO_HMI.kr30Bbis_ON; //Кран  30Б’ открыть
+Global_PLC_A3_arch.kr7B_OFF_1:=SHKU17_A3_DO_HMI.kr7B_OFF; //Кран 7Б закрыть
+Global_PLC_A3_arch.kr7B_ON_1:=SHKU17_A3_DO_HMI.kr7B_ON; //Кран 7Б открыть
+Global_PLC_A3_arch.kr7Bzak_OFF_1:=SHKU17_A3_DO_HMI.kr7Bzak_OFF; //Кран 7Б зак закрыть
+Global_PLC_A3_arch.kr7Bzak_ON_1:=SHKU17_A3_DO_HMI.kr7Bzak_ON; //Кран 7Б зак открыть
+Global_PLC_A3_arch.kr8B_OFF_1:=SHKU17_A3_DO_HMI.kr8B_OFF; //Кран 8Б закрыть
+Global_PLC_A3_arch.kr8B_ON_1:=SHKU17_A3_DO_HMI.kr8B_ON; //Кран 8Б открыть
+Global_PLC_A3_arch.kr8Bbis_OFF_1:=SHKU17_A3_DO_HMI.kr8Bbis_OFF; //Кран 8Б’ закрыть
+Global_PLC_A3_arch.kr8Bbis_ON_1:=SHKU17_A3_DO_HMI.kr8Bbis_ON; //Кран 8Б’ открыть
+Global_PLC_A3_arch.kr17B_OFF_1:=SHKU17_A3_DO_HMI.kr17B_OFF; //Кран  17Б закрыть
+Global_PLC_A3_arch.kr17B_ON_1:=SHKU17_A3_DO_HMI.kr17B_ON; //Кран  17Б открыть
+Global_PLC_A3_arch.kr18B_OFF_1:=SHKU17_A3_DO_HMI.kr18B_OFF; //Кран 18Б закрыть
+Global_PLC_A3_arch.kr18B_ON_1:=SHKU17_A3_DO_HMI.kr18B_ON; //Кран 18Б открыть
+Global_PLC_A3_arch.kr6B_OFF_1:=SHKU17_A3_DO_HMI.kr6B_OFF; //Кран 6Б закрыть
+Global_PLC_A3_arch.kr6B_ON_1:=SHKU17_A3_DO_HMI.kr6B_ON; //Кран 6Б открыть
+Global_PLC_A3_arch.kr6BR_OFF:=SHKU17_A3_DO_HMI.kr6BR_OFF; //Кран 6БР закрыть
+Global_PLC_A3_arch.kr6BR_ON:=SHKU17_A3_DO_HMI.kr6BR_ON; //Кран 6БР открыть
+Global_PLC_A3_arch.krA_OFF:=SHKU17_A3_DO_HMI.krA_OFF; //Кран А закрыть
+Global_PLC_A3_arch.krA_ON:=SHKU17_A3_DO_HMI.krA_ON; //Кран А открыть
+Global_PLC_A3_arch.krC_OFF:=SHKU17_A3_DO_HMI.krC_OFF; //Кран С закрыть
+Global_PLC_A3_arch.krC_ON:=SHKU17_A3_DO_HMI.krC_ON; //Кран С открыть
+Global_PLC_A3_arch.kr6_9_OFF:=SHKU17_A3_DO_HMI.kr6_9_OFF; //Кран 6-9 закрыть
+Global_PLC_A3_arch.kr6_9_ON:=SHKU17_A3_DO_HMI.kr6_9_ON; //Кран 6-9 открыть
+]]></ST>
         </FunctionBlock>
         <FunctionBlock UUID="0DEB5E1642B7CA983E2A3DB75DD05F50" Name="block_Link">
             <Variables />

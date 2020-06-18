@@ -12,7 +12,6 @@
         <Signal Name="@RESERVED" UUID="D236B8984088837AA58AD58AF2D51451" Type="BOOL" />
         <Signal Name="@RESERVE" UUID="B1A5865544AEB6876D00E69D526F7CE1" Type="BOOL" />
         <Signal Name="@LICENSE" UUID="7ABE6CAE4E500DA1BD801C8C1744AE2F" Type="STRING" Usage="output" />
-        <Signal Name="@NODE_RUN" UUID="E54C12A544DED3D9C6DDD985013E18EF" Type="BOOL" />
         <Signal Name="FirstScan_MAIN" UUID="977565C940802CE6729B789E817806B9" Type="BOOL" InitialValue="TRUE" Usage="" Comment="Флаг первого цикла" />
         <Signal Name="Deblock" UUID="852E395443D13B70FEC0C8BFCFA8EA50" Type="BOOL" Usage="" Comment="Деблокировка" />
         <Signal Name="Kvitir" UUID="BC34D30948E312AE66A8E5A457C6BF58" Type="BOOL" Usage="" Comment="Квитирование" />
@@ -101,5 +100,6 @@
         <Signal Name="Link_GPA8" UUID="ECB06B874F653551D2F07AABD1199D56" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-8" />
         <Signal Name="Link_GPA9" UUID="EC623095491859B9E8936FA043C744CD" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-9" />
         <Signal Name="Global_params" UUID="5908548A4499D932688ED7A046D37AA8" Type="1A8BFD724F51539282B12EA0FAD774CA" Usage="" Global="TRUE" Comment="Глобальные переменные" />
+        <Signal Name="Global_PLC_A3_arch" UUID="89E073734B4E8ACD9BFECFAE4A825E30" Type="B34CC93E440887710D257B8C5C502CCF" Usage="" Global="TRUE" Comment="Передача данных из ПЛК А3 в архив" />
     </InterfaceList>
 </SubAppType>

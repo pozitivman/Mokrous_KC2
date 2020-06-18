@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.SQL v. 1.1 >
+<Configuration>
+    <Nodes>
+        <Node Location="172.16.35.13" Database="siem" DBType="Postgresql" User="siem" Password="siem">
+            <Group Name="Query_1" Query="INSERT INTO CLIENTEVENTS (Timestamp, Severity, EventID, EventName, UserName, ClientAddress, ClientHostName, ServerAddress, ServerHostName, TargetUserName, TargetAddress, TargetHostName, Detail, Result) VALUES (%1, %3, %4, %5, %6, %7, %8, %9, %10, %11, %12, %13, %14, %15);" />
+            <Group Name="Query_2" Query="INSERT INTO ACCIDENTEVENTS (ID,Timestamp, EventNumber, Severity, EventID, EventName, ServerAddress, ServerHostName, SignalSource, SignalValue, SignalStringValue, SignalValueDimension, SignalValueUnit, SignalType, AlarmState, OperatorNode, OperatorName, ThresholdValue, SignalDeviation, Result, Detail ) VALUES (%3, %21, %5, %11, %3, %4, %9, %10, %13, %16, %14, %17, %18, %15, %1, %7, %6, %20, %12, %8, %2)" />
+        </Node>
+    </Nodes>
+    <Common ReserveInactive="0" />
+    <Crossconnect>
+        <Connection ItemName="IBE.StartWrihtSQL" Device="" Channel="Group.update" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.00AC021F4E81BF11B1EEAD95ADD06999" />
+        <Connection ItemName="IBE.Timestamp" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.F969B9254588E17FE9B40FAEBADB4047" />
+        <Connection ItemName="IBE.EventNumber" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.CEA6F5FE4D80F9142E57319A10280832" />
+        <Connection ItemName="IBE.Severity" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.BA7B74784743DEB8BF386E84F5EC51A4" />
+        <Connection ItemName="IBE.EventID" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.034BBE2144D1DA04B8B1C9BBED602958" />
+        <Connection ItemName="IBE.EventName" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.C3D3DF4E408513DEA9DD378B636F534B" />
+        <Connection ItemName="IBE.UserName" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.5A6436694D12ED596D944EA98C006C2E" />
+        <Connection ItemName="IBE.ClientAddress" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.A7EB35E848B35A4317361E91BB1EB564" />
+        <Connection ItemName="IBE.ClientHostName" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.A47A7BD74295F14AADD408A3CFEB4961" />
+        <Connection ItemName="IBE.ServerAddress" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.796D92DF4A29FFDFD4C8D289472B9936" />
+        <Connection ItemName="IBE.ServerHostName" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.D6DAF1584465D5FF306D42BB806DA894" />
+        <Connection ItemName="IBE.TargetUserName" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.1341D12E4469D8A32D66AD83A66DC0A4" />
+        <Connection ItemName="IBE.TargetAddress" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.9EF2C1C14B115E4FA41935A128E35AF6" />
+        <Connection ItemName="IBE.TargetHostName" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.422F765847B3ED4E716133988EC372A5" />
+        <Connection ItemName="IBE.Detail" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.15BA8D1943DAF5932AEE8A84A74C8D26" />
+        <Connection ItemName="IBE.Result" Device="" Channel="INPUT" Group="Query_1" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.2019A6114C438405239C84895464762A" />
+        <Connection ItemName="IBE_Teh.StartWrihtSQL" Device="" Channel="Group.update" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.00AC021F4E81BF11B1EEAD95ADD06999" />
+        <Connection ItemName="IBE_Teh.AlarmState" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.7A69FD424C8DD3602A284BBA97ADD331" />
+        <Connection ItemName="IBE_Teh.Detail" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.656847924BF3921C6C2CE4A5F44525DE" />
+        <Connection ItemName="IBE_Teh.EventID" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.034BBE2144D1DA04B8B1C9BBED602958" />
+        <Connection ItemName="IBE_Teh.EventName" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.C3D3DF4E408513DEA9DD378B636F534B" />
+        <Connection ItemName="IBE_Teh.EventNumber" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.CEA6F5FE4D80F9142E57319A10280832" />
+        <Connection ItemName="IBE_Teh.OperatorName" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.B789685744356746C4A17AB2CB2B3A31" />
+        <Connection ItemName="IBE_Teh.OperatorNode" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.34CE60634390C2AA705D8BA2EB3F013E" />
+        <Connection ItemName="IBE_Teh.Result" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.423AEAC34DD7EDF75119F3B92210C241" />
+        <Connection ItemName="IBE_Teh.ServerAddress" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.796D92DF4A29FFDFD4C8D289472B9936" />
+        <Connection ItemName="IBE_Teh.ServerHostName" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.D6DAF1584465D5FF306D42BB806DA894" />
+        <Connection ItemName="IBE_Teh.Severity" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.BA7B74784743DEB8BF386E84F5EC51A4" />
+        <Connection ItemName="IBE_Teh.SignalDeviation" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.4AC21E91417A93779429CCAFB87E3D28" />
+        <Connection ItemName="IBE_Teh.SignalSource" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.1341D12E4469D8A32D66AD83A66DC0A4" />
+        <Connection ItemName="IBE_Teh.SignalStringValue" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.422F765847B3ED4E716133988EC372A5" />
+        <Connection ItemName="IBE_Teh.SignalType" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.7DD590744884DAFC309D2BA3B4ABF15E" />
+        <Connection ItemName="IBE_Teh.SignalValue" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.9EF2C1C14B115E4FA41935A128E35AF6" />
+        <Connection ItemName="IBE_Teh.SignalValueDimension" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.2019A6114C438405239C84895464762A" />
+        <Connection ItemName="IBE_Teh.SignalValueUnit" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.15BA8D1943DAF5932AEE8A84A74C8D26" />
+        <Connection ItemName="IBE_Teh.StartWrihtSQL" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.00AC021F4E81BF11B1EEAD95ADD06999" />
+        <Connection ItemName="IBE_Teh.ThresholdValue" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.2A322371429CE25E1056EB847F14219C" />
+        <Connection ItemName="IBE_Teh.Timestamp" Device="" Channel="INPUT" Group="Query_2" UUID="5CD539F34450400785E0BCBC77CFD66F.F969B9254588E17FE9B40FAEBADB4047" />
+    </Crossconnect>
+    <Queries>
+        <Signal Signal="IBE.StartWrihtSQL" Name="Query_1" Query="INSERT INTO CLIENTEVENTS (Timestamp, Severity, EventID, EventName, UserName, ClientAddress, ClientHostName, ServerAddress, ServerHostName, TargetUserName, TargetAddress, TargetHostName, Detail, Result) VALUES (%1, %3, %4, %5, %6, %7, %8, %9, %10, %11, %12, %13, %14, %15);" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.00AC021F4E81BF11B1EEAD95ADD06999">
+            <Variable Signal="IBE.Timestamp" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.F969B9254588E17FE9B40FAEBADB4047" />
+            <Variable Signal="IBE.EventNumber" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.CEA6F5FE4D80F9142E57319A10280832" />
+            <Variable Signal="IBE.Severity" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.BA7B74784743DEB8BF386E84F5EC51A4" />
+            <Variable Signal="IBE.EventID" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.034BBE2144D1DA04B8B1C9BBED602958" />
+            <Variable Signal="IBE.EventName" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.C3D3DF4E408513DEA9DD378B636F534B" />
+            <Variable Signal="IBE.UserName" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.5A6436694D12ED596D944EA98C006C2E" />
+            <Variable Signal="IBE.ClientAddress" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.A7EB35E848B35A4317361E91BB1EB564" />
+            <Variable Signal="IBE.ClientHostName" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.A47A7BD74295F14AADD408A3CFEB4961" />
+            <Variable Signal="IBE.ServerAddress" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.796D92DF4A29FFDFD4C8D289472B9936" />
+            <Variable Signal="IBE.ServerHostName" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.D6DAF1584465D5FF306D42BB806DA894" />
+            <Variable Signal="IBE.TargetUserName" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.1341D12E4469D8A32D66AD83A66DC0A4" />
+            <Variable Signal="IBE.TargetAddress" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.9EF2C1C14B115E4FA41935A128E35AF6" />
+            <Variable Signal="IBE.TargetHostName" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.422F765847B3ED4E716133988EC372A5" />
+            <Variable Signal="IBE.Detail" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.15BA8D1943DAF5932AEE8A84A74C8D26" />
+            <Variable Signal="IBE.Result" SignalIOType="INPUT" UUID="A6E3E7A847B33615C6B2D2A515EA4F13.2019A6114C438405239C84895464762A" />
+        </Signal>
+        <Signal Signal="IBE_Teh.StartWrihtSQL" Name="Query_2" Query="INSERT INTO ACCIDENTEVENTS (ID,Timestamp, EventNumber, Severity, EventID, EventName, ServerAddress, ServerHostName, SignalSource, SignalValue, SignalStringValue, SignalValueDimension, SignalValueUnit, SignalType, AlarmState, OperatorNode, OperatorName, ThresholdValue, SignalDeviation, Result, Detail ) VALUES (%3, %21, %5, %11, %3, %4, %9, %10, %13, %16, %14, %17, %18, %15, %1, %7, %6, %20, %12, %8, %2)" UUID="5CD539F34450400785E0BCBC77CFD66F.00AC021F4E81BF11B1EEAD95ADD06999">
+            <Variable Signal="IBE_Teh.AlarmState" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.7A69FD424C8DD3602A284BBA97ADD331" />
+            <Variable Signal="IBE_Teh.Detail" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.656847924BF3921C6C2CE4A5F44525DE" />
+            <Variable Signal="IBE_Teh.EventID" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.034BBE2144D1DA04B8B1C9BBED602958" />
+            <Variable Signal="IBE_Teh.EventName" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.C3D3DF4E408513DEA9DD378B636F534B" />
+            <Variable Signal="IBE_Teh.EventNumber" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.CEA6F5FE4D80F9142E57319A10280832" />
+            <Variable Signal="IBE_Teh.OperatorName" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.B789685744356746C4A17AB2CB2B3A31" />
+            <Variable Signal="IBE_Teh.OperatorNode" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.34CE60634390C2AA705D8BA2EB3F013E" />
+            <Variable Signal="IBE_Teh.Result" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.423AEAC34DD7EDF75119F3B92210C241" />
+            <Variable Signal="IBE_Teh.ServerAddress" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.796D92DF4A29FFDFD4C8D289472B9936" />
+            <Variable Signal="IBE_Teh.ServerHostName" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.D6DAF1584465D5FF306D42BB806DA894" />
+            <Variable Signal="IBE_Teh.Severity" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.BA7B74784743DEB8BF386E84F5EC51A4" />
+            <Variable Signal="IBE_Teh.SignalDeviation" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.4AC21E91417A93779429CCAFB87E3D28" />
+            <Variable Signal="IBE_Teh.SignalSource" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.1341D12E4469D8A32D66AD83A66DC0A4" />
+            <Variable Signal="IBE_Teh.SignalStringValue" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.422F765847B3ED4E716133988EC372A5" />
+            <Variable Signal="IBE_Teh.SignalType" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.7DD590744884DAFC309D2BA3B4ABF15E" />
+            <Variable Signal="IBE_Teh.SignalValue" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.9EF2C1C14B115E4FA41935A128E35AF6" />
+            <Variable Signal="IBE_Teh.SignalValueDimension" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.2019A6114C438405239C84895464762A" />
+            <Variable Signal="IBE_Teh.SignalValueUnit" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.15BA8D1943DAF5932AEE8A84A74C8D26" />
+            <Variable Signal="IBE_Teh.StartWrihtSQL" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.00AC021F4E81BF11B1EEAD95ADD06999" />
+            <Variable Signal="IBE_Teh.ThresholdValue" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.2A322371429CE25E1056EB847F14219C" />
+            <Variable Signal="IBE_Teh.Timestamp" SignalIOType="INPUT" UUID="5CD539F34450400785E0BCBC77CFD66F.F969B9254588E17FE9B40FAEBADB4047" />
+        </Signal>
+    </Queries>
+</Configuration>

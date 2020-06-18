@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_IB_Event" Kind="Struct" UUID="E734958D4774D2B4B01747B68929B910">
+    <Fields>
+        <Field Name="Timestamp" Type="STRING" UUID="F969B9254588E17FE9B40FAEBADB4047" />
+        <Field Name="EventNumber" Type="ULINT" UUID="CEA6F5FE4D80F9142E57319A10280832" />
+        <Field Name="Severity" Type="STRING" UUID="BA7B74784743DEB8BF386E84F5EC51A4" />
+        <Field Name="EventID" Type="STRING" UUID="034BBE2144D1DA04B8B1C9BBED602958" />
+        <Field Name="EventName" Type="STRING" UUID="C3D3DF4E408513DEA9DD378B636F534B" />
+        <Field Name="UserName" Type="STRING" UUID="5A6436694D12ED596D944EA98C006C2E" />
+        <Field Name="ClientAddress" Type="STRING" UUID="A7EB35E848B35A4317361E91BB1EB564" />
+        <Field Name="ClientHostName" Type="STRING" UUID="A47A7BD74295F14AADD408A3CFEB4961" />
+        <Field Name="ServerAddress" Type="STRING" UUID="796D92DF4A29FFDFD4C8D289472B9936" />
+        <Field Name="ServerHostName" Type="STRING" UUID="D6DAF1584465D5FF306D42BB806DA894" />
+        <Field Name="TargetUserName" Type="STRING" UUID="1341D12E4469D8A32D66AD83A66DC0A4" />
+        <Field Name="TargetAddress" Type="STRING" UUID="9EF2C1C14B115E4FA41935A128E35AF6" />
+        <Field Name="TargetHostName" Type="STRING" UUID="422F765847B3ED4E716133988EC372A5" />
+        <Field Name="Result" Type="STRING" UUID="2019A6114C438405239C84895464762A" />
+        <Field Name="Detail" Type="STRING" UUID="15BA8D1943DAF5932AEE8A84A74C8D26" />
+        <Field Name="StartWrihtSQL" Type="BOOL" UUID="00AC021F4E81BF11B1EEAD95ADD06999" />
+    </Fields>
+</Type>

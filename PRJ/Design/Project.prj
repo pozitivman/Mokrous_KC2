@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Project v. 1.0 >
-<Project Name="Mokrous_KC2" Comment="" Port="10000" EndPort="30000" UUID="B39663EC46DE829035B082B68D4D3048" SignProject="FALSE" UsersUpdateMode="ASK">
+<Project Name="Mokrous_KC2" Comment="" Port="10000" EndPort="30000" UUID="ABBB6B6A4A7C3124D51D4FA10A607741" SignProject="FALSE" UsersUpdateMode="ASK">
     <Globals>
         <Signal Name="Sound_PS" UUID="C2A81D004C2F7FFA8ED24DA4C26066BF" Type="BOOL" Global="TRUE" Comment="Звук ПС" />
         <Signal Name="Sound_AS" UUID="3696E1F84C0E4BB9B4D61793CC54CAE2" Type="BOOL" Global="TRUE" Comment="Звук АС" />
@@ -60,6 +60,19 @@
         <Signal Name="Link_GPA7" UUID="4562A5D848A83337142EDDACDA7F9E4A" Type="FBA07BFA420F40EAC2D41A949BC69296" Global="TRUE" Comment="Связь с ГПА-7" />
         <Signal Name="Link_GPA8" UUID="ECB06B874F653551D2F07AABD1199D56" Type="FBA07BFA420F40EAC2D41A949BC69296" Global="TRUE" Comment="Связь с ГПА-8" />
         <Signal Name="Link_GPA9" UUID="EC623095491859B9E8936FA043C744CD" Type="FBA07BFA420F40EAC2D41A949BC69296" Global="TRUE" Comment="Связь с ГПА-9" />
+        <Signal Name="Cur_server_work" UUID="E13635A743F515CE0F148BA75DC06157" Type="INT" Global="TRUE" />
+        <Signal Name="Work_S1" UUID="A9A027794DF4420FF763F2AAFDA7F1F9" Type="BOOL" Global="TRUE" />
+        <Signal Name="Work_S2" UUID="6330247F4AF821C07A595CA3D77CEEF9" Type="BOOL" Global="TRUE" />
+        <Signal Name="Link_Status" UUID="5F11A3EF427C2F2B7A6AF690A9ADE87D" Type="B1A462444BF27429F17C1698EB172F22" Global="TRUE" />
+        <Signal Name="Server_rab" UUID="0B1781E741EDA736C4BB1BAE64AD339D" Type="BOOL" Global="TRUE" />
+        <Signal Name="Global_PLC_A1_arch" UUID="1FB9B6B34442DDB2DD98A5B1EE3A3088" Type="D4C3241A48145D7692EBDF89EFEA33AA" Global="TRUE" Comment="Передача данных из ПЛК А1 в архив" />
+        <Signal Name="Global_PLC_A3_arch" UUID="89E073734B4E8ACD9BFECFAE4A825E30" Type="B34CC93E440887710D257B8C5C502CCF" Global="TRUE" Comment="Передача данных из ПЛК А3 в архив" />
+        <Signal Name="Global_PLC_A5_arch" UUID="75A7FA0E4AC3B1A1FE4D019B83C6348B" Type="0A1BDB684A638EFBDD2EAEB9BB5D3872" Global="TRUE" Comment="Передача данных из ПЛК А5 в архив" />
+        <Signal Name="Make_reports" UUID="96EB583743A1B0C568EA06AAD9EB83F3" Type="BOOL" ArraySize="5" Global="TRUE" Comment="Создание отчётов" />
+        <Signal Name="IS" UUID="4019BFDB41AD8510B07BDDBAE5ED82CA" Type="5F8BE35044E475170D88C5AD88003473" InitialValue="(CF50DC014E524D10B37B4C81D0BE5D95:=[T#1d,T#1d,T#1d,T#1d,T#1d])" Global="TRUE" Storage="persistent" />
+        <Signal Name="IBE" UUID="00BBBBF94DBDCE521EC828990CD69903" Type="E734958D4774D2B4B01747B68929B910" Global="TRUE" />
+        <Signal Name="IBE_Teh" UUID="DDE2091D434A1E4511CA83AE5FEB6F42" Type="44255E4D45199B78AD5D93A5AB861C2C" Global="TRUE" />
+        <Signal Name="MainServerFlag" UUID="405E008342C2B8A2A2A9A584360AA34E" Type="WORD" InitialValue="1" Global="TRUE" Comment="Текущий основной сервер (1 или 2)" />
     </Globals>
     <Connections />
 </Project>

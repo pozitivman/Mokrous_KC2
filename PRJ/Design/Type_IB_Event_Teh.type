@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_IB_Event_Teh" Kind="Struct" UUID="44255E4D45199B78AD5D93A5AB861C2C">
+    <Fields>
+        <Field Name="Timestamp" Type="STRING" UUID="F969B9254588E17FE9B40FAEBADB4047" />
+        <Field Name="EventNumber" Type="ULINT" UUID="CEA6F5FE4D80F9142E57319A10280832" />
+        <Field Name="Severity" Type="STRING" UUID="BA7B74784743DEB8BF386E84F5EC51A4" />
+        <Field Name="EventID" Type="STRING" UUID="034BBE2144D1DA04B8B1C9BBED602958" />
+        <Field Name="EventName" Type="STRING" UUID="C3D3DF4E408513DEA9DD378B636F534B" Comment="Наименование события" />
+        <Field Name="ServerAddress" Type="STRING" UUID="796D92DF4A29FFDFD4C8D289472B9936" Comment="Сетевой адрес сервера SCADA" />
+        <Field Name="ServerHostName" Type="STRING" UUID="D6DAF1584465D5FF306D42BB806DA894" Comment="Сетевое имя сервера" />
+        <Field Name="SignalSource" Type="STRING" UUID="1341D12E4469D8A32D66AD83A66DC0A4" />
+        <Field Name="SignalValue" Type="REAL" UUID="9EF2C1C14B115E4FA41935A128E35AF6" Comment="текущее числовое значение сигнала тех.процесса" />
+        <Field Name="SignalStringValue" Type="STRING" UUID="422F765847B3ED4E716133988EC372A5" Comment="строковое значение сигнала" />
+        <Field Name="SignalValueDimension" Type="STRING" UUID="2019A6114C438405239C84895464762A" Comment="размерность сигнала" />
+        <Field Name="SignalValueUnit" Type="STRING" UUID="15BA8D1943DAF5932AEE8A84A74C8D26" Comment="единица измерения сигнала" />
+        <Field Name="SignalType" Type="STRING" UUID="7DD590744884DAFC309D2BA3B4ABF15E" Comment="тип сигнала (дискретный/аналоговый)" />
+        <Field Name="AlarmState" Type="STRING" UUID="7A69FD424C8DD3602A284BBA97ADD331" />
+        <Field Name="OperatorNode" Type="STRING" UUID="34CE60634390C2AA705D8BA2EB3F013E" Comment="имя оператора" />
+        <Field Name="OperatorName" Type="STRING" UUID="B789685744356746C4A17AB2CB2B3A31" Comment="имя АРМ оператора" />
+        <Field Name="ThresholdValue" Type="STRING" UUID="2A322371429CE25E1056EB847F14219C" Comment="значение аварийной уставки" />
+        <Field Name="SignalDeviation" Type="REAL" UUID="4AC21E91417A93779429CCAFB87E3D28" Comment="выход за предельное значение" />
+        <Field Name="Result" Type="STRING" UUID="423AEAC34DD7EDF75119F3B92210C241" />
+        <Field Name="Detail" Type="STRING" UUID="656847924BF3921C6C2CE4A5F44525DE" />
+        <Field Name="StartWrihtSQL" Type="BOOL" UUID="00AC021F4E81BF11B1EEAD95ADD06999" />
+    </Fields>
+</Type>

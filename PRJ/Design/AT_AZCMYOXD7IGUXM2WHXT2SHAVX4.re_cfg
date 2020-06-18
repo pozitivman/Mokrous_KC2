@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ReportEngine >
+<Configuration>
+    <ReportList>
+        <Report Equation="Make_reports[0]=TRUE" Printer="lp" Template="Report_Shift_DayShift.html" Print="FALSE" ShowPreview="TRUE" Archive="" FileNameTemplate="D:\Documents\Day_12h\%Y-%m-%d_%H%M%S.html" Comment="Дневная смена" Landscape="TRUE" MarginTop="5" MarginLeft="5" MarginRight="5" MarginBottom="5" PageSize="A4" FullPage="FALSE" />
+        <Report Equation="Make_reports[1]=TRUE" Printer="lp" Template="Report_Shift_NightShift.html" Print="FALSE" ShowPreview="TRUE" Archive="" FileNameTemplate="D:\Documents\Night_12h\%Y-%m-%d_%H%M%S.html" Comment="Ночная смена" Landscape="TRUE" MarginTop="5" MarginLeft="5" MarginRight="5" MarginBottom="5" PageSize="A4" FullPage="FALSE" />
+        <Report Equation="Make_reports[2]=TRUE" Printer="lp" Template="Report_Shift_Day.html" Print="FALSE" ShowPreview="TRUE" Archive="" FileNameTemplate="D:\Documents\Day_24h\%Y-%m-%d_%H%M%S.html" Comment="Суточная ведомость" Landscape="TRUE" MarginTop="5" MarginLeft="5" MarginRight="5" MarginBottom="5" PageSize="A4" FullPage="FALSE" />
+    </ReportList>
+</Configuration>

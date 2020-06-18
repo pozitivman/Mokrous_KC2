@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="PLC_A5_Arch" Kind="Struct" UUID="0A1BDB684A638EFBDD2EAEB9BB5D3872">
+    <Fields>
+        <Field Name="kr6BR_OFF" Type="BOOL" UUID="EBB6FE8342CE3548947DE3A5E67F303A" Comment="Кран 6БР Закрыт" />
+        <Field Name="kr6BR_ON" Type="BOOL" UUID="C8CD9A9740520F52F4C7759A594E1899" Comment="Кран 6БР Открыт" />
+        <Field Name="kr6BR_IM" Type="BOOL" UUID="F1AD06A14E6D5EA92CECB3959D3F495E" Comment="Кран 6БР Контроль цепи ИМ" />
+        <Field Name="kr6BR_VK" Type="BOOL" UUID="2E90530C404F51AB1D046286C4ACE968" Comment="Кран 6БР Контроль цепи ВК" />
+        <Field Name="krA_OFF" Type="BOOL" UUID="A0D1BF324C1B2565232E32A83FD6F3CE" Comment="Кран А Закрыт" />
+        <Field Name="krA_ON" Type="BOOL" UUID="4AA6E54241700FF98B30AB902ED4B8B1" Comment="Кран А Открыт" />
+        <Field Name="krA_IM" Type="BOOL" UUID="CFDECCDC4C619CDC383364AE612576E6" Comment="Кран А Контроль цепи ИМ" />
+        <Field Name="krA_VK" Type="BOOL" UUID="7529E1444317A6614726138D970F3581" Comment="Кран А Контроль цепи ВК" />
+        <Field Name="krC_OFF" Type="BOOL" UUID="E73D168341E44ECCDFE2FC83616DE122" Comment="Кран С Закрыт" />
+        <Field Name="krC_ON" Type="BOOL" UUID="CAFFAE1E406D90CD25D9578FB41C47C2" Comment="Кран С Открыт" />
+        <Field Name="krC_IM" Type="BOOL" UUID="22F24B3E4D5D7805FE328E9E8DBAEDB5" Comment="Кран С Контроль цепи ИМ" />
+        <Field Name="krC_VK" Type="BOOL" UUID="A382456B49803893F9721BA78E501D0C" Comment="Кран С Контроль цепи ВК" />
+        <Field Name="kr6_9_OFF" Type="BOOL" UUID="8B0585C14B2AD5F510BA579FD854F634" Comment="Кран 6-9 Закрыт" />
+        <Field Name="kr6_9_ON" Type="BOOL" UUID="9BD504554A18111073844A9567A9C078" Comment="Кран 6-9 Открыт" />
+        <Field Name="kr6_9_IM" Type="BOOL" UUID="87087BF94B430849C74BFAAE0C4354F8" Comment="Кран 6-9 Контроль цепи ИМ" />
+        <Field Name="kr6_9_VK" Type="BOOL" UUID="B68A04E84FDD5459DC0938B91DB84D97" Comment="Кран 6-9 Контроль цепи ВК" />
+        <Field Name="___1___" Type="BOOL" UUID="B727B76148C995A3530D889C72396082" />
+        <Field Name="Ind_AOB" Type="BOOL" UUID="F9BBA7F5407F396B498B04BE23D6E8DC" Comment="Индикация АО КЦ бс" />
+        <Field Name="Ind_AOS" Type="BOOL" UUID="E2C11C87463809273C116CA109E6D166" Comment="Индикация АО КЦ сс" />
+        <Field Name="Sound_warn" Type="BOOL" UUID="4AB971744E76EFC27E3DB2A0DE39B077" Comment="Предупредительный звуковой сигнал" />
+        <Field Name="Sound_ala" Type="BOOL" UUID="635A681947CE2641DD302F8B2926C89A" Comment="Аварийный звуковой сигнал" />
+        <Field Name="PLC_flt" Type="BOOL" UUID="C37292B443BBB474A4F52E97C01B122A" Comment="Неисправность контроллера" />
+    </Fields>
+</Type>
